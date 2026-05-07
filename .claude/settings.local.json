@@ -1,0 +1,31 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/fengwang/Desktop/**)",
+      "Read(//Users/fengwang/Downloads/**)",
+      "Read(//Users/fengwang/Documents/**)",
+      "Bash(npx tsc --noEmit 2>&1 | head -50)",
+      "Bash(npx tsc --noEmit 2>&1 | grep -v \"node_modules\" | grep -v \"@react-navigation/stack\" | head -20)",
+      "Bash(node scripts/generateVocab.js)",
+      "Bash(node -e \"\nconst ROOTS = [['port','搬运','拉丁语 portare','#3B82A0',1,'transport:v:运输']];\nconst r = ROOTS[0];\nconsole.log\\('length:', r.length\\);\nconsole.log\\('0:', r[0], '1:', r[1], '5:', r[5]\\);\n\")",
+      "Bash(node -e \"\nconst fs = require\\('fs'\\);\nconst content = fs.readFileSync\\('/Users/fengwang/Documents/trae_projects/beidanci/scripts/generateVocab.js', 'utf8'\\);\n// Find ROOTS entries and check their structure\nconst rootMatch = content.match\\(/\\\\['\\\\w+',/g\\);\nconsole.log\\('Root entries found:', rootMatch?.length\\);\n\" 2>&1)",
+      "Bash(node -e \"\nconst a = ['port','搬运','拉丁语 portare','#3B82A0',1,\n'transport:v:运输,import:v:进口'];\nconsole.log\\('length:', a.length, 'last:', typeof a[5], a[5]?.substring\\(0,20\\)\\);\n\")",
+      "Bash(npx tsc --noEmit 2>&1 | head -80)",
+      "Bash(npx tsc --noEmit 2>&1)",
+      "Bash(cd /Users/fengwang/Documents/trae_projects/beidanci/ios && xcodebuild -workspace beidanci.xcworkspace -scheme beidanci -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 15' build 2>&1 | tail -50)",
+      "Bash(xcodebuild -workspace beidanci.xcworkspace -scheme beidanci -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro' build 2>&1 | tail -80)",
+      "Bash(curl -s \"http://localhost:8081/index.bundle?platform=ios&dev=true&minify=false\" 2>&1 | tail -30)",
+      "Bash(xcrun simctl list devices booted 2>&1)",
+      "Bash(xcrun simctl spawn 0A1509B5-1A36-4FEC-BB06-9C6D30031A9C log stream --predicate 'processImagePath contains \"beidanci\"' --level error --timeout 3 2>&1 || true)",
+      "Bash(curl -s \"http://localhost:8081/index.bundle?platform=ios&dev=true&minify=false\" 2>&1 | grep -i \"error\\\\|Error\\\\|MODULE_NOT_FOUND\\\\|Cannot find\" | head -20)",
+      "Bash(node -e \"const pkg = require\\('./node_modules/react-native-safe-area-context/package.json'\\); console.log\\('safe-area-context:', pkg.version\\)\" && node -e \"const pkg = require\\('./node_modules/react-native-screens/package.json'\\); console.log\\('screens:', pkg.version\\)\" && node -e \"const pkg = require\\('./node_modules/react-native/package.json'\\); console.log\\('react-native:', pkg.version\\)\" && node -e \"const pkg = require\\('./node_modules/react-native-gesture-handler/package.json'\\); console.log\\('gesture-handler:', pkg.version\\)\")",
+      "Bash(node -e \"const pkg = require\\('./node_modules/@react-navigation/native/package.json'\\); console.log\\('navigation/native:', pkg.version\\)\" && node -e \"const pkg = require\\('./node_modules/@react-navigation/native-stack/package.json'\\); console.log\\('navigation/native-stack:', pkg.version\\)\" && node -e \"const pkg = require\\('./node_modules/@react-navigation/bottom-tabs/package.json'\\); console.log\\('navigation/bottom-tabs:', pkg.version\\)\")",
+      "Bash(npm install react-native-safe-area-context@4.8.2 react-native-gesture-handler@2.14.1 2>&1 | tail -20)",
+      "Bash(cd /Users/fengwang/Documents/trae_projects/beidanci/ios && pod install 2>&1 | tail -20)",
+      "Bash(xcodebuild -workspace beidanci.xcworkspace -scheme beidanci -configuration Debug -destination 'platform=iOS Simulator,name=iPhone 17 Pro Max' build 2>&1 | tail -10)",
+      "Bash(xcrun simctl install 0A1509B5-1A36-4FEC-BB06-9C6D30031A9C /Users/fengwang/Library/Developer/Xcode/DerivedData/beidanci-hfvwqtknhdwwhjahazbgvacueoqj/Build/Products/Debug-iphonesimulator/beidanci.app 2>&1 && xcrun simctl launch 0A1509B5-1A36-4FEC-BB06-9C6D30031A9C org.reactjs.native.example.beidanci 2>&1)",
+      "Bash(sleep 5 && xcrun simctl spawn 0A1509B5-1A36-4FEC-BB06-9C6D30031A9C log show --predicate 'processImagePath contains \"beidanci\" AND \\(messageType == error OR messageType == fault\\)' --last 10s --style compact 2>&1 | head -30)",
+      "Bash(lsof -ti:8081 | xargs kill -9 2>/dev/null; echo \"Metro stopped\")"
+    ]
+  }
+}
