@@ -1,211 +1,566 @@
 import { Word, WordRoot, Prefix, Suffix, Level } from './types';
+import rawData from './wordDatabaseRaw.json';
+import enrichmentData from './wordEnrichment.json';
 
+const enrichment: Record<string, { phonetic: string; examples: string[] }> = enrichmentData as any;
+
+// === Levels ===
 export const levels: Level[] = [
-  { level: 1, name: '入门', description: '掌握最基础的词根词缀和高频单词', targetWords: 300, rootsCount: 20, prefixesCount: 5, suffixesCount: 5 },
-  { level: 2, name: '基础', description: '扩展词根词缀，学习常用单词', targetWords: 500, rootsCount: 30, prefixesCount: 10, suffixesCount: 10 },
-  { level: 3, name: '进阶', description: '深入学习词根词缀，掌握中等难度单词', targetWords: 700, rootsCount: 40, prefixesCount: 15, suffixesCount: 15 },
-  { level: 4, name: '中级', description: '掌握更多词根词缀，学习较复杂单词', targetWords: 900, rootsCount: 50, prefixesCount: 20, suffixesCount: 20 },
-  { level: 5, name: '中高', description: '扩展高级词根词缀，学习多词素组合', targetWords: 1100, rootsCount: 60, prefixesCount: 25, suffixesCount: 25 },
-  { level: 6, name: '高级', description: '掌握专业词汇和学术词汇', targetWords: 1300, rootsCount: 70, prefixesCount: 30, suffixesCount: 30 },
-  { level: 7, name: '进阶高', description: '深入学术词汇和专业术语', targetWords: 1500, rootsCount: 80, prefixesCount: 35, suffixesCount: 35 },
-  { level: 8, name: '专家', description: '掌握GRE级别词汇', targetWords: 1700, rootsCount: 90, prefixesCount: 40, suffixesCount: 40 },
-  { level: 9, name: '大师', description: '掌握高阶词汇和难词', targetWords: 1900, rootsCount: 100, prefixesCount: 45, suffixesCount: 45 },
-  { level: 10, name: '终极', description: '掌握全部词根词缀和8000+词汇', targetWords: 2200, rootsCount: 200, prefixesCount: 50, suffixesCount: 50 },
+  { level: 1, name: '入门', description: '核心词根 + 高频词', targetWords: 100, rootsCount: 6 },
+  { level: 2, name: '基础', description: '扩展词根词缀', targetWords: 250, rootsCount: 12 },
+  { level: 3, name: '进阶', description: '中频词根 + 组合词', targetWords: 450, rootsCount: 18 },
+  { level: 4, name: '中级', description: '多词素词汇', targetWords: 700, rootsCount: 24 },
+  { level: 5, name: '中高', description: '专业词根', targetWords: 1000, rootsCount: 30 },
+  { level: 6, name: '高级', description: '综合运用词根词缀', targetWords: 1500, rootsCount: 40 },
+  { level: 7, name: '精通', description: '深度词根扩展', targetWords: 2200, rootsCount: 60 },
+  { level: 8, name: '大师', description: '全部词汇掌握', targetWords: 3272, rootsCount: 99 },
 ];
 
-export const coreRoots: WordRoot[] = [
-  { id: 'r001', root: 'port', meaning: '携带，运送', origin: '拉丁语 portare', color: '#3B82A0', level: 1, words: [{ word: 'transport', meaning: '运输' }, { word: 'import', meaning: '进口' }, { word: 'export', meaning: '出口' }] },
-  { id: 'r002', root: 'cred', meaning: '相信', origin: '拉丁语 credere', color: '#A03B82', level: 1, words: [{ word: 'credit', meaning: '信用' }, { word: 'incredible', meaning: '难以置信的' }, { word: 'credible', meaning: '可信的' }] },
-  { id: 'r003', root: 'scrib', meaning: '写', origin: '拉丁语 scribere', color: '#82A03B', level: 1, words: [{ word: 'describe', meaning: '描述' }, { word: 'subscribe', meaning: '订阅' }, { word: 'prescribe', meaning: '开处方' }] },
-  { id: 'r004', root: 'magn', meaning: '大，伟大', origin: '拉丁语 magnus', color: '#A06F3B', level: 1, words: [{ word: 'magnify', meaning: '放大' }, { word: 'magnificent', meaning: '壮丽的' }, { word: 'magnitude', meaning: '量级' }] },
-  { id: 'r005', root: 'dict', meaning: '说，言', origin: '拉丁语 dicere', color: '#3B9B82', level: 1, words: [{ word: 'dictionary', meaning: '字典' }, { word: 'predict', meaning: '预测' }, { word: 'contradict', meaning: '反驳' }] },
-  { id: 'r006', root: 'spect', meaning: '看', origin: '拉丁语 spectare', color: '#9B3B82', level: 1, words: [{ word: 'inspect', meaning: '检查' }, { word: 'respect', meaning: '尊重' }, { word: 'spectator', meaning: '观众' }] },
-  { id: 'r007', root: 'struct', meaning: '建造', origin: '拉丁语 struere', color: '#3B6B9B', level: 2, words: [{ word: 'construct', meaning: '建造' }, { word: 'structure', meaning: '结构' }, { word: 'instruct', meaning: '指导' }] },
-  { id: 'r008', root: 'form', meaning: '形状，形式', origin: '拉丁语 forma', color: '#6B9B3B', level: 2, words: [{ word: 'transform', meaning: '转变' }, { word: 'inform', meaning: '通知' }, { word: 'reform', meaning: '改革' }] },
-  { id: 'r009', root: 'duct', meaning: '引导', origin: '拉丁语 ducere', color: '#9B6B3B', level: 2, words: [{ word: 'conduct', meaning: '引导' }, { word: 'produce', meaning: '生产' }, { word: 'reduce', meaning: '减少' }] },
-  { id: 'r010', root: 'ject', meaning: '投掷', origin: '拉丁语 jacere', color: '#3B829B', level: 2, words: [{ word: 'project', meaning: '项目' }, { word: 'reject', meaning: '拒绝' }, { word: 'inject', meaning: '注射' }] },
-  { id: 'r011', root: 'tract', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#823B9B', level: 2, words: [{ word: 'attract', meaning: '吸引' }, { word: 'extract', meaning: '提取' }, { word: 'contract', meaning: '合同' }] },
-  { id: 'r012', root: 'mit', meaning: '发送', origin: '拉丁语 mittere', color: '#5BA03B', level: 2, words: [{ word: 'submit', meaning: '提交' }, { word: 'transmit', meaning: '传输' }, { word: 'permit', meaning: '允许' }] },
-  { id: 'r013', root: 'pos', meaning: '放置', origin: '拉丁语 ponere', color: '#A03B5B', level: 2, words: [{ word: 'compose', meaning: '组成' }, { word: 'dispose', meaning: '处理' }, { word: 'propose', meaning: '提议' }] },
-  { id: 'r014', root: 'vis', meaning: '看', origin: '拉丁语 videre', color: '#3BA082', level: 3, words: [{ word: 'vision', meaning: '视觉' }, { word: 'visible', meaning: '可见的' }, { word: 'supervise', meaning: '监督' }] },
-  { id: 'r015', root: 'aud', meaning: '听', origin: '拉丁语 audire', color: '#823BA0', level: 3, words: [{ word: 'audio', meaning: '音频' }, { word: 'audience', meaning: '观众' }, { word: 'audition', meaning: '试听' }] },
-  { id: 'r016', root: 'sent', meaning: '感觉', origin: '拉丁语 sentire', color: '#A0823B', level: 3, words: [{ word: 'consent', meaning: '同意' }, { word: 'resent', meaning: '怨恨' }, { word: 'present', meaning: '呈现' }] },
-  { id: 'r017', root: 'vert', meaning: '转', origin: '拉丁语 vertere', color: '#3BA05B', level: 3, words: [{ word: 'convert', meaning: '转换' }, { word: 'revert', meaning: '恢复' }, { word: 'divert', meaning: '转移' }] },
-  { id: 'r018', root: 'voc', meaning: '呼叫', origin: '拉丁语 vocare', color: '#A03B82', level: 3, words: [{ word: 'vocabulary', meaning: '词汇' }, { word: 'advocate', meaning: '倡导' }, { word: 'provoke', meaning: '挑衅' }] },
-  { id: 'r019', root: 'pend', meaning: '悬挂', origin: '拉丁语 pendere', color: '#3B82A0', level: 3, words: [{ word: 'depend', meaning: '依赖' }, { word: 'suspend', meaning: '暂停' }, { word: 'append', meaning: '附加' }] },
-  { id: 'r020', root: 'fac', meaning: '做，制作', origin: '拉丁语 facere', color: '#82A03B', level: 3, words: [{ word: 'factory', meaning: '工厂' }, { word: 'facility', meaning: '设施' }, { word: 'manufacture', meaning: '制造' }] },
-];
-
+// === Prefixes ===
 export const prefixes: Prefix[] = [
-  { id: 'p001', prefix: 'trans-', meaning: '穿越，跨越', origin: '拉丁语', color: '#A03B82', level: 1, examples: ['transport', 'transfer', 'transform'] },
-  { id: 'p002', prefix: 'in-', meaning: '不，向内', origin: '拉丁语', color: '#FF6B6B', level: 1, examples: ['incredible', 'import', 'include'] },
-  { id: 'p003', prefix: 're-', meaning: '再次，返回', origin: '拉丁语', color: '#4ECDC4', level: 1, examples: ['return', 'repeat', 'review'] },
-  { id: 'p004', prefix: 'ex-', meaning: '向外', origin: '拉丁语', color: '#FFE66D', level: 1, examples: ['export', 'exit', 'expand'] },
-  { id: 'p005', prefix: 'pre-', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3', level: 1, examples: ['predict', 'prepare', 'prevent'] },
-  { id: 'p006', prefix: 'dis-', meaning: '否定，分离', origin: '拉丁语', color: '#DDA0DD', level: 2, examples: ['disagree', 'discover', 'disappear'] },
-  { id: 'p007', prefix: 'un-', meaning: '不，相反', origin: '古英语', color: '#98D8C8', level: 2, examples: ['unhappy', 'unable', 'unlock'] },
-  { id: 'p008', prefix: 'sub-', meaning: '在...下面', origin: '拉丁语', color: '#F7DC6F', level: 2, examples: ['subway', 'submit', 'subscribe'] },
-  { id: 'p009', prefix: 'super-', meaning: '超级，在...上面', origin: '拉丁语', color: '#BB8FCE', level: 2, examples: ['superman', 'supervise', 'superior'] },
-  { id: 'p010', prefix: 'inter-', meaning: '在...之间', origin: '拉丁语', color: '#85C1E9', level: 2, examples: ['international', 'internet', 'interview'] },
+  { id: 'p_re', prefix: 're-', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4', level: 1, examples: ['return', 'repeat', 'review', 'reform', 'reduce'] },
+  { id: 'p_in1', prefix: 'in-', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B', level: 1, examples: ['incredible', 'import', 'include', 'invest', 'involve'] },
+  { id: 'p_ex', prefix: 'ex-', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D', level: 1, examples: ['export', 'exit', 'expand', 'explore', 'express'] },
+  { id: 'p_trans', prefix: 'trans-', meaning: '穿越/转变', origin: '拉丁语', color: '#A03B82', level: 1, examples: ['transport', 'transfer', 'transform', 'transmit', 'translate'] },
+  { id: 'p_pre', prefix: 'pre-', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3', level: 1, examples: ['predict', 'prepare', 'prevent', 'present', 'preserve'] },
+  { id: 'p_dis', prefix: 'dis-', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD', level: 2, examples: ['disagree', 'discover', 'disappear', 'disrupt', 'dismiss'] },
+  { id: 'p_un', prefix: 'un-', meaning: '不/相反', origin: '古英语', color: '#98D8C8', level: 2, examples: ['unhappy', 'unable', 'unlock', 'unusual', 'uncertain'] },
+  { id: 'p_sub', prefix: 'sub-', meaning: '在...下面', origin: '拉丁语', color: '#F7DC6F', level: 2, examples: ['subway', 'submit', 'subscribe', 'subtract', 'substance'] },
+  { id: 'p_con', prefix: 'con-/com-', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9', level: 2, examples: ['construct', 'conduct', 'compose', 'connect', 'confirm'] },
+  { id: 'p_de', prefix: 'de-', meaning: '向下/去除', origin: '拉丁语', color: '#E59866', level: 2, examples: ['describe', 'deport', 'decline', 'decrease', 'defend'] },
+  { id: 'p_super', prefix: 'super-', meaning: '超级/上方', origin: '拉丁语', color: '#BB8FCE', level: 3, examples: ['supervise', 'superior', 'superstructure', 'supernatural'] },
+  { id: 'p_inter', prefix: 'inter-', meaning: '在...之间', origin: '拉丁语', color: '#85C1E9', level: 3, examples: ['international', 'internet', 'interview', 'interrupt', 'interact'] },
+  { id: 'p_pro', prefix: 'pro-', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6', level: 3, examples: ['produce', 'project', 'progress', 'promote', 'prospect'] },
+  { id: 'p_per', prefix: 'per-', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E', level: 3, examples: ['perfect', 'perform', 'permanent', 'permit', 'persist'] },
+  { id: 'p_ob', prefix: 'ob-', meaning: '对着/阻碍', origin: '拉丁语', color: '#CD6155', level: 4, examples: ['obstruct', 'observe', 'obtain', 'obvious', 'object'] },
+  { id: 'p_ad', prefix: 'ad-', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2', level: 4, examples: ['attract', 'admit', 'adapt', 'addict', 'adjust'] },
+  { id: 'p_ab', prefix: 'ab-', meaning: '离开/偏离', origin: '拉丁语', color: '#AF7AC5', level: 4, examples: ['abstract', 'absent', 'absorb', 'abnormal', 'abuse'] },
+  { id: 'p_auto', prefix: 'auto-', meaning: '自己', origin: '希腊语', color: '#48C9B0', level: 5, examples: ['automatic', 'automobile', 'autonomy', 'autograph'] },
+  { id: 'p_tele', prefix: 'tele-', meaning: '远距离', origin: '希腊语', color: '#5499C7', level: 5, examples: ['telephone', 'television', 'telescope', 'telegram'] },
+  { id: 'p_anti', prefix: 'anti-', meaning: '反对/对抗', origin: '希腊语', color: '#E74C3C', level: 5, examples: ['antibiotic', 'antisocial', 'antique', 'anticipate'] },
+  { id: 'p_mis', prefix: 'mis-', meaning: '错误', origin: '古英语', color: '#DC7633', level: 3, examples: ['mistake', 'misunderstand', 'mislead', 'misfortune'] },
+  { id: 'p_over', prefix: 'over-', meaning: '过度/在上', origin: '古英语', color: '#7DCEA0', level: 3, examples: ['overcome', 'overlook', 'overnight', 'overseas'] },
+  { id: 'p_out', prefix: 'out-', meaning: '超出/向外', origin: '古英语', color: '#F0B27A', level: 4, examples: ['outcome', 'outdoor', 'outrage', 'outstanding'] },
+  { id: 'p_under', prefix: 'under-', meaning: '不足/在下', origin: '古英语', color: '#AED6F1', level: 4, examples: ['understand', 'undertake', 'undermine', 'underlying'] },
 ];
 
+// === Suffixes ===
 export const suffixes: Suffix[] = [
-  { id: 's001', suffix: '-tion', meaning: '名词后缀，表示行为/状态', origin: '拉丁语', color: '#00D4AA', level: 1, partOfSpeech: 'noun', examples: ['action', 'nation', 'education'] },
-  { id: 's002', suffix: '-able', meaning: '能够...的', origin: '拉丁语', color: '#00D4AA', level: 1, partOfSpeech: 'adjective', examples: ['readable', 'comfortable', 'available'] },
-  { id: 's003', suffix: '-ment', meaning: '名词后缀，表示行为/结果', origin: '拉丁语', color: '#00D4AA', level: 1, partOfSpeech: 'noun', examples: ['movement', 'development', 'agreement'] },
-  { id: 's004', suffix: '-ly', meaning: '副词后缀', origin: '古英语', color: '#00D4AA', level: 1, partOfSpeech: 'adverb', examples: ['quickly', 'slowly', 'carefully'] },
-  { id: 's005', suffix: '-ness', meaning: '名词后缀，表示状态/性质', origin: '古英语', color: '#00D4AA', level: 1, partOfSpeech: 'noun', examples: ['happiness', 'darkness', 'kindness'] },
-  { id: 's006', suffix: '-ful', meaning: '充满...的', origin: '古英语', color: '#FF6B6B', level: 2, partOfSpeech: 'adjective', examples: ['beautiful', 'helpful', 'wonderful'] },
-  { id: 's007', suffix: '-less', meaning: '没有...的', origin: '古英语', color: '#FF6B6B', level: 2, partOfSpeech: 'adjective', examples: ['homeless', 'careless', 'endless'] },
-  { id: 's008', suffix: '-er', meaning: '做...的人/物', origin: '古英语', color: '#FF6B6B', level: 2, partOfSpeech: 'noun', examples: ['teacher', 'worker', 'player'] },
-  { id: 's009', suffix: '-ist', meaning: '从事...的人', origin: '希腊语', color: '#FF6B6B', level: 2, partOfSpeech: 'noun', examples: ['artist', 'scientist', 'pianist'] },
-  { id: 's010', suffix: '-ize', meaning: '使成为', origin: '希腊语', color: '#FF6B6B', level: 2, partOfSpeech: 'verb', examples: ['realize', 'organize', 'recognize'] },
+  { id: 's_tion', suffix: '-tion/-sion', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA', level: 1, partOfSpeech: 'n.', examples: ['action', 'education', 'production', 'expression'] },
+  { id: 's_able', suffix: '-able/-ible', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71', level: 1, partOfSpeech: 'adj.', examples: ['readable', 'visible', 'credible', 'portable'] },
+  { id: 's_ment', suffix: '-ment', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB', level: 1, partOfSpeech: 'n.', examples: ['movement', 'development', 'agreement', 'statement'] },
+  { id: 's_ly', suffix: '-ly', meaning: '副词后缀', origin: '古英语', color: '#9B59B6', level: 1, partOfSpeech: 'adv.', examples: ['quickly', 'carefully', 'extremely', 'naturally'] },
+  { id: 's_er', suffix: '-er/-or', meaning: '做...的人/物', origin: '古英语', color: '#E67E22', level: 1, partOfSpeech: 'n.', examples: ['teacher', 'conductor', 'reporter', 'inspector'] },
+  { id: 's_ness', suffix: '-ness', meaning: '状态/性质(名词)', origin: '古英语', color: '#1ABC9C', level: 2, partOfSpeech: 'n.', examples: ['happiness', 'darkness', 'kindness', 'weakness'] },
+  { id: 's_ful', suffix: '-ful', meaning: '充满...的', origin: '古英语', color: '#E74C3C', level: 2, partOfSpeech: 'adj.', examples: ['beautiful', 'helpful', 'wonderful', 'powerful'] },
+  { id: 's_less', suffix: '-less', meaning: '没有...的', origin: '古英语', color: '#95A5A6', level: 2, partOfSpeech: 'adj.', examples: ['homeless', 'careless', 'endless', 'powerless'] },
+  { id: 's_ive', suffix: '-ive/-ative', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12', level: 2, partOfSpeech: 'adj.', examples: ['active', 'creative', 'supportive', 'productive'] },
+  { id: 's_ize', suffix: '-ize/-ise', meaning: '使成为(动词)', origin: '希腊语', color: '#8E44AD', level: 2, partOfSpeech: 'v.', examples: ['realize', 'organize', 'recognize', 'memorize'] },
+  { id: 's_al', suffix: '-al/-ial', meaning: '属于...的', origin: '拉丁语', color: '#2980B9', level: 2, partOfSpeech: 'adj.', examples: ['natural', 'external', 'personal', 'national'] },
+  { id: 's_ous', suffix: '-ous/-ious', meaning: '有...特征的', origin: '拉丁语', color: '#D35400', level: 3, partOfSpeech: 'adj.', examples: ['famous', 'dangerous', 'generous', 'conscious'] },
+  { id: 's_ist', suffix: '-ist', meaning: '从事...的人', origin: '希腊语', color: '#C0392B', level: 3, partOfSpeech: 'n.', examples: ['artist', 'scientist', 'specialist', 'economist'] },
+  { id: 's_ity', suffix: '-ity/-ty', meaning: '性质/状态(名词)', origin: '拉丁语', color: '#16A085', level: 3, partOfSpeech: 'n.', examples: ['ability', 'quality', 'reality', 'security'] },
+  { id: 's_ence', suffix: '-ence/-ance', meaning: '状态/行为(名词)', origin: '拉丁语', color: '#27AE60', level: 3, partOfSpeech: 'n.', examples: ['difference', 'importance', 'presence', 'evidence'] },
+  { id: 's_ate', suffix: '-ate', meaning: '使...(动词)/有...的', origin: '拉丁语', color: '#2C3E50', level: 3, partOfSpeech: 'v./adj.', examples: ['create', 'separate', 'accurate', 'generate'] },
+  { id: 's_ure', suffix: '-ure', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D', level: 4, partOfSpeech: 'n.', examples: ['structure', 'culture', 'nature', 'manufacture'] },
+  { id: 's_fy', suffix: '-fy/-ify', meaning: '使成为(动词)', origin: '拉丁语', color: '#D68910', level: 4, partOfSpeech: 'v.', examples: ['magnify', 'simplify', 'identify', 'classify'] },
+  { id: 's_ent', suffix: '-ent/-ant', meaning: '正在...的/...者', origin: '拉丁语', color: '#5B2C6F', level: 4, partOfSpeech: 'adj./n.', examples: ['different', 'important', 'student', 'assistant'] },
+  { id: 's_ic', suffix: '-ic/-ical', meaning: '属于...的', origin: '希腊语', color: '#1A5276', level: 4, partOfSpeech: 'adj.', examples: ['automatic', 'economic', 'logical', 'historical'] },
 ];
 
-export const generateMockWords = (): Word[] => {
+// === Build word database from raw JSON ===
+
+const posMap: Record<string, string> = {
+  'v': 'v.', 'n': 'n.', 'a': 'adj.', 'ad': 'adv.',
+  'prep': 'prep.', 'conj': 'conj.', 'pron': 'pron.',
+};
+
+const getPhonetic = (word: string): string => {
+  const data = enrichment[word.toLowerCase()];
+  return data?.phonetic || '';
+};
+
+// Build association stories from morpheme analysis
+const buildAssociation = (word: string, rootMeaning: string, rootName: string): string => {
+  const prefixMatches = prefixes.filter(p => {
+    const clean = p.prefix.replace(/[-/].*/g, '');
+    return word.startsWith(clean) && clean.length >= 2;
+  });
+
+  const suffixMatches = suffixes.filter(s => {
+    const variants = s.suffix.replace('-', '').split('/');
+    return variants.some(v => word.endsWith(v) && v.length >= 2);
+  });
+
+  const parts: string[] = [];
+  if (prefixMatches.length > 0) {
+    const p = prefixMatches[0];
+    parts.push(`${p.prefix.split('/')[0]}(${p.meaning})`);
+  }
+  parts.push(`${rootName}(${rootMeaning})`);
+  if (suffixMatches.length > 0) {
+    const s = suffixMatches[0];
+    parts.push(`${s.suffix.split('/')[0]}(${s.meaning})`);
+  }
+
+  if (parts.length >= 2) {
+    return `${word} = ${parts.join(' + ')} → 组合理解：${parts.map(p => p.match(/\(([^)]+)\)/)?.[1]).filter(Boolean).join(' + ')}`;
+  }
+  return `${word} 包含词根 ${rootName}(${rootMeaning})，帮助记忆这个词的核心含义。`;
+};
+
+// Manual morpheme overrides for words where algorithmic splitting fails
+// Format: word -> [{ text, type, meaning, origin, color }]
+type MorphemeTuple = [string, 'prefix' | 'root' | 'suffix', string]; // [text, type, meaning_key]
+const morphemeOverrides: Record<string, MorphemeTuple[]> = {
+  // Compound words - no prefix, just compound + root
+  'airport': [['air-', 'prefix', '空气/空中'], ['port', 'root', '']],
+  'passport': [['pass-', 'prefix', '通过'], ['port', 'root', '']],
+  'sport': [['sport', 'root', '']],
+  'portfolio': [['port', 'root', ''], ['-folio', 'suffix', '页/叶']],
+  'proportion': [['pro-', 'prefix', '向前/支持'], ['port', 'root', ''], ['-ion', 'suffix', '行为/状态(名词)']],
+  'opportunity': [['ob-', 'prefix', '朝向'], ['port', 'root', ''], ['-unity', 'suffix', '状态(名词)']],
+  'comport': [['com-', 'prefix', '共同/一起'], ['port', 'root', '']],
+  'purport': [['pur-', 'prefix', '向前(pro-变体)'], ['port', 'root', '']],
+  'disport': [['dis-', 'prefix', '分离'], ['port', 'root', '']],
+  // struct
+  'structure': [['struct', 'root', ''], ['-ure', 'suffix', '行为/结果(名词)']],
+  'restructure': [['re-', 'prefix', '再次/返回'], ['struct', 'root', ''], ['-ure', 'suffix', '行为/结果(名词)']],
+  'superstructure': [['super-', 'prefix', '超级/上方'], ['struct', 'root', ''], ['-ure', 'suffix', '行为/结果(名词)']],
+  'infrastructure': [['infra-', 'prefix', '在...下面'], ['struct', 'root', ''], ['-ure', 'suffix', '行为/结果(名词)']],
+  // ject
+  'subject': [['sub-', 'prefix', '在...下面'], ['ject', 'root', '']],
+  'object': [['ob-', 'prefix', '对着/阻碍'], ['ject', 'root', '']],
+  'adjective': [['ad-', 'prefix', '朝向/附加'], ['ject', 'root', ''], ['-ive', 'suffix', '有...性质的']],
+  // rupt
+  'abrupt': [['ab-', 'prefix', '离开/偏离'], ['rupt', 'root', '']],
+  'bankrupt': [['bank-', 'prefix', '银行/柜台'], ['rupt', 'root', '']],
+  'corrupt': [['cor-', 'prefix', '共同(con-变体)'], ['rupt', 'root', '']],
+  // dict
+  'dictionary': [['dict', 'root', ''], ['-ionary', 'suffix', '与...有关的(名词)']],
+  'verdict': [['ver-', 'prefix', '真实'], ['dict', 'root', '']],
+  // spect
+  'spectrum': [['spect', 'root', ''], ['-rum', 'suffix', '(名词后缀)']],
+  'speculate': [['spec', 'root', ''], ['-ulate', 'suffix', '使...(动词)']],
+  // vis/vid
+  'visual': [['vis', 'root', ''], ['-ual', 'suffix', '属于...的']],
+  'visualize': [['vis', 'root', ''], ['-ual', 'suffix', '属于...的'], ['-ize', 'suffix', '使成为(动词)']],
+  'television': [['tele-', 'prefix', '远距离'], ['vis', 'root', ''], ['-ion', 'suffix', '行为/状态(名词)']],
+  // voc/vok
+  'voice': [['voc', 'root', ''], ['-e', 'suffix', '']],
+  'vocation': [['voc', 'root', ''], ['-ation', 'suffix', '行为/状态(名词)']],
+  // misc compound words
+  'understand': [['under-', 'prefix', '不足/在下'], ['stand', 'root', '']],
+  'outstanding': [['out-', 'prefix', '超出/向外'], ['stand', 'root', ''], ['-ing', 'suffix', '正在...的']],
+  'withstand': [['with-', 'prefix', '对抗'], ['stand', 'root', '']],
+  'circumstance': [['circum-', 'prefix', '周围'], ['st', 'root', ''], ['-ance', 'suffix', '状态/行为(名词)']],
+  'telephone': [['tele-', 'prefix', '远距离'], ['phon', 'root', ''], ['-e', 'suffix', '']],
+  'microphone': [['micro-', 'prefix', '小/微'], ['phon', 'root', ''], ['-e', 'suffix', '']],
+  'mediterranean': [['medi-', 'prefix', '中间'], ['terr', 'root', ''], ['-anean', 'suffix', '属于...的']],
+  'automobile': [['auto-', 'prefix', '自己'], ['mob', 'root', ''], ['-ile', 'suffix', '能够...的']],
+  'semiconductor': [['semi-', 'prefix', '半'], ['con-', 'prefix', '共同/一起'], ['duct', 'root', ''], ['-or', 'suffix', '做...的人/物']],
+};
+
+// Build morphemes for a word
+const buildMorphemes = (word: string, rootId: string, rootMeaning: string, rootColor: string, rootOrigin: string) => {
+  type MorphemeResult = { text: string; type: 'prefix' | 'root' | 'suffix'; meaning: string; origin: string; color: string };
+  const lowerWord = word.toLowerCase();
+
+  // Check manual overrides first
+  const override = morphemeOverrides[lowerWord];
+  if (override) {
+    return override.map(([text, type, meaning]) => ({
+      text,
+      type,
+      meaning: type === 'root' ? rootMeaning : meaning,
+      origin: type === 'root' ? rootOrigin : '',
+      color: type === 'root' ? rootColor
+        : type === 'prefix' ? (prefixes.find(p => text.replace('-', '').startsWith(p.prefix.replace(/[-/].*/g, '')))?.color || '#888888')
+        : (suffixes.find(s => {
+            const variants = s.suffix.replace('-', '').split('/');
+            return variants.some(v => text.replace('-', '').endsWith(v.replace('-', '')));
+          })?.color || '#888888'),
+    })) as MorphemeResult[];
+  }
+
+  const morphemes: MorphemeResult[] = [];
+  let remaining = lowerWord;
+
+  // Check prefix - only match if root is clearly present after removing prefix
+  const sortedPrefixes = [...prefixes].sort((a, b) => {
+    const aLen = a.prefix.replace(/[-/].*/g, '').length;
+    const bLen = b.prefix.replace(/[-/].*/g, '').length;
+    return bLen - aLen;
+  });
+
+  for (const p of sortedPrefixes) {
+    const variants = p.prefix.replace('-', '').split('/').map(v => v.replace('-', ''));
+    for (const v of variants) {
+      if (remaining.startsWith(v) && remaining.length > v.length + 1) {
+        const afterPrefix = remaining.slice(v.length);
+        // Root must appear at the start of what remains (possibly with 1 char variation for assimilation)
+        if (afterPrefix.startsWith(rootId) || afterPrefix.slice(0, 1) + afterPrefix.slice(1).startsWith(rootId.slice(1))) {
+          morphemes.push({
+            text: v + '-',
+            type: 'prefix',
+            meaning: p.meaning,
+            origin: p.origin,
+            color: p.color,
+          });
+          remaining = afterPrefix;
+          break;
+        }
+      }
+    }
+    if (morphemes.length > 0) break;
+  }
+
+  // Check suffix
+  const sortedSuffixes = [...suffixes].sort((a, b) => {
+    const aLen = a.suffix.replace(/[-/].*/g, '').length;
+    const bLen = b.suffix.replace(/[-/].*/g, '').length;
+    return bLen - aLen;
+  });
+
+  let suffixMatch: typeof suffixes[0] | null = null;
+  let suffixVariant = '';
+  for (const s of sortedSuffixes) {
+    const variants = s.suffix.replace('-', '').split('/').map(v => v.replace('-', ''));
+    for (const v of variants) {
+      if (remaining.endsWith(v) && remaining.length > v.length) {
+        const beforeSuffix = remaining.slice(0, remaining.length - v.length);
+        // The part before suffix should contain or closely match the root
+        if (beforeSuffix.includes(rootId) || beforeSuffix.endsWith(rootId) ||
+            (beforeSuffix.length >= rootId.length - 1 && beforeSuffix.length <= rootId.length + 2)) {
+          suffixMatch = s;
+          suffixVariant = v;
+          break;
+        }
+      }
+    }
+    if (suffixMatch) break;
+  }
+
+  // Add root
+  morphemes.push({
+    text: rootId,
+    type: 'root',
+    meaning: rootMeaning,
+    origin: rootOrigin,
+    color: rootColor,
+  });
+
+  // Add suffix
+  if (suffixMatch) {
+    morphemes.push({
+      text: '-' + suffixVariant,
+      type: 'suffix',
+      meaning: suffixMatch.meaning,
+      origin: suffixMatch.origin,
+      color: suffixMatch.color,
+    });
+  }
+
+  return morphemes;
+};
+
+// Generate a Chinese translation for an enrichment example sentence
+const translateExample = (example: string, word: string, meaning: string, pos: string): string => {
+  // Clean the meaning: take first short meaning, strip trailing 的/地
+  let m = meaning.split('/')[0].split('；')[0].split(',')[0].trim();
+  const mClean = m.replace(/的$/, '').replace(/地$/, '');
+
+  const posKey = pos.replace('.', '');
+  const isAdj = posKey === 'a' || posKey === 'adj';
+  const isAdv = posKey === 'ad' || posKey === 'adv';
+  const isNoun = posKey === 'n';
+  const isVerb = posKey === 'v';
+
+  if (isAdj) {
+    const opts = [
+      `句中 ${word} 意为"${mClean}的"，用来修饰描述事物的性质。`,
+      `${word} 在此表示"${mClean}的"，形容相关事物的特征。`,
+      `此处 ${word} 是形容词，意思是"${mClean}的"。`,
+    ];
+    return opts[(word.charCodeAt(0) + example.length) % opts.length];
+  }
+  if (isAdv) {
+    const opts = [
+      `句中 ${word} 意为"${mClean}地"，修饰动作的方式。`,
+      `${word} 在此表示"${mClean}地"，描述行为的状态。`,
+      `此处 ${word} 是副词，意思是"${mClean}地"。`,
+    ];
+    return opts[(word.charCodeAt(0) + example.length) % opts.length];
+  }
+  if (isNoun) {
+    const opts = [
+      `句中 ${word} 意为"${m}"，指代相关的事物或概念。`,
+      `${word} 在此表示"${m}"，是句子的关键名词。`,
+      `此处 ${word} 是名词，意思是"${m}"。`,
+    ];
+    return opts[(word.charCodeAt(0) + example.length) % opts.length];
+  }
+  if (isVerb) {
+    const opts = [
+      `句中 ${word} 意为"${m}"，表示所进行的动作。`,
+      `${word} 在此表示"${m}"，描述主语的行为。`,
+      `此处 ${word} 是动词，意思是"${m}"。`,
+    ];
+    return opts[(word.charCodeAt(0) + example.length) % opts.length];
+  }
+
+  // Fallback for other POS (prep, conj, etc.)
+  return `句中 ${word} 的意思是"${m}"。`;
+};
+
+// Get real example sentence from enrichment data, with fallback
+const generateExample = (word: string, meaning: string, pos: string): { example: string; translation: string } => {
+  const data = enrichment[word.toLowerCase()];
+  if (data?.examples && data.examples.length > 0) {
+    // Pick the shortest reasonable example (prefer < 120 chars)
+    const sorted = [...data.examples].sort((a, b) => a.length - b.length);
+    const picked = sorted.find(e => e.length >= 20 && e.length <= 120) || sorted[0];
+    // Truncate very long examples at sentence boundary
+    let example = picked;
+    if (example.length > 150) {
+      const cutoff = example.lastIndexOf('.', 150);
+      if (cutoff > 40) example = example.slice(0, cutoff + 1);
+      else example = example.slice(0, 147) + '...';
+    }
+    const formatted = example.charAt(0).toUpperCase() + example.slice(1);
+    const withPeriod = formatted.endsWith('.') || formatted.endsWith('!') || formatted.endsWith('?')
+      ? formatted : formatted + '.';
+    const translation = translateExample(withPeriod, word, meaning, pos);
+    return { example: withPeriod, translation };
+  }
+
+  // Fallback: more varied and natural templates
+  const templates: Record<string, Array<{ en: (w: string) => string; cn: (m: string) => string }>> = {
+    'v': [
+      { en: w => `The company plans to ${w} new products next year.`, cn: m => `公司计划明年${m}新产品。` },
+      { en: w => `Can you ${w} this document for me?`, cn: m => `你能帮我${m}这份文件吗？` },
+      { en: w => `Scientists are trying to ${w} the phenomenon.`, cn: m => `科学家们正在尝试${m}这一现象。` },
+      { en: w => `The government decided to ${w} the new policy.`, cn: m => `政府决定${m}新政策。` },
+      { en: w => `He managed to ${w} the problem quickly.`, cn: m => `他设法迅速${m}了这个问题。` },
+      { en: w => `They will ${w} the agreement tomorrow.`, cn: m => `他们明天将${m}这项协议。` },
+    ],
+    'n': [
+      { en: w => `The ${w} of the project exceeded expectations.`, cn: m => `该项目的${m}超出了预期。` },
+      { en: w => `Her ${w} in this field is widely recognized.`, cn: m => `她在这一领域的${m}得到了广泛认可。` },
+      { en: w => `The ${w} between the two systems is significant.`, cn: m => `两个系统之间的${m}是显著的。` },
+      { en: w => `This ${w} has been debated for decades.`, cn: m => `这个${m}已经争论了数十年。` },
+      { en: w => `A clear ${w} is essential for success.`, cn: m => `明确的${m}对成功至关重要。` },
+      { en: w => `The ${w} of modern technology has changed our lives.`, cn: m => `现代技术的${m}改变了我们的生活。` },
+    ],
+    'a': [
+      { en: w => `This is a highly ${w} method.`, cn: m => `这是一种非常${m}的方法。` },
+      { en: w => `The situation became increasingly ${w}.`, cn: m => `情况变得越来越${m}。` },
+      { en: w => `His work is considered ${w} by experts.`, cn: m => `他的工作被专家认为是${m}的。` },
+      { en: w => `It would be ${w} to consider all options.`, cn: m => `考虑所有选项是${m}的。` },
+      { en: w => `The ${w} nature of this discovery surprised everyone.`, cn: m => `这一发现${m}的性质让所有人惊讶。` },
+    ],
+    'ad': [
+      { en: w => `The project progressed ${w} under new leadership.`, cn: m => `在新领导下，项目${m}地推进。` },
+      { en: w => `She ${w} explained the complex theory.`, cn: m => `她${m}地解释了这个复杂理论。` },
+      { en: w => `The economy has ${w} improved this year.`, cn: m => `经济今年${m}地改善了。` },
+    ],
+  };
+
+  const posKey = pos.replace('.', '');
+  const options = templates[posKey] || templates['v'];
+  const idx = (word.charCodeAt(0) + word.length) % options.length;
+  return { example: options[idx].en(word), translation: options[idx].cn(meaning) };
+};
+
+// === Build all words ===
+
+let wordIdCounter = 0;
+
+const buildRootWords = (): { words: Word[]; roots: WordRoot[] } => {
   const words: Word[] = [];
-  const wordList = [
-    { word: 'transport', phonetic: '/trænsˈpɔːrt/', pos: 'v./n.', meaning: '运输，运送', level: 1, freq: 100 },
-    { word: 'import', phonetic: '/ˈɪmpɔːrt/', pos: 'v./n.', meaning: '进口，输入', level: 1, freq: 95 },
-    { word: 'export', phonetic: '/ˈekspɔːrt/', pos: 'v./n.', meaning: '出口，输出', level: 1, freq: 90 },
-    { word: 'portable', phonetic: '/ˈpɔːrtəbl/', pos: 'adj.', meaning: '便携的', level: 1, freq: 85 },
-    { word: 'report', phonetic: '/rɪˈpɔːrt/', pos: 'v./n.', meaning: '报告', level: 1, freq: 92 },
-    { word: 'credit', phonetic: '/ˈkredɪt/', pos: 'n./v.', meaning: '信用，学分', level: 1, freq: 88 },
-    { word: 'incredible', phonetic: '/ɪnˈkredəbl/', pos: 'adj.', meaning: '难以置信的', level: 1, freq: 86 },
-    { word: 'credible', phonetic: '/ˈkredəbl/', pos: 'adj.', meaning: '可信的', level: 2, freq: 75 },
-    { word: 'describe', phonetic: '/dɪˈskraɪb/', pos: 'v.', meaning: '描述', level: 1, freq: 94 },
-    { word: 'subscribe', phonetic: '/səbˈskraɪb/', pos: 'v.', meaning: '订阅', level: 2, freq: 78 },
-    { word: 'prescribe', phonetic: '/prɪˈskraɪb/', pos: 'v.', meaning: '开处方', level: 3, freq: 65 },
-    { word: 'magnificent', phonetic: '/mæɡˈnɪfɪsnt/', pos: 'adj.', meaning: '壮丽的', level: 2, freq: 82 },
-    { word: 'magnify', phonetic: '/ˈmæɡnɪfaɪ/', pos: 'v.', meaning: '放大', level: 2, freq: 70 },
-    { word: 'predict', phonetic: '/prɪˈdɪkt/', pos: 'v.', meaning: '预测', level: 2, freq: 80 },
-    { word: 'dictionary', phonetic: '/ˈdɪkʃəneri/', pos: 'n.', meaning: '字典', level: 1, freq: 96 },
-    { word: 'inspect', phonetic: '/ɪnˈspekt/', pos: 'v.', meaning: '检查', level: 2, freq: 72 },
-    { word: 'respect', phonetic: '/rɪˈspekt/', pos: 'n./v.', meaning: '尊重', level: 1, freq: 91 },
-    { word: 'construct', phonetic: '/kənˈstrʌkt/', pos: 'v.', meaning: '建造', level: 2, freq: 76 },
-    { word: 'structure', phonetic: '/ˈstrʌktʃər/', pos: 'n.', meaning: '结构', level: 2, freq: 84 },
-    { word: 'transform', phonetic: '/trænsˈfɔːrm/', pos: 'v.', meaning: '转变', level: 2, freq: 79 },
-    { word: 'inform', phonetic: '/ɪnˈfɔːrm/', pos: 'v.', meaning: '通知', level: 1, freq: 93 },
-    { word: 'conduct', phonetic: '/kənˈdʌkt/', pos: 'v./n.', meaning: '引导，行为', level: 2, freq: 77 },
-    { word: 'produce', phonetic: '/prəˈdjuːs/', pos: 'v.', meaning: '生产', level: 2, freq: 83 },
-    { word: 'project', phonetic: '/ˈprɒdʒekt/', pos: 'n.', meaning: '项目', level: 2, freq: 87 },
-    { word: 'reject', phonetic: '/rɪˈdʒekt/', pos: 'v.', meaning: '拒绝', level: 2, freq: 74 },
-    { word: 'attract', phonetic: '/əˈtrækt/', pos: 'v.', meaning: '吸引', level: 2, freq: 81 },
-    { word: 'extract', phonetic: '/ɪkˈstrækt/', pos: 'v.', meaning: '提取', level: 3, freq: 68 },
-    { word: 'submit', phonetic: '/səbˈmɪt/', pos: 'v.', meaning: '提交', level: 2, freq: 73 },
-    { word: 'transmit', phonetic: '/trænzˈmɪt/', pos: 'v.', meaning: '传输', level: 3, freq: 66 },
-    { word: 'compose', phonetic: '/kəmˈpəʊz/', pos: 'v.', meaning: '组成', level: 2, freq: 71 },
-    { word: 'propose', phonetic: '/prəˈpəʊz/', pos: 'v.', meaning: '提议', level: 3, freq: 64 },
-    { word: 'vision', phonetic: '/ˈvɪʒən/', pos: 'n.', meaning: '视觉', level: 2, freq: 78 },
-    { word: 'visible', phonetic: '/ˈvɪzəbl/', pos: 'adj.', meaning: '可见的', level: 2, freq: 85 },
-    { word: 'audio', phonetic: '/ˈɔːdiəʊ/', pos: 'n.', meaning: '音频', level: 2, freq: 80 },
-    { word: 'audience', phonetic: '/ˈɔːdiəns/', pos: 'n.', meaning: '观众', level: 2, freq: 82 },
-    { word: 'convert', phonetic: '/kənˈvɜːt/', pos: 'v.', meaning: '转换', level: 3, freq: 67 },
-    { word: 'revert', phonetic: '/rɪˈvɜːt/', pos: 'v.', meaning: '恢复', level: 3, freq: 63 },
-    { word: 'depend', phonetic: '/dɪˈpend/', pos: 'v.', meaning: '依赖', level: 2, freq: 86 },
-    { word: 'suspend', phonetic: '/səˈspend/', pos: 'v.', meaning: '暂停', level: 3, freq: 62 },
-    { word: 'factory', phonetic: '/ˈfæktəri/', pos: 'n.', meaning: '工厂', level: 2, freq: 84 },
-    { word: 'manufacture', phonetic: '/ˌmænjuˈfæktʃər/', pos: 'v./n.', meaning: '制造', level: 3, freq: 61 },
-  ];
+  const roots: WordRoot[] = [];
 
-  const rootMap: Record<string, WordRoot> = {};
-  coreRoots.forEach(r => rootMap[r.root] = r);
+  (rawData as any).roots.forEach((rootData: any) => {
+    const root: WordRoot = {
+      id: rootData.id,
+      root: rootData.root,
+      meaning: rootData.meaning,
+      origin: rootData.origin,
+      color: rootData.color,
+      level: rootData.level,
+      words: rootData.words.map((w: any) => ({
+        word: w.word,
+        meaning: w.meaning,
+      })),
+    };
+    roots.push(root);
 
-  wordList.forEach((item, index) => {
-    const morphemes = extractMorphemes(item.word, item.level);
-    const roots = morphemes.filter(m => m.type === 'root').map(m => m.text);
-    
-    words.push({
-      id: index + 1,
-      word: item.word,
-      phonetic: item.phonetic,
-      partOfSpeech: item.pos,
-      meaning: item.meaning,
-      morphemes,
-      example: `This is an example of ${item.word}.`,
-      translation: `这是${item.word}的一个例子。`,
-      associationStory: generateAssociationStory(item.word, morphemes),
-      roots,
-      level: item.level,
-      frequency: item.freq,
+    rootData.words.forEach((w: any, idx: number) => {
+      wordIdCounter++;
+      const pos = posMap[w.pos] || w.pos;
+      const morphemes = buildMorphemes(w.word, rootData.root, rootData.meaning, rootData.color, rootData.origin);
+      const { example, translation } = generateExample(w.word, w.meaning.split('/')[0], w.pos);
+      const association = buildAssociation(w.word, rootData.meaning, rootData.root);
+
+      words.push({
+        id: wordIdCounter,
+        word: w.word,
+        phonetic: getPhonetic(w.word),
+        partOfSpeech: pos,
+        meaning: w.meaning,
+        morphemes,
+        example,
+        translation,
+        associationStory: association,
+        roots: [rootData.root],
+        level: rootData.level,
+        frequency: Math.max(100 - rootData.level * 10 - idx, 10),
+        rootId: rootData.id,
+      });
+    });
+  });
+
+  return { words, roots };
+};
+
+const buildSupplementWords = (): Word[] => {
+  const words: Word[] = [];
+  const supplement = (rawData as any).supplement;
+  if (!supplement) return words;
+
+  const categoryLevels: Record<string, number> = {
+    '日常基础': 1,
+    '社会生活': 3,
+    '学术科技': 5,
+    '进阶词汇': 7,
+  };
+
+  Object.entries(supplement).forEach(([category, wordList]: [string, any]) => {
+    const level = categoryLevels[category] || 5;
+    wordList.forEach((w: any, idx: number) => {
+      wordIdCounter++;
+      const pos = posMap[w.pos] || w.pos;
+      const { example, translation } = generateExample(w.word, w.meaning, w.pos);
+
+      words.push({
+        id: wordIdCounter,
+        word: w.word,
+        phonetic: getPhonetic(w.word),
+        partOfSpeech: pos,
+        meaning: w.meaning,
+        morphemes: [{ text: w.word, type: 'root', meaning: w.meaning, origin: '', color: '#A06F3B' }],
+        example,
+        translation,
+        associationStory: `${w.word} - ${w.meaning}`,
+        roots: [],
+        level,
+        frequency: Math.max(80 - level * 5 - idx % 20, 5),
+        category,
+      });
     });
   });
 
   return words;
 };
 
-const extractMorphemes = (word: string, level: number) => {
-  const morphemes = [];
-  const prefixMap: Record<string, Prefix> = {};
-  prefixes.forEach(p => prefixMap[p.prefix] = p);
-  const rootMap: Record<string, WordRoot> = {};
-  coreRoots.forEach(r => rootMap[r.root] = r);
-  const suffixMap: Record<string, Suffix> = {};
-  suffixes.forEach(s => suffixMap[s.suffix] = s);
+// Initialize database
+const { words: rootWords, roots } = buildRootWords();
+const supplementWords = buildSupplementWords();
 
-  let remaining = word;
-  
-  for (const prefix of Object.values(prefixMap).filter(p => p.level <= level)) {
-    if (remaining.startsWith(prefix.prefix.replace('-', ''))) {
-      morphemes.push({
-        text: prefix.prefix,
-        type: 'prefix' as const,
-        meaning: prefix.meaning,
-        origin: prefix.origin,
-        color: prefix.color,
-      });
-      remaining = remaining.replace(prefix.prefix.replace('-', ''), '');
-      break;
+export const allWords: Word[] = [...rootWords, ...supplementWords];
+export const coreRoots: WordRoot[] = roots;
+
+// === Lookup helpers ===
+
+export const getWordsByRoot = (rootId: string): Word[] => {
+  return allWords.filter(w => w.rootId === rootId);
+};
+
+export const searchWords = (query: string): Word[] => {
+  const q = query.toLowerCase().trim();
+  if (!q) return [];
+  return allWords.filter(w =>
+    w.word.toLowerCase().includes(q) ||
+    w.meaning.includes(q) ||
+    w.roots.some(r => r.includes(q))
+  ).slice(0, 50);
+};
+
+// === Lookalike / confusable words (形近词) ===
+
+const levenshtein = (a: string, b: string): number => {
+  const m = a.length, n = b.length;
+  const dp: number[][] = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+  for (let i = 0; i <= m; i++) dp[i][0] = i;
+  for (let j = 0; j <= n; j++) dp[0][j] = j;
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      dp[i][j] = a[i - 1] === b[j - 1]
+        ? dp[i - 1][j - 1]
+        : 1 + Math.min(dp[i - 1][j - 1], dp[i - 1][j], dp[i][j - 1]);
     }
   }
+  return dp[m][n];
+};
 
-  for (const suffix of Object.values(suffixMap).filter(s => s.level <= level)) {
-    if (remaining.endsWith(suffix.suffix.replace('-', ''))) {
-      const rootPart = remaining.replace(suffix.suffix.replace('-', ''), '');
-      for (const root of Object.values(rootMap).filter(r => r.level <= level)) {
-        if (rootPart.includes(root.root)) {
-          morphemes.push({
-            text: root.root,
-            type: 'root' as const,
-            meaning: root.meaning,
-            origin: root.origin,
-            color: root.color,
-          });
-          morphemes.push({
-            text: suffix.suffix,
-            type: 'suffix' as const,
-            meaning: suffix.meaning,
-            origin: suffix.origin,
-            color: suffix.color,
-          });
-          return morphemes;
-        }
+// Check if two words share a long common substring (visual similarity)
+const longestCommonSubstring = (a: string, b: string): number => {
+  const m = a.length, n = b.length;
+  let max = 0;
+  const dp: number[][] = Array.from({ length: m + 1 }, () => Array(n + 1).fill(0));
+  for (let i = 1; i <= m; i++) {
+    for (let j = 1; j <= n; j++) {
+      if (a[i - 1] === b[j - 1]) {
+        dp[i][j] = dp[i - 1][j - 1] + 1;
+        if (dp[i][j] > max) max = dp[i][j];
       }
     }
   }
-
-  for (const root of Object.values(rootMap).filter(r => r.level <= level)) {
-    if (remaining.includes(root.root)) {
-      morphemes.push({
-        text: root.root,
-        type: 'root' as const,
-        meaning: root.meaning,
-        origin: root.origin,
-        color: root.color,
-      });
-      return morphemes;
-    }
-  }
-
-  return [{ text: word, type: 'root' as const, meaning: '', origin: '', color: '#A06F3B' }];
+  return max;
 };
 
-const generateAssociationStory = (word: string, morphemes: { text: string; meaning: string }[]) => {
-  if (morphemes.length < 2) {
-    return `这个单词${word}的意思是...`;
+/**
+ * Find visually similar words (形近词).
+ * Uses edit distance + common substring to find words that "look alike"
+ * but have different meanings – a common source of confusion for learners.
+ */
+const similarCache = new Map<number, Word[]>();
+
+export const getSimilarWords = (word: Word, maxResults: number = 6): Word[] => {
+  const cached = similarCache.get(word.id);
+  if (cached) return cached.slice(0, maxResults);
+  const w = word.word.toLowerCase();
+  const minLen = 4; // skip very short words
+  if (w.length < minLen) return [];
+
+  const candidates: { word: Word; score: number }[] = [];
+
+  for (const candidate of allWords) {
+    if (candidate.id === word.id) continue;
+    const c = candidate.word.toLowerCase();
+    if (c.length < minLen) continue;
+
+    // Length difference too big → skip
+    const lenDiff = Math.abs(w.length - c.length);
+    if (lenDiff > 2) continue;
+
+    const dist = levenshtein(w, c);
+    // Allow edit distance 1-2 for similar-length words
+    const maxDist = Math.min(2, Math.floor(Math.max(w.length, c.length) * 0.3));
+    if (dist < 1 || dist > maxDist) continue;
+
+    // Must share a meaningful common substring
+    const lcs = longestCommonSubstring(w, c);
+    if (lcs < 3) continue;
+
+    // Score: lower is more similar. Prefer same-length, smaller edit distance, longer LCS
+    const score = dist * 10 - lcs * 3 + lenDiff * 2;
+    candidates.push({ word: candidate, score });
   }
-  const parts = morphemes.map(m => `${m.text}(${m.meaning})`).join(' + ');
-  return `${word} = ${parts} → 通过组合这些语素的含义，可以理解这个词的意思。`;
+
+  candidates.sort((a, b) => a.score - b.score);
+  const result = candidates.slice(0, maxResults).map(c => c.word);
+  similarCache.set(word.id, result);
+  return result;
 };
 
-export const mockWords = generateMockWords();

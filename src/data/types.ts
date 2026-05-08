@@ -19,6 +19,8 @@ export interface Word {
   roots: string[];
   level: number;
   frequency: number;
+  rootId?: string;
+  category?: string;
 }
 
 export interface WordRoot {
@@ -48,17 +50,47 @@ export interface Level {
   description: string;
   targetWords: number;
   rootsCount: number;
-  prefixesCount: number;
-  suffixesCount: number;
 }
 
 export interface Question {
   id: number;
+  type: 'root-meaning' | 'word-meaning' | 'morpheme-match' | 'fill-blank';
   question: string;
   options: { text: string; isCorrect: boolean }[];
   explanation: string;
   level: number;
+  wordId?: number;
 }
+
+// === Study Plan ===
+
+export interface StudyPlan {
+  wordsPerDay: number;          // 用户设定的每日目标: 20/30/50
+  totalDays: number;            // 预计完成天数
+  startDate: string;            // 开始日期
+  currentDay: number;           // 当前第几天
+}
+
+export interface DailyMission {
+  date: string;
+  newRoots: string[];           // 今日要学的词根id
+  newWordIds: number[];         // 今日要学的新词id
+  reviewWordIds: number[];      // 今日要复习的词id
+  completedNewWords: number[];  // 已完成的新词
+  completedReviews: number[];   // 已完成的复习
+  quizDone: boolean;
+}
+
+// === Learning Session (引导式学习流程) ===
+
+export type SessionStep =
+  | { type: 'root-intro'; rootId: string }
+  | { type: 'word-learn'; wordId: number }
+  | { type: 'quiz'; questions: Question[] }
+  | { type: 'review-card'; wordId: number }
+  | { type: 'complete' };
+
+// === User Progress ===
 
 export interface UserProgress {
   currentLevel: number;
@@ -67,11 +99,25 @@ export interface UserProgress {
   learningHistory: LearningRecord[];
   streak: number;
   totalScore: number;
+  wordReviews: Record<number, WordReviewData>;
+  studyPlan: StudyPlan | null;
+  todayMission: DailyMission | null;
+  learnedRootIds: string[];     // 已教过的词根
+}
+
+export interface WordReviewData {
+  wordId: number;
+  easeFactor: number;
+  interval: number;
+  repetitions: number;
+  nextReview: string;
+  lastReview: string;
 }
 
 export interface LearningRecord {
   date: string;
   wordsLearned: number;
+  wordsReviewed: number;
   score: number;
   timeSpent: number;
 }
@@ -96,3 +142,4 @@ export interface Suffix {
   partOfSpeech: string;
   examples: string[];
 }
+
