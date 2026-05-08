@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
   headerLeft: {
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'center',
     gap: 8,
   },
   word: {

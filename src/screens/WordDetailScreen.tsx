@@ -7,6 +7,7 @@ import { Word } from '../data/types';
 import { theme } from '../theme';
 import { loadProgress, saveProgress, markWordLearned } from '../data/learningLogic';
 import { getWordsByRoot, coreRoots, getSimilarWords } from '../data/wordDatabase';
+import { speak } from '../utils/speech';
 
 type RootStackParamList = {
   Tab: undefined;
@@ -64,7 +65,9 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
         </TouchableOpacity>
 
         <View style={styles.wordHeader}>
-          <Text style={styles.word}>{word.word}</Text>
+          <TouchableOpacity onPress={() => speak(word.word)} activeOpacity={0.6}>
+            <Text style={styles.word}>{word.word} <Text style={styles.speakerIcon}>{'\uD83D\uDD0A'}</Text></Text>
+          </TouchableOpacity>
           {word.phonetic ? <Text style={styles.phonetic}>{word.phonetic}</Text> : null}
           <Text style={styles.pos}>{word.partOfSpeech}</Text>
         </View>
@@ -246,7 +249,7 @@ const styles = StyleSheet.create({
   },
   wordHeader: {
     flexDirection: 'row',
-    alignItems: 'baseline',
+    alignItems: 'center',
     gap: 10,
     marginBottom: 8,
   },
@@ -254,6 +257,10 @@ const styles = StyleSheet.create({
     fontSize: 32,
     fontWeight: 'bold',
     color: theme.colors.textPrimary,
+  },
+  speakerIcon: {
+    fontSize: 18,
+    color: theme.colors.textTertiary,
   },
   phonetic: {
     fontSize: 14,

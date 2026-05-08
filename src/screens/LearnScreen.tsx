@@ -13,6 +13,7 @@ import {
   createStudyPlan, getEstimatedDays, getOverallStats, generateNextBatch,
 } from '../data/learningLogic';
 import { allWords, coreRoots, getWordsByRoot } from '../data/wordDatabase';
+import { speak } from '../utils/speech';
 
 type Nav = NativeStackNavigationProp<{ Tab: undefined; WordDetail: { word: Word } }>;
 
@@ -236,7 +237,9 @@ export const LearnScreen: React.FC = () => {
         <View style={[styles.container, { paddingTop: insets.top }]}>
           <SessionHeader pct={pct} step={stepIdx + 1} total={totalSteps} label="学习新词" onClose={() => setMode('dashboard')} />
           <ScrollView style={styles.sessionBody} contentContainerStyle={styles.sessionContent}>
-            <Text style={styles.wordBig}>{word.word}</Text>
+            <TouchableOpacity onPress={() => speak(word.word)} activeOpacity={0.6}>
+              <Text style={styles.wordBig}>{word.word} <Text style={styles.speakerIcon}>{'\uD83D\uDD0A'}</Text></Text>
+            </TouchableOpacity>
             {word.phonetic ? <Text style={styles.wordPhonetic}>{word.phonetic}  {word.partOfSpeech}</Text> : <Text style={styles.wordPhonetic}>{word.partOfSpeech}</Text>}
             <Text style={styles.wordMeaningBig}>{word.meaning}</Text>
 
@@ -372,7 +375,9 @@ export const LearnScreen: React.FC = () => {
           <View style={styles.sessionBody}>
             <View style={styles.flashCard}>
               <View style={styles.flashCardInner}>
-                <Text style={styles.flashWord}>{word.word}</Text>
+                <TouchableOpacity onPress={() => speak(word.word)} activeOpacity={0.6}>
+                  <Text style={styles.flashWord}>{word.word} <Text style={styles.speakerIcon}>{'\uD83D\uDD0A'}</Text></Text>
+                </TouchableOpacity>
                 {flipReview ? (
                   <>
                     <Text style={styles.flashMeaning}>{word.meaning}</Text>
@@ -666,7 +671,7 @@ const styles = StyleSheet.create({
   section: { paddingHorizontal: 20, marginBottom: 20 },
   sectionTitle: { fontSize: 12, color: theme.colors.primary, marginBottom: 10, fontWeight: '700', letterSpacing: 1 },
   rootPreview: { backgroundColor: theme.colors.surface, borderRadius: 14, padding: 14, marginBottom: 10, borderLeftWidth: 4, shadowColor: '#000', shadowOffset: { width: 0, height: 1 }, shadowOpacity: 0.04, shadowRadius: 4, elevation: 1 },
-  rootPreviewHead: { flexDirection: 'row', alignItems: 'baseline', gap: 10, marginBottom: 6 },
+  rootPreviewHead: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 6 },
   rootPreviewName: { fontSize: 22, fontWeight: 'bold' },
   rootPreviewMeaning: { fontSize: 15, color: theme.colors.textPrimary },
   rootPreviewWords: { fontSize: 13, color: theme.colors.textTertiary, lineHeight: 20 },
@@ -710,6 +715,7 @@ const styles = StyleSheet.create({
 
   // Word learn
   wordBig: { fontSize: 36, fontWeight: 'bold', color: theme.colors.textPrimary, textAlign: 'center', marginTop: 20, marginBottom: 4 },
+  speakerIcon: { fontSize: 20, color: theme.colors.textTertiary },
   wordPhonetic: { fontSize: 14, color: theme.colors.textTertiary, textAlign: 'center', marginBottom: 12 },
   wordMeaningBig: { fontSize: 22, fontWeight: '600', color: theme.colors.textPrimary, textAlign: 'center', marginBottom: 20 },
   morphRow: { flexDirection: 'row', gap: 8, marginBottom: 20 },
