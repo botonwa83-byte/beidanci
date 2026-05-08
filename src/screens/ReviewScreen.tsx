@@ -80,6 +80,8 @@ export const ReviewScreen: React.FC = () => {
         await saveProgress(p);
         setProgress(p);
       }
+      // Auto-advance after a short delay on correct answer
+      setTimeout(() => handleNext(), 600);
     } else {
       setWrong(n => n + 1);
       if (q.wordId) {
@@ -184,13 +186,13 @@ export const ReviewScreen: React.FC = () => {
             >
               <Text style={styles.confirmBtnText}>确认</Text>
             </TouchableOpacity>
-          ) : (
+          ) : selected !== null && !questions[qIdx].options[selected].isCorrect ? (
             <TouchableOpacity style={styles.confirmBtn} onPress={handleNext} activeOpacity={0.7}>
               <Text style={styles.confirmBtnText}>
                 {qIdx < questions.length - 1 ? '下一题' : '查看结果'}
               </Text>
             </TouchableOpacity>
-          )}
+          ) : null}
         </View>
       </View>
     );
