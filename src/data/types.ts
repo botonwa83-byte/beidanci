@@ -12,6 +12,7 @@ export interface Word {
   phonetic: string;
   partOfSpeech: string;
   meaning: string;
+  meanings: string[];
   morphemes: WordMorpheme[];
   example: string;
   translation: string;

@@ -1,9 +1,11 @@
 import { Word, WordRoot, Prefix, Suffix, Level } from './types';
 import rawData from './wordDatabaseRaw.json';
 import enrichmentData from './wordEnrichment.json';
+import rootsExtendedData from './rootsExtended.json';
 import { translationService } from '../services/translationService';
 
 const enrichment: Record<string, { phonetic: string; examples: string[]; exampleTranslations?: string[] }> = enrichmentData as any;
+const extendedRoots = rootsExtendedData.roots;
 
 // === Levels ===
 export const levels: Level[] = [
@@ -199,7 +201,6 @@ const buildMorphemes = (word: string, rootId: string, rootMeaning: string, rootC
     for (const v of variants) {
       if (remaining.startsWith(v) && remaining.length > v.length + 1) {
         const afterPrefix = remaining.slice(v.length);
-        // Root must appear at the start of what remains (possibly with 1 char variation for assimilation)
         if (afterPrefix.startsWith(rootId) || afterPrefix.slice(0, 1) + afterPrefix.slice(1).startsWith(rootId.slice(1))) {
           morphemes.push({
             text: v + '-',
@@ -230,7 +231,6 @@ const buildMorphemes = (word: string, rootId: string, rootMeaning: string, rootC
     for (const v of variants) {
       if (remaining.endsWith(v) && remaining.length > v.length) {
         const beforeSuffix = remaining.slice(0, remaining.length - v.length);
-        // The part before suffix should contain or closely match the root
         if (beforeSuffix.includes(rootId) || beforeSuffix.endsWith(rootId) ||
             (beforeSuffix.length >= rootId.length - 1 && beforeSuffix.length <= rootId.length + 2)) {
           suffixMatch = s;
@@ -263,6 +263,1154 @@ const buildMorphemes = (word: string, rootId: string, rootMeaning: string, rootC
   }
 
   return morphemes;
+};
+
+// Extended morpheme overrides with better coverage
+const extendedMorphemeOverrides: Record<string, { text: string; type: 'prefix' | 'root' | 'suffix'; meaning: string; origin: string; color: string }[]> = {
+  'transport': [
+    { text: 'trans-', type: 'prefix', meaning: '穿越/转变', origin: '拉丁语', color: '#A03B82' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'export': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'import': [
+    { text: 'im-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'support': [
+    { text: 'sup-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'report': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'construct': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' }
+  ],
+  'instruct': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' }
+  ],
+  'destruct': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' }
+  ],
+  'obstruct': [
+    { text: 'ob-', type: 'prefix', meaning: '对着/阻碍', origin: '拉丁语', color: '#CD6155' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' }
+  ],
+  'inspect': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' }
+  ],
+  'respect': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' }
+  ],
+  'expect': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' }
+  ],
+  'prospect': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' }
+  ],
+  'project': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' }
+  ],
+  'inject': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' }
+  ],
+  'reject': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' }
+  ],
+  'predict': [
+    { text: 'pre-', type: 'prefix', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3' },
+    { text: 'dict', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' }
+  ],
+  'contradict': [
+    { text: 'contra-', type: 'prefix', meaning: '相反/反对', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'dict', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' }
+  ],
+  'visible': [
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'vision': [
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'supervise': [
+    { text: 'super-', type: 'prefix', meaning: '超级/上方', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'conduct': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'duct', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' }
+  ],
+  'produce': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'duce', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' }
+  ],
+  'reduce': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'duce', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' }
+  ],
+  'introduce': [
+    { text: 'intro-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'duce', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' }
+  ],
+  'reform': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' }
+  ],
+  'transform': [
+    { text: 'trans-', type: 'prefix', meaning: '穿越/转变', origin: '拉丁语', color: '#A03B82' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' }
+  ],
+  'inform': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' }
+  ],
+  'perform': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' }
+  ],
+  'attract': [
+    { text: 'at-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'extract': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'contract': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'distract': [
+    { text: 'dis-', type: 'prefix', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'interrupt': [
+    { text: 'inter-', type: 'prefix', meaning: '在...之间', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'rupt', type: 'root', meaning: '破裂，断裂', origin: '拉丁语 rumpere', color: '#D35400' }
+  ],
+  'describe': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'scrib', type: 'root', meaning: '写', origin: '拉丁语 scribere', color: '#8E44AD' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'subscribe': [
+    { text: 'sub-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#F7DC6F' },
+    { text: 'scrib', type: 'root', meaning: '写', origin: '拉丁语 scribere', color: '#8E44AD' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'prescribe': [
+    { text: 'pre-', type: 'prefix', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3' },
+    { text: 'scrib', type: 'root', meaning: '写', origin: '拉丁语 scribere', color: '#8E44AD' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'transmit': [
+    { text: 'trans-', type: 'prefix', meaning: '穿越/转变', origin: '拉丁语', color: '#A03B82' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'permit': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'submit': [
+    { text: 'sub-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#F7DC6F' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'commit': [
+    { text: 'com-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'position': [
+    { text: 'pos', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' },
+    { text: '-ition', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'compose': [
+    { text: 'com-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'pose', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  'dispose': [
+    { text: 'dis-', type: 'prefix', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD' },
+    { text: 'pose', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  'expose': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'pose', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  'credit': [
+    { text: 'cred', type: 'root', meaning: '相信', origin: '拉丁语 credere', color: '#27AE60' },
+    { text: '-it', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'credible': [
+    { text: 'cred', type: 'root', meaning: '相信', origin: '拉丁语 credere', color: '#27AE60' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'incredible': [
+    { text: 'in-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'cred', type: 'root', meaning: '相信', origin: '拉丁语 credere', color: '#27AE60' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'memory': [
+    { text: 'mem', type: 'root', meaning: '记忆', origin: '拉丁语 memor', color: '#F1C40F' },
+    { text: '-ory', type: 'suffix', meaning: '与...有关的(名词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'remember': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'mem', type: 'root', meaning: '记忆', origin: '拉丁语 memor', color: '#F1C40F' },
+    { text: '-ber', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'photograph': [
+    { text: 'photo-', type: 'prefix', meaning: '光', origin: '希腊语', color: '#F39C12' },
+    { text: 'graph', type: 'root', meaning: '写，画', origin: '希腊语 graphein', color: '#8B4513' }
+  ],
+  'telegraph': [
+    { text: 'tele-', type: 'prefix', meaning: '远距离', origin: '希腊语', color: '#5499C7' },
+    { text: 'graph', type: 'root', meaning: '写，画', origin: '希腊语 graphein', color: '#8B4513' }
+  ],
+  'biography': [
+    { text: 'bio-', type: 'prefix', meaning: '生命', origin: '希腊语', color: '#27AE60' },
+    { text: 'graph', type: 'root', meaning: '写，画', origin: '希腊语 graphein', color: '#8B4513' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  'biology': [
+    { text: 'bio-', type: 'prefix', meaning: '生命', origin: '希腊语', color: '#27AE60' },
+    { text: '-ology', type: 'suffix', meaning: '...学', origin: '希腊语', color: '#17A589' }
+  ],
+  'psychology': [
+    { text: 'psycho-', type: 'prefix', meaning: '心灵', origin: '希腊语', color: '#9B59B6' },
+    { text: '-ology', type: 'suffix', meaning: '...学', origin: '希腊语', color: '#17A589' }
+  ],
+  'technology': [
+    { text: 'techno-', type: 'prefix', meaning: '技术', origin: '希腊语', color: '#3498DB' },
+    { text: '-ology', type: 'suffix', meaning: '...学', origin: '希腊语', color: '#17A589' }
+  ],
+  'convert': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'revert': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'divert': [
+    { text: 'di-', type: 'prefix', meaning: '分开/二', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'invert': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'reverse': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'universe': [
+    { text: 'uni-', type: 'prefix', meaning: '一/单一', origin: '拉丁语', color: '#9B59B6' },
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'accept': [
+    { text: 'ac-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'cept', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'except': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'cept', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'concept': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'cept', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'receive': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'ceive', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'perceive': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'ceive', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'sense': [
+    { text: 'sens', type: 'root', meaning: '感觉', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'sensitive': [
+    { text: 'sens', type: 'root', meaning: '感觉', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-itive', type: 'suffix', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12' }
+  ],
+  'depend': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'pend', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' }
+  ],
+  'suspend': [
+    { text: 'sus-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'pend', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' }
+  ],
+  'extend': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'tend', type: 'root', meaning: '拉伸，趋向', origin: '拉丁语 tendere', color: '#DDA0DD' }
+  ],
+  'intend': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'tend', type: 'root', meaning: '拉伸，趋向', origin: '拉丁语 tendere', color: '#DDA0DD' }
+  ],
+  'attend': [
+    { text: 'at-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'tend', type: 'root', meaning: '拉伸，趋向', origin: '拉丁语 tendere', color: '#DDA0DD' }
+  ],
+  'event': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' }
+  ],
+  'prevent': [
+    { text: 'pre-', type: 'prefix', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' }
+  ],
+  'invent': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' }
+  ],
+  'perfect': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'fect', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' }
+  ],
+  'effect': [
+    { text: 'ef-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'fect', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' }
+  ],
+  'transfer': [
+    { text: 'trans-', type: 'prefix', meaning: '穿越/转变', origin: '拉丁语', color: '#A03B82' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'refer': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'prefer': [
+    { text: 'pre-', type: 'prefix', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'motion': [
+    { text: 'mot', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'motor': [
+    { text: 'mot', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' },
+    { text: '-or', type: 'suffix', meaning: '做...的人/物', origin: '拉丁语', color: '#E67E22' }
+  ],
+  'promote': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'mote', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' }
+  ],
+  'compel': [
+    { text: 'com-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'expel': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'repel': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'claim': [
+    { text: 'claim', type: 'root', meaning: '喊叫', origin: '拉丁语 clamare', color: '#CD853F' }
+  ],
+  'exclaim': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'claim', type: 'root', meaning: '喊叫', origin: '拉丁语 clamare', color: '#CD853F' }
+  ],
+  'proclaim': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'claim', type: 'root', meaning: '喊叫', origin: '拉丁语 clamare', color: '#CD853F' }
+  ],
+  'clarify': [
+    { text: 'clar', type: 'root', meaning: '清楚，明白', origin: '拉丁语 clarus', color: '#F4A460' },
+    { text: '-ify', type: 'suffix', meaning: '使成为(动词)', origin: '拉丁语', color: '#D68910' }
+  ],
+  'declare': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'clare', type: 'root', meaning: '清楚，明白', origin: '拉丁语 clarus', color: '#F4A460' }
+  ],
+  'mortal': [
+    { text: 'mort', type: 'root', meaning: '死亡', origin: '拉丁语 mors', color: '#708090' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'immortal': [
+    { text: 'im-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'mort', type: 'root', meaning: '死亡', origin: '拉丁语 mors', color: '#708090' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'vital': [
+    { text: 'vit', type: 'root', meaning: '生命', origin: '拉丁语 vita', color: '#32CD32' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'vivid': [
+    { text: 'viv', type: 'root', meaning: '生命，活', origin: '拉丁语 vivere', color: '#32CD32' },
+    { text: '-id', type: 'suffix', meaning: '有...特征的', origin: '拉丁语', color: '#888888' }
+  ],
+  'survive': [
+    { text: 'sur-', type: 'prefix', meaning: '在...上面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'vive', type: 'root', meaning: '生命，活', origin: '拉丁语 vivere', color: '#32CD32' }
+  ],
+  'audio': [
+    { text: 'aud', type: 'root', meaning: '听', origin: '拉丁语 audire', color: '#4169E1' },
+    { text: '-io', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'audience': [
+    { text: 'aud', type: 'root', meaning: '听', origin: '拉丁语 audire', color: '#4169E1' },
+    { text: '-ience', type: 'suffix', meaning: '状态/行为(名词)', origin: '拉丁语', color: '#27AE60' }
+  ],
+  'telescope': [
+    { text: 'tele-', type: 'prefix', meaning: '远距离', origin: '希腊语', color: '#5499C7' },
+    { text: 'scope', type: 'root', meaning: '看，观察', origin: '希腊语 skopein', color: '#00CED1' }
+  ],
+  'microscope': [
+    { text: 'micro-', type: 'prefix', meaning: '小/微', origin: '希腊语', color: '#7DCEA0' },
+    { text: 'scope', type: 'root', meaning: '看，观察', origin: '希腊语 skopein', color: '#00CED1' }
+  ],
+  'chronic': [
+    { text: 'chron', type: 'root', meaning: '时间', origin: '希腊语 chronos', color: '#DAA520' },
+    { text: '-ic', type: 'suffix', meaning: '属于...的', origin: '希腊语', color: '#1A5276' }
+  ],
+  'geography': [
+    { text: 'geo-', type: 'prefix', meaning: '地球，土地', origin: '希腊语', color: '#228B22' },
+    { text: 'graph', type: 'root', meaning: '写，画', origin: '希腊语 graphein', color: '#8B4513' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  'geology': [
+    { text: 'geo-', type: 'prefix', meaning: '地球，土地', origin: '希腊语', color: '#228B22' },
+    { text: '-ology', type: 'suffix', meaning: '...学', origin: '希腊语', color: '#17A589' }
+  ],
+  'hydrogen': [
+    { text: 'hydr-', type: 'prefix', meaning: '水', origin: '希腊语', color: '#1E90FF' },
+    { text: '-gen', type: 'suffix', meaning: '产生，种类', origin: '希腊语', color: '#E67E22' }
+  ],
+  'sympathy': [
+    { text: 'sym-', type: 'prefix', meaning: '共同/一起', origin: '希腊语', color: '#85C1E9' },
+    { text: 'pathy', type: 'root', meaning: '感情，疾病', origin: '希腊语 pathos', color: '#DC143C' }
+  ],
+  'empathy': [
+    { text: 'em-', type: 'prefix', meaning: '向内/进入', origin: '希腊语', color: '#FF6B6B' },
+    { text: 'pathy', type: 'root', meaning: '感情，疾病', origin: '希腊语 pathos', color: '#DC143C' }
+  ],
+  'manual': [
+    { text: 'manu', type: 'root', meaning: '手', origin: '拉丁语 manus', color: '#D2691E' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'manufacture': [
+    { text: 'manu', type: 'root', meaning: '手', origin: '拉丁语 manus', color: '#D2691E' },
+    { text: 'fact', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'international': [
+    { text: 'inter-', type: 'prefix', meaning: '在...之间', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'nation', type: 'root', meaning: '国家', origin: '拉丁语 natio', color: '#7D3C98' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'national': [
+    { text: 'nation', type: 'root', meaning: '国家', origin: '拉丁语 natio', color: '#7D3C98' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'nationality': [
+    { text: 'nation', type: 'root', meaning: '国家', origin: '拉丁语 natio', color: '#7D3C98' },
+    { text: '-ality', type: 'suffix', meaning: '性质/状态(名词)', origin: '拉丁语', color: '#16A085' }
+  ],
+  'natural': [
+    { text: 'nat', type: 'root', meaning: '出生', origin: '拉丁语 nasci', color: '#7D3C98' },
+    { text: '-ural', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'nature': [
+    { text: 'nat', type: 'root', meaning: '出生', origin: '拉丁语 nasci', color: '#7D3C98' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'education': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'duc', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'educate': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'duc', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' },
+    { text: '-ate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#2C3E50' }
+  ],
+  'development': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'velop', type: 'root', meaning: '包裹', origin: '古法语 voloper', color: '#E67E22' },
+    { text: '-ment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  'develop': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'velop', type: 'root', meaning: '包裹', origin: '古法语 voloper', color: '#E67E22' }
+  ],
+  'information': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'knowledge': [
+    { text: 'know', type: 'root', meaning: '知道', origin: '古英语 cnawan', color: '#27AE60' },
+    { text: '-ledge', type: 'suffix', meaning: '(名词后缀)', origin: '古英语', color: '#888888' }
+  ],
+  'understanding': [
+    { text: 'under-', type: 'prefix', meaning: '不足/在下', origin: '古英语', color: '#AED6F1' },
+    { text: 'stand', type: 'root', meaning: '站立', origin: '古英语 standan', color: '#8B4513' },
+    { text: '-ing', type: 'suffix', meaning: '正在...的/名词化', origin: '古英语', color: '#888888' }
+  ],
+  'television': [
+    { text: 'tele-', type: 'prefix', meaning: '远距离', origin: '希腊语', color: '#5499C7' },
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'telephone': [
+    { text: 'tele-', type: 'prefix', meaning: '远距离', origin: '希腊语', color: '#5499C7' },
+    { text: 'phon', type: 'root', meaning: '声音', origin: '希腊语 phone', color: '#7D3C98' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'photography': [
+    { text: 'photo-', type: 'prefix', meaning: '光', origin: '希腊语', color: '#F39C12' },
+    { text: 'graph', type: 'root', meaning: '写，画', origin: '希腊语 graphein', color: '#8B4513' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  'automatic': [
+    { text: 'auto-', type: 'prefix', meaning: '自己', origin: '希腊语', color: '#48C9B0' },
+    { text: 'mat', type: 'root', meaning: '思考/行动', origin: '希腊语 matos', color: '#1ABC9C' },
+    { text: '-ic', type: 'suffix', meaning: '属于...的', origin: '希腊语', color: '#1A5276' }
+  ],
+  'automobile': [
+    { text: 'auto-', type: 'prefix', meaning: '自己', origin: '希腊语', color: '#48C9B0' },
+    { text: 'mob', type: 'root', meaning: '移动', origin: '拉丁语 mobilis', color: '#9370DB' },
+    { text: '-ile', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'history': [
+    { text: 'hist', type: 'root', meaning: '知识/研究', origin: '希腊语 historia', color: '#CD853F' },
+    { text: '-ory', type: 'suffix', meaning: '与...有关的(名词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'historical': [
+    { text: 'hist', type: 'root', meaning: '知识/研究', origin: '希腊语 historia', color: '#CD853F' },
+    { text: '-orical', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#1A5276' }
+  ],
+  'personal': [
+    { text: 'person', type: 'root', meaning: '人', origin: '拉丁语 persona', color: '#2980B9' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'personality': [
+    { text: 'person', type: 'root', meaning: '人', origin: '拉丁语 persona', color: '#2980B9' },
+    { text: '-ality', type: 'suffix', meaning: '性质/状态(名词)', origin: '拉丁语', color: '#16A085' }
+  ],
+  'important': [
+    { text: 'im-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' },
+    { text: '-ant', type: 'suffix', meaning: '正在...的/...者', origin: '拉丁语', color: '#5B2C6F' }
+  ],
+  'impossible': [
+    { text: 'im-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'poss', type: 'root', meaning: '能够', origin: '拉丁语 posse', color: '#C0392B' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'possible': [
+    { text: 'poss', type: 'root', meaning: '能够', origin: '拉丁语 posse', color: '#C0392B' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'necessary': [
+    { text: 'ne-', type: 'prefix', meaning: '不', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'cess', type: 'root', meaning: '走，步', origin: '拉丁语 cedere', color: '#D35400' },
+    { text: '-ary', type: 'suffix', meaning: '与...有关的(形容词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'opportunity': [
+    { text: 'op-', type: 'prefix', meaning: '朝向', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' },
+    { text: '-unity', type: 'suffix', meaning: '状态(名词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'experience': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'peri-', type: 'prefix', meaning: '通过', origin: '希腊语', color: '#D4AC6E' },
+    { text: 'ence', type: 'root', meaning: '状态', origin: '拉丁语', color: '#27AE60' }
+  ],
+  'experiment': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'peri-', type: 'prefix', meaning: '通过', origin: '希腊语', color: '#D4AC6E' },
+    { text: 'ment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  'environment': [
+    { text: 'en-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'viron', type: 'root', meaning: '环绕', origin: '古法语 virer', color: '#2980B9' },
+    { text: '-ment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  'government': [
+    { text: 'govern', type: 'root', meaning: '统治', origin: '拉丁语 gubernare', color: '#E67E22' },
+    { text: '-ment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  'governmental': [
+    { text: 'govern', type: 'root', meaning: '统治', origin: '拉丁语 gubernare', color: '#E67E22' },
+    { text: '-mental', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'administration': [
+    { text: 'ad-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'ministr', type: 'root', meaning: '服务', origin: '拉丁语 minister', color: '#27AE60' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'communication': [
+    { text: 'com-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'mun', type: 'root', meaning: '服务/交换', origin: '拉丁语 munus', color: '#27AE60' },
+    { text: '-ication', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'communicate': [
+    { text: 'com-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'mun', type: 'root', meaning: '服务/交换', origin: '拉丁语 munus', color: '#27AE60' },
+    { text: '-icate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#2C3E50' }
+  ],
+  'economy': [
+    { text: 'eco-', type: 'prefix', meaning: '家庭/环境', origin: '希腊语', color: '#27AE60' },
+    { text: 'nom', type: 'root', meaning: '管理/法则', origin: '希腊语 nomos', color: '#17A589' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  'economic': [
+    { text: 'eco-', type: 'prefix', meaning: '家庭/环境', origin: '希腊语', color: '#27AE60' },
+    { text: 'nom', type: 'root', meaning: '管理/法则', origin: '希腊语 nomos', color: '#17A589' },
+    { text: '-ic', type: 'suffix', meaning: '属于...的', origin: '希腊语', color: '#1A5276' }
+  ],
+  'economical': [
+    { text: 'eco-', type: 'prefix', meaning: '家庭/环境', origin: '希腊语', color: '#27AE60' },
+    { text: 'nom', type: 'root', meaning: '管理/法则', origin: '希腊语 nomos', color: '#17A589' },
+    { text: '-ical', type: 'suffix', meaning: '属于...的', origin: '希腊语', color: '#1A5276' }
+  ],
+  'culture': [
+    { text: 'cult', type: 'root', meaning: '耕种/培育', origin: '拉丁语 colere', color: '#27AE60' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'cultural': [
+    { text: 'cult', type: 'root', meaning: '耕种/培育', origin: '拉丁语 colere', color: '#27AE60' },
+    { text: '-ural', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'agriculture': [
+    { text: 'agri-', type: 'prefix', meaning: '田地', origin: '拉丁语', color: '#228B22' },
+    { text: 'cult', type: 'root', meaning: '耕种/培育', origin: '拉丁语 colere', color: '#27AE60' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'industrial': [
+    { text: 'industri', type: 'root', meaning: '勤奋', origin: '拉丁语 industria', color: '#E67E22' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'industry': [
+    { text: 'industri', type: 'root', meaning: '勤奋', origin: '拉丁语 industria', color: '#E67E22' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  'business': [
+    { text: 'busy', type: 'root', meaning: '忙碌', origin: '古英语 bisig', color: '#E67E22' },
+    { text: '-ness', type: 'suffix', meaning: '状态/性质(名词)', origin: '古英语', color: '#1ABC9C' }
+  ],
+  'successful': [
+    { text: 'suc-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'cess', type: 'root', meaning: '走，步', origin: '拉丁语 cedere', color: '#D35400' },
+    { text: '-ful', type: 'suffix', meaning: '充满...的', origin: '古英语', color: '#E74C3C' }
+  ],
+  'success': [
+    { text: 'suc-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'cess', type: 'root', meaning: '走，步', origin: '拉丁语 cedere', color: '#D35400' }
+  ],
+  // === 补充更多高频词根单词 ===
+  // port 词根
+  'portable': [
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' },
+    { text: '-able', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'deport': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' }
+  ],
+  'portrait': [
+    { text: 'port', type: 'root', meaning: '携带，运送', origin: '拉丁语 portare', color: '#E74C3C' },
+    { text: '-rait', type: 'suffix', meaning: '(名词后缀)', origin: '古法语', color: '#888888' }
+  ],
+  // struct 词根
+  'structure': [
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'reconstruct': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'infrastructure': [
+    { text: 'infra-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'superstructure': [
+    { text: 'super-', type: 'prefix', meaning: '超级/上方', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'struct', type: 'root', meaning: '建造，构建', origin: '拉丁语 struere', color: '#3498DB' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  // spect 词根
+  'spectacle': [
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' },
+    { text: '-acle', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'spectrum': [
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' },
+    { text: '-rum', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'speculate': [
+    { text: 'spec', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' },
+    { text: '-ulate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#D68910' }
+  ],
+  'perspective': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'spect', type: 'root', meaning: '看，观察', origin: '拉丁语 spectare', color: '#2ECC71' },
+    { text: '-ive', type: 'suffix', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12' }
+  ],
+  // ject 词根
+  'eject': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' }
+  ],
+  'conjecture': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'abject': [
+    { text: 'ab-', type: 'prefix', meaning: '离开/偏离', origin: '拉丁语', color: '#AF7AC5' },
+    { text: 'ject', type: 'root', meaning: '投掷，扔', origin: '拉丁语 jacere', color: '#9B59B6' }
+  ],
+  // dict 词根
+  'dictate': [
+    { text: 'dict', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' },
+    { text: '-ate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#2C3E50' }
+  ],
+  'addict': [
+    { text: 'ad-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'dict', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' }
+  ],
+  'dedicate': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'dic', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' },
+    { text: '-ate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#2C3E50' }
+  ],
+  'indicate': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'dic', type: 'root', meaning: '说，言', origin: '拉丁语 dicere', color: '#F39C12' },
+    { text: '-ate', type: 'suffix', meaning: '使...(动词)', origin: '拉丁语', color: '#2C3E50' }
+  ],
+  // vis 词根
+  'visit': [
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-it', type: 'suffix', meaning: '(动词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'visual': [
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ual', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'revise': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'visualize': [
+    { text: 'vis', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ual', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' },
+    { text: '-ize', type: 'suffix', meaning: '使成为(动词)', origin: '希腊语', color: '#8E44AD' }
+  ],
+  // vid 词根
+  'video': [
+    { text: 'vid', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-eo', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  'evidence': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'vid', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-ence', type: 'suffix', meaning: '状态/行为(名词)', origin: '拉丁语', color: '#27AE60' }
+  ],
+  'provide': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'vid', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'divide': [
+    { text: 'di-', type: 'prefix', meaning: '分开/二', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'vid', type: 'root', meaning: '看', origin: '拉丁语 videre', color: '#1ABC9C' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'individual': [
+    { text: 'in-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'divid', type: 'root', meaning: '分开', origin: '拉丁语 dividere', color: '#1ABC9C' },
+    { text: '-ual', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  // duct 词根
+  'deduce': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'duce', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' }
+  ],
+  'reproduce': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'produce', type: 'root', meaning: '生产', origin: '拉丁语 producere', color: '#2980B9' }
+  ],
+  'semiconductor': [
+    { text: 'semi-', type: 'prefix', meaning: '半', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'duct', type: 'root', meaning: '引导，带领', origin: '拉丁语 ducere', color: '#2980B9' },
+    { text: '-or', type: 'suffix', meaning: '做...的人/物', origin: '拉丁语', color: '#E67E22' }
+  ],
+  // form 词根
+  'uniform': [
+    { text: 'uni-', type: 'prefix', meaning: '一/单一', origin: '拉丁语', color: '#9B59B6' },
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' }
+  ],
+  'formal': [
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  'formation': [
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'formula': [
+    { text: 'form', type: 'root', meaning: '形状，形式', origin: '拉丁语 forma', color: '#E67E22' },
+    { text: '-ula', type: 'suffix', meaning: '(名词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  // tract 词根
+  'abstract': [
+    { text: 'abs-', type: 'prefix', meaning: '离开/偏离', origin: '拉丁语', color: '#AF7AC5' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'subtract': [
+    { text: 'sub-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#F7DC6F' },
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' }
+  ],
+  'tractor': [
+    { text: 'tract', type: 'root', meaning: '拉，拖', origin: '拉丁语 trahere', color: '#95A5A6' },
+    { text: '-or', type: 'suffix', meaning: '做...的人/物', origin: '拉丁语', color: '#E67E22' }
+  ],
+  // rupt 词根
+  'disrupt': [
+    { text: 'dis-', type: 'prefix', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD' },
+    { text: 'rupt', type: 'root', meaning: '破裂，断裂', origin: '拉丁语 rumpere', color: '#D35400' }
+  ],
+  'erupt': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'rupt', type: 'root', meaning: '破裂，断裂', origin: '拉丁语 rumpere', color: '#D35400' }
+  ],
+  'rupture': [
+    { text: 'rupt', type: 'root', meaning: '破裂，断裂', origin: '拉丁语 rumpere', color: '#D35400' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  // mit/miss 词根
+  'admit': [
+    { text: 'ad-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'emit': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'remit': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'mit', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'mission': [
+    { text: 'miss', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'dismiss': [
+    { text: 'dis-', type: 'prefix', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD' },
+    { text: 'miss', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' }
+  ],
+  'permission': [
+    { text: 'per-', type: 'prefix', meaning: '完全/贯穿', origin: '拉丁语', color: '#D4AC6E' },
+    { text: 'miss', type: 'root', meaning: '发送，放', origin: '拉丁语 mittere', color: '#16A085' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  // pos 词根
+  'propose': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'pose', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  'oppose': [
+    { text: 'op-', type: 'prefix', meaning: '对着/反对', origin: '拉丁语', color: '#CD6155' },
+    { text: 'pose', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  'deposit': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'posit', type: 'root', meaning: '放置', origin: '拉丁语 ponere', color: '#C0392B' }
+  ],
+  // cred 词根
+  'credential': [
+    { text: 'cred', type: 'root', meaning: '相信', origin: '拉丁语 credere', color: '#27AE60' },
+    { text: '-ential', type: 'suffix', meaning: '与...有关的', origin: '拉丁语', color: '#888888' }
+  ],
+  'accredit': [
+    { text: 'ac-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'cred', type: 'root', meaning: '相信', origin: '拉丁语 credere', color: '#27AE60' },
+    { text: '-it', type: 'suffix', meaning: '(动词后缀)', origin: '拉丁语', color: '#888888' }
+  ],
+  // mem 词根
+  'memorial': [
+    { text: 'mem', type: 'root', meaning: '记忆', origin: '拉丁语 memor', color: '#F1C40F' },
+    { text: '-orial', type: 'suffix', meaning: '与...有关的(形容词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'memorize': [
+    { text: 'mem', type: 'root', meaning: '记忆', origin: '拉丁语 memor', color: '#F1C40F' },
+    { text: '-orize', type: 'suffix', meaning: '使成为(动词)', origin: '希腊语', color: '#8E44AD' }
+  ],
+  // fer 词根
+  'infer': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'confer': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'differ': [
+    { text: 'dif-', type: 'prefix', meaning: '分开/否定', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'suffer': [
+    { text: 'suf-', type: 'prefix', meaning: '在...下面', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  'offer': [
+    { text: 'of-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'fer', type: 'root', meaning: '带来，携带', origin: '拉丁语 ferre', color: '#FF69B4' }
+  ],
+  // vent/ven 词根
+  'adventure': [
+    { text: 'ad-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'convention': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'controversy': [
+    { text: 'contro-', type: 'prefix', meaning: '相反/反对', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-y', type: 'suffix', meaning: '状态(名词)', origin: '希腊语', color: '#888888' }
+  ],
+  // fac/fect 词根
+  'factory': [
+    { text: 'fact', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' },
+    { text: '-ory', type: 'suffix', meaning: '与...有关的(名词)', origin: '拉丁语', color: '#888888' }
+  ],
+  'facility': [
+    { text: 'fac', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' },
+    { text: '-ility', type: 'suffix', meaning: '性质/状态(名词)', origin: '拉丁语', color: '#16A085' }
+  ],
+  'infect': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'fect', type: 'root', meaning: '做，制作', origin: '拉丁语 facere', color: '#20B2AA' }
+  ],
+  'reflect': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'flect', type: 'root', meaning: '弯曲', origin: '拉丁语 flectere', color: '#20B2AA' }
+  ],
+  'select': [
+    { text: 'se-', type: 'prefix', meaning: '分开', origin: '拉丁语', color: '#BB8FCE' },
+    { text: 'lect', type: 'root', meaning: '选择，收集', origin: '拉丁语 legere', color: '#20B2AA' }
+  ],
+  // mot/mov 词根
+  'remote': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'mot', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'emotion': [
+    { text: 'e-', type: 'prefix', meaning: '向外/出来', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'mot', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'movement': [
+    { text: 'move', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' },
+    { text: '-ment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  'remove': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'move', type: 'root', meaning: '移动', origin: '拉丁语 movere', color: '#9370DB' }
+  ],
+  'improve': [
+    { text: 'im-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'prove', type: 'root', meaning: '证明，测试', origin: '拉丁语 probare', color: '#9370DB' }
+  ],
+  // sens/sent 词根
+  'sensible': [
+    { text: 'sens', type: 'root', meaning: '感觉', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'sensation': [
+    { text: 'sens', type: 'root', meaning: '感觉', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'consent': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'sent', type: 'root', meaning: '感觉，发送', origin: '拉丁语 sentire', color: '#6C5CE7' }
+  ],
+  'resent': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'sent', type: 'root', meaning: '感觉，发送', origin: '拉丁语 sentire', color: '#6C5CE7' }
+  ],
+  'sentence': [
+    { text: 'sent', type: 'root', meaning: '感觉，发送', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-ence', type: 'suffix', meaning: '状态/行为(名词)', origin: '拉丁语', color: '#27AE60' }
+  ],
+  'sentiment': [
+    { text: 'sent', type: 'root', meaning: '感觉，发送', origin: '拉丁语 sentire', color: '#6C5CE7' },
+    { text: '-iment', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#3498DB' }
+  ],
+  // pend/pens 词根
+  'append': [
+    { text: 'ap-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'pend', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' }
+  ],
+  'independent': [
+    { text: 'in-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'pend', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' },
+    { text: '-ent', type: 'suffix', meaning: '正在...的/...者', origin: '拉丁语', color: '#5B2C6F' }
+  ],
+  'expend': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'pend', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' }
+  ],
+  'expense': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'pens', type: 'root', meaning: '悬挂，称重', origin: '拉丁语 pendere', color: '#00CEC9' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  // tend/tens 词根
+  'pretend': [
+    { text: 'pre-', type: 'prefix', meaning: '在...之前', origin: '拉丁语', color: '#95E1D3' },
+    { text: 'tend', type: 'root', meaning: '拉伸，趋向', origin: '拉丁语 tendere', color: '#DDA0DD' }
+  ],
+  'contend': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'tend', type: 'root', meaning: '拉伸，趋向', origin: '拉丁语 tendere', color: '#DDA0DD' }
+  ],
+  'tense': [
+    { text: 'tens', type: 'root', meaning: '拉伸，紧张', origin: '拉丁语 tendere', color: '#DDA0DD' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'tension': [
+    { text: 'tens', type: 'root', meaning: '拉伸，紧张', origin: '拉丁语 tendere', color: '#DDA0DD' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'intense': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'tens', type: 'root', meaning: '拉伸，紧张', origin: '拉丁语 tendere', color: '#DDA0DD' },
+    { text: '-e', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  'extensive': [
+    { text: 'ex-', type: 'prefix', meaning: '向外/前任', origin: '拉丁语', color: '#FFE66D' },
+    { text: 'tens', type: 'root', meaning: '拉伸，紧张', origin: '拉丁语 tendere', color: '#DDA0DD' },
+    { text: '-ive', type: 'suffix', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12' }
+  ],
+  // cept/ceiv 词根
+  'intercept': [
+    { text: 'inter-', type: 'prefix', meaning: '在...之间', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'cept', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'receptive': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'cept', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' },
+    { text: '-ive', type: 'suffix', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12' }
+  ],
+  'deceive': [
+    { text: 'de-', type: 'prefix', meaning: '向下/去除', origin: '拉丁语', color: '#E59866' },
+    { text: 'ceive', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'conceive': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'ceive', type: 'root', meaning: '抓住，接受', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  'achieve': [
+    { text: 'a-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'chieve', type: 'root', meaning: '完成', origin: '拉丁语 capere', color: '#EB4D4B' }
+  ],
+  // vert/vers 词根
+  'advertise': [
+    { text: 'ad-', type: 'prefix', meaning: '朝向/附加', origin: '拉丁语', color: '#5DADE2' },
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-ise', type: 'suffix', meaning: '使成为(动词)', origin: '希腊语', color: '#8E44AD' }
+  ],
+  'vertical': [
+    { text: 'vert', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-ical', type: 'suffix', meaning: '属于...的', origin: '希腊语', color: '#1A5276' }
+  ],
+  'reversible': [
+    { text: 're-', type: 'prefix', meaning: '再次/返回', origin: '拉丁语', color: '#4ECDC4' },
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-ible', type: 'suffix', meaning: '能够...的', origin: '拉丁语', color: '#2ECC71' }
+  ],
+  'version': [
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'diverse': [
+    { text: 'di-', type: 'prefix', meaning: '分开/二', origin: '拉丁语', color: '#E74C3C' },
+    { text: 'verse', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'converse': [
+    { text: 'con-', type: 'prefix', meaning: '共同/一起', origin: '拉丁语', color: '#85C1E9' },
+    { text: 'verse', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' }
+  ],
+  'universal': [
+    { text: 'uni-', type: 'prefix', meaning: '一/单一', origin: '拉丁语', color: '#9B59B6' },
+    { text: 'vers', type: 'root', meaning: '转', origin: '拉丁语 vertere', color: '#F0932B' },
+    { text: '-al', type: 'suffix', meaning: '属于...的', origin: '拉丁语', color: '#2980B9' }
+  ],
+  // pel/pul 词根
+  'propel': [
+    { text: 'pro-', type: 'prefix', meaning: '向前/支持', origin: '拉丁语', color: '#73C6B6' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'impel': [
+    { text: 'im-', type: 'prefix', meaning: '不/向内', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'dispel': [
+    { text: 'dis-', type: 'prefix', meaning: '否定/分离', origin: '拉丁语', color: '#DDA0DD' },
+    { text: 'pel', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' }
+  ],
+  'pulse': [
+    { text: 'pul', type: 'root', meaning: '推，驱使', origin: '拉丁语 pellere', color: '#87CEEB' },
+    { text: '-se', type: 'suffix', meaning: '', origin: '', color: '#888888' }
+  ],
+  // 其他常用词
+  'invention': [
+    { text: 'in-', type: 'prefix', meaning: '向内/进入', origin: '拉丁语', color: '#FF6B6B' },
+    { text: 'vent', type: 'root', meaning: '来', origin: '拉丁语 venire', color: '#FF7F50' },
+    { text: '-ion', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'creature': [
+    { text: 'creat', type: 'root', meaning: '创造', origin: '拉丁语 creare', color: '#20B2AA' },
+    { text: '-ure', type: 'suffix', meaning: '行为/结果(名词)', origin: '拉丁语', color: '#7F8C8D' }
+  ],
+  'creation': [
+    { text: 'creat', type: 'root', meaning: '创造', origin: '拉丁语 creare', color: '#20B2AA' },
+    { text: '-ation', type: 'suffix', meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA' }
+  ],
+  'creative': [
+    { text: 'creat', type: 'root', meaning: '创造', origin: '拉丁语 creare', color: '#20B2AA' },
+    { text: '-ive', type: 'suffix', meaning: '有...性质的', origin: '拉丁语', color: '#F39C12' }
+  ],
 };
 
 // Generate a Chinese translation for an enrichment example sentence
@@ -408,15 +1556,19 @@ const buildRootWords = (): { words: Word[]; roots: WordRoot[] } => {
       const { example, translation } = generateExample(w.word, w.meaning.split('/')[0], w.pos);
       const association = buildAssociation(w.word, rootData.meaning, rootData.root);
 
+      const serviceDef = translationService.getDefinition(w.word);
+      const meanings = serviceDef?.definitions || w.meaning.split('/');
+
       words.push({
         id: wordIdCounter,
         word: w.word,
-        phonetic: getPhonetic(w.word),
+        phonetic: getPhonetic(w.word) || serviceDef?.phonetic || '',
         partOfSpeech: pos,
         meaning: w.meaning,
+        meanings,
         morphemes,
-        example,
-        translation,
+        example: serviceDef?.examples?.[0]?.en || example,
+        translation: serviceDef?.examples?.[0]?.zh || translation,
         associationStory: association,
         roots: [rootData.root],
         level: rootData.level,
@@ -427,6 +1579,48 @@ const buildRootWords = (): { words: Word[]; roots: WordRoot[] } => {
   });
 
   return { words, roots };
+};
+
+const analyzeSupplementMorphemes = (word: string, meaning: string) => {
+  const lowerWord = word.toLowerCase();
+
+  if (extendedMorphemeOverrides[lowerWord]) {
+    return extendedMorphemeOverrides[lowerWord];
+  }
+
+  for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+    if (lowerWord.includes(rootId) && lowerWord.length > rootId.length + 1) {
+      return buildMorphemes(word, rootId, rootData.meaning, rootData.color, rootData.origin);
+    }
+  }
+
+  for (const p of prefixes) {
+    const cleanPrefix = p.prefix.replace(/[-/].*/g, '');
+    if (lowerWord.startsWith(cleanPrefix) && lowerWord.length > cleanPrefix.length + 2) {
+      const afterPrefix = lowerWord.slice(cleanPrefix.length);
+      for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+        if (afterPrefix.includes(rootId)) {
+          return buildMorphemes(word, rootId, rootData.meaning, rootData.color, rootData.origin);
+        }
+      }
+    }
+  }
+
+  for (const s of suffixes) {
+    const variants = s.suffix.replace('-', '').split('/');
+    for (const v of variants) {
+      if (lowerWord.endsWith(v) && lowerWord.length > v.length + 2) {
+        const beforeSuffix = lowerWord.slice(0, -v.length);
+        for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+          if (beforeSuffix.includes(rootId)) {
+            return buildMorphemes(word, rootId, rootData.meaning, rootData.color, rootData.origin);
+          }
+        }
+      }
+    }
+  }
+
+  return [{ text: word, type: 'root' as const, meaning, origin: '', color: '#A06F3B' }];
 };
 
 const buildSupplementWords = (): Word[] => {
@@ -447,18 +1641,25 @@ const buildSupplementWords = (): Word[] => {
       wordIdCounter++;
       const pos = posMap[w.pos] || w.pos;
       const { example, translation } = generateExample(w.word, w.meaning, w.pos);
+      const morphemes = analyzeSupplementMorphemes(w.word, w.meaning);
+
+      const serviceDef = translationService.getDefinition(w.word);
+      const meanings = serviceDef?.definitions || w.meaning.split('/');
 
       words.push({
         id: wordIdCounter,
         word: w.word,
-        phonetic: getPhonetic(w.word),
+        phonetic: getPhonetic(w.word) || serviceDef?.phonetic || '',
         partOfSpeech: pos,
         meaning: w.meaning,
-        morphemes: [{ text: w.word, type: 'root', meaning: w.meaning, origin: '', color: '#A06F3B' }],
-        example,
-        translation,
-        associationStory: `${w.word} - ${w.meaning}`,
-        roots: [],
+        meanings,
+        morphemes,
+        example: serviceDef?.examples?.[0]?.en || example,
+        translation: serviceDef?.examples?.[0]?.zh || translation,
+        associationStory: morphemes.length > 1 
+          ? `${w.word} = ${morphemes.map(m => m.text).join(' + ')}`
+          : `${w.word} - ${w.meaning}`,
+        roots: morphemes.filter(m => m.type === 'root').map(m => m.text),
         level,
         frequency: Math.max(80 - level * 5 - idx % 20, 5),
         category,
