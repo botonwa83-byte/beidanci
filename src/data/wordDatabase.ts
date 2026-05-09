@@ -1,6 +1,7 @@
 import { Word, WordRoot, Prefix, Suffix, Level } from './types';
 import rawData from './wordDatabaseRaw.json';
 import enrichmentData from './wordEnrichment.json';
+import { translationService } from '../services/translationService';
 
 const enrichment: Record<string, { phonetic: string; examples: string[]; exampleTranslations?: string[] }> = enrichmentData as any;
 
@@ -317,12 +318,9 @@ const translateExample = (example: string, word: string, meaning: string, pos: s
 const generateExample = (word: string, meaning: string, pos: string): { example: string; translation: string } => {
   const data = enrichment[word.toLowerCase()];
   if (data?.examples && data.examples.length > 0) {
-    // Pick the shortest reasonable example (prefer < 120 chars)
     const sorted = [...data.examples].sort((a, b) => a.length - b.length);
     const picked = sorted.find(e => e.length >= 20 && e.length <= 120) || sorted[0];
-    // Find the index of the picked example to get the corresponding translation
     const pickedIndex = data.examples.indexOf(picked);
-    // Truncate very long examples at sentence boundary
     let example = picked;
     if (example.length > 150) {
       const cutoff = example.lastIndexOf('.', 150);
@@ -332,10 +330,13 @@ const generateExample = (word: string, meaning: string, pos: string): { example:
     const formatted = example.charAt(0).toUpperCase() + example.slice(1);
     const withPeriod = formatted.endsWith('.') || formatted.endsWith('!') || formatted.endsWith('?')
       ? formatted : formatted + '.';
-    // Use pre-defined translation if available, otherwise generate one
-    const translation = (data.exampleTranslations && data.exampleTranslations[pickedIndex])
-      ? data.exampleTranslations[pickedIndex]
-      : translateExample(withPeriod, word, meaning, pos);
+    let translation: string;
+    if (data.exampleTranslations && data.exampleTranslations[pickedIndex]) {
+      translation = data.exampleTranslations[pickedIndex];
+    } else {
+      const serviceTranslation = translationService.translateText(withPeriod);
+      translation = serviceTranslation !== withPeriod ? serviceTranslation : translateExample(withPeriod, word, meaning, pos);
+    }
     return { example: withPeriod, translation };
   }
 
