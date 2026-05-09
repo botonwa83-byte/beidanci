@@ -6,8 +6,20 @@
 const fs = require('fs');
 const path = require('path');
 
-const RAW_PATH = path.join(__dirname, '..', 'src', 'data', 'wordDatabaseRaw.json');
-const OUTPUT_PATH = path.join(__dirname, '..', 'src', 'data', 'wordEnrichment.json');
+const RAW_PATH = path.join(
+  __dirname,
+  '..',
+  'src',
+  'data',
+  'wordDatabaseRaw.json',
+);
+const OUTPUT_PATH = path.join(
+  __dirname,
+  '..',
+  'src',
+  'data',
+  'wordEnrichment.json',
+);
 
 // Load existing enrichment if any (for incremental updates)
 let existing = {};
@@ -21,7 +33,9 @@ const rawData = JSON.parse(fs.readFileSync(RAW_PATH, 'utf8'));
 
 // Collect all unique words
 const allWords = new Set();
-rawData.roots.forEach(r => r.words.forEach(w => allWords.add(w.word.toLowerCase())));
+rawData.roots.forEach(r =>
+  r.words.forEach(w => allWords.add(w.word.toLowerCase())),
+);
 if (rawData.supplement) {
   Object.values(rawData.supplement).forEach(list => {
     list.forEach(w => allWords.add(w.word.toLowerCase()));
@@ -33,16 +47,28 @@ console.log(`Total unique words: ${wordList.length}`);
 
 // Skip words we already have
 const toFetch = wordList.filter(w => !existing[w] || !existing[w].phonetic);
-console.log(`Words to fetch: ${toFetch.length} (already have ${wordList.length - toFetch.length})`);
+console.log(
+  `Words to fetch: ${toFetch.length} (already have ${
+    wordList.length - toFetch.length
+  })`,
+);
 
-const sleep = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function fetchWord(word) {
   try {
-    const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
-    if (!res.ok) return null;
+    const res = await fetch(
+      `https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(
+        word,
+      )}`,
+    );
+    if (!res.ok) {
+      return null;
+    }
     const data = await res.json();
-    if (!Array.isArray(data) || data.length === 0) return null;
+    if (!Array.isArray(data) || data.length === 0) {
+      return null;
+    }
 
     const entry = data[0];
 
@@ -50,7 +76,10 @@ async function fetchWord(word) {
     let phonetic = entry.phonetic || '';
     if (!phonetic && entry.phonetics) {
       for (const p of entry.phonetics) {
-        if (p.text) { phonetic = p.text; break; }
+        if (p.text) {
+          phonetic = p.text;
+          break;
+        }
       }
     }
 
@@ -76,14 +105,14 @@ async function fetchWord(word) {
 }
 
 async function main() {
-  const result = { ...existing };
+  const result = {...existing};
   let fetched = 0;
   let failed = 0;
   const batchSize = 5; // concurrent requests
 
   for (let i = 0; i < toFetch.length; i += batchSize) {
     const batch = toFetch.slice(i, i + batchSize);
-    const promises = batch.map(async (word) => {
+    const promises = batch.map(async word => {
       const data = await fetchWord(word);
       if (data) {
         result[word] = data;
@@ -102,7 +131,11 @@ async function main() {
 
     // Progress
     if ((i + batchSize) % 50 === 0 || i + batchSize >= toFetch.length) {
-      console.log(`Progress: ${Math.min(i + batchSize, toFetch.length)}/${toFetch.length} (fetched: ${fetched}, failed: ${failed})`);
+      console.log(
+        `Progress: ${Math.min(i + batchSize, toFetch.length)}/${
+          toFetch.length
+        } (fetched: ${fetched}, failed: ${failed})`,
+      );
       // Save intermediate results
       fs.writeFileSync(OUTPUT_PATH, JSON.stringify(result, null, 2));
     }

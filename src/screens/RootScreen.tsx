@@ -1,61 +1,93 @@
-import React, { useState, useMemo } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { coreRoots, prefixes, suffixes, getWordsByRoot, searchWords, allWords } from '../data/wordDatabase';
-import { theme } from '../theme';
-import { Word } from '../data/types';
+import React, {useState, useMemo} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+  TextInput,
+} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  coreRoots,
+  prefixes,
+  suffixes,
+  getWordsByRoot,
+  searchWords,
+  allWords,
+} from '../data/wordDatabase';
+import {theme} from '../theme';
+import {Word} from '../data/types';
 
 type RootStackParamList = {
   Tab: undefined;
-  WordDetail: { word: Word };
+  WordDetail: {word: Word};
 };
 
 type TabType = 'root' | 'prefix' | 'suffix' | 'search';
 
 export const RootScreen: React.FC = () => {
-  const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [activeTab, setActiveTab] = useState<TabType>('root');
   const [activeRoot, setActiveRoot] = useState(coreRoots[0]?.root || 'port');
-  const [activePrefix, setActivePrefix] = useState(prefixes[0]?.prefix || 're-');
-  const [activeSuffix, setActiveSuffix] = useState(suffixes[0]?.suffix || '-tion/-sion');
+  const [activePrefix, setActivePrefix] = useState(
+    prefixes[0]?.prefix || 're-',
+  );
+  const [activeSuffix, setActiveSuffix] = useState(
+    suffixes[0]?.suffix || '-tion/-sion',
+  );
   const [searchQuery, setSearchQuery] = useState('');
 
-  const currentRootData = coreRoots.find((r) => r.root === activeRoot);
-  const currentPrefixData = prefixes.find((p) => p.prefix === activePrefix);
-  const currentSuffixData = suffixes.find((s) => s.suffix === activeSuffix);
+  const currentRootData = coreRoots.find(r => r.root === activeRoot);
+  const currentPrefixData = prefixes.find(p => p.prefix === activePrefix);
+  const currentSuffixData = suffixes.find(s => s.suffix === activeSuffix);
 
   const rootMatchedWords = useMemo(() => {
-    if (activeTab !== 'root' || !currentRootData) return [];
+    if (activeTab !== 'root' || !currentRootData) {
+      return [];
+    }
     return getWordsByRoot(currentRootData.id);
-  }, [activeTab, activeRoot, currentRootData]);
+  }, [activeTab, currentRootData]);
 
   const prefixMatchedWords = useMemo(() => {
-    if (activeTab !== 'prefix' || !currentPrefixData) return [];
+    if (activeTab !== 'prefix' || !currentPrefixData) {
+      return [];
+    }
     const clean = currentPrefixData.prefix.replace(/[-/].*/g, '');
     return allWords.filter(w => w.word.startsWith(clean)).slice(0, 30);
-  }, [activeTab, activePrefix, currentPrefixData]);
+  }, [activeTab, currentPrefixData]);
 
   const suffixMatchedWords = useMemo(() => {
-    if (activeTab !== 'suffix' || !currentSuffixData) return [];
-    const variants = currentSuffixData.suffix.replace('-', '').split('/').map(v => v.replace('-', ''));
-    return allWords.filter(w => variants.some(v => w.word.endsWith(v))).slice(0, 30);
-  }, [activeTab, activeSuffix, currentSuffixData]);
+    if (activeTab !== 'suffix' || !currentSuffixData) {
+      return [];
+    }
+    const variants = currentSuffixData.suffix
+      .replace('-', '')
+      .split('/')
+      .map(v => v.replace('-', ''));
+    return allWords
+      .filter(w => variants.some(v => w.word.endsWith(v)))
+      .slice(0, 30);
+  }, [activeTab, currentSuffixData]);
 
   const searchResults = useMemo(() => {
-    if (activeTab !== 'search' || searchQuery.length < 1) return [];
+    if (activeTab !== 'search' || searchQuery.length < 1) {
+      return [];
+    }
     return searchWords(searchQuery);
   }, [activeTab, searchQuery]);
 
   const handleWordPress = (word: Word) => {
-    navigation.navigate('WordDetail', { word });
+    navigation.navigate('WordDetail', {word});
   };
 
-  const tabs: { key: TabType; label: string }[] = [
-    { key: 'root', label: '词根' },
-    { key: 'prefix', label: '前缀' },
-    { key: 'suffix', label: '后缀' },
-    { key: 'search', label: '搜索' },
+  const tabs: {key: TabType; label: string}[] = [
+    {key: 'root', label: '词根'},
+    {key: 'prefix', label: '前缀'},
+    {key: 'suffix', label: '后缀'},
+    {key: 'search', label: '搜索'},
   ];
 
   const renderWordItem = (word: Word) => (
@@ -63,14 +95,15 @@ export const RootScreen: React.FC = () => {
       key={word.id}
       style={styles.wordItem}
       onPress={() => handleWordPress(word)}
-      activeOpacity={0.7}
-    >
+      activeOpacity={0.7}>
       <View style={styles.wordItemLeft}>
         <Text style={styles.wordText}>{word.word}</Text>
         <Text style={styles.wordPhonetic}>{word.phonetic}</Text>
       </View>
       <View style={styles.wordItemRight}>
-        <Text style={styles.wordMeaning} numberOfLines={1}>{word.meaning}</Text>
+        <Text style={styles.wordMeaning} numberOfLines={1}>
+          {word.meaning}
+        </Text>
         <Text style={styles.wordPos}>{word.partOfSpeech}</Text>
       </View>
     </TouchableOpacity>
@@ -80,7 +113,9 @@ export const RootScreen: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.title}>词根探索</Text>
-        <Text style={styles.subtitle}>{coreRoots.length}词根 {prefixes.length}前缀 {suffixes.length}后缀</Text>
+        <Text style={styles.subtitle}>
+          {coreRoots.length}词根 {prefixes.length}前缀 {suffixes.length}后缀
+        </Text>
       </View>
 
       {/* Main tabs */}
@@ -88,10 +123,16 @@ export const RootScreen: React.FC = () => {
         {tabs.map(tab => (
           <TouchableOpacity
             key={tab.key}
-            style={[styles.mainTab, activeTab === tab.key && styles.mainTabActive]}
-            onPress={() => setActiveTab(tab.key)}
-          >
-            <Text style={[styles.mainTabText, activeTab === tab.key && styles.mainTabTextActive]}>
+            style={[
+              styles.mainTab,
+              activeTab === tab.key && styles.mainTabActive,
+            ]}
+            onPress={() => setActiveTab(tab.key)}>
+            <Text
+              style={[
+                styles.mainTabText,
+                activeTab === tab.key && styles.mainTabTextActive,
+              ]}>
               {tab.label}
             </Text>
           </TouchableOpacity>
@@ -111,7 +152,9 @@ export const RootScreen: React.FC = () => {
             autoCapitalize="none"
           />
           {searchQuery.length > 0 && (
-            <TouchableOpacity style={styles.clearButton} onPress={() => setSearchQuery('')}>
+            <TouchableOpacity
+              style={styles.clearButton}
+              onPress={() => setSearchQuery('')}>
               <Text style={styles.clearText}>{'\u2715'}</Text>
             </TouchableOpacity>
           )}
@@ -121,27 +164,60 @@ export const RootScreen: React.FC = () => {
       {/* Root tab content */}
       {activeTab === 'root' && (
         <>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.morphemeScroll} contentContainerStyle={styles.morphemeScrollContent}>
-            {coreRoots.map((root) => (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.morphemeScroll}
+            contentContainerStyle={styles.morphemeScrollContent}>
+            {coreRoots.map(root => (
               <TouchableOpacity
                 key={root.id}
-                style={[styles.morphemeChip, activeRoot === root.root && { backgroundColor: root.color + '20', borderColor: root.color }]}
-                onPress={() => setActiveRoot(root.root)}
-              >
-                <Text style={[styles.morphemeChipText, activeRoot === root.root && { color: root.color, fontWeight: 'bold' }]}>
+                style={[
+                  styles.morphemeChip,
+                  activeRoot === root.root && {
+                    backgroundColor: root.color + '20',
+                    borderColor: root.color,
+                  },
+                ]}
+                onPress={() => setActiveRoot(root.root)}>
+                <Text
+                  style={[
+                    styles.morphemeChipText,
+                    activeRoot === root.root && {
+                      color: root.color,
+                      fontWeight: 'bold',
+                    },
+                  ]}>
                   {root.root}
                 </Text>
-                <Text style={styles.morphemeChipCount}>{root.words.length}</Text>
+                <Text style={styles.morphemeChipCount}>
+                  {root.words.length}
+                </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
 
           {currentRootData && (
-            <View style={[styles.infoCard, { backgroundColor: currentRootData.color + '0D', borderColor: currentRootData.color + '30' }]}>
+            <View
+              style={[
+                styles.infoCard,
+                {
+                  backgroundColor: currentRootData.color + '0D',
+                  borderColor: currentRootData.color + '30',
+                },
+              ]}>
               <View style={styles.infoHeader}>
-                <Text style={[styles.infoRoot, { color: currentRootData.color }]}>{currentRootData.root}</Text>
-                <View style={[styles.levelTag, { backgroundColor: currentRootData.color }]}>
-                  <Text style={styles.levelTagText}>L{currentRootData.level}</Text>
+                <Text style={[styles.infoRoot, {color: currentRootData.color}]}>
+                  {currentRootData.root}
+                </Text>
+                <View
+                  style={[
+                    styles.levelTag,
+                    {backgroundColor: currentRootData.color},
+                  ]}>
+                  <Text style={styles.levelTagText}>
+                    L{currentRootData.level}
+                  </Text>
                 </View>
               </View>
               <Text style={styles.infoMeaning}>{currentRootData.meaning}</Text>
@@ -154,14 +230,30 @@ export const RootScreen: React.FC = () => {
       {/* Prefix tab content */}
       {activeTab === 'prefix' && (
         <>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.morphemeScroll} contentContainerStyle={styles.morphemeScrollContent}>
-            {prefixes.map((p) => (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.morphemeScroll}
+            contentContainerStyle={styles.morphemeScrollContent}>
+            {prefixes.map(p => (
               <TouchableOpacity
                 key={p.id}
-                style={[styles.morphemeChip, activePrefix === p.prefix && { backgroundColor: p.color + '20', borderColor: p.color }]}
-                onPress={() => setActivePrefix(p.prefix)}
-              >
-                <Text style={[styles.morphemeChipText, activePrefix === p.prefix && { color: p.color, fontWeight: 'bold' }]}>
+                style={[
+                  styles.morphemeChip,
+                  activePrefix === p.prefix && {
+                    backgroundColor: p.color + '20',
+                    borderColor: p.color,
+                  },
+                ]}
+                onPress={() => setActivePrefix(p.prefix)}>
+                <Text
+                  style={[
+                    styles.morphemeChipText,
+                    activePrefix === p.prefix && {
+                      color: p.color,
+                      fontWeight: 'bold',
+                    },
+                  ]}>
                   {p.prefix}
                 </Text>
               </TouchableOpacity>
@@ -169,14 +261,30 @@ export const RootScreen: React.FC = () => {
           </ScrollView>
 
           {currentPrefixData && (
-            <View style={[styles.infoCard, { backgroundColor: currentPrefixData.color + '0D', borderColor: currentPrefixData.color + '30' }]}>
+            <View
+              style={[
+                styles.infoCard,
+                {
+                  backgroundColor: currentPrefixData.color + '0D',
+                  borderColor: currentPrefixData.color + '30',
+                },
+              ]}>
               <View style={styles.infoHeader}>
-                <Text style={[styles.infoRoot, { color: currentPrefixData.color }]}>{currentPrefixData.prefix}</Text>
-                <View style={[styles.typeBadge, { backgroundColor: currentPrefixData.color }]}>
+                <Text
+                  style={[styles.infoRoot, {color: currentPrefixData.color}]}>
+                  {currentPrefixData.prefix}
+                </Text>
+                <View
+                  style={[
+                    styles.typeBadge,
+                    {backgroundColor: currentPrefixData.color},
+                  ]}>
                   <Text style={styles.typeBadgeText}>前缀</Text>
                 </View>
               </View>
-              <Text style={styles.infoMeaning}>{currentPrefixData.meaning}</Text>
+              <Text style={styles.infoMeaning}>
+                {currentPrefixData.meaning}
+              </Text>
               <Text style={styles.infoOrigin}>{currentPrefixData.origin}</Text>
             </View>
           )}
@@ -186,14 +294,30 @@ export const RootScreen: React.FC = () => {
       {/* Suffix tab content */}
       {activeTab === 'suffix' && (
         <>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.morphemeScroll} contentContainerStyle={styles.morphemeScrollContent}>
-            {suffixes.map((s) => (
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            style={styles.morphemeScroll}
+            contentContainerStyle={styles.morphemeScrollContent}>
+            {suffixes.map(s => (
               <TouchableOpacity
                 key={s.id}
-                style={[styles.morphemeChip, activeSuffix === s.suffix && { backgroundColor: s.color + '20', borderColor: s.color }]}
-                onPress={() => setActiveSuffix(s.suffix)}
-              >
-                <Text style={[styles.morphemeChipText, activeSuffix === s.suffix && { color: s.color, fontWeight: 'bold' }]}>
+                style={[
+                  styles.morphemeChip,
+                  activeSuffix === s.suffix && {
+                    backgroundColor: s.color + '20',
+                    borderColor: s.color,
+                  },
+                ]}
+                onPress={() => setActiveSuffix(s.suffix)}>
+                <Text
+                  style={[
+                    styles.morphemeChipText,
+                    activeSuffix === s.suffix && {
+                      color: s.color,
+                      fontWeight: 'bold',
+                    },
+                  ]}>
                   {s.suffix}
                 </Text>
               </TouchableOpacity>
@@ -201,14 +325,32 @@ export const RootScreen: React.FC = () => {
           </ScrollView>
 
           {currentSuffixData && (
-            <View style={[styles.infoCard, { backgroundColor: currentSuffixData.color + '0D', borderColor: currentSuffixData.color + '30' }]}>
+            <View
+              style={[
+                styles.infoCard,
+                {
+                  backgroundColor: currentSuffixData.color + '0D',
+                  borderColor: currentSuffixData.color + '30',
+                },
+              ]}>
               <View style={styles.infoHeader}>
-                <Text style={[styles.infoRoot, { color: currentSuffixData.color }]}>{currentSuffixData.suffix}</Text>
-                <View style={[styles.typeBadge, { backgroundColor: currentSuffixData.color }]}>
-                  <Text style={styles.typeBadgeText}>后缀 {currentSuffixData.partOfSpeech}</Text>
+                <Text
+                  style={[styles.infoRoot, {color: currentSuffixData.color}]}>
+                  {currentSuffixData.suffix}
+                </Text>
+                <View
+                  style={[
+                    styles.typeBadge,
+                    {backgroundColor: currentSuffixData.color},
+                  ]}>
+                  <Text style={styles.typeBadgeText}>
+                    后缀 {currentSuffixData.partOfSpeech}
+                  </Text>
                 </View>
               </View>
-              <Text style={styles.infoMeaning}>{currentSuffixData.meaning}</Text>
+              <Text style={styles.infoMeaning}>
+                {currentSuffixData.meaning}
+              </Text>
               <Text style={styles.infoOrigin}>{currentSuffixData.origin}</Text>
             </View>
           )}
@@ -221,9 +363,16 @@ export const RootScreen: React.FC = () => {
           {activeTab === 'root' && `词汇家族 (${rootMatchedWords.length})`}
           {activeTab === 'prefix' && `相关词汇 (${prefixMatchedWords.length})`}
           {activeTab === 'suffix' && `相关词汇 (${suffixMatchedWords.length})`}
-          {activeTab === 'search' && (searchResults.length > 0 ? `搜索结果 (${searchResults.length})` : searchQuery ? '未找到' : '输入关键词搜索')}
+          {activeTab === 'search' &&
+            (searchResults.length > 0
+              ? `搜索结果 (${searchResults.length})`
+              : searchQuery
+              ? '未找到'
+              : '输入关键词搜索')}
         </Text>
-        <ScrollView style={styles.wordList} contentContainerStyle={styles.wordListContent}>
+        <ScrollView
+          style={styles.wordList}
+          contentContainerStyle={styles.wordListContent}>
           {activeTab === 'root' && rootMatchedWords.map(renderWordItem)}
           {activeTab === 'prefix' && prefixMatchedWords.map(renderWordItem)}
           {activeTab === 'suffix' && suffixMatchedWords.map(renderWordItem)}
@@ -271,7 +420,7 @@ const styles = StyleSheet.create({
   mainTabActive: {
     backgroundColor: theme.colors.primary,
     shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.3,
     shadowRadius: 4,
     elevation: 3,
@@ -299,7 +448,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#E8ECF2',
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 4,
     elevation: 1,
@@ -332,7 +481,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 4,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.03,
     shadowRadius: 3,
     elevation: 1,
@@ -418,7 +567,7 @@ const styles = StyleSheet.create({
     backgroundColor: theme.colors.surface,
     borderRadius: 12,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.03,
     shadowRadius: 4,
     elevation: 1,

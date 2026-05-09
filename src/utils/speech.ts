@@ -1,8 +1,10 @@
-import { NativeModules } from 'react-native';
+import {NativeModules} from 'react-native';
 
-const { Speech } = NativeModules;
+const {Speech} = NativeModules;
 
 export const speak = (word: string) => {
-  if (!Speech?.speak) return;
+  if (!Speech?.speak) {
+    return;
+  }
   Speech.speak(word, 'en-US', 0.45);
 };

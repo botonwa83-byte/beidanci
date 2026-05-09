@@ -1,29 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
-import { RouteProp } from '@react-navigation/native';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Word } from '../data/types';
-import { theme } from '../theme';
-import { loadProgress, saveProgress, markWordLearned } from '../data/learningLogic';
-import { getWordsByRoot, coreRoots, getSimilarWords } from '../data/wordDatabase';
-import { speak } from '../utils/speech';
+import React, {useState, useEffect} from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
+import {RouteProp} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Word} from '../data/types';
+import {theme} from '../theme';
+import {
+  loadProgress,
+  saveProgress,
+  markWordLearned,
+} from '../data/learningLogic';
+import {getWordsByRoot, coreRoots, getSimilarWords} from '../data/wordDatabase';
+import {speak} from '../utils/speech';
 
 type RootStackParamList = {
   Tab: undefined;
-  WordDetail: { word: Word };
+  WordDetail: {word: Word};
 };
 
 type WordDetailScreenRouteProp = RouteProp<RootStackParamList, 'WordDetail'>;
-type WordDetailScreenNavigationProp = NativeStackNavigationProp<RootStackParamList, 'WordDetail'>;
+type WordDetailScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'WordDetail'
+>;
 
 interface WordDetailScreenProps {
   route: WordDetailScreenRouteProp;
   navigation: WordDetailScreenNavigationProp;
 }
 
-export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navigation }) => {
-  const { word } = route.params;
+export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({
+  route,
+  navigation,
+}) => {
+  const {word} = route.params;
   const [selectedMorpheme, setSelectedMorpheme] = useState<number>(0);
   const [isLearned, setIsLearned] = useState(false);
   const [relatedWords, setRelatedWords] = useState<Word[]>([]);
@@ -38,7 +54,9 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
     check();
 
     if (word.rootId) {
-      const related = getWordsByRoot(word.rootId).filter(w => w.id !== word.id).slice(0, 6);
+      const related = getWordsByRoot(word.rootId)
+        .filter(w => w.id !== word.id)
+        .slice(0, 6);
       setRelatedWords(related);
     }
 
@@ -54,21 +72,32 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
   };
 
   const currentMorpheme = word.morphemes[selectedMorpheme];
-  const rootInfo = word.rootId ? coreRoots.find(r => r.id === word.rootId) : null;
+  const rootInfo = word.rootId
+    ? coreRoots.find(r => r.id === word.rootId)
+    : null;
 
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
-      <View style={[styles.header, { paddingTop: insets.top + 12 }]}>
-        <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+      <View style={[styles.header, {paddingTop: insets.top + 12}]}>
+        <TouchableOpacity
+          style={styles.backButton}
+          onPress={() => navigation.goBack()}>
           <Text style={styles.backText}>{'\u2039'}</Text>
         </TouchableOpacity>
 
         <View style={styles.wordHeader}>
-          <TouchableOpacity onPress={() => speak(word.word)} activeOpacity={0.6}>
-            <Text style={styles.word}>{word.word} <Text style={styles.speakerIcon}>{'\uD83D\uDD0A'}</Text></Text>
+          <TouchableOpacity
+            onPress={() => speak(word.word)}
+            activeOpacity={0.6}>
+            <Text style={styles.word}>
+              {word.word}{' '}
+              <Text style={styles.speakerIcon}>{'\uD83D\uDD0A'}</Text>
+            </Text>
           </TouchableOpacity>
-          {word.phonetic ? <Text style={styles.phonetic}>{word.phonetic}</Text> : null}
+          {word.phonetic ? (
+            <Text style={styles.phonetic}>{word.phonetic}</Text>
+          ) : null}
           <Text style={styles.pos}>{word.partOfSpeech}</Text>
         </View>
 
@@ -85,14 +114,17 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
               <TouchableOpacity
                 style={[
                   styles.morphemeBlock,
-                  { backgroundColor: morpheme.color },
+                  {backgroundColor: morpheme.color},
                   selectedMorpheme === index && styles.morphemeBlockActive,
                 ]}
-                onPress={() => setSelectedMorpheme(index)}
-              >
+                onPress={() => setSelectedMorpheme(index)}>
                 <Text style={styles.morphemeText}>{morpheme.text}</Text>
                 <Text style={styles.morphemeLabel}>
-                  {morpheme.type === 'prefix' ? '前缀' : morpheme.type === 'root' ? '词根' : '后缀'}
+                  {morpheme.type === 'prefix'
+                    ? '前缀'
+                    : morpheme.type === 'root'
+                    ? '词根'
+                    : '后缀'}
                 </Text>
               </TouchableOpacity>
             </React.Fragment>
@@ -102,17 +134,36 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
 
       {/* Morpheme detail */}
       {currentMorpheme && (
-        <View style={[styles.morphemeDetail, { backgroundColor: currentMorpheme.color + '12', borderColor: currentMorpheme.color + '30' }]}>
+        <View
+          style={[
+            styles.morphemeDetail,
+            {
+              backgroundColor: currentMorpheme.color + '12',
+              borderColor: currentMorpheme.color + '30',
+            },
+          ]}>
           <View style={styles.detailHeader}>
-            <Text style={[styles.detailRoot, { color: currentMorpheme.color }]}>{currentMorpheme.text}</Text>
-            <View style={[styles.detailBadge, { backgroundColor: currentMorpheme.color }]}>
+            <Text style={[styles.detailRoot, {color: currentMorpheme.color}]}>
+              {currentMorpheme.text}
+            </Text>
+            <View
+              style={[
+                styles.detailBadge,
+                {backgroundColor: currentMorpheme.color},
+              ]}>
               <Text style={styles.detailBadgeText}>
-                {currentMorpheme.type === 'prefix' ? '前缀' : currentMorpheme.type === 'root' ? '词根' : '后缀'}
+                {currentMorpheme.type === 'prefix'
+                  ? '前缀'
+                  : currentMorpheme.type === 'root'
+                  ? '词根'
+                  : '后缀'}
               </Text>
             </View>
           </View>
           <Text style={styles.detailMeaning}>{currentMorpheme.meaning}</Text>
-          {currentMorpheme.origin ? <Text style={styles.detailOrigin}>{currentMorpheme.origin}</Text> : null}
+          {currentMorpheme.origin ? (
+            <Text style={styles.detailOrigin}>{currentMorpheme.origin}</Text>
+          ) : null}
         </View>
       )}
 
@@ -144,11 +195,12 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
               <TouchableOpacity
                 key={rw.id}
                 style={styles.relatedCard}
-                onPress={() => navigation.push('WordDetail', { word: rw })}
-                activeOpacity={0.7}
-              >
+                onPress={() => navigation.push('WordDetail', {word: rw})}
+                activeOpacity={0.7}>
                 <Text style={styles.relatedWord}>{rw.word}</Text>
-                <Text style={styles.relatedMeaning} numberOfLines={1}>{rw.meaning}</Text>
+                <Text style={styles.relatedMeaning} numberOfLines={1}>
+                  {rw.meaning}
+                </Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -166,15 +218,18 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
                 <TouchableOpacity
                   key={sw.id}
                   style={styles.similarCard}
-                  onPress={() => navigation.push('WordDetail', { word: sw })}
-                  activeOpacity={0.7}
-                >
+                  onPress={() => navigation.push('WordDetail', {word: sw})}
+                  activeOpacity={0.7}>
                   <View style={styles.similarHeader}>
                     <Text style={styles.similarWord}>
                       {sw.word.split('').map((ch, i) => {
-                        const isDiff = i >= thisWord.length || ch.toLowerCase() !== thisWord[i];
+                        const isDiff =
+                          i >= thisWord.length ||
+                          ch.toLowerCase() !== thisWord[i];
                         return (
-                          <Text key={i} style={isDiff ? styles.similarDiffChar : undefined}>
+                          <Text
+                            key={i}
+                            style={isDiff ? styles.similarDiffChar : undefined}>
                             {ch}
                           </Text>
                         );
@@ -182,7 +237,9 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
                     </Text>
                     <Text style={styles.similarPos}>{sw.partOfSpeech}</Text>
                   </View>
-                  <Text style={styles.similarMeaning} numberOfLines={1}>{sw.meaning}</Text>
+                  <Text style={styles.similarMeaning} numberOfLines={1}>
+                    {sw.meaning}
+                  </Text>
                   <View style={styles.similarCompare}>
                     <Text style={styles.similarCompareText}>
                       {word.word} = {word.meaning.split('/')[0]}
@@ -205,15 +262,18 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({ route, navig
           style={[styles.learnButton, isLearned && styles.learnedButton]}
           onPress={handleMarkLearned}
           disabled={isLearned}
-          activeOpacity={0.7}
-        >
-          <Text style={[styles.learnButtonText, isLearned && styles.learnedButtonText]}>
+          activeOpacity={0.7}>
+          <Text
+            style={[
+              styles.learnButtonText,
+              isLearned && styles.learnedButtonText,
+            ]}>
             {isLearned ? '\u2713 已学会' : '标记为已学会'}
           </Text>
         </TouchableOpacity>
       </View>
 
-      <View style={{ height: 60 }} />
+      <View style={{height: 60}} />
     </ScrollView>
   );
 };
@@ -236,7 +296,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.06,
     shadowRadius: 4,
     elevation: 2,
@@ -310,9 +370,9 @@ const styles = StyleSheet.create({
     gap: 4,
   },
   morphemeBlockActive: {
-    transform: [{ scale: 1.03 }],
+    transform: [{scale: 1.03}],
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.15,
     shadowRadius: 8,
     elevation: 4,
@@ -368,7 +428,7 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 14,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 6,
     elevation: 1,
@@ -385,7 +445,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: theme.colors.primary,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 6,
     elevation: 1,
@@ -413,7 +473,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: '48%' as any,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 4,
     elevation: 1,
@@ -438,7 +498,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 3,
     borderLeftColor: theme.colors.accent,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
+    shadowOffset: {width: 0, height: 1},
     shadowOpacity: 0.04,
     shadowRadius: 4,
     elevation: 1,
@@ -500,7 +560,7 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: 'center',
     shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.25,
     shadowRadius: 8,
     elevation: 4,

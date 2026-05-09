@@ -10,5 +10,7 @@ export const setLogoutListener = (listener: AuthListener) => {
 };
 
 export const triggerLogout = () => {
-  if (logoutListener) logoutListener();
+  if (logoutListener) {
+    logoutListener();
+  }
 };

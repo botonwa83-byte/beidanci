@@ -1,19 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import {
-  View, Text, StyleSheet, TextInput, TouchableOpacity,
-  KeyboardAvoidingView, Platform, Alert, Keyboard,
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
+  Alert,
+  Keyboard,
 } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { theme } from '../theme';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {theme} from '../theme';
 import {
-  isValidPhone, sendVerificationCode, verifyCode, AuthUser,
+  isValidPhone,
+  sendVerificationCode,
+  verifyCode,
+  AuthUser,
 } from '../data/authService';
 
 interface LoginScreenProps {
   onLoginSuccess: (user: AuthUser) => void;
 }
 
-export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
+export const LoginScreen: React.FC<LoginScreenProps> = ({onLoginSuccess}) => {
   const insets = useSafeAreaInsets();
   const [phone, setPhone] = useState('');
   const [code, setCode] = useState('');
@@ -25,7 +35,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
 
   useEffect(() => {
     return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+      }
     };
   }, []);
 
@@ -34,7 +46,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
     timerRef.current = setInterval(() => {
       setCountdown(prev => {
         if (prev <= 1) {
-          if (timerRef.current) clearInterval(timerRef.current);
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+          }
           return 0;
         }
         return prev - 1;
@@ -64,7 +78,9 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
   };
 
   const handleResend = async () => {
-    if (countdown > 0) return;
+    if (countdown > 0) {
+      return;
+    }
     setLoading(true);
     const result = await sendVerificationCode(phone);
     setLoading(false);
@@ -103,16 +119,17 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
   return (
     <KeyboardAvoidingView
       style={styles.container}
-      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
-    >
-      <View style={[styles.content, { paddingTop: insets.top + 60 }]}>
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+      <View style={[styles.content, {paddingTop: insets.top + 60}]}>
         {/* Logo area */}
         <View style={styles.logoWrap}>
           <View style={styles.logoCircle}>
             <Text style={styles.logoText}>{'\u8BCD'}</Text>
           </View>
           <Text style={styles.appName}>{'\u80CC\u5355\u8BCD'}</Text>
-          <Text style={styles.appSlogan}>{'\u8BCD\u6839\u8BCD\u7F00'} {'\u00B7'} {'\u9AD8\u6548\u8BB0\u5FC6'}</Text>
+          <Text style={styles.appSlogan}>
+            {'\u8BCD\u6839\u8BCD\u7F00'} {'\u00B7'} {'\u9AD8\u6548\u8BB0\u5FC6'}
+          </Text>
         </View>
 
         {step === 'phone' ? (
@@ -134,18 +151,22 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
                 autoFocus
               />
               {phone.length > 0 && (
-                <TouchableOpacity onPress={() => setPhone('')} style={styles.clearBtn}>
+                <TouchableOpacity
+                  onPress={() => setPhone('')}
+                  style={styles.clearBtn}>
                   <Text style={styles.clearText}>{'\u2715'}</Text>
                 </TouchableOpacity>
               )}
             </View>
 
             <TouchableOpacity
-              style={[styles.primaryBtn, !isValidPhone(phone) && styles.btnDisabled]}
+              style={[
+                styles.primaryBtn,
+                !isValidPhone(phone) && styles.btnDisabled,
+              ]}
               onPress={handleSendCode}
               disabled={!isValidPhone(phone) || loading}
-              activeOpacity={0.7}
-            >
+              activeOpacity={0.7}>
               <Text style={styles.primaryBtnText}>
                 {loading ? '发送中...' : '获取验证码'}
               </Text>
@@ -171,7 +192,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
             {/* Code input boxes */}
             <View style={styles.codeRow}>
               {[0, 1, 2, 3, 4, 5].map(i => (
-                <View key={i} style={[styles.codeBox, code.length === i && styles.codeBoxActive]}>
+                <View
+                  key={i}
+                  style={[
+                    styles.codeBox,
+                    code.length === i && styles.codeBoxActive,
+                  ]}>
                   <Text style={styles.codeChar}>{code[i] || ''}</Text>
                 </View>
               ))}
@@ -187,11 +213,13 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
             />
 
             <TouchableOpacity
-              style={[styles.primaryBtn, code.length !== 6 && styles.btnDisabled]}
+              style={[
+                styles.primaryBtn,
+                code.length !== 6 && styles.btnDisabled,
+              ]}
               onPress={handleVerify}
               disabled={code.length !== 6 || loading}
-              activeOpacity={0.7}
-            >
+              activeOpacity={0.7}>
               <Text style={styles.primaryBtnText}>
                 {loading ? '验证中...' : '登录'}
               </Text>
@@ -200,9 +228,12 @@ export const LoginScreen: React.FC<LoginScreenProps> = ({ onLoginSuccess }) => {
             <TouchableOpacity
               onPress={handleResend}
               disabled={countdown > 0}
-              style={styles.resendBtn}
-            >
-              <Text style={[styles.resendText, countdown > 0 && styles.resendDisabled]}>
+              style={styles.resendBtn}>
+              <Text
+                style={[
+                  styles.resendText,
+                  countdown > 0 && styles.resendDisabled,
+                ]}>
                 {countdown > 0 ? `${countdown}s 后重新发送` : '重新发送验证码'}
               </Text>
             </TouchableOpacity>
@@ -237,7 +268,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginBottom: 16,
     shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 6 },
+    shadowOffset: {width: 0, height: 6},
     shadowOpacity: 0.3,
     shadowRadius: 12,
     elevation: 6,
@@ -316,7 +347,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     shadowColor: theme.colors.primary,
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: {width: 0, height: 4},
     shadowOpacity: 0.3,
     shadowRadius: 8,
     elevation: 4,

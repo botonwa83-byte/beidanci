@@ -469,9 +469,9 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beidanci.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordpulse.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/beidanci.app/beidanci";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/beidanci/beidanci";
 			};
 			name = Debug;
 		};
@@ -493,9 +493,9 @@
 					"-lc++",
 					"$(inherited)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beidanci.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordpulse.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/beidanci.app/beidanci";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/beidanci/beidanci";
 			};
 			name = Release;
 		};
@@ -519,8 +519,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beidanci.app;
-				PRODUCT_NAME = "背单词";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordpulse.app;
+				PRODUCT_NAME = "WordPulse";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -546,8 +546,8 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.beidanci.app;
-				PRODUCT_NAME = "背单词";
+				PRODUCT_BUNDLE_IDENTIFIER = com.wordpulse.app;
+				PRODUCT_NAME = "WordPulse";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

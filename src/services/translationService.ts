@@ -1,11 +1,9 @@
-import { Platform } from 'react-native';
-
 export interface WordDefinition {
   word: string;
   phonetic: string;
   partOfSpeech: string;
   definitions: string[];
-  examples: { en: string; zh: string }[];
+  examples: {en: string; zh: string}[];
   synonyms: string[];
   antonyms: string[];
   etymology?: string;
@@ -20,78 +18,72 @@ class TranslationService {
 
   private loadLocalDictionary() {
     this.localDictionary = {
-      'abroad': {
+      abroad: {
         word: 'abroad',
         phonetic: '/əˈbrɔːd/',
         partOfSpeech: 'adv.',
-        definitions: [
-          '在国外，到海外',
-          '广为流传',
-          '在户外，在室外'
-        ],
+        definitions: ['在国外，到海外', '广为流传', '在户外，在室外'],
         examples: [
-          { en: 'He lives abroad.', zh: '他住在国外。' },
-          { en: 'The news spread abroad.', zh: '消息传遍四方。' },
-          { en: 'A tree spreads its branches abroad.', zh: '树枝向外伸展。' }
+          {en: 'He lives abroad.', zh: '他住在国外。'},
+          {en: 'The news spread abroad.', zh: '消息传遍四方。'},
+          {en: 'A tree spreads its branches abroad.', zh: '树枝向外伸展。'},
         ],
         synonyms: ['overseas', 'foreign', 'away'],
         antonyms: ['domestic', 'local', 'home'],
-        etymology: '源自古英语 on brede，意为"广泛地"'
+        etymology: '源自古英语 on brede，意为"广泛地"',
       },
-      'abrupt': {
+      abrupt: {
         word: 'abrupt',
         phonetic: '/əˈbrʌpt/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '突然的，意外的',
-          '生硬的，唐突的',
-          '陡峭的'
-        ],
+        definitions: ['突然的，意外的', '生硬的，唐突的', '陡峭的'],
         examples: [
-          { en: 'The meeting came to an abrupt end.', zh: '会议突然结束。' },
-          { en: 'He has an abrupt manner.', zh: '他态度生硬。' },
-          { en: 'The party came to an abrupt end when the parents arrived.', zh: '家长们一到，派对就草草结束了。' }
+          {en: 'The meeting came to an abrupt end.', zh: '会议突然结束。'},
+          {en: 'He has an abrupt manner.', zh: '他态度生硬。'},
+          {
+            en: 'The party came to an abrupt end when the parents arrived.',
+            zh: '家长们一到，派对就草草结束了。',
+          },
         ],
         synonyms: ['sudden', 'unexpected', 'sharp'],
         antonyms: ['gradual', 'smooth', 'gentle'],
-        etymology: '源自拉丁语 abruptus，意为"断裂的"'
+        etymology: '源自拉丁语 abruptus，意为"断裂的"',
       },
-      'absent': {
+      absent: {
         word: 'absent',
         phonetic: '/ˈæbsənt/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '缺席的，不在场的',
-          '缺乏的，不存在的',
-          '心不在焉的'
-        ],
+        definitions: ['缺席的，不在场的', '缺乏的，不存在的', '心不在焉的'],
         examples: [
-          { en: 'He was absent from school.', zh: '他没来上学。' },
-          { en: 'Love was absent from his childhood.', zh: '他的童年缺少爱。' },
-          { en: 'Absent taxes modern governments cannot function.', zh: '没有税收，现代政府无法运转。' }
+          {en: 'He was absent from school.', zh: '他没来上学。'},
+          {en: 'Love was absent from his childhood.', zh: '他的童年缺少爱。'},
+          {
+            en: 'Absent taxes modern governments cannot function.',
+            zh: '没有税收，现代政府无法运转。',
+          },
         ],
         synonyms: ['missing', 'away', 'lacking'],
         antonyms: ['present', 'attending', 'existing'],
-        etymology: '源自拉丁语 absentem，意为"不在的"'
+        etymology: '源自拉丁语 absentem，意为"不在的"',
       },
-      'abstain': {
+      abstain: {
         word: 'abstain',
         phonetic: '/əbˈsteɪn/',
         partOfSpeech: 'v.',
-        definitions: [
-          '戒除，节制',
-          '弃权'
-        ],
+        definitions: ['戒除，节制', '弃权'],
         examples: [
-          { en: 'He abstains from alcohol.', zh: '他戒酒。' },
-          { en: 'She abstained from voting.', zh: '她弃权了。' },
-          { en: 'In order to improve his health, Rob decided to abstain from smoking.', zh: '为了改善健康，罗伯决定戒烟。' }
+          {en: 'He abstains from alcohol.', zh: '他戒酒。'},
+          {en: 'She abstained from voting.', zh: '她弃权了。'},
+          {
+            en: 'In order to improve his health, Rob decided to abstain from smoking.',
+            zh: '为了改善健康，罗伯决定戒烟。',
+          },
         ],
         synonyms: ['refrain', 'forbear', 'withhold'],
         antonyms: ['indulge', 'participate'],
-        etymology: '源自拉丁语 abstinere，意为"克制"'
+        etymology: '源自拉丁语 abstinere，意为"克制"',
       },
-      'absorb': {
+      absorb: {
         word: 'absorb',
         phonetic: '/əbˈsɔːb/',
         partOfSpeech: 'v.',
@@ -99,1365 +91,1269 @@ class TranslationService {
           '吸收（液体、气体等）',
           '吸引（注意力）',
           '吞并，合并',
-          '理解，掌握'
+          '理解，掌握',
         ],
         examples: [
-          { en: 'Plants absorb carbon dioxide.', zh: '植物吸收二氧化碳。' },
-          { en: 'The book absorbed my attention.', zh: '这本书吸引了我的注意力。' },
-          { en: 'Heat, light, and electricity are absorbed in the substances.', zh: '热、光和电被物质吸收。' }
+          {en: 'Plants absorb carbon dioxide.', zh: '植物吸收二氧化碳。'},
+          {
+            en: 'The book absorbed my attention.',
+            zh: '这本书吸引了我的注意力。',
+          },
+          {
+            en: 'Heat, light, and electricity are absorbed in the substances.',
+            zh: '热、光和电被物质吸收。',
+          },
         ],
         synonyms: ['soak up', 'take in', 'engross'],
         antonyms: ['emit', 'release', 'expel'],
-        etymology: '源自拉丁语 absorbere，意为"吸收"'
+        etymology: '源自拉丁语 absorbere，意为"吸收"',
       },
-      'abstract': {
+      abstract: {
         word: 'abstract',
         phonetic: '/ˈæbstrækt/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '抽象的，理论的',
-          '难懂的，深奥的'
-        ],
+        definitions: ['抽象的，理论的', '难懂的，深奥的'],
         examples: [
-          { en: 'Beauty is an abstract concept.', zh: '美是一个抽象概念。' },
-          { en: 'He abstracted out the square root function.', zh: '他提取出平方根函数。' },
-          { en: 'Abstraction is necessary for classification.', zh: '抽象对于分类是必要的。' }
+          {en: 'Beauty is an abstract concept.', zh: '美是一个抽象概念。'},
+          {
+            en: 'He abstracted out the square root function.',
+            zh: '他提取出平方根函数。',
+          },
+          {
+            en: 'Abstraction is necessary for classification.',
+            zh: '抽象对于分类是必要的。',
+          },
         ],
         synonyms: ['theoretical', 'conceptual', 'general'],
         antonyms: ['concrete', 'specific', 'practical'],
-        etymology: '源自拉丁语 abstractus，意为"抽出的"'
+        etymology: '源自拉丁语 abstractus，意为"抽出的"',
       },
-      'abuse': {
+      abuse: {
         word: 'abuse',
         phonetic: '/əˈbjuːz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '滥用，误用',
-          '虐待',
-          '辱骂，诋毁'
-        ],
+        definitions: ['滥用，误用', '虐待', '辱骂，诋毁'],
         examples: [
-          { en: 'He abused his power.', zh: '他滥用职权。' },
-          { en: 'She was abused as a child.', zh: '她小时候受过虐待。' },
-          { en: 'All abuse, whether physical or verbal, is bad.', zh: '任何形式的虐待，无论是身体上的还是言语上的，都是有害的。' }
+          {en: 'He abused his power.', zh: '他滥用职权。'},
+          {en: 'She was abused as a child.', zh: '她小时候受过虐待。'},
+          {
+            en: 'All abuse, whether physical or verbal, is bad.',
+            zh: '任何形式的虐待，无论是身体上的还是言语上的，都是有害的。',
+          },
         ],
         synonyms: ['misuse', 'mistreat', 'insult'],
         antonyms: ['respect', 'cherish', 'honor'],
-        etymology: '源自拉丁语 abusus，意为"误用"'
+        etymology: '源自拉丁语 abusus，意为"误用"',
       },
-      'accept': {
+      accept: {
         word: 'accept',
         phonetic: '/əkˈsept/',
         partOfSpeech: 'v.',
-        definitions: [
-          '接受，接纳',
-          '认可，同意',
-          '承担（责任）'
-        ],
+        definitions: ['接受，接纳', '认可，同意', '承担（责任）'],
         examples: [
-          { en: 'She accepted the gift.', zh: '她接受了礼物。' },
-          { en: 'I accept your apology.', zh: '我接受你的道歉。' },
-          { en: 'The Boy Scouts were going to accept him as a member.', zh: '童子军打算接纳他为成员。' }
+          {en: 'She accepted the gift.', zh: '她接受了礼物。'},
+          {en: 'I accept your apology.', zh: '我接受你的道歉。'},
+          {
+            en: 'The Boy Scouts were going to accept him as a member.',
+            zh: '童子军打算接纳他为成员。',
+          },
         ],
         synonyms: ['receive', 'take', 'agree to'],
         antonyms: ['reject', 'refuse', 'decline'],
-        etymology: '源自拉丁语 acceptare，意为"接受"'
+        etymology: '源自拉丁语 acceptare，意为"接受"',
       },
-      'access': {
+      access: {
         word: 'access',
         phonetic: '/ˈækses/',
         partOfSpeech: 'n.',
-        definitions: [
-          '通道，入口',
-          '使用权，访问权',
-          '接近，进入'
-        ],
+        definitions: ['通道，入口', '使用权，访问权', '接近，进入'],
         examples: [
-          { en: 'The access to the building is restricted.', zh: '进入大楼的通道受限。' },
-          { en: 'You need access to the internet.', zh: '你需要互联网访问权限。' },
-          { en: 'an access of territory', zh: '领土的扩张' }
+          {
+            en: 'The access to the building is restricted.',
+            zh: '进入大楼的通道受限。',
+          },
+          {
+            en: 'You need access to the internet.',
+            zh: '你需要互联网访问权限。',
+          },
+          {en: 'an access of territory', zh: '领土的扩张'},
         ],
         synonyms: ['entry', 'approach', 'way in'],
         antonyms: ['restriction', 'barrier', 'denial'],
-        etymology: '源自拉丁语 accessus，意为"接近"'
+        etymology: '源自拉丁语 accessus，意为"接近"',
       },
-      'accomplish': {
+      accomplish: {
         word: 'accomplish',
         phonetic: '/əˈkʌmplɪʃ/',
         partOfSpeech: 'v.',
-        definitions: [
-          '完成，实现',
-          '达到（目标）'
-        ],
+        definitions: ['完成，实现', '达到（目标）'],
         examples: [
-          { en: 'We accomplished our mission.', zh: '我们完成了任务。' },
-          { en: 'She accomplished her goal.', zh: '她实现了目标。' },
-          { en: 'to accomplish a design, an object, a promise', zh: '完成设计、实现目标、兑现承诺' }
+          {en: 'We accomplished our mission.', zh: '我们完成了任务。'},
+          {en: 'She accomplished her goal.', zh: '她实现了目标。'},
+          {
+            en: 'to accomplish a design, an object, a promise',
+            zh: '完成设计、实现目标、兑现承诺',
+          },
         ],
         synonyms: ['achieve', 'complete', 'fulfill'],
         antonyms: ['fail', 'abandon', 'give up'],
-        etymology: '源自拉丁语 accomplere，意为"完成"'
+        etymology: '源自拉丁语 accomplere，意为"完成"',
       },
-      'accurate': {
+      accurate: {
         word: 'accurate',
         phonetic: '/ˈækjərət/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '准确的，精确的',
-          '正确无误的'
-        ],
+        definitions: ['准确的，精确的', '正确无误的'],
         examples: [
-          { en: 'Give me an accurate report.', zh: '给我一份准确的报告。' },
-          { en: 'His prediction was accurate.', zh: '他的预测很准确。' },
-          { en: 'My horoscopes were surprisingly accurate.', zh: '我的星座运势出奇地准确。' }
+          {en: 'Give me an accurate report.', zh: '给我一份准确的报告。'},
+          {en: 'His prediction was accurate.', zh: '他的预测很准确。'},
+          {
+            en: 'My horoscopes were surprisingly accurate.',
+            zh: '我的星座运势出奇地准确。',
+          },
         ],
         synonyms: ['precise', 'correct', 'exact'],
         antonyms: ['inaccurate', 'wrong', 'incorrect'],
-        etymology: '源自拉丁语 accuratus，意为"精心制作的"'
+        etymology: '源自拉丁语 accuratus，意为"精心制作的"',
       },
-      'acquire': {
+      acquire: {
         word: 'acquire',
         phonetic: '/əˈkwaɪər/',
         partOfSpeech: 'v.',
-        definitions: [
-          '获得，取得',
-          '学到，习得',
-          '收购'
-        ],
+        definitions: ['获得，取得', '学到，习得', '收购'],
         examples: [
-          { en: 'He acquired wealth.', zh: '他获得了财富。' },
-          { en: 'She acquired a new skill.', zh: '她学到了一项新技能。' },
-          { en: 'He acquired a title.', zh: '他获得了头衔。' }
+          {en: 'He acquired wealth.', zh: '他获得了财富。'},
+          {en: 'She acquired a new skill.', zh: '她学到了一项新技能。'},
+          {en: 'He acquired a title.', zh: '他获得了头衔。'},
         ],
         synonyms: ['obtain', 'gain', 'get'],
         antonyms: ['lose', 'give up', 'relinquish'],
-        etymology: '源自拉丁语 acquirere，意为"寻求获得"'
+        etymology: '源自拉丁语 acquirere，意为"寻求获得"',
       },
-      'action': {
+      action: {
         word: 'action',
         phonetic: '/ˈækʃən/',
         partOfSpeech: 'n.',
-        definitions: [
-          '行动，动作',
-          '行为，举措',
-          '诉讼'
-        ],
+        definitions: ['行动，动作', '行为，举措', '诉讼'],
         examples: [
-          { en: 'Actions speak louder than words.', zh: '行动胜于言语。' },
-          { en: 'Take action now.', zh: '现在就行动。' },
-          { en: 'a movie full of exciting action', zh: '充满刺激动作的电影' }
+          {en: 'Actions speak louder than words.', zh: '行动胜于言语。'},
+          {en: 'Take action now.', zh: '现在就行动。'},
+          {en: 'a movie full of exciting action', zh: '充满刺激动作的电影'},
         ],
         synonyms: ['deed', 'movement', 'activity'],
         antonyms: ['inaction', 'passivity', 'idleness'],
-        etymology: '源自拉丁语 actio，意为"做，行动"'
+        etymology: '源自拉丁语 actio，意为"做，行动"',
       },
-      'active': {
+      active: {
         word: 'active',
         phonetic: '/ˈæktɪv/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '积极的，活跃的',
-          '主动的，能动的',
-          '活跃的（化学）'
-        ],
+        definitions: ['积极的，活跃的', '主动的，能动的', '活跃的（化学）'],
         examples: [
-          { en: 'She is an active participant.', zh: '她是积极参与者。' },
-          { en: 'Take an active role.', zh: '发挥积极作用。' },
-          { en: 'certain active principles', zh: '某些活性成分' }
+          {en: 'She is an active participant.', zh: '她是积极参与者。'},
+          {en: 'Take an active role.', zh: '发挥积极作用。'},
+          {en: 'certain active principles', zh: '某些活性成分'},
         ],
         synonyms: ['energetic', 'dynamic', 'busy'],
         antonyms: ['passive', 'inactive', 'dormant'],
-        etymology: '源自拉丁语 activus，意为"行动的"'
+        etymology: '源自拉丁语 activus，意为"行动的"',
       },
-      'activity': {
+      activity: {
         word: 'activity',
         phonetic: '/ækˈtɪvɪti/',
         partOfSpeech: 'n.',
-        definitions: [
-          '活动，行动',
-          '活跃，活力',
-          '业务，工作'
-        ],
+        definitions: ['活动，行动', '活跃，活力', '业务，工作'],
         examples: [
-          { en: 'Physical activity is good for health.', zh: '体育活动有益健康。' },
-          { en: 'There was little activity in the office.', zh: '办公室里没什么活动。' },
-          { en: 'Pit row was abuzz with activity.', zh: '维修站一片繁忙。' }
+          {
+            en: 'Physical activity is good for health.',
+            zh: '体育活动有益健康。',
+          },
+          {
+            en: 'There was little activity in the office.',
+            zh: '办公室里没什么活动。',
+          },
+          {en: 'Pit row was abuzz with activity.', zh: '维修站一片繁忙。'},
         ],
         synonyms: ['action', 'movement', 'operation'],
         antonyms: ['inactivity', 'idleness', 'stagnation'],
-        etymology: '源自拉丁语 activitas，意为"活动状态"'
+        etymology: '源自拉丁语 activitas，意为"活动状态"',
       },
-      'adapt': {
+      adapt: {
         word: 'adapt',
         phonetic: '/əˈdæpt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '适应',
-          '改编，改写'
-        ],
+        definitions: ['适应', '改编，改写'],
         examples: [
-          { en: 'She adapted to the new environment.', zh: '她适应了新环境。' },
-          { en: 'The book was adapted for film.', zh: '这本书被改编成电影。' },
-          { en: 'to adapt a story for the stage', zh: '将故事改编为舞台剧' }
+          {en: 'She adapted to the new environment.', zh: '她适应了新环境。'},
+          {en: 'The book was adapted for film.', zh: '这本书被改编成电影。'},
+          {en: 'to adapt a story for the stage', zh: '将故事改编为舞台剧'},
         ],
         synonyms: ['adjust', 'modify', 'accommodate'],
         antonyms: ['resist', 'refuse', 'reject'],
-        etymology: '源自拉丁语 adaptare，意为"使适应"'
+        etymology: '源自拉丁语 adaptare，意为"使适应"',
       },
-      'adjust': {
+      adjust: {
         word: 'adjust',
         phonetic: '/əˈdʒʌst/',
         partOfSpeech: 'v.',
-        definitions: [
-          '调整，调节',
-          '适应',
-          '校正'
-        ],
+        definitions: ['调整，调节', '适应', '校正'],
         examples: [
-          { en: 'Adjust the volume.', zh: '调整音量。' },
-          { en: 'He adjusted to the new job.', zh: '他适应了新工作。' },
-          { en: 'Morimoto\'s recipes are adjusted to suit the palate.', zh: '森本的食谱经过调整以适应口味。' }
+          {en: 'Adjust the volume.', zh: '调整音量。'},
+          {en: 'He adjusted to the new job.', zh: '他适应了新工作。'},
+          {
+            en: "Morimoto's recipes are adjusted to suit the palate.",
+            zh: '森本的食谱经过调整以适应口味。',
+          },
         ],
         synonyms: ['tune', 'regulate', 'adapt'],
         antonyms: ['disarrange', 'misalign', 'disrupt'],
-        etymology: '源自拉丁语 adjuxtare，意为"使靠近"'
+        etymology: '源自拉丁语 adjuxtare，意为"使靠近"',
       },
-      'administrate': {
+      administrate: {
         word: 'administrate',
         phonetic: '/ədˈmɪnɪstreɪt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '管理，治理',
-          '执行，实施'
-        ],
+        definitions: ['管理，治理', '执行，实施'],
         examples: [
-          { en: 'He administrates the company.', zh: '他管理这家公司。' },
-          { en: 'Successive US administrations have had similar policies.', zh: '历届美国政府都有类似的政策。' }
+          {en: 'He administrates the company.', zh: '他管理这家公司。'},
+          {
+            en: 'Successive US administrations have had similar policies.',
+            zh: '历届美国政府都有类似的政策。',
+          },
         ],
         synonyms: ['manage', 'govern', 'direct'],
         antonyms: ['mismanage', 'neglect', 'abandon'],
-        etymology: '源自拉丁语 administrare，意为"管理"'
+        etymology: '源自拉丁语 administrare，意为"管理"',
       },
-      'admit': {
+      admit: {
         word: 'admit',
         phonetic: '/ədˈmɪt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '承认',
-          '准许进入',
-          '接纳'
-        ],
+        definitions: ['承认', '准许进入', '接纳'],
         examples: [
-          { en: 'He admitted his mistake.', zh: '他承认了错误。' },
-          { en: 'The ticket admits one person.', zh: '此票准许一人入场。' },
-          { en: 'I request admission for two adults.', zh: '我请求两名成人入场。' }
+          {en: 'He admitted his mistake.', zh: '他承认了错误。'},
+          {en: 'The ticket admits one person.', zh: '此票准许一人入场。'},
+          {
+            en: 'I request admission for two adults.',
+            zh: '我请求两名成人入场。',
+          },
         ],
         synonyms: ['acknowledge', 'confess', 'allow in'],
         antonyms: ['deny', 'reject', 'exclude'],
-        etymology: '源自拉丁语 admittere，意为"允许进入"'
+        etymology: '源自拉丁语 admittere，意为"允许进入"',
       },
-      'adopt': {
+      adopt: {
         word: 'adopt',
         phonetic: '/əˈdɒpt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '收养',
-          '采用，采纳',
-          '正式通过'
-        ],
+        definitions: ['收养', '采用，采纳', '正式通过'],
         examples: [
-          { en: 'They adopted a child.', zh: '他们收养了一个孩子。' },
-          { en: 'The committee adopted the proposal.', zh: '委员会采纳了这项提议。' },
-          { en: 'He adopted a new look.', zh: '他采用了新造型。' }
+          {en: 'They adopted a child.', zh: '他们收养了一个孩子。'},
+          {
+            en: 'The committee adopted the proposal.',
+            zh: '委员会采纳了这项提议。',
+          },
+          {en: 'He adopted a new look.', zh: '他采用了新造型。'},
         ],
         synonyms: ['take up', 'embrace', 'approve'],
         antonyms: ['reject', 'abandon', 'disown'],
-        etymology: '源自拉丁语 adoptare，意为"选择，采纳"'
+        etymology: '源自拉丁语 adoptare，意为"选择，采纳"',
       },
-      'advance': {
+      advance: {
         word: 'advance',
         phonetic: '/ədˈvɑːns/',
         partOfSpeech: 'v.',
-        definitions: [
-          '前进，推进',
-          '提前',
-          '提出（建议等）'
-        ],
+        definitions: ['前进，推进', '提前', '提出（建议等）'],
         examples: [
-          { en: 'The army advanced.', zh: '军队前进。' },
-          { en: 'Can you advance the deadline?', zh: '你能提前截止日期吗？' },
-          { en: 'an advance on the prime cost of goods', zh: '货物原价的预付款' }
+          {en: 'The army advanced.', zh: '军队前进。'},
+          {en: 'Can you advance the deadline?', zh: '你能提前截止日期吗？'},
+          {en: 'an advance on the prime cost of goods', zh: '货物原价的预付款'},
         ],
         synonyms: ['progress', 'proceed', 'forward'],
         antonyms: ['retreat', 'delay', 'postpone'],
-        etymology: '源自拉丁语 abante，意为"向前"'
+        etymology: '源自拉丁语 abante，意为"向前"',
       },
-      'adventure': {
+      adventure: {
         word: 'adventure',
         phonetic: '/ədˈventʃər/',
         partOfSpeech: 'n.',
-        definitions: [
-          '冒险，冒险经历',
-          '奇遇'
-        ],
+        definitions: ['冒险，冒险经历', '奇遇'],
         examples: [
-          { en: 'Life is an adventure.', zh: '人生是一场冒险。' },
-          { en: 'He went on an adventure.', zh: '他去冒险了。' },
-          { en: 'A life full of adventures.', zh: '充满冒险的一生。' }
+          {en: 'Life is an adventure.', zh: '人生是一场冒险。'},
+          {en: 'He went on an adventure.', zh: '他去冒险了。'},
+          {en: 'A life full of adventures.', zh: '充满冒险的一生。'},
         ],
         synonyms: ['expedition', 'venture', 'quest'],
         antonyms: ['safety', 'routine', 'security'],
-        etymology: '源自拉丁语 adventurus，意为"即将到来的"'
+        etymology: '源自拉丁语 adventurus，意为"即将到来的"',
       },
-      'advertise': {
+      advertise: {
         word: 'advertise',
         phonetic: '/ˈædvətaɪz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '做广告，宣传',
-          '公布，告知'
-        ],
+        definitions: ['做广告，宣传', '公布，告知'],
         examples: [
-          { en: 'They advertise on TV.', zh: '他们在电视上做广告。' },
-          { en: 'Jobs are advertised in the newspaper.', zh: '招聘信息刊登在报纸上。' },
-          { en: 'For personal needs, advertise on the internet.', zh: '个人需求可在网上刊登广告。' }
+          {en: 'They advertise on TV.', zh: '他们在电视上做广告。'},
+          {
+            en: 'Jobs are advertised in the newspaper.',
+            zh: '招聘信息刊登在报纸上。',
+          },
+          {
+            en: 'For personal needs, advertise on the internet.',
+            zh: '个人需求可在网上刊登广告。',
+          },
         ],
         synonyms: ['promote', 'publicize', 'market'],
         antonyms: ['conceal', 'hide', 'withhold'],
-        etymology: '源自拉丁语 advertere，意为"转向，注意"'
+        etymology: '源自拉丁语 advertere，意为"转向，注意"',
       },
-      'advise': {
+      advise: {
         word: 'advise',
         phonetic: '/ədˈvaɪz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '建议，劝告',
-          '通知，告知'
-        ],
+        definitions: ['建议，劝告', '通知，告知'],
         examples: [
-          { en: 'I advise you to wait.', zh: '我建议你等待。' },
-          { en: 'Please advise us of any changes.', zh: '如有变更请通知我们。' },
-          { en: 'The dentist advised me to brush three times a day.', zh: '牙医建议我每天刷牙三次。' }
+          {en: 'I advise you to wait.', zh: '我建议你等待。'},
+          {en: 'Please advise us of any changes.', zh: '如有变更请通知我们。'},
+          {
+            en: 'The dentist advised me to brush three times a day.',
+            zh: '牙医建议我每天刷牙三次。',
+          },
         ],
         synonyms: ['counsel', 'recommend', 'inform'],
         antonyms: ['mislead', 'discourage', 'disadvise'],
-        etymology: '源自拉丁语 advisare，意为"考虑，深思"'
+        etymology: '源自拉丁语 advisare，意为"考虑，深思"',
       },
-      'affection': {
+      affection: {
         word: 'affection',
         phonetic: '/əˈfekʃən/',
         partOfSpeech: 'n.',
-        definitions: [
-          '感情，爱意',
-          '喜爱，钟爱'
-        ],
+        definitions: ['感情，爱意', '喜爱，钟爱'],
         examples: [
-          { en: 'She has great affection for her family.', zh: '她非常爱她的家人。' },
-          { en: 'He shows affection for animals.', zh: '他很喜欢动物。' },
-          { en: 'I have a lot of affection for my little sister.', zh: '我很疼爱我的小妹妹。' }
+          {
+            en: 'She has great affection for her family.',
+            zh: '她非常爱她的家人。',
+          },
+          {en: 'He shows affection for animals.', zh: '他很喜欢动物。'},
+          {
+            en: 'I have a lot of affection for my little sister.',
+            zh: '我很疼爱我的小妹妹。',
+          },
         ],
         synonyms: ['love', 'fondness', 'warmth'],
         antonyms: ['hatred', 'dislike', 'animosity'],
-        etymology: '源自拉丁语 affectio，意为"倾向，情感"'
+        etymology: '源自拉丁语 affectio，意为"倾向，情感"',
       },
-      'affluent': {
+      affluent: {
         word: 'affluent',
         phonetic: '/ˈæfluənt/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '富裕的，富足的',
-          '丰富的，充足的'
-        ],
+        definitions: ['富裕的，富足的', '丰富的，充足的'],
         examples: [
-          { en: 'an affluent neighborhood', zh: '富裕的社区' },
-          { en: 'an affluent supply of water', zh: '充足的水源' },
-          { en: 'They were affluent, but aspired to true wealth.', zh: '他们很富裕，但渴望真正的财富。' }
+          {en: 'an affluent neighborhood', zh: '富裕的社区'},
+          {en: 'an affluent supply of water', zh: '充足的水源'},
+          {
+            en: 'They were affluent, but aspired to true wealth.',
+            zh: '他们很富裕，但渴望真正的财富。',
+          },
         ],
         synonyms: ['wealthy', 'rich', 'prosperous'],
         antonyms: ['poor', 'impoverished', 'destitute'],
-        etymology: '源自拉丁语 affluens，意为"流动的，丰富的"'
+        etymology: '源自拉丁语 affluens，意为"流动的，丰富的"',
       },
-      'aggressive': {
+      aggressive: {
         word: 'aggressive',
         phonetic: '/əˈɡresɪv/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '侵略性的，好斗的',
-          '积极进取的',
-          '有攻击性的'
-        ],
+        definitions: ['侵略性的，好斗的', '积极进取的', '有攻击性的'],
         examples: [
-          { en: 'an aggressive dog', zh: '一只攻击性的狗' },
-          { en: 'an aggressive marketing campaign', zh: '积极的营销活动' },
-          { en: 'an aggressive policy, war, person, nation', zh: '激进的政策、战争、人、国家' }
+          {en: 'an aggressive dog', zh: '一只攻击性的狗'},
+          {en: 'an aggressive marketing campaign', zh: '积极的营销活动'},
+          {
+            en: 'an aggressive policy, war, person, nation',
+            zh: '激进的政策、战争、人、国家',
+          },
         ],
         synonyms: ['assertive', 'bold', 'hostile'],
         antonyms: ['passive', 'peaceful', 'timid'],
-        etymology: '源自拉丁语 aggressivus，意为"攻击的"'
+        etymology: '源自拉丁语 aggressivus，意为"攻击的"',
       },
-      'aim': {
+      aim: {
         word: 'aim',
         phonetic: '/eɪm/',
         partOfSpeech: 'n.',
-        definitions: [
-          '目标，目的',
-          '瞄准'
-        ],
+        definitions: ['目标，目的', '瞄准'],
         examples: [
-          { en: 'My aim is to succeed.', zh: '我的目标是成功。' },
-          { en: 'Take careful aim.', zh: '仔细瞄准。' },
-          { en: 'Take time with the aim of your gun.', zh: '花时间瞄准你的枪。' }
+          {en: 'My aim is to succeed.', zh: '我的目标是成功。'},
+          {en: 'Take careful aim.', zh: '仔细瞄准。'},
+          {en: 'Take time with the aim of your gun.', zh: '花时间瞄准你的枪。'},
         ],
         synonyms: ['goal', 'objective', 'target'],
         antonyms: ['aimlessness', 'randomness', 'miss'],
-        etymology: '源自拉丁语 aemulus，意为"竞争者"'
+        etymology: '源自拉丁语 aemulus，意为"竞争者"',
       },
-      'alien': {
+      alien: {
         word: 'alien',
         phonetic: '/ˈeɪliən/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '外国的，异域的',
-          '陌生的，格格不入的',
-          '外星的'
-        ],
+        definitions: ['外国的，异域的', '陌生的，格格不入的', '外星的'],
         examples: [
-          { en: 'an alien culture', zh: '异域文化' },
-          { en: 'He felt alien in the new city.', zh: '他在新城市里感到格格不入。' },
-          { en: 'principles alien to our religion', zh: '与我们宗教格格不入的原则' }
+          {en: 'an alien culture', zh: '异域文化'},
+          {
+            en: 'He felt alien in the new city.',
+            zh: '他在新城市里感到格格不入。',
+          },
+          {
+            en: 'principles alien to our religion',
+            zh: '与我们宗教格格不入的原则',
+          },
         ],
         synonyms: ['foreign', 'extraterrestrial', 'strange'],
         antonyms: ['native', 'familiar', 'domestic'],
-        etymology: '源自拉丁语 alienus，意为"属于他人的"'
+        etymology: '源自拉丁语 alienus，意为"属于他人的"',
       },
-      'allow': {
+      allow: {
         word: 'allow',
         phonetic: '/əˈlaʊ/',
         partOfSpeech: 'v.',
-        definitions: [
-          '允许，准许',
-          '给予，容许',
-          '考虑到'
-        ],
+        definitions: ['允许，准许', '给予，容许', '考虑到'],
         examples: [
-          { en: 'Allow me to help.', zh: '让我帮忙。' },
-          { en: 'The budget allows for expenses.', zh: '预算考虑了开支。' },
-          { en: 'her meagre allowance of food or drink', zh: '她微薄的食物或饮料配给' }
+          {en: 'Allow me to help.', zh: '让我帮忙。'},
+          {en: 'The budget allows for expenses.', zh: '预算考虑了开支。'},
+          {
+            en: 'her meagre allowance of food or drink',
+            zh: '她微薄的食物或饮料配给',
+          },
         ],
         synonyms: ['permit', 'grant', 'enable'],
         antonyms: ['forbid', 'prohibit', 'deny'],
-        etymology: '源自古法语 alouer，意为"分配，允许"'
+        etymology: '源自古法语 alouer，意为"分配，允许"',
       },
-      'allot': {
+      allot: {
         word: 'allot',
         phonetic: '/əˈlɒt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '分配，分派',
-          '拨给'
-        ],
+        definitions: ['分配，分派', '拨给'],
         examples: [
-          { en: 'They allotted seats to everyone.', zh: '他们给每个人分配了座位。' },
-          { en: 'Funds were allotted for the project.', zh: '为该项目拨了款。' },
-          { en: 'The bulk of education funds are allocated to school districts.', zh: '教育资金的大部分分配给学区。' }
+          {
+            en: 'They allotted seats to everyone.',
+            zh: '他们给每个人分配了座位。',
+          },
+          {en: 'Funds were allotted for the project.', zh: '为该项目拨了款。'},
+          {
+            en: 'The bulk of education funds are allocated to school districts.',
+            zh: '教育资金的大部分分配给学区。',
+          },
         ],
         synonyms: ['allocate', 'assign', 'distribute'],
         antonyms: ['withhold', 'hoard', 'concentrate'],
-        etymology: '源自中古英语 aloten，意为"分配"'
+        etymology: '源自中古英语 aloten，意为"分配"',
       },
-      'alone': {
+      alone: {
         word: 'alone',
         phonetic: '/əˈləʊn/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '单独的，独自的',
-          '仅仅，只'
-        ],
+        definitions: ['单独的，独自的', '仅仅，只'],
         examples: [
-          { en: 'She lives alone.', zh: '她独自生活。' },
-          { en: 'He alone knows the truth.', zh: '只有他知道真相。' },
-          { en: 'I can\'t ask for help because I am alone.', zh: '我不能寻求帮助，因为我独自一人。' }
+          {en: 'She lives alone.', zh: '她独自生活。'},
+          {en: 'He alone knows the truth.', zh: '只有他知道真相。'},
+          {
+            en: "I can't ask for help because I am alone.",
+            zh: '我不能寻求帮助，因为我独自一人。',
+          },
         ],
         synonyms: ['solitary', 'lonely', 'only'],
         antonyms: ['accompanied', 'together', 'with others'],
-        etymology: '源自古英语 allān，意为"全部，完全"'
+        etymology: '源自古英语 allān，意为"全部，完全"',
       },
-      'amaze': {
+      amaze: {
         word: 'amaze',
         phonetic: '/əˈmeɪz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '使惊奇，使惊愕'
-        ],
+        definitions: ['使惊奇，使惊愕'],
         examples: [
-          { en: 'The view amazed me.', zh: '景色让我惊叹。' },
-          { en: 'It amazes me how fast he learns.', zh: '他学得这么快让我惊讶。' },
-          { en: 'He was amazed when he found that the girl was a robot.', zh: '当他发现那个女孩是机器人时，他很惊讶。' }
+          {en: 'The view amazed me.', zh: '景色让我惊叹。'},
+          {
+            en: 'It amazes me how fast he learns.',
+            zh: '他学得这么快让我惊讶。',
+          },
+          {
+            en: 'He was amazed when he found that the girl was a robot.',
+            zh: '当他发现那个女孩是机器人时，他很惊讶。',
+          },
         ],
         synonyms: ['astonish', 'surprise', 'astound'],
         antonyms: ['bore', 'disappoint', 'underwhelm'],
-        etymology: '源自中古英语 amasen，意为"使困惑"'
+        etymology: '源自中古英语 amasen，意为"使困惑"',
       },
-      'ample': {
+      ample: {
         word: 'ample',
         phonetic: '/ˈæmpl/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '充足的，丰富的',
-          '宽敞的，充裕的'
-        ],
+        definitions: ['充足的，丰富的', '宽敞的，充裕的'],
         examples: [
-          { en: 'There is ample time.', zh: '时间充裕。' },
-          { en: 'ample evidence', zh: '充分的证据' },
-          { en: 'an ample house', zh: '宽敞的房子' }
+          {en: 'There is ample time.', zh: '时间充裕。'},
+          {en: 'ample evidence', zh: '充分的证据'},
+          {en: 'an ample house', zh: '宽敞的房子'},
         ],
         synonyms: ['plentiful', 'sufficient', 'spacious'],
         antonyms: ['insufficient', 'scant', 'meager'],
-        etymology: '源自拉丁语 amplus，意为"大的，宽的"'
+        etymology: '源自拉丁语 amplus，意为"大的，宽的"',
       },
-      'anxious': {
+      anxious: {
         word: 'anxious',
         phonetic: '/ˈæŋkʃəs/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '焦虑的，担心的',
-          '急切的，渴望的'
-        ],
+        definitions: ['焦虑的，担心的', '急切的，渴望的'],
         examples: [
-          { en: 'She felt anxious about the exam.', zh: '她对考试感到焦虑。' },
-          { en: 'He is anxious to start.', zh: '他急切地想开始。' },
-          { en: 'I could tell she was anxious as she was biting her nails.', zh: '从她咬指甲的样子可以看出她很焦虑。' }
+          {en: 'She felt anxious about the exam.', zh: '她对考试感到焦虑。'},
+          {en: 'He is anxious to start.', zh: '他急切地想开始。'},
+          {
+            en: 'I could tell she was anxious as she was biting her nails.',
+            zh: '从她咬指甲的样子可以看出她很焦虑。',
+          },
         ],
         synonyms: ['worried', 'nervous', 'eager'],
         antonyms: ['calm', 'relaxed', 'unconcerned'],
-        etymology: '源自拉丁语 anxius，意为"担心的"'
+        etymology: '源自拉丁语 anxius，意为"担心的"',
       },
-      'apologize': {
+      apologize: {
         word: 'apologize',
         phonetic: '/əˈpɒlədʒaɪz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '道歉，认错'
-        ],
+        definitions: ['道歉，认错'],
         examples: [
-          { en: 'He apologized for his mistake.', zh: '他为自己的错误道歉。' },
-          { en: 'You should apologize to her.', zh: '你应该向她道歉。' },
-          { en: 'The CEO made a public apology for the scandal.', zh: '首席执行官就丑闻公开道歉。' }
+          {en: 'He apologized for his mistake.', zh: '他为自己的错误道歉。'},
+          {en: 'You should apologize to her.', zh: '你应该向她道歉。'},
+          {
+            en: 'The CEO made a public apology for the scandal.',
+            zh: '首席执行官就丑闻公开道歉。',
+          },
         ],
         synonyms: ['say sorry', 'express regret', 'make amends'],
         antonyms: ['accuse', 'blame', 'defend'],
-        etymology: '源自希腊语 apologia，意为"辩护"'
+        etymology: '源自希腊语 apologia，意为"辩护"',
       },
-      'appreciate': {
+      appreciate: {
         word: 'appreciate',
         phonetic: '/əˈpriːʃieɪt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '欣赏，赏识',
-          '感激',
-          '增值'
-        ],
+        definitions: ['欣赏，赏识', '感激', '增值'],
         examples: [
-          { en: 'I appreciate good music.', zh: '我欣赏好音乐。' },
-          { en: 'I appreciate your help.', zh: '感谢你的帮助。' },
-          { en: 'The house appreciated in value.', zh: '房子增值了。' }
+          {en: 'I appreciate good music.', zh: '我欣赏好音乐。'},
+          {en: 'I appreciate your help.', zh: '感谢你的帮助。'},
+          {en: 'The house appreciated in value.', zh: '房子增值了。'},
         ],
         synonyms: ['value', 'treasure', 'thank'],
         antonyms: ['depreciate', 'disregard', 'unappreciative'],
-        etymology: '源自拉丁语 appretiare，意为"评估，重视"'
+        etymology: '源自拉丁语 appretiare，意为"评估，重视"',
       },
-      'approach': {
+      approach: {
         word: 'approach',
         phonetic: '/əˈprəʊtʃ/',
         partOfSpeech: 'v.',
-        definitions: [
-          '接近，靠近',
-          '处理，着手',
-          '探讨，交流'
-        ],
+        definitions: ['接近，靠近', '处理，着手', '探讨，交流'],
         examples: [
-          { en: 'Winter is approaching.', zh: '冬天即将来临。' },
-          { en: 'We need a new approach.', zh: '我们需要新的方法。' },
-          { en: 'There are several avenues by which we can approach this problem.', zh: '有几种途径可以解决这个问题。' }
+          {en: 'Winter is approaching.', zh: '冬天即将来临。'},
+          {en: 'We need a new approach.', zh: '我们需要新的方法。'},
+          {
+            en: 'There are several avenues by which we can approach this problem.',
+            zh: '有几种途径可以解决这个问题。',
+          },
         ],
         synonyms: ['near', 'come close', 'tackle'],
         antonyms: ['retreat', 'avoid', 'distance'],
-        etymology: '源自拉丁语 appropriare，意为"靠近"'
+        etymology: '源自拉丁语 appropriare，意为"靠近"',
       },
-      'approve': {
+      approve: {
         word: 'approve',
         phonetic: '/əˈpruːv/',
         partOfSpeech: 'v.',
-        definitions: [
-          '批准，认可',
-          '赞成，同意'
-        ],
+        definitions: ['批准，认可', '赞成，同意'],
         examples: [
-          { en: 'The committee approved the plan.', zh: '委员会批准了计划。' },
-          { en: 'I don\'t approve of his behavior.', zh: '我不赞成他的行为。' },
-          { en: 'These resolutions were adopted.', zh: '这些决议获得通过。' }
+          {en: 'The committee approved the plan.', zh: '委员会批准了计划。'},
+          {en: "I don't approve of his behavior.", zh: '我不赞成他的行为。'},
+          {en: 'These resolutions were adopted.', zh: '这些决议获得通过。'},
         ],
         synonyms: ['sanction', 'endorse', 'agree to'],
         antonyms: ['disapprove', 'reject', 'oppose'],
-        etymology: '源自拉丁语 approbare，意为"证明，批准"'
+        etymology: '源自拉丁语 approbare，意为"证明，批准"',
       },
-      'argue': {
+      argue: {
         word: 'argue',
         phonetic: '/ˈɑːɡjuː/',
         partOfSpeech: 'v.',
-        definitions: [
-          '争论，辩论',
-          '主张，论证'
-        ],
+        definitions: ['争论，辩论', '主张，论证'],
         examples: [
-          { en: 'They argued about politics.', zh: '他们争论政治。' },
-          { en: 'He argues that we should wait.', zh: '他主张我们应该等待。' },
-          { en: 'The agency alleged my credit history had problems.', zh: '该机构声称我的信用记录有问题。' }
+          {en: 'They argued about politics.', zh: '他们争论政治。'},
+          {en: 'He argues that we should wait.', zh: '他主张我们应该等待。'},
+          {
+            en: 'The agency alleged my credit history had problems.',
+            zh: '该机构声称我的信用记录有问题。',
+          },
         ],
         synonyms: ['debate', 'dispute', 'reason'],
         antonyms: ['agree', 'concur', 'acquiesce'],
-        etymology: '源自拉丁语 arguere，意为"证明，断言"'
+        etymology: '源自拉丁语 arguere，意为"证明，断言"',
       },
-      'arise': {
+      arise: {
         word: 'arise',
         phonetic: '/əˈraɪz/',
         partOfSpeech: 'v.',
-        definitions: [
-          '出现，产生',
-          '起身，起床'
-        ],
+        definitions: ['出现，产生', '起身，起床'],
         examples: [
-          { en: 'Problems arose during the project.', zh: '项目期间出现了问题。' },
-          { en: 'She arose early.', zh: '她早起了。' },
-          { en: 'A new opportunity arose.', zh: '出现了新的机会。' }
+          {
+            en: 'Problems arose during the project.',
+            zh: '项目期间出现了问题。',
+          },
+          {en: 'She arose early.', zh: '她早起了。'},
+          {en: 'A new opportunity arose.', zh: '出现了新的机会。'},
         ],
         synonyms: ['emerge', 'appear', 'come up'],
         antonyms: ['disappear', 'vanish', 'subside'],
-        etymology: '源自古英语 arisan，意为"上升，出现"'
+        etymology: '源自古英语 arisan，意为"上升，出现"',
       },
-      'arrive': {
+      arrive: {
         word: 'arrive',
         phonetic: '/əˈraɪv/',
         partOfSpeech: 'v.',
-        definitions: [
-          '到达，抵达',
-          '达成，得出'
-        ],
+        definitions: ['到达，抵达', '达成，得出'],
         examples: [
-          { en: 'We arrived at the station.', zh: '我们到达了车站。' },
-          { en: 'They arrived at an agreement.', zh: '他们达成了协议。' },
-          { en: 'She arrived late.', zh: '她迟到了。' }
+          {en: 'We arrived at the station.', zh: '我们到达了车站。'},
+          {en: 'They arrived at an agreement.', zh: '他们达成了协议。'},
+          {en: 'She arrived late.', zh: '她迟到了。'},
         ],
         synonyms: ['reach', 'get to', 'come'],
         antonyms: ['depart', 'leave', 'set out'],
-        etymology: '源自拉丁语 arrivare，意为"到达港口"'
+        etymology: '源自拉丁语 arrivare，意为"到达港口"',
       },
-      'artificial': {
+      artificial: {
         word: 'artificial',
         phonetic: '/ˌɑːtɪˈfɪʃl/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '人造的，人工的',
-          '虚假的，做作的'
-        ],
+        definitions: ['人造的，人工的', '虚假的，做作的'],
         examples: [
-          { en: 'artificial flowers', zh: '人造花' },
-          { en: 'an artificial smile', zh: '做作的微笑' },
-          { en: 'Many offices still need to automate.', zh: '许多办公室仍然需要自动化。' }
+          {en: 'artificial flowers', zh: '人造花'},
+          {en: 'an artificial smile', zh: '做作的微笑'},
+          {
+            en: 'Many offices still need to automate.',
+            zh: '许多办公室仍然需要自动化。',
+          },
         ],
         synonyms: ['man-made', 'synthetic', 'fake'],
         antonyms: ['natural', 'genuine', 'authentic'],
-        etymology: '源自拉丁语 artificialis，意为"人工的"'
+        etymology: '源自拉丁语 artificialis，意为"人工的"',
       },
-      'ask': {
+      ask: {
         word: 'ask',
         phonetic: '/ɑːsk/',
         partOfSpeech: 'v.',
-        definitions: [
-          '询问，问',
-          '请求，要求',
-          '邀请'
-        ],
+        definitions: ['询问，问', '请求，要求', '邀请'],
         examples: [
-          { en: 'Ask him the question.', zh: '问他这个问题。' },
-          { en: 'She asked for help.', zh: '她请求帮助。' },
-          { en: 'Can I borrow a sheet of paper?', zh: '我可以借一张纸吗？' }
+          {en: 'Ask him the question.', zh: '问他这个问题。'},
+          {en: 'She asked for help.', zh: '她请求帮助。'},
+          {en: 'Can I borrow a sheet of paper?', zh: '我可以借一张纸吗？'},
         ],
         synonyms: ['inquire', 'request', 'demand'],
         antonyms: ['answer', 'reply', 'respond'],
-        etymology: '源自古英语 ascian，意为"询问"'
+        etymology: '源自古英语 ascian，意为"询问"',
       },
-      'assess': {
+      assess: {
         word: 'assess',
         phonetic: '/əˈses/',
         partOfSpeech: 'v.',
-        definitions: [
-          '评估，评价',
-          '估算，评定'
-        ],
+        definitions: ['评估，评价', '估算，评定'],
         examples: [
-          { en: 'We need to assess the damage.', zh: '我们需要评估损失。' },
-          { en: 'The value was assessed at $100,000.', zh: '价值评估为10万美元。' },
-          { en: 'They assessed his performance.', zh: '他们评估了他的表现。' }
+          {en: 'We need to assess the damage.', zh: '我们需要评估损失。'},
+          {
+            en: 'The value was assessed at $100,000.',
+            zh: '价值评估为10万美元。',
+          },
+          {en: 'They assessed his performance.', zh: '他们评估了他的表现。'},
         ],
         synonyms: ['evaluate', 'appraise', 'judge'],
         antonyms: ['misjudge', 'underestimate', 'overestimate'],
-        etymology: '源自拉丁语 assessare，意为"评价"'
+        etymology: '源自拉丁语 assessare，意为"评价"',
       },
-      'assign': {
+      assign: {
         word: 'assign',
         phonetic: '/əˈsaɪn/',
         partOfSpeech: 'v.',
-        definitions: [
-          '分配，指派',
-          '指定，分配给'
-        ],
+        definitions: ['分配，指派', '指定，分配给'],
         examples: [
-          { en: 'The teacher assigned homework.', zh: '老师布置了作业。' },
-          { en: 'They assigned him to the project.', zh: '他们派他去做这个项目。' },
-          { en: 'A task was assigned to each member.', zh: '给每个成员分配了一项任务。' }
+          {en: 'The teacher assigned homework.', zh: '老师布置了作业。'},
+          {
+            en: 'They assigned him to the project.',
+            zh: '他们派他去做这个项目。',
+          },
+          {
+            en: 'A task was assigned to each member.',
+            zh: '给每个成员分配了一项任务。',
+          },
         ],
         synonyms: ['allocate', 'delegate', 'appoint'],
         antonyms: ['withhold', 'retain', 'keep'],
-        etymology: '源自拉丁语 assignare，意为"分配"'
+        etymology: '源自拉丁语 assignare，意为"分配"',
       },
-      'assist': {
+      assist: {
         word: 'assist',
         phonetic: '/əˈsɪst/',
         partOfSpeech: 'v.',
-        definitions: [
-          '帮助，协助'
-        ],
+        definitions: ['帮助，协助'],
         examples: [
-          { en: 'Can you assist me?', zh: '你能帮我吗？' },
-          { en: 'She assisted with the preparations.', zh: '她协助准备工作。' },
-          { en: 'Paramedics assisted the injured.', zh: '医护人员帮助伤者。' }
+          {en: 'Can you assist me?', zh: '你能帮我吗？'},
+          {en: 'She assisted with the preparations.', zh: '她协助准备工作。'},
+          {en: 'Paramedics assisted the injured.', zh: '医护人员帮助伤者。'},
         ],
         synonyms: ['help', 'aid', 'support'],
         antonyms: ['hinder', 'obstruct', 'oppose'],
-        etymology: '源自拉丁语 assistere，意为"站立在旁边"'
+        etymology: '源自拉丁语 assistere，意为"站立在旁边"',
       },
-      'assume': {
+      assume: {
         word: 'assume',
         phonetic: '/əˈsjuːm/',
         partOfSpeech: 'v.',
-        definitions: [
-          '假定，假设',
-          '承担，担任',
-          '呈现，采取'
-        ],
+        definitions: ['假定，假设', '承担，担任', '呈现，采取'],
         examples: [
-          { en: 'Let\'s assume he is right.', zh: '假设他是对的。' },
-          { en: 'She assumed responsibility.', zh: '她承担了责任。' },
-          { en: 'He assumed a new identity.', zh: '他采用了新身份。' }
+          {en: "Let's assume he is right.", zh: '假设他是对的。'},
+          {en: 'She assumed responsibility.', zh: '她承担了责任。'},
+          {en: 'He assumed a new identity.', zh: '他采用了新身份。'},
         ],
         synonyms: ['suppose', 'presume', 'take on'],
         antonyms: ['disprove', 'reject', 'abandon'],
-        etymology: '源自拉丁语 assumere，意为"接管，接受"'
+        etymology: '源自拉丁语 assumere，意为"接管，接受"',
       },
-      'attach': {
+      attach: {
         word: 'attach',
         phonetic: '/əˈtætʃ/',
         partOfSpeech: 'v.',
-        definitions: [
-          '附上，附加',
-          '连接，固定',
-          '依恋，喜爱'
-        ],
+        definitions: ['附上，附加', '连接，固定', '依恋，喜爱'],
         examples: [
-          { en: 'Please attach the file.', zh: '请附上文件。' },
-          { en: 'Attach the rope to the tree.', zh: '把绳子系在树上。' },
-          { en: 'She is attached to her hometown.', zh: '她很依恋家乡。' }
+          {en: 'Please attach the file.', zh: '请附上文件。'},
+          {en: 'Attach the rope to the tree.', zh: '把绳子系在树上。'},
+          {en: 'She is attached to her hometown.', zh: '她很依恋家乡。'},
         ],
         synonyms: ['fasten', 'join', 'affix'],
         antonyms: ['detach', 'separate', 'remove'],
-        etymology: '源自拉丁语 attaccare，意为"固定"'
+        etymology: '源自拉丁语 attaccare，意为"固定"',
       },
-      'attend': {
+      attend: {
         word: 'attend',
         phonetic: '/əˈtend/',
         partOfSpeech: 'v.',
-        definitions: [
-          '参加，出席',
-          '照料，护理',
-          '注意，专心'
-        ],
+        definitions: ['参加，出席', '照料，护理', '注意，专心'],
         examples: [
-          { en: 'I will attend the meeting.', zh: '我会参加会议。' },
-          { en: 'She attended to the patient.', zh: '她照料病人。' },
-          { en: 'Please attend to what I say.', zh: '请注意我说的话。' }
+          {en: 'I will attend the meeting.', zh: '我会参加会议。'},
+          {en: 'She attended to the patient.', zh: '她照料病人。'},
+          {en: 'Please attend to what I say.', zh: '请注意我说的话。'},
         ],
         synonyms: ['participate', 'be present', 'care for'],
         antonyms: ['absent', 'ignore', 'neglect'],
-        etymology: '源自拉丁语 attendere，意为"伸展，注意"'
+        etymology: '源自拉丁语 attendere，意为"伸展，注意"',
       },
-      'attract': {
+      attract: {
         word: 'attract',
         phonetic: '/əˈtrækt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '吸引',
-          '引起（注意、兴趣等）'
-        ],
+        definitions: ['吸引', '引起（注意、兴趣等）'],
         examples: [
-          { en: 'The magnet attracts metal.', zh: '磁铁吸引金属。' },
-          { en: 'The event attracted many people.', zh: '活动吸引了很多人。' },
-          { en: 'He was wholly abstracted by other objects.', zh: '他完全被其他事物吸引。' }
+          {en: 'The magnet attracts metal.', zh: '磁铁吸引金属。'},
+          {en: 'The event attracted many people.', zh: '活动吸引了很多人。'},
+          {
+            en: 'He was wholly abstracted by other objects.',
+            zh: '他完全被其他事物吸引。',
+          },
         ],
         synonyms: ['draw', 'pull', 'charm'],
         antonyms: ['repel', 'deter', 'discourage'],
-        etymology: '源自拉丁语 attrahere，意为"拉向自己"'
+        etymology: '源自拉丁语 attrahere，意为"拉向自己"',
       },
-      'authority': {
+      authority: {
         word: 'authority',
         phonetic: '/ɔːˈθɒrəti/',
         partOfSpeech: 'n.',
-        definitions: [
-          '权威，权力',
-          '权威人士，专家',
-          '官方，当局'
-        ],
+        definitions: ['权威，权力', '权威人士，专家', '官方，当局'],
         examples: [
-          { en: 'He has the authority to decide.', zh: '他有决定权。' },
-          { en: 'She is an authority on the subject.', zh: '她是该领域的权威。' },
-          { en: 'The authorities are investigating.', zh: '当局正在调查。' }
+          {en: 'He has the authority to decide.', zh: '他有决定权。'},
+          {en: 'She is an authority on the subject.', zh: '她是该领域的权威。'},
+          {en: 'The authorities are investigating.', zh: '当局正在调查。'},
         ],
         synonyms: ['power', 'control', 'expert'],
         antonyms: ['powerlessness', 'subordination', 'inexperience'],
-        etymology: '源自拉丁语 auctoritas，意为"创造者，权威"'
+        etymology: '源自拉丁语 auctoritas，意为"创造者，权威"',
       },
-      'automatic': {
+      automatic: {
         word: 'automatic',
         phonetic: '/ˌɔːtəˈmætɪk/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '自动的',
-          '无意识的，本能的'
-        ],
+        definitions: ['自动的', '无意识的，本能的'],
         examples: [
-          { en: 'automatic door', zh: '自动门' },
-          { en: 'an automatic response', zh: '本能反应' },
-          { en: 'The automatic clothes washer was a great labor-saving device.', zh: '自动洗衣机是一项伟大的省力装置。' }
+          {en: 'automatic door', zh: '自动门'},
+          {en: 'an automatic response', zh: '本能反应'},
+          {
+            en: 'The automatic clothes washer was a great labor-saving device.',
+            zh: '自动洗衣机是一项伟大的省力装置。',
+          },
         ],
         synonyms: ['self-operating', 'mechanical', 'instinctive'],
         antonyms: ['manual', 'autonomous', 'deliberate'],
-        etymology: '源自希腊语 automatos，意为"自己行动的"'
+        etymology: '源自希腊语 automatos，意为"自己行动的"',
       },
-      'available': {
+      available: {
         word: 'available',
         phonetic: '/əˈveɪləbl/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '可用的，可获得的',
-          '有空的，可联系的'
-        ],
+        definitions: ['可用的，可获得的', '有空的，可联系的'],
         examples: [
-          { en: 'Is the room available?', zh: '房间有空吗？' },
-          { en: 'The manager is available now.', zh: '经理现在有空。' },
-          { en: 'We have an available candidate.', zh: '我们有一个可用的候选人。' }
+          {en: 'Is the room available?', zh: '房间有空吗？'},
+          {en: 'The manager is available now.', zh: '经理现在有空。'},
+          {
+            en: 'We have an available candidate.',
+            zh: '我们有一个可用的候选人。',
+          },
         ],
         synonyms: ['accessible', 'obtainable', 'free'],
         antonyms: ['unavailable', 'occupied', 'taken'],
-        etymology: '源自拉丁语 availabilis，意为"有用的"'
+        etymology: '源自拉丁语 availabilis，意为"有用的"',
       },
-      'average': {
+      average: {
         word: 'average',
         phonetic: '/ˈævərɪdʒ/',
         partOfSpeech: 'n.',
-        definitions: [
-          '平均数，平均值',
-          '一般水平，平均水平'
-        ],
+        definitions: ['平均数，平均值', '一般水平，平均水平'],
         examples: [
-          { en: 'The average of 2, 4, and 6 is 4.', zh: '2、4、6的平均数是4。' },
-          { en: 'above average', zh: '高于平均水平' },
-          { en: 'The average of 10, 20 and 24 is 18.', zh: '10、20和24的平均值是18。' }
+          {en: 'The average of 2, 4, and 6 is 4.', zh: '2、4、6的平均数是4。'},
+          {en: 'above average', zh: '高于平均水平'},
+          {
+            en: 'The average of 10, 20 and 24 is 18.',
+            zh: '10、20和24的平均值是18。',
+          },
         ],
         synonyms: ['mean', 'median', 'norm'],
         antonyms: ['extreme', 'exceptional', 'outlier'],
-        etymology: '源自阿拉伯语 awariya，意为"受损的货物"'
+        etymology: '源自阿拉伯语 awariya，意为"受损的货物"',
       },
-      'aware': {
+      aware: {
         word: 'aware',
         phonetic: '/əˈweə/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '意识到的，知道的'
-        ],
+        definitions: ['意识到的，知道的'],
         examples: [
-          { en: 'Are you aware of the danger?', zh: '你意识到危险了吗？' },
-          { en: 'He became aware of the problem.', zh: '他意识到了这个问题。' },
-          { en: 'Stay aware! Don\'t let your guard down.', zh: '保持警觉！不要放松警惕。' }
+          {en: 'Are you aware of the danger?', zh: '你意识到危险了吗？'},
+          {en: 'He became aware of the problem.', zh: '他意识到了这个问题。'},
+          {
+            en: "Stay aware! Don't let your guard down.",
+            zh: '保持警觉！不要放松警惕。',
+          },
         ],
         synonyms: ['conscious', 'cognizant', 'alert'],
         antonyms: ['unaware', 'ignorant', 'unconscious'],
-        etymology: '源自中古英语 awaeren，意为"注意到"'
+        etymology: '源自中古英语 awaeren，意为"注意到"',
       },
-      'avoid': {
+      avoid: {
         word: 'avoid',
         phonetic: '/əˈvɔɪd/',
         partOfSpeech: 'v.',
-        definitions: [
-          '避免，躲避',
-          '避开，逃避'
-        ],
+        definitions: ['避免，躲避', '避开，逃避'],
         examples: [
-          { en: 'Avoid the rush hour.', zh: '避开高峰时间。' },
-          { en: 'He avoided my question.', zh: '他回避了我的问题。' },
-          { en: 'I try to avoid the company of gamblers.', zh: '我尽量避免和赌徒为伍。' }
+          {en: 'Avoid the rush hour.', zh: '避开高峰时间。'},
+          {en: 'He avoided my question.', zh: '他回避了我的问题。'},
+          {
+            en: 'I try to avoid the company of gamblers.',
+            zh: '我尽量避免和赌徒为伍。',
+          },
         ],
         synonyms: ['evade', 'escape', 'shun'],
         antonyms: ['confront', 'face', 'embrace'],
-        etymology: '源自拉丁语 evitare，意为"避开"'
+        etymology: '源自拉丁语 evitare，意为"避开"',
       },
-      'awful': {
+      awful: {
         word: 'awful',
         phonetic: '/ˈɔːfl/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '可怕的，糟糕的',
-          '非常的，极度的'
-        ],
+        definitions: ['可怕的，糟糕的', '非常的，极度的'],
         examples: [
-          { en: 'an awful accident', zh: '可怕的事故' },
-          { en: 'I feel awful.', zh: '我感觉糟透了。' },
-          { en: 'My socks smell awful.', zh: '我的袜子闻起来很臭。' }
+          {en: 'an awful accident', zh: '可怕的事故'},
+          {en: 'I feel awful.', zh: '我感觉糟透了。'},
+          {en: 'My socks smell awful.', zh: '我的袜子闻起来很臭。'},
         ],
         synonyms: ['terrible', 'dreadful', 'horrible'],
         antonyms: ['wonderful', 'excellent', 'pleasant'],
-        etymology: '源自 awe（敬畏）+ -ful，原意为"令人敬畏的"'
+        etymology: '源自 awe（敬畏）+ -ful，原意为"令人敬畏的"',
       },
-      'baby': {
+      baby: {
         word: 'baby',
         phonetic: '/ˈbeɪbi/',
         partOfSpeech: 'n.',
-        definitions: [
-          '婴儿，宝宝',
-          '孩子气的人',
-          '宝贝（昵称）'
-        ],
+        definitions: ['婴儿，宝宝', '孩子气的人', '宝贝（昵称）'],
         examples: [
-          { en: 'She had a baby.', zh: '她生了个宝宝。' },
-          { en: 'Don\'t be such a baby!', zh: '别这么孩子气！' },
-          { en: 'When is your baby due?', zh: '你的宝宝什么时候出生？' }
+          {en: 'She had a baby.', zh: '她生了个宝宝。'},
+          {en: "Don't be such a baby!", zh: '别这么孩子气！'},
+          {en: 'When is your baby due?', zh: '你的宝宝什么时候出生？'},
         ],
         synonyms: ['infant', 'toddler', 'child'],
         antonyms: ['adult', 'grown-up', 'mature'],
-        etymology: '源自中古英语 babi，可能源自婴儿语"ba, ba"'
+        etymology: '源自中古英语 babi，可能源自婴儿语"ba, ba"',
       },
-      'balance': {
+      balance: {
         word: 'balance',
         phonetic: '/ˈbæləns/',
         partOfSpeech: 'n.',
-        definitions: [
-          '平衡，均衡',
-          '余额',
-          '天平，秤'
-        ],
+        definitions: ['平衡，均衡', '余额', '天平，秤'],
         examples: [
-          { en: 'Keep your balance.', zh: '保持平衡。' },
-          { en: 'My bank balance is low.', zh: '我的银行余额很少。' },
-          { en: 'I just need to check my balance.', zh: '我只需要查一下余额。' }
+          {en: 'Keep your balance.', zh: '保持平衡。'},
+          {en: 'My bank balance is low.', zh: '我的银行余额很少。'},
+          {en: 'I just need to check my balance.', zh: '我只需要查一下余额。'},
         ],
         synonyms: ['equilibrium', 'stability', 'remainder'],
         antonyms: ['imbalance', 'instability', 'deficit'],
-        etymology: '源自拉丁语 bilanx，意为"两个盘子的"'
+        etymology: '源自拉丁语 bilanx，意为"两个盘子的"',
       },
-      'ban': {
+      ban: {
         word: 'ban',
         phonetic: '/bæn/',
         partOfSpeech: 'v.',
-        definitions: [
-          '禁止，取缔',
-          '开除，逐出'
-        ],
+        definitions: ['禁止，取缔', '开除，逐出'],
         examples: [
-          { en: 'Smoking is banned here.', zh: '这里禁止吸烟。' },
-          { en: 'He was banned from the club.', zh: '他被俱乐部开除了。' },
-          { en: 'Bare feet are banned in this establishment.', zh: '本场所禁止赤脚。' }
+          {en: 'Smoking is banned here.', zh: '这里禁止吸烟。'},
+          {en: 'He was banned from the club.', zh: '他被俱乐部开除了。'},
+          {
+            en: 'Bare feet are banned in this establishment.',
+            zh: '本场所禁止赤脚。',
+          },
         ],
         synonyms: ['prohibit', 'forbid', 'outlaw'],
         antonyms: ['allow', 'permit', 'authorize'],
-        etymology: '源自古法语 ban，意为"公告，禁令"'
+        etymology: '源自古法语 ban，意为"公告，禁令"',
       },
-      'bare': {
+      bare: {
         word: 'bare',
         phonetic: '/beə/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '赤裸的，裸露的',
-          '仅有的，基本的'
-        ],
+        definitions: ['赤裸的，裸露的', '仅有的，基本的'],
         examples: [
-          { en: 'bare feet', zh: '赤脚' },
-          { en: 'the bare essentials', zh: '基本必需品' },
-          { en: 'Bare feet are banned in this establishment.', zh: '本场所禁止赤脚。' }
+          {en: 'bare feet', zh: '赤脚'},
+          {en: 'the bare essentials', zh: '基本必需品'},
+          {
+            en: 'Bare feet are banned in this establishment.',
+            zh: '本场所禁止赤脚。',
+          },
         ],
         synonyms: ['naked', 'uncovered', 'minimal'],
         antonyms: ['clothed', 'covered', 'complete'],
-        etymology: '源自古英语 bær，意为"赤裸的"'
+        etymology: '源自古英语 bær，意为"赤裸的"',
       },
-      'base': {
+      base: {
         word: 'base',
         phonetic: '/beɪs/',
         partOfSpeech: 'n.',
-        definitions: [
-          '基础，根基',
-          '底部，底座',
-          '基地'
-        ],
+        definitions: ['基础，根基', '底部，底座', '基地'],
         examples: [
-          { en: 'The base of the mountain.', zh: '山的底部。' },
-          { en: 'a military base', zh: '军事基地' },
-          { en: 'The logarithm to base 2 of 8 is 3.', zh: '以2为底8的对数是3。' }
+          {en: 'The base of the mountain.', zh: '山的底部。'},
+          {en: 'a military base', zh: '军事基地'},
+          {en: 'The logarithm to base 2 of 8 is 3.', zh: '以2为底8的对数是3。'},
         ],
         synonyms: ['foundation', 'basis', 'bottom'],
         antonyms: ['top', 'apex', 'summit'],
-        etymology: '源自拉丁语 basis，意为"底座"'
+        etymology: '源自拉丁语 basis，意为"底座"',
       },
-      'basket': {
+      basket: {
         word: 'basket',
         phonetic: '/ˈbɑːskɪt/',
         partOfSpeech: 'n.',
-        definitions: [
-          '篮子',
-          '篮筐（篮球）'
-        ],
+        definitions: ['篮子', '篮筐（篮球）'],
         examples: [
-          { en: 'a basket of apples', zh: '一篮苹果' },
-          { en: 'He scored a basket.', zh: '他投进了一个球。' },
-          { en: 'A basket of fake fruit adorned the table.', zh: '一篮假水果装饰着桌子。' }
+          {en: 'a basket of apples', zh: '一篮苹果'},
+          {en: 'He scored a basket.', zh: '他投进了一个球。'},
+          {
+            en: 'A basket of fake fruit adorned the table.',
+            zh: '一篮假水果装饰着桌子。',
+          },
         ],
         synonyms: ['container', 'hamper', 'bin'],
         antonyms: [],
-        etymology: '源自古法语 basquette，意为"小篮子"'
+        etymology: '源自古法语 basquette，意为"小篮子"',
       },
-      'bathe': {
+      bathe: {
         word: 'bathe',
         phonetic: '/beɪð/',
         partOfSpeech: 'v.',
-        definitions: [
-          '洗澡，沐浴',
-          '浸泡',
-          '游泳'
-        ],
+        definitions: ['洗澡，沐浴', '浸泡', '游泳'],
         examples: [
-          { en: 'I bathe every day.', zh: '我每天洗澡。' },
-          { en: 'The doctor bathed the wound.', zh: '医生清洗了伤口。' },
-          { en: 'They bathed in the sea.', zh: '他们在海里游泳。' }
+          {en: 'I bathe every day.', zh: '我每天洗澡。'},
+          {en: 'The doctor bathed the wound.', zh: '医生清洗了伤口。'},
+          {en: 'They bathed in the sea.', zh: '他们在海里游泳。'},
         ],
         synonyms: ['wash', 'cleanse', 'soak'],
         antonyms: ['dirty', 'pollute', 'soil'],
-        etymology: '源自古英语 baþian，意为"沐浴"'
+        etymology: '源自古英语 baþian，意为"沐浴"',
       },
-      'bear': {
+      bear: {
         word: 'bear',
         phonetic: '/beər/',
         partOfSpeech: 'v.',
-        definitions: [
-          '忍受，承受',
-          '携带，运送',
-          '生育'
-        ],
+        definitions: ['忍受，承受', '携带，运送', '生育'],
         examples: [
-          { en: 'I can\'t bear the pain.', zh: '我无法忍受痛苦。' },
-          { en: 'The tree bears fruit.', zh: '树结果实。' },
-          { en: 'to bear a railroad stock', zh: '持有铁路股票' }
+          {en: "I can't bear the pain.", zh: '我无法忍受痛苦。'},
+          {en: 'The tree bears fruit.', zh: '树结果实。'},
+          {en: 'to bear a railroad stock', zh: '持有铁路股票'},
         ],
         synonyms: ['endure', 'tolerate', 'carry'],
         antonyms: ['break', 'collapse', 'surrender'],
-        etymology: '源自古英语 beran，意为"携带，生育"'
+        etymology: '源自古英语 beran，意为"携带，生育"',
       },
-      'beard': {
+      beard: {
         word: 'beard',
         phonetic: '/bɪəd/',
         partOfSpeech: 'n.',
-        definitions: [
-          '胡须'
-        ],
+        definitions: ['胡须'],
         examples: [
-          { en: 'He has a long beard.', zh: '他留着长胡子。' },
-          { en: 'He trimmed his beard.', zh: '他修剪了胡须。' },
-          { en: 'the beard of grain', zh: '谷穗' }
+          {en: 'He has a long beard.', zh: '他留着长胡子。'},
+          {en: 'He trimmed his beard.', zh: '他修剪了胡须。'},
+          {en: 'the beard of grain', zh: '谷穗'},
         ],
         synonyms: ['facial hair', 'stubble', 'goatee'],
         antonyms: [],
-        etymology: '源自古英语 beard，意为"胡须"'
+        etymology: '源自古英语 beard，意为"胡须"',
       },
-      'beat': {
+      beat: {
         word: 'beat',
         phonetic: '/biːt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '打，击打',
-          '击败，战胜',
-          '拍打，敲击'
-        ],
+        definitions: ['打，击打', '击败，战胜', '拍打，敲击'],
         examples: [
-          { en: 'He beat the drum.', zh: '他打鼓。' },
-          { en: 'They beat the opponent.', zh: '他们击败了对手。' },
-          { en: 'My heart is beating fast.', zh: '我的心跳得很快。' }
+          {en: 'He beat the drum.', zh: '他打鼓。'},
+          {en: 'They beat the opponent.', zh: '他们击败了对手。'},
+          {en: 'My heart is beating fast.', zh: '我的心跳得很快。'},
         ],
         synonyms: ['strike', 'defeat', 'pulse'],
         antonyms: ['lose', 'surrender', 'submit'],
-        etymology: '源自古英语 beatan，意为"击打"'
+        etymology: '源自古英语 beatan，意为"击打"',
       },
-      'become': {
+      become: {
         word: 'become',
         phonetic: '/bɪˈkʌm/',
         partOfSpeech: 'v.',
-        definitions: [
-          '变成，成为',
-          '适合，相称'
-        ],
+        definitions: ['变成，成为', '适合，相称'],
         examples: [
-          { en: 'He became a doctor.', zh: '他成为了一名医生。' },
-          { en: 'This dress becomes you.', zh: '这件衣服很适合你。' },
-          { en: 'It became dark.', zh: '天黑了。' }
+          {en: 'He became a doctor.', zh: '他成为了一名医生。'},
+          {en: 'This dress becomes you.', zh: '这件衣服很适合你。'},
+          {en: 'It became dark.', zh: '天黑了。'},
         ],
         synonyms: ['turn into', 'grow into', 'suit'],
         antonyms: ['remain', 'stay', 'disappear'],
-        etymology: '源自古英语 becuman，意为"成为，发生"'
+        etymology: '源自古英语 becuman，意为"成为，发生"',
       },
-      'before': {
+      before: {
         word: 'before',
         phonetic: '/bɪˈfɔː/',
         partOfSpeech: 'prep.',
-        definitions: [
-          '在...之前',
-          '在...前面'
-        ],
+        definitions: ['在...之前', '在...前面'],
         examples: [
-          { en: 'Come before 5 PM.', zh: '下午5点前过来。' },
-          { en: 'Stand before me.', zh: '站在我面前。' },
-          { en: 'Think before you speak.', zh: '三思而后行。' }
+          {en: 'Come before 5 PM.', zh: '下午5点前过来。'},
+          {en: 'Stand before me.', zh: '站在我面前。'},
+          {en: 'Think before you speak.', zh: '三思而后行。'},
         ],
         synonyms: ['prior to', 'ahead of', 'earlier than'],
         antonyms: ['after', 'behind', 'later than'],
-        etymology: '源自古英语 beforan，意为"在前面"'
+        etymology: '源自古英语 beforan，意为"在前面"',
       },
-      'begin': {
+      begin: {
         word: 'begin',
         phonetic: '/bɪˈɡɪn/',
         partOfSpeech: 'v.',
-        definitions: [
-          '开始，着手'
-        ],
+        definitions: ['开始，着手'],
         examples: [
-          { en: 'Let\'s begin now.', zh: '我们现在开始吧。' },
-          { en: 'The meeting begins at 9.', zh: '会议9点开始。' },
-          { en: 'She began to cry.', zh: '她开始哭泣。' }
+          {en: "Let's begin now.", zh: '我们现在开始吧。'},
+          {en: 'The meeting begins at 9.', zh: '会议9点开始。'},
+          {en: 'She began to cry.', zh: '她开始哭泣。'},
         ],
         synonyms: ['start', 'commence', 'initiate'],
         antonyms: ['end', 'finish', 'conclude'],
-        etymology: '源自古英语 beginnan，意为"开始"'
+        etymology: '源自古英语 beginnan，意为"开始"',
       },
-      'behalf': {
+      behalf: {
         word: 'behalf',
         phonetic: '/bɪˈhɑːf/',
         partOfSpeech: 'n.',
-        definitions: [
-          '代表，利益'
-        ],
+        definitions: ['代表，利益'],
         examples: [
-          { en: 'On behalf of the company...', zh: '代表公司...' },
-          { en: 'She spoke on my behalf.', zh: '她代表我发言。' },
-          { en: 'Don\'t trouble yourself on my behalf.', zh: '别为我费心。' }
+          {en: 'On behalf of the company...', zh: '代表公司...'},
+          {en: 'She spoke on my behalf.', zh: '她代表我发言。'},
+          {en: "Don't trouble yourself on my behalf.", zh: '别为我费心。'},
         ],
         synonyms: ['representation', 'interest', 'account'],
         antonyms: [],
-        etymology: '源自古英语 behealf，意为"帮助，支持"'
+        etymology: '源自古英语 behealf，意为"帮助，支持"',
       },
-      'believe': {
+      believe: {
         word: 'believe',
         phonetic: '/bɪˈliːv/',
         partOfSpeech: 'v.',
-        definitions: [
-          '相信，信任',
-          '认为，以为'
-        ],
+        definitions: ['相信，信任', '认为，以为'],
         examples: [
-          { en: 'I believe you.', zh: '我相信你。' },
-          { en: 'She believes in ghosts.', zh: '她相信有鬼。' },
-          { en: 'I believe it will rain.', zh: '我认为会下雨。' }
+          {en: 'I believe you.', zh: '我相信你。'},
+          {en: 'She believes in ghosts.', zh: '她相信有鬼。'},
+          {en: 'I believe it will rain.', zh: '我认为会下雨。'},
         ],
         synonyms: ['trust', 'have faith in', 'think'],
         antonyms: ['doubt', 'disbelieve', 'distrust'],
-        etymology: '源自古英语 belȳfan，意为"相信，信任"'
+        etymology: '源自古英语 belȳfan，意为"相信，信任"',
       },
-      'benefit': {
+      benefit: {
         word: 'benefit',
         phonetic: '/ˈbenɪfɪt/',
         partOfSpeech: 'n.',
-        definitions: [
-          '利益，好处',
-          '福利，津贴'
-        ],
+        definitions: ['利益，好处', '福利，津贴'],
         examples: [
-          { en: 'The benefits of exercise.', zh: '锻炼的好处。' },
-          { en: 'employee benefits', zh: '员工福利' },
-          { en: 'You will benefit from this.', zh: '你会从中受益。' }
+          {en: 'The benefits of exercise.', zh: '锻炼的好处。'},
+          {en: 'employee benefits', zh: '员工福利'},
+          {en: 'You will benefit from this.', zh: '你会从中受益。'},
         ],
         synonyms: ['advantage', 'profit', 'gain'],
         antonyms: ['disadvantage', 'harm', 'loss'],
-        etymology: '源自拉丁语 beneficium，意为"善行，恩惠"'
+        etymology: '源自拉丁语 beneficium，意为"善行，恩惠"',
       },
-      'better': {
+      better: {
         word: 'better',
         phonetic: '/ˈbetər/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '更好的',
-          '好转的，康复的'
-        ],
+        definitions: ['更好的', '好转的，康复的'],
         examples: [
-          { en: 'This is better.', zh: '这个更好。' },
-          { en: 'Get well better soon.', zh: '早日康复。' },
-          { en: 'He\'s in a better place now.', zh: '他现在在更好的地方。' }
+          {en: 'This is better.', zh: '这个更好。'},
+          {en: 'Get well better soon.', zh: '早日康复。'},
+          {en: "He's in a better place now.", zh: '他现在在更好的地方。'},
         ],
         synonyms: ['superior', 'improved', 'preferable'],
         antonyms: ['worse', 'inferior', 'poorer'],
-        etymology: '源自古英语 betera，意为"更好的"'
+        etymology: '源自古英语 betera，意为"更好的"',
       },
-      'between': {
+      between: {
         word: 'between',
         phonetic: '/bɪˈtwiːn/',
         partOfSpeech: 'prep.',
-        definitions: [
-          '在...之间',
-          '在...中间'
-        ],
+        definitions: ['在...之间', '在...中间'],
         examples: [
-          { en: 'between you and me', zh: '你我之间' },
-          { en: 'between two buildings', zh: '两栋楼之间' },
-          { en: 'The border between Canada and USA is the longest.', zh: '加拿大和美国之间的边界是最长的。' }
+          {en: 'between you and me', zh: '你我之间'},
+          {en: 'between two buildings', zh: '两栋楼之间'},
+          {
+            en: 'The border between Canada and USA is the longest.',
+            zh: '加拿大和美国之间的边界是最长的。',
+          },
         ],
         synonyms: ['amidst', 'among', 'in the middle of'],
         antonyms: ['outside', 'beyond', 'around'],
-        etymology: '源自古英语 betweonum，意为"在中间"'
+        etymology: '源自古英语 betweonum，意为"在中间"',
       },
-      'beyond': {
+      beyond: {
         word: 'beyond',
         phonetic: '/bɪˈjɒnd/',
         partOfSpeech: 'prep.',
-        definitions: [
-          '超出，超过',
-          '在...那边',
-          '除了...之外'
-        ],
+        definitions: ['超出，超过', '在...那边', '除了...之外'],
         examples: [
-          { en: 'beyond my understanding', zh: '超出我的理解' },
-          { en: 'beyond the mountains', zh: '山那边' },
-          { en: 'Nothing beyond that.', zh: '除此之外没有别的。' }
+          {en: 'beyond my understanding', zh: '超出我的理解'},
+          {en: 'beyond the mountains', zh: '山那边'},
+          {en: 'Nothing beyond that.', zh: '除此之外没有别的。'},
         ],
         synonyms: ['past', 'over', 'exceeding'],
         antonyms: ['within', 'inside', 'below'],
-        etymology: '源自古英语 begeondan，意为"在远处"'
+        etymology: '源自古英语 begeondan，意为"在远处"',
       },
-      'big': {
+      big: {
         word: 'big',
         phonetic: '/bɪɡ/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '大的，巨大的',
-          '重要的，重大的'
-        ],
+        definitions: ['大的，巨大的', '重要的，重大的'],
         examples: [
-          { en: 'a big house', zh: '大房子' },
-          { en: 'a big decision', zh: '重大决定' },
-          { en: 'This putt has a big left-to-right borrow.', zh: '这个推杆有很大的从左到右的坡度。' }
+          {en: 'a big house', zh: '大房子'},
+          {en: 'a big decision', zh: '重大决定'},
+          {
+            en: 'This putt has a big left-to-right borrow.',
+            zh: '这个推杆有很大的从左到右的坡度。',
+          },
         ],
         synonyms: ['large', 'huge', 'major'],
         antonyms: ['small', 'tiny', 'minor'],
-        etymology: '源自古英语 bigg，可能意为"强壮的"'
+        etymology: '源自古英语 bigg，可能意为"强壮的"',
       },
-      'bite': {
+      bite: {
         word: 'bite',
         phonetic: '/baɪt/',
         partOfSpeech: 'v.',
-        definitions: [
-          '咬，咬伤',
-          '刺痛，叮咬',
-          '一口'
-        ],
+        definitions: ['咬，咬伤', '刺痛，叮咬', '一口'],
         examples: [
-          { en: 'The dog bit me.', zh: '狗咬了我。' },
-          { en: 'Mosquitoes bite.', zh: '蚊子叮咬。' },
-          { en: 'Take a bite of the apple.', zh: '咬一口苹果。' }
+          {en: 'The dog bit me.', zh: '狗咬了我。'},
+          {en: 'Mosquitoes bite.', zh: '蚊子叮咬。'},
+          {en: 'Take a bite of the apple.', zh: '咬一口苹果。'},
         ],
         synonyms: ['gnaw', 'chew', 'nip'],
         antonyms: ['lick', 'kiss', 'caress'],
-        etymology: '源自古英语 bītan，意为"咬"'
+        etymology: '源自古英语 bītan，意为"咬"',
       },
-      'black': {
+      black: {
         word: 'black',
         phonetic: '/blæk/',
         partOfSpeech: 'adj.',
-        definitions: [
-          '黑色的',
-          '黑暗的',
-          '邪恶的'
-        ],
+        definitions: ['黑色的', '黑暗的', '邪恶的'],
         examples: [
-          { en: 'a black cat', zh: '黑猫' },
-          { en: 'black coffee', zh: '黑咖啡' },
-          { en: 'He gave me a black look.', zh: '他恶狠狠地瞪了我一眼。' }
+          {en: 'a black cat', zh: '黑猫'},
+          {en: 'black coffee', zh: '黑咖啡'},
+          {en: 'He gave me a black look.', zh: '他恶狠狠地瞪了我一眼。'},
         ],
         synonyms: ['dark', 'inky', 'ebony'],
         antonyms: ['white', 'light', 'bright'],
-        etymology: '源自古英语 blæc，意为"黑色的"'
+        etymology: '源自古英语 blæc，意为"黑色的"',
       },
-      'blame': {
+      blame: {
         word: 'blame',
         phonetic: '/bleɪm/',
         partOfSpeech: 'v.',
-        definitions: [
-          '责备，指责',
-          '归咎于'
-        ],
+        definitions: ['责备，指责', '归咎于'],
         examples: [
-          { en: 'Don\'t blame me.', zh: '别怪我。' },
-          { en: 'He blamed the accident on me.', zh: '他把事故归咎于我。' },
-          { en: 'The blame for starting the fire lies with the arsonist.', zh: '纵火的责任在于纵火犯。' }
+          {en: "Don't blame me.", zh: '别怪我。'},
+          {en: 'He blamed the accident on me.', zh: '他把事故归咎于我。'},
+          {
+            en: 'The blame for starting the fire lies with the arsonist.',
+            zh: '纵火的责任在于纵火犯。',
+          },
         ],
         synonyms: ['accuse', 'criticize', 'fault'],
         antonyms: ['praise', 'commend', 'exonerate'],
-        etymology: '源自法语 blâmer，意为"责备"'
+        etymology: '源自法语 blâmer，意为"责备"',
       },
-      'bleed': {
+      bleed: {
         word: 'bleed',
         phonetic: '/bliːd/',
         partOfSpeech: 'v.',
-        definitions: [
-          '流血',
-          '榨取，勒索',
-          '出血（印刷）'
-        ],
+        definitions: ['流血', '榨取，勒索', '出血（印刷）'],
         examples: [
-          { en: 'He cut his hand and it\'s bleeding.', zh: '他割伤了手，在流血。' },
-          { en: 'The company was bleeding money.', zh: '公司在亏损。' },
-          { en: 'The colors bleed when washed.', zh: '洗的时候颜色会渗开。' }
+          {
+            en: "He cut his hand and it's bleeding.",
+            zh: '他割伤了手，在流血。',
+          },
+          {en: 'The company was bleeding money.', zh: '公司在亏损。'},
+          {en: 'The colors bleed when washed.', zh: '洗的时候颜色会渗开。'},
         ],
         synonyms: ['hemorrhage', 'lose blood', 'drain'],
         antonyms: ['heal', 'stop bleeding', 'gain'],
-        etymology: '源自古英语 blēdan，意为"流血"'
+        etymology: '源自古英语 blēdan，意为"流血"',
       },
-      'blend': {
+      blend: {
         word: 'blend',
         phonetic: '/blend/',
         partOfSpeech: 'v.',
-        definitions: [
-          '混合，融合',
-          '协调，和谐'
-        ],
+        definitions: ['混合，融合', '协调，和谐'],
         examples: [
-          { en: 'Blend the ingredients.', zh: '混合配料。' },
-          { en: 'The colors blend well.', zh: '颜色很协调。' },
-          { en: 'Our department has a good blend of experienced workers.', zh: '我们部门既有经验丰富的工人，也有新人。' }
+          {en: 'Blend the ingredients.', zh: '混合配料。'},
+          {en: 'The colors blend well.', zh: '颜色很协调。'},
+          {
+            en: 'Our department has a good blend of experienced workers.',
+            zh: '我们部门既有经验丰富的工人，也有新人。',
+          },
         ],
         synonyms: ['mix', 'combine', 'merge'],
         antonyms: ['separate', 'divide', 'split'],
-        etymology: '源自古英语 blendan，意为"混合"'
+        etymology: '源自古英语 blendan，意为"混合"',
       },
     };
   }
@@ -1474,7 +1370,7 @@ class TranslationService {
     return this.fallbackTranslate(text, targetLang);
   }
 
-  private fallbackTranslate(text: string, targetLang: string): string {
+  private fallbackTranslate(text: string, _targetLang: string): string {
     const translations: Record<string, string> = {
       'He lives abroad.': '他住在国外。',
       'The news spread abroad.': '消息传遍四方。',
@@ -1524,7 +1420,7 @@ class TranslationService {
       'We need to assess the damage.': '我们需要评估损失。',
       'The teacher assigned homework.': '老师布置了作业。',
       'Can you assist me?': '你能帮我吗？',
-      'Let\'s assume he is right.': '假设他是对的。',
+      "Let's assume he is right.": '假设他是对的。',
       'Please attach the file.': '请附上文件。',
       'I will attend the meeting.': '我会参加会议。',
       'The magnet attracts metal.': '磁铁吸引金属。',
@@ -1542,12 +1438,12 @@ class TranslationService {
       'The base of the mountain.': '山的底部。',
       'a basket of apples': '一篮苹果',
       'I bathe every day.': '我每天洗澡。',
-      'I can\'t bear the pain.': '我无法忍受痛苦。',
+      "I can't bear the pain.": '我无法忍受痛苦。',
       'He has a long beard.': '他留着长胡子。',
       'He beat the drum.': '他打鼓。',
       'He became a doctor.': '他成为了一名医生。',
       'Come before 5 PM.': '下午5点前过来。',
-      'Let\'s begin now.': '我们现在开始吧。',
+      "Let's begin now.": '我们现在开始吧。',
       'On behalf of the company...': '代表公司...',
       'I believe you.': '我相信你。',
       'The benefits of exercise.': '锻炼的好处。',
@@ -1557,8 +1453,8 @@ class TranslationService {
       'a big house': '大房子',
       'The dog bit me.': '狗咬了我。',
       'a black cat': '黑猫',
-      'Don\'t blame me.': '别怪我。',
-      'He cut his hand and it\'s bleeding.': '他割伤了手，在流血。',
+      "Don't blame me.": '别怪我。',
+      "He cut his hand and it's bleeding.": '他割伤了手，在流血。',
       'Blend the ingredients.': '混合配料。',
     };
     return translations[text] || text;

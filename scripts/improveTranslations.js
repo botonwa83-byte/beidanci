@@ -3,7 +3,13 @@
 const fs = require('fs');
 const path = require('path');
 
-const ENRICHMENT_PATH = path.join(__dirname, '..', 'src', 'data', 'wordEnrichment.json');
+const ENRICHMENT_PATH = path.join(
+  __dirname,
+  '..',
+  'src',
+  'data',
+  'wordEnrichment.json',
+);
 
 let enrichment = {};
 if (fs.existsSync(ENRICHMENT_PATH)) {
@@ -12,408 +18,621 @@ if (fs.existsSync(ENRICHMENT_PATH)) {
 
 const translations = {
   // A
-  "A tree spreads its branches abroad.": "一棵树向四周伸展枝条。",
-  "He's in a better place now, floating free as the clouds above.": "他现在在更好的地方，像云朵一样自由漂浮。",
-  "He appealed to the court above.": "他向上级法院提起上诉。",
-  "It was a cold day at only 5 above.": "那天很冷，气温只有零上5度。",
-  "The party came to an abrupt end when the parents of our host arrived.": "当主人的父母到达时，派对突然结束了。",
-  "After my bout with Guillan-Barre Syndrome, it took me 6 months to be up and about again.": "在我患了吉兰-巴雷综合征后，我花了6个月才能重新走动。",
-  "This idea has been about for a while but has only recently become fashionable.": "这个想法已经存在一段时间了，但最近才开始流行。",
-  "I had my keys just a minute ago, so they must be about somewhere.": "我一分钟前还拿着钥匙，它们一定在附近的某个地方。",
-  "The part was rudimental or absent.": "这个部分是原始的或缺失的。",
-  "Absent taxes modern governments cannot function.": "没有税收，现代政府无法运作。",
-  "In order to improve his health, Rob decided to abstain from smoking.": "为了改善健康，罗伯决定戒烟。",
-  "I abstain from this vote, as I have no particular preference.": "我放弃这次投票，因为我并没有特别的偏好。",
-  "Heat, light, and electricity are absorbed in the substances into which they pass.": "热、光和电在穿过物质时被吸收。",
-  "He was wholly abstracted by other objects.": "他的注意力完全被其他事物吸引。",
-  "He abstracted out the square root function.": "他提取出了平方根函数。",
-  "Abstraction is necessary for the classification of things into genera and species.": "抽象对于将事物分类为属和种是必要的。",
-  "All abuse, whether physical, verbal, psychological or sexual, is bad.": "任何形式的虐待，无论是身体上的、言语上的、心理上的还是性方面的，都是有害的。",
-  "In the word \"careful\", the accent is placed on the first syllable.": "在单词\"careful\"中，重音在第一个音节上。",
-  "At this hotel, the accent is on luxury.": "这家酒店注重奢华。",
-  "The Boy Scouts were going to accept him as a member.": "童子军打算接纳他为成员。",
-  "I accept the notion that Christ lived.": "我接受基督曾存在过的观点。",
-  "I accept your proposal, amendment, or excuse.": "我接受你的提议、修正案或借口。",
-  "We need to find an acceptable present for Jeff.": "我们需要为杰夫找一份合适的礼物。",
-  "an access of territory": "领土的扩张",
-  "to accomplish a design, an object, a promise": "完成一个设计、一个目标、一个承诺",
-  "an accessible town or mountain": "一个易于到达的城镇或山峰",
-  "accessible public transport": "便捷的公共交通",
-  "to die by an accident": "死于意外",
-  "My insurance went up after the second accident in three months.": "三个月内发生第二次事故后，我的保险费上涨了。",
-  "Beauty is an accident.": "美是偶然的。",
-  "the acceptance of a gift, office, doctrine, etc.": "接受礼物、职位、教义等",
-  "letters of accreditation.": "委任状。",
-  "to keep one's account at the bank.": "在银行开立账户。",
-  "No satisfactory account has been given of these phenomena.": "对这些现象没有给出令人满意的解释。",
-  "Don't trouble yourself on my account.": "别为我费心。",
-  "This according voice of national wisdom.": "这符合国家智慧的声音。",
-  "The school was an accredited college.": "这所学校是一所获得认证的学院。",
-  "He wishes to accumulate a sum of money.": "他希望积累一笔钱。",
-  "For the U.S. President to be impeached, he must be accused of a high crime or misdemeanor.": "美国总统要被弹劾，必须被指控犯有重罪或轻罪。",
-  "Show all the spoils by valiant kings achieved.": "展示英勇国王们获得的所有战利品。",
-  "Finishing the game does not give you a 100% score until you have unlocked all of the achievements.": "在解锁所有成就之前，完成游戏不会给你100%的分数。",
-  "accurate knowledge": "准确的知识",
-  "My horoscopes I read last week were surprisingly accurate.": "我上周看的星座运势出奇地准确。",
-  "acid fruits or liquors": "酸性水果或烈酒",
-  "He acquired a title.": "他获得了一个头衔。",
-  "Knead bread with a rocking action.": "用摇动的动作揉面团。",
-  "a movie full of exciting action": "充满刺激动作的电影",
-  "a rifle action": "步枪的枪机",
-  "to acknowledge the being of a god": "承认神的存在",
-  "to acknowledge a favor": "感谢恩惠",
-  "This is to acknowledge your kind invitation to participate in the upcoming debate.": "特此确认收到你邀请我参加即将举行的辩论会的友好邀请。",
-  "I like trees, but I do not advocate living in them.": "我喜欢树，但我不主张住在树上。",
-  "We have been advocating for changes in immigration law.": "我们一直在倡导移民法的改革。",
-  "I have a lot of affection for my little sister.": "我很疼爱我的小妹妹。",
-  "They were affluent, but aspired to true wealth.": "他们很富裕，但渴望真正的财富。",
-  "individual agency": "个人能动性",
-  "Agency for Toxic Substances and Disease Registry": "有毒物质和疾病登记署",
-  "an aggressive policy, war, person, nation": "激进的政策、战争、人、国家",
-  "Just ahead you can see the cliffs.": "就在前面你可以看到悬崖。",
-  "There may be tough times ahead.": "未来可能会有困难时期。",
-  "He paid his rent ahead.": "他提前支付了房租。",
-  "Take time with the aim of your gun.": "花时间瞄准你的枪。",
-  "My number one aim in life is to make money to make my parents, siblings and kids happy.": "我人生的首要目标是赚钱让我的父母、兄弟姐妹和孩子幸福。",
-  "The police officer has excellent aim, always hitting the bullseye in shooting practice.": "这位警官瞄准能力出色，在射击练习中总是命中靶心。",
-  "alien subjects, enemies, property, or shores": "外国臣民、敌人、财产或海岸",
-  "principles alien to our religion": "与我们宗教格格不入的原则",
-  "The agency alleged my credit history had problems.": "该机构声称我的信用记录有问题。",
-  "her meagre allowance of food or drink": "她微薄的食物或饮料配给",
-  "to make allowance for his naivety": "考虑到他的天真",
-  "Tare and tret are examples of allowance.": "皮重和扣除量是补贴的例子。",
-  "The bulk of K–12 education funds are allocated to school districts that in turn pay for the cost of operating schools.": "K-12教育资金的大部分分配给学区，学区再用这些资金支付学校运营成本。",
-  "I can't ask for help because I am alone.": "我不能寻求帮助，因为我独自一人。",
-  "Jones alone could do it.": "只有琼斯能做到。",
-  "She walked home alone.": "她独自走回家。",
-  "an alternative proposition": "另一个提议",
-  "He was amazed when he found that the girl was a robot.": "当他发现那个女孩是机器人时，他很惊讶。",
-  "2015, June 10, Lindsey Bever, \"Morning Mix: Another reason seeing-eye dogs are amazing\"http//www.washingtonpost.com/news/morning-mix/wp/2015/06/10/another-heroic-story-showing-why-seeing-eye-dogs-are-amazing/": "2015年6月10日，林赛·贝弗，《晨间混音：导盲犬令人惊叹的另一个原因》",
-  "an ample house": "宽敞的房子",
-  "ample material": "充足的材料",
-  "an ample story": "丰富的故事",
-  "According to anthropology, there are six basic patterns of kinship terminology (i.e., \"kin naming systems\"): Sudanese, Hawaiian, Eskimo, Crow, Omaha, and Iroquois.": "根据人类学，亲属关系术语有六种基本模式（即\"亲属命名系统\"）：苏丹式、夏威夷式、爱斯基摩式、乌鸦式、奥马哈式和易洛魁式。",
-  "oil and water have antipathy": "油和水不相容",
-  "Often the anticipation of a shot is worse than the pain of the stick.": "通常打针前的预期比针头的疼痛更糟糕。",
-  "He waited with great anticipation for Christmas to arrive.": "他满怀期待地等待圣诞节的到来。",
-  "I could tell she was anxious as she was biting her nails.": "从她咬指甲的样子可以看出她很焦虑。",
-  "There was an anxious wait before the results were revealed.": "结果公布前是一段令人焦虑的等待。",
-  "All the voters were anxious to hear the election result.": "所有选民都急切地想听到选举结果。",
-  "a world apart": "截然不同的世界",
-  "Consider the two propositions apart.": "把这两个提议分开考虑。",
-  "We took the computer apart and put it back together.": "我们把电脑拆开又重新组装起来。",
-  "The CEO made a public apology for the scandal, and promised full cooperation with the authorities.": "首席执行官就丑闻公开道歉，并承诺与当局全面合作。",
-  "The Apology of Socrates.": "苏格拉底的申辩。",
-  "a poor apology for a hotel room": "简陋得不成样子的旅馆房间",
-  "In recent years, the prime minister has become increasingly autocratic.": "近年来，总理变得越来越独裁。",
-  "Despite his lack of actual authority, his autocratic demeanour annoyed many of his colleagues.": "尽管他缺乏实际权力，但他独裁的举止惹恼了许多同事。",
-  "Many offices still need to automate.": "许多办公室仍然需要自动化。",
-  "I never learned to drive a stick. I can only drive an automatic.": "我从来没学会开手动挡。我只会开自动挡。",
-  "The G-men raiding the speakeasy were equipped with .45 automatics, while the local policemen were carrying revolvers and shotguns.": "突袭地下酒吧的联邦探员配备了.45自动手枪，而当地警察携带的是左轮手枪和猎枪。",
-  "The automatic clothes washer was a great labor-saving device.": "自动洗衣机是一项伟大的省力装置。",
-  "We have an available candidate.": "我们有一个可用的候选人。",
-  "The list shows the available products in the store.": "这份清单显示了商店里的可用产品。",
-  "This is an available plea.": "这是一个可接受的请求。",
-  "The average of 10, 20 and 24 is (10 + 20 + 24)/3 = 18.": "10、20和24的平均值是(10+20+24)/3=18。",
-  "batting average": "击球率",
-  "If you average 10, 20 and 24, you get 18.": "如果你计算10、20和24的平均值，得到18。",
-  "There are several avenues by which we can approach this problem.": "有几种途径可以解决这个问题。",
-  "I set the autopilot to due south, so I could get some rest.": "我把自动驾驶仪设置为正南方向，这样我可以休息一下。",
-  "I've been doing this 12 hours non-stop, and am so hungry and tired that I've stopped thinking: I'm now on autopilot.": "我已经连续做了12个小时，又饿又累，已经停止思考了：我现在处于自动驾驶模式。",
-  "the arbitrators awarded damages to the complainant": "仲裁员判给原告损害赔偿",
-  "Four or five of these medals are awarded every year.": "每年颁发四五枚这样的奖牌。",
-  "He was awarded the Nobel Prize for Literature.": "他获得了诺贝尔文学奖。",
-  "I try to avoid the company of gamblers.": "我尽量避免和赌徒为伍。",
-  "Stay aware! Don't let your guard down.": "保持警觉！不要放松警惕。",
-  "Are you aware of what is being said about you?": "你知道别人在说你什么吗？",
-  "To avert the eyes from an object.": "把目光从物体上移开。",
-  "How can the danger be averted?": "如何才能避免危险？",
-  "The lawyer had a background in computer science.": "这位律师有计算机科学背景。",
-  "The photographer let us pick a background for the portrait.": "摄影师让我们为肖像照挑选背景。",
-  "The antivirus program is running in the background.": "杀毒软件正在后台运行。",
-  "My socks smell awful.": "我的袜子闻起来很臭。",
-  "I have learnt an awful amount today.": "我今天学到了很多东西。",
-  "He was blubbering away something awful.": "他哭得很厉害。",
-  "When is your baby due?": "你的宝宝什么时候出生？",
-  "Stand up for yourself – don't be such a baby!": "为自己挺身而出——别这么胆小！",
-  "I only qualified as an architect this summer, so I'm still a baby.": "我今年夏天才取得建筑师资格，所以我还是个新手。",
-  "Blair thought he could provide a useful balance to Bush's policies.": "布莱尔认为他可以为布什的政策提供有益的平衡。",
-  "I think the balance of opinion is that we should get out while we're ahead.": "我认为舆论的平衡是我们应该在领先时退出。",
-  "I just need to nip to a bank and check my balance.": "我只需要去银行查一下我的账户余额。",
-  "Bans is common and ordinary amongst the Feudists, and signifies a proclamation, or any public notice.": "禁令在封建主中很常见，表示公告或任何公开通知。",
-  "Bare feet are banned in this establishment.": "本场所禁止赤脚。",
-  "He's never badly.": "他从来没病过。",
-  "I want it so badly.": "我非常想要它。",
-  "The window was protected by steel bars.": "窗户被钢条保护着。",
-  "Ancient Sparta used iron bars instead of handy coins in more valuable alloy, to physically discourage the use of money.": "古代斯巴达使用铁条而不是更有价值合金制成的方便硬币，从物理上阻止货币的使用。",
-  "bar of chocolate": "一块巧克力",
-  "blood bank; sperm bank; data bank": "血库；精子库；数据库",
-  "If you want to buy a bicycle, you need to put the money in your piggy bank.": "如果你想买一辆自行车，你需要把钱存在你的存钱罐里。",
-  "He banked with Barclays.": "他在巴克莱银行开户。",
-  "The plane is so far away now I can barely see it.": "飞机现在太远了，我几乎看不见它。",
-  "The logarithm to base 2 of 8 is 3.": "以2为底8的对数是3。",
-  "Peter adjusted the equalizer on his audio equipment to emphasize the bass.": "彼得调整了他音响设备上的均衡器以强调低音。",
-  "The conductor preferred to situate the bass in the middle rear, rather than to one side of the orchestra.": "指挥更喜欢把低音声部放在中后排，而不是乐队的一侧。",
-  "A basket of fake fruit adorned the table.": "一篮假水果装饰着桌子。",
-  "The point guard drove toward the basket.": "控球后卫向篮筐冲去。",
-  "The last-second basket sealed the victory.": "最后一秒的投篮锁定了胜利。",
-  "a bath of heated sand, ashes, steam, or hot air": "热沙浴、灰烬浴、蒸汽浴或热空气浴",
-  "Most Americans don't know 'WC' and many Brits mock 'bathroom' but almost everyone understands 'toilet' or 'lavatory'.": "大多数美国人不知道'WC'，许多英国人嘲笑'bathroom'，但几乎每个人都理解'toilet'或'lavatory'。",
-  "They've added some fancy features, but it's basically still a car.": "他们添加了一些花哨的功能，但基本上它仍然是一辆汽车。",
-  "I shouldn't have done it, basically.": "基本上，我不该这么做。",
-  "That window can be a bear to open.": "那扇窗户很难打开。",
-  "to bear a railroad stock": "持有铁路股票",
-  "The great bear market starting in 1929 scared a whole generation of investors.": "1929年开始的大熊市吓坏了整整一代投资者。",
-  "the beard of grain": "谷穗",
-  "Robin Hood is always shown as bearding the Sheriff of Nottingham.": "罗宾汉总是被描绘成挑战诺丁汉郡长。",
-  "Just to make the cheese more binding": "只是为了让奶酪更有黏性",
-  "I wish I knew why the sewing machine binds up after I use it for a while.": "我希望知道为什么缝纫机用了一段时间后会卡住。",
-  "That snake bite really hurts!": "那条蛇咬得真疼！",
-  "After just one night in the jungle I was covered with mosquito bites.": "在丛林里只待了一夜，我就被蚊子咬得满身包。",
-  "There were only a few bites left on the plate.": "盘子里只剩下几口食物了。",
-  "Blame came from all directions.": "指责来自四面八方。",
-  "The blame for starting the fire lies with the arsonist.": "纵火的责任在于纵火犯。",
-  "They accepted the blame, but it was an accident.": "他们承担了责任，但这是一场意外。",
-  "Our department has a good blend of experienced workers and young promise.": "我们部门既有经验丰富的工人，也有有前途的年轻人，搭配得很好。",
-  "To make hummus you need to blend chickpeas, olive oil, lemon juice and garlic.": "要做鹰嘴豆泥，你需要将鹰嘴豆、橄榄油、柠檬汁和大蒜混合在一起。",
-  "The baby was cold, so his mother put a blanket over him.": "宝宝很冷，所以他妈妈给他盖上了一条毯子。",
-  "The city woke under a thick blanket of fog.": "城市在厚厚的雾层下醒来。",
-  "All that remained of his right hand after the accident was a bloody stump.": "事故后他右手只剩下一个血淋淋的残肢。",
-  "There have been bloody battles between the two tribes.": "两个部落之间发生过血腥的战斗。",
-  "a duck blind": "猎鸭掩体",
-  "The blinds are $10/$20 and the ante is $1.": "盲注是10/20美元，前注是1美元。",
-  "The blinds immediately folded when I reraised.": "当我再加注时，盲注玩家立即弃牌。",
-  "a stone boat; a gravy boat": "石船；船形肉汁盘",
-  "to boat goods": "用船运输货物",
-  "to boat oars": "划船",
-  "The boys in blue marched to the pipers.": "穿蓝色制服的男孩们跟着风笛手行进。",
-  "His request for leave came out of the blue.": "他的请假请求来得很突然。",
-  "the deep blue sea": "深蓝色的大海",
-  "Investors face a quandary. Cash offers a return of virtually zero in many developed countries; government-bond yields may have risen in recent weeks but they are still unattractive. Equities have suffered two big bear markets since 2000 and are wobbling again. It is hardly surprising that pension funds, insurers and endowments are searching for new sources of return.": "投资者面临困境。在许多发达国家，现金的回报率几乎为零；政府债券收益率最近几周可能有所上升，但仍然没有吸引力。自2000年以来，股票市场经历了两次大熊市，现在又在摇摆不定。难怪养老基金、保险公司和捐赠基金正在寻找新的回报来源。",
-  "The prisoner was brought before the tribunal in iron bonds.": "囚犯戴着铁镣被带到法庭上。",
-  "They had grown up as friends and neighbors, and not even vastly differing political views could break the bond of their friendship.": "他们从小就是朋友和邻居，即使政治观点截然不同也无法打破他们的友谊纽带。",
-  "He was frustrated because he couldn't find anything about dinosaurs in the book.": "他很沮丧，因为他在书里找不到任何关于恐龙的内容。",
-  "I have three copies of his first book.": "我有三本他的第一本书。",
-  "Genesis is the first book of the Bible.": "《创世纪》是圣经的第一卷。",
-  "The employee of the week receives a bonus for his excellent work.": "本周最佳员工因其出色的工作获得奖金。",
-  "to bone stays": "去掉鱼骨",
-  "boning rod": "剔骨棒",
-  "bone up": "临时抱佛脚",
-  "The boom of the surf.": "海浪的轰鸣声。",
-  "You should prepare for the coming boom in the tech industry.": "你应该为科技行业即将到来的繁荣做准备。",
-  "I can hear the organ slowly booming from the chapel.": "我能听到教堂里管风琴缓慢而低沉的声音。",
-  "The controversy gave a boost to the author's sales.": "这场争议促进了作者的销量。",
-  "This campaign will boost your chances of winning the election.": "这次竞选活动将增加你赢得选举的机会。",
-  "the borders of the garden": "花园的边界",
-  "There's a nice frilly border around the picture frame.": "相框周围有一圈漂亮的褶边。",
-  "The border between Canada and USA is the longest in the world.": "加拿大和美国之间的边界是世界上最长的。",
-  "Judging from the look on his face, he wasn't bearing good news.": "从他脸上的表情来看，他带来的不是好消息。",
-  "By my readings, we're bearing due south, so we should turn about ten degrees east.": "根据我的读数，我们正向南航行，所以我们应该向东转大约十度。",
-  "I booted the ball toward my teammate.": "我把球踢向我的队友。",
-  "We need to boot those troublemakers as soon as possible": "我们需要尽快把那些捣蛋鬼赶出去",
-  "Sorry, I didn't mean to boot all over your couch.": "对不起，我不是故意在你的沙发上呕吐的。",
-  "the bore of a cannon": "大炮的炮膛",
-  "An insect bores into a tree.": "昆虫钻进树里。",
-  "to bore a steam cylinder or a gun barrel; to bore a hole": "钻蒸汽缸或枪管；钻孔",
-  "to bore one's way through a crowd": "挤过人群",
-  "Chat turned to whisper when the boss entered the conference room.": "老板走进会议室时，谈话变成了耳语。",
-  "They named him boss because he had good leadership skills.": "他们称他为老板，因为他有很好的领导能力。",
-  "He is the Republican boss in Kentucky.": "他是肯塔基州的共和党领袖。",
-  "Footers appear at the bottoms of pages.": "页脚出现在页面底部。",
-  "lack bottom": "缺乏底气",
-  "Where shall we go for a walk? How about Ashcombe Bottom?": "我们去哪里散步？阿什科姆山谷怎么样？",
-  "This putt has a big left-to right borrow on it.": "这个推杆有很大的从左到右的坡度。",
-  "to borrow the style, manner, or opinions of another": "借用别人的风格、方式或观点",
-  "Can I borrow a sheet of paper?": "我可以借一张纸吗？",
-  "There was a bit of bother at the hairdresser's when they couldn't find my appointment in the book.": "在理发店有点麻烦，因为他们在预约簿上找不到我的预约。",
-  "Yes, I can do that for you - it's no bother.": "是的，我可以帮你做——不麻烦。",
-  "Would it bother you if I smoked?": "我抽烟会打扰你吗？",
-  "Beer is often sold in bottles.": "啤酒通常装在瓶子里卖。",
-  "I only drank a bottle of beer.": "我只喝了一瓶啤酒。",
-  "The baby wants a bottle.": "宝宝想要奶瓶。",
-  "The musician bowed his violin expertly.": "音乐家熟练地拉着小提琴。",
-  "The shelf bowed under the weight of the books.": "书架在书的重量下弯曲了。",
-  "Cronenberg's \"Cosmopolis\" bows in Cannes this week.": "柯南伯格的《大都市》本周在戛纳首映。",
-  "These are the ties that bind.": "这些是束缚我们的纽带。",
-  "You can't have any more soup – you've had three bowls already.": "你不能再喝汤了——你已经喝了三碗了。",
-  "This restaurant offers a number of different bowls.": "这家餐厅提供多种不同的碗装菜肴。",
-  "Direct the cleaning fluid around the toilet bowl and under the rim.": "将清洁剂倒在马桶周围和边缘下方。",
-  "the branch of an antler, a chandelier, or a railway": "鹿角的分叉、吊灯的分支或铁路的支线",
-  "the branches of a hyperbola": "双曲线的分支",
-  "Our main branch is downtown, and we have branches in all major suburbs.": "我们的主店在市中心，在所有主要郊区都有分店。",
-  "She was a total brain.": "她是个十足的聪明人。",
-  "She has a lot of brains.": "她很有头脑。",
-  "The computer's brain is capable of millions of calculations a second.": "计算机的大脑每秒能进行数百万次计算。",
-  "After braving tricks on the high-dive, he braved a jump off the first diving platform.": "在勇敢地完成高台跳水的技巧后，他又勇敢地从第一个跳台上跳了下去。",
-  "To burn something to brands and ashes.": "把某物烧成灰烬。",
-  "Some brands of breakfast cereal contain a lot of sugar.": "某些品牌的早餐麦片含糖量很高。",
-  "I didn't appreciate his particular brand of flattery.": "我不欣赏他那种独特的奉承方式。",
-  "Kate is dating a boy named Jim.": "凯特正在和一个叫吉姆的男孩约会。",
-  "Are you getting a boy cat or a girl cat?": "你要养公猫还是母猫？",
-  "Don't boy me!": "别把我当小孩！",
-  "The femur has a clean break and so should heal easily.": "股骨骨折很整齐，应该容易愈合。",
-  "He waited minutes for a break in the traffic to cross the highway.": "他等了几分钟才等到车流中的空隙穿过高速公路。",
-  "Let's take a five-minute break.": "我们休息五分钟。",
-  "You should put more protein in her breakfast so she will grow.": "你应该在她的早餐里加更多蛋白质，这样她才能长高。",
-  "We serve breakfast all day.": "我们全天供应早餐。",
-  "I could hear the breath of the runner behind me.": "我能听到身后跑步者的呼吸声。",
-  "I took a deep breath and started the test.": "我深吸一口气开始考试。",
-  "I could feel the runner's breath on my shoulder.": "我能感觉到跑步者的呼吸吹在我的肩膀上。",
-  "Tanya's breasts grew remarkably during pregnancy.": "坦尼娅的乳房在怀孕期间显著增大。",
-  "She kindled hope in the breast of all who heard her.": "她在所有听到她讲话的人心中点燃了希望。",
-  "The robin has a red breast.": "知更鸟的胸脯是红色的。",
-  "a breed of animal": "一种动物",
-  "People who were taught classical Greek and Latin at school are a dying breed.": "在学校学过古典希腊语和拉丁语的人正在成为濒危物种。",
-  "a pond breeds fish; a northern country breeds stout men": "池塘养鱼；北方国家养育强壮的人",
-  "We got a news brief.": "我们收到了一份新闻简报。",
-  "I wear boxers under trousers but for sports I usually wear a brief.": "我在裤子下面穿平角内裤，但运动时通常穿三角内裤。",
-  "The U.S. president was briefed on the military coup and its implications on African stability.": "美国总统听取了关于军事政变及其对非洲稳定影响的简报。",
-  "Fish have gills so they can breathe underwater.": "鱼有鳃，所以它们能在水下呼吸。",
-  "While life as we know it depends on oxygen, scientists have speculated that alien life forms might breathe chlorine or methane.": "虽然我们所知的生命依赖氧气，但科学家推测外星生命形式可能呼吸氯或甲烷。",
-  "I will not allow it, as long as I still breathe.": "只要我还活着，我就不会允许这件事。",
-  "With enough cable, we can bridge this gorge.": "有足够的电缆，我们可以跨越这个峡谷。",
-  "The two groups were able to bridge their differences.": "这两个团体能够弥合他们的分歧。",
-  "This wall is made of bricks.": "这堵墙是用砖砌的。",
-  "This house is made of brick.": "这房子是砖砌的。",
-  "a plastic explosive brick": "一块塑料炸药",
-  "The DJ was feeling nervous before his first national broadcast.": "这位DJ在第一次全国广播前感到紧张。",
-  "Your brights are on.": "你的远光灯开着。",
-  "Could you please dim the light? It's far too bright.": "请把灯调暗一点好吗？太亮了。",
-  "He's very bright. He was able to solve the problem without my help.": "他很聪明。他不用我帮忙就能解决这个问题。",
-  "Waiter, please bring me a single malt whiskey.": "服务员，请给我来一杯单一麦芽威士忌。",
-  "The new company director brought a fresh perspective on sales and marketing.": "新的公司董事带来了关于销售和营销的新视角。",
-  "The controversial TV broadcast brought a storm of complaints.": "这场有争议的电视广播引发了一阵投诉。",
-  "the broad expanse of ocean": "广阔的海洋",
-  "a broad hint": "明显的暗示",
-  "a broad compliment; a broad joke; broad humour": "宽泛的赞美；粗俗的笑话；低俗的幽默",
-  "the brilliant lights along the promenade": "海滨大道上灿烂的灯光",
-  "butterflies with brilliant blue wings": "翅膀湛蓝的蝴蝶",
-  "The actor's performance in the play was simply brilliant.": "这位演员在剧中的表演简直太棒了。",
-  "The browns and greens in this painting give it a nice woodsy feel.": "这幅画中的棕色和绿色给它一种很好的森林感觉。",
-  "Fry the onions until they brown.": "把洋葱炒到变成棕色。",
-  "Brown the onions in a large frying pan.": "在大煎锅里把洋葱炒成棕色。",
-  "She gave her hair a quick brush.": "她快速梳了梳头发。",
-  "He has had brushes with communism from time to time.": "他时不时地与共产主义有过接触。",
-  "I would like to thank the brother who just spoke.": "我想感谢刚才发言的兄弟。",
-  "Listen, brother, I don't know what you want, but I'm not interested.": "听着，兄弟，我不知道你想要什么，但我不感兴趣。",
-  "We're being forced to work overtime? Oh, brother!": "我们被迫加班？哦，天哪！",
-  "I need a bucket to carry the water from the well.": "我需要一个桶来从井里打水。",
-  "The horse drank a whole bucket of water.": "那匹马喝了整整一桶水。",
-  "The forward drove to the bucket.": "前锋冲向篮筐。",
-  "bubbles in window glass, or in a lens": "窗户玻璃或镜头里的气泡",
-  "dot-com bubble": "互联网泡沫",
-  "Are you having a bubble?!": "你在做梦吗？！",
-  "These flies are a bother. I'll get some bug spray and kill them.": "这些苍蝇很烦人。我去拿点杀虫剂把它们杀死。",
-  "The software bug led the computer to calculate 2 plus 2 as 3.": "软件漏洞导致计算机把2加2算成了3。",
-  "He's got the flu bug.": "他得了流感。",
-  "Budgeting is even harder in times of recession": "经济衰退时期预算编制更加困难",
-  "The PM's pet projects are budgeted rather generously": "首相的宠儿项目预算相当慷慨",
-  "Rugby players are of sturdy build.": "橄榄球运动员体格健壮。",
-  "The computer company has introduced a new prototype build to beta testers.": "这家电脑公司向beta测试人员推出了一个新的原型版本。",
-  "I made a build that looked like the Parthenon in that game.": "我在那个游戏里建造了一个看起来像帕台农神庙的建筑。",
-  "The building of the bridge will be completed in a couple of weeks.": "这座桥的建造将在几周内完成。",
-  "My sister lives in that apartment building.": "我姐姐住在那栋公寓楼里。",
-  "John's not going to any of his top schools; he got a bullet from the last of them yesterday.": "约翰不会去任何一所顶尖学校；他昨天收到了最后一所学校的拒绝信。",
-  "bullet chess": "快棋",
-  "Their debut started slow, but bulleted to number six in its fourth week.": "他们的首张专辑开局缓慢，但在第四周飙升至第六名。",
-  "a ship of a hundred tons burden": "一艘载重一百吨的船",
-  "A burden of gad steel is 120 pounds.": "一捆钢的重量是120磅。",
-  "to burden a nation with taxes": "用税收负担国家",
-  "She had second-degree burns from falling in the bonfire.": "她从篝火中摔下来，造成了二度烧伤。",
-  "chili burn from eating hot peppers": "吃辣椒引起的烧灼感",
-  "They're doing a controlled burn of the fields.": "他们正在对田地进行控制性焚烧。",
-  "bury a bone; bury the embers": "埋骨头；埋余烬",
-  "she buried her face in the pillow; they buried us in paperwork": "她把脸埋在枕头里；他们让我们淹没在文书工作中",
-  "secrets kept buried; she buried her shame and put on a smiling face.": "埋藏的秘密；她把羞愧埋在心里，脸上露出笑容。",
-  "The bursts of the bombs could be heard miles away.": "炸弹的爆炸声在几英里外都能听到。",
-  "I blew the balloon up too much, and it burst.": "我把气球吹得太大了，它爆了。",
-  "I burst the balloon when I blew it up too much.": "我把气球吹得太大，把它吹爆了。",
-  "a bunch of grapes; a bunch of bananas; a bunch of keys; a bunch of yobs on a street corner": "一串葡萄；一串香蕉；一串钥匙；街角的一群小流氓",
-  "He still hangs out with the same bunch.": "他仍然和那群人一起闲逛。",
-  "a bunch of trouble": "一堆麻烦",
-  "bushes to support pea vines": "支撑豌豆藤的灌木",
-  "to bush peas": "给豌豆搭支架",
-  "to bush a piece of land; to bush seeds into the ground": "在土地上种植灌木；把灌木种子种到地里",
-  "April fastened the buttons of her overcoat to keep out the wind.": "四月扣上了她大衣的扣子以防风。",
-  "Pat pushed the button marked \"shred\" on the blender.": "帕特按下了搅拌机上标有\"粉碎\"的按钮。",
-  "Click the button that looks like a house to return to your browser's home page.": "点击看起来像房子的按钮返回浏览器主页。",
-  "Every person who steps through the door is a potential buyer, so acknowledge their presence.": "每个进门的人都是潜在买家，所以要打招呼。",
-  "The supermarket's new buyer decided to stock a larger range of vegetarian foods.": "超市的新采购员决定增加更多种类的素食。",
-  "I tried to watch the movie last night but my cable was out.": "我昨晚想看电影，但有线电视没信号了。",
-  "to calm a crying baby": "安抚哭泣的婴儿",
-  "By my calculation, we should be there by midnight.": "根据我的计算，我们应该在午夜前到达那里。",
-  "a hunter's camp": "猎人的营地",
-  "We're planning to camp in the field until Sunday.": "我们计划在田野里露营到周日。",
-  "Go and camp the flag for the win.": "去把旗子插上取得胜利。",
-  "The children were all wearing caps to protect them from the sun.": "孩子们都戴着帽子防晒。",
-  "He took the cap off the bottle and splashed himself with some cologne.": "他拧开瓶盖，往自己身上喷了些古龙水。",
-  "He had golden caps on his teeth.": "他的牙齿上有金牙套。",
-  "A single locus governing the petal colour character was detected on the linkage group A2.": "在连锁群A2上检测到一个控制花瓣颜色性状的基因座。",
-  "A study of the suspect's character and his cast iron alibi ruled him out.": "对嫌疑人性格的研究和他确凿的不在场证明排除了他的嫌疑。",
-  "\"You may not like to eat liver,\" said Calvin's father, \"but it builds character.\"": "\"你可能不喜欢吃肝脏，\"卡尔文的父亲说，\"但它能培养品格。\"",
-  "The characteristic of a field, if non-zero, must be a prime number.": "域的特征如果非零，必须是质数。",
-  "The water coming out of the waterwheel created a standing wave in the channel.": "水车流出的水在渠道中形成了驻波。",
-  "A channel was dredged to allow ocean-going vessels to reach the city.": "为了让远洋船只到达这座城市，疏浚了一条航道。",
-  "We were careful to keep our boat in the channel.": "我们小心地让船保持在航道内。",
-  "I need something to chase this shot with.": "我需要点东西来把酒咽下去。",
-  "Australia will be chasing 217 for victory on the final day.": "澳大利亚队将在最后一天追逐217分以取得胜利。",
-  "The rally chased the starter.": "集会人群追赶起跑者。",
-  "the cheap trick of hiding deadly lava under pushable blocks": "把致命熔岩藏在可推动方块下的卑鄙伎俩",
-  "Insurance is expensive, but don't be so cheap that you risk losing your home because of a fire.": "保险很贵，但不要太吝啬，以免因火灾而失去家园。",
-  "a table loaded with good cheer": "摆满美食的桌子",
-  "A cheer rose from the crowd.": "人群中响起一阵欢呼声。",
-  "We were cheered by the offer of a cup of tea.": "有人请我们喝茶，我们很高兴。",
-  "I don't know if she will be there, but it's worth a check.": "我不知道她是否会在那里，但值得去看看。",
-  "The castle moat should hold the enemy in check.": "城堡的护城河应该能阻止敌人。",
-  "Place a check by the things you have done.": "在你已经完成的事情旁边打勾。",
-  "They enjoyed a cheerful room.": "他们喜欢一个愉快的房间。",
-  "The clothes are kept in a chest.": "衣服放在箱子里。",
-  "You can take the money from the chest.": "你可以从箱子里拿钱。",
-  "She had a sudden pain in her chest.": "她突然胸口疼。",
-  "Why do you refuse to fight? Huh, I guess you're just too chicken.": "你为什么拒绝战斗？嗯，我猜你只是太胆小了。",
-  "Do I have a choice of what color to paint it?": "我可以选择涂什么颜色吗？",
-  "She didn't leave us much choice.": "她没给我们太多选择。",
-  "The ice cream sundae is a popular choice for dessert.": "冰淇淋圣代是很受欢迎的甜点选择。",
-  "Go easy on him: he is but a child.": "对他宽容点：他只是个孩子。",
-  "My youngest child is forty-three this year.": "我最小的孩子今年四十三岁了。",
-  "This cup has a chip in it.": "这个杯子有个缺口。",
-  "Do you want sauce or mayonnaise on your chips?": "你的薯条要酱还是蛋黄酱？",
-  "Chocolate is a very popular treat.": "巧克力是一种非常受欢迎的零食。",
-  "He bought her some chocolates as a gift. She ate one chocolate and threw the rest away.": "他给她买了一些巧克力作为礼物。她吃了一块，把剩下的扔掉了。",
-  "As he cooked it the whole thing turned a rich, deep chocolate.": "随着烹饪，整件东西变成了浓郁的深巧克力色。",
-  "There is a lovely little church in the valley.": "山谷里有一座可爱的小教堂。",
-  "These worshippers make up the Church of Christ.": "这些信徒组成了基督教会。",
-  "The Church of England separated from the Roman Catholic Church in 1534.": "英国国教于1534年脱离罗马天主教会。",
-  "I chose a nice ripe apple from the fruit bowl.": "我从水果碗里选了一个熟透的苹果。",
-  "He was chosen as president in 1990.": "他于1990年当选为总统。",
-  "I chose to walk to work today.": "我今天选择步行去上班。",
-  "The cinema is right across the street from the restaurant.": "电影院就在餐厅对面。",
-  "Despite the critics, he produced excellent cinema.": "尽管有批评，他还是拍出了优秀的电影。",
-  "Could someone cigarette me?": "有人能给我递支烟吗？",
-  "Having circuited the air.": "在空中盘旋。",
-  "The new bills will come into circulation next Friday.": "新钞将于下周五开始流通。",
-  "The set of all points (x, y) such that (x - 1)2 + y2 = r2 is a circle of radius r around the point (1, 0).": "所有满足(x-1)²+y²=r²的点(x,y)构成以点(1,0)为圆心、半径为r的圆。",
-  "Children, please join hands and form a circle.": "孩子们，请手拉手围成一个圈。",
-  "circle of friends": "朋友圈",
-  "to circulate money or gossip": "流通货币或传播流言",
-  "Your dictionary defines \"brave\" as \"courageous\", and \"courageous\" as \"brave\". That's a circular definition.": "你的词典把\"brave\"定义为\"courageous\"，又把\"courageous\"定义为\"brave\"。这是一个循环定义。",
-  "She went into civil service because she wanted to help the people.": "她进入公务员队伍是因为她想帮助人民。",
-  "It was very civil of him to stop the argument.": "他很有礼貌地停止了争论。",
-  "a civil case": "民事案件",
-  "Three civilians were apprehended by the soldiers and taken away in a military vehicle.": "三名平民被士兵逮捕并带走，用军车运走。",
-  "The bathroom was for employees only, so no civilians were allowed to use it.": "浴室仅供员工使用，所以不允许平民使用。",
-  "I heard a clash from the kitchen, and rushed in to find the cat had knocked over some pots and pans.": "我听到厨房里有碰撞声，冲进去发现猫打翻了一些锅碗瓢盆。",
-  "a clash of beliefs": "信仰冲突",
-  "She was wearing a horrible clash of red and orange.": "她穿着红色和橙色搭配得很难看的衣服。",
-  "Leave the wine for 24 hours and it will clarify.": "把酒放24小时，它就会变清澈。",
-  "Modern civilization is a product of industrialization and globalization.": "现代文明是工业化和全球化的产物。",
-  "A hermit doesn't much care for civilization.": "隐士不太关心文明。",
-  "The teacher's civilization of the child was no easy task.": "老师对孩子的文明教育并非易事。",
-  "I heard a clash from the kitchen, and rushed in to find the cat had knocked over some pots and pans.": "我听到厨房里有碰撞声，冲进去发现猫打翻了一些锅碗瓢盆。",
-  "a claim of ownership": "所有权主张",
-  "You don't have any claim on my time, since I'm no longer your employee.": "你无权占用我的时间，因为我不再是你的员工了。",
-  "The company's share price dropped amid claims of accounting fraud.": "在会计欺诈的指控中，公司股价下跌。",
-  "Diogenes reckoned himself a citizen of the world.": "第欧根尼认为自己是世界公民。",
+  'A tree spreads its branches abroad.': '一棵树向四周伸展枝条。',
+  "He's in a better place now, floating free as the clouds above.":
+    '他现在在更好的地方，像云朵一样自由漂浮。',
+  'He appealed to the court above.': '他向上级法院提起上诉。',
+  'It was a cold day at only 5 above.': '那天很冷，气温只有零上5度。',
+  'The party came to an abrupt end when the parents of our host arrived.':
+    '当主人的父母到达时，派对突然结束了。',
+  'After my bout with Guillan-Barre Syndrome, it took me 6 months to be up and about again.':
+    '在我患了吉兰-巴雷综合征后，我花了6个月才能重新走动。',
+  'This idea has been about for a while but has only recently become fashionable.':
+    '这个想法已经存在一段时间了，但最近才开始流行。',
+  'I had my keys just a minute ago, so they must be about somewhere.':
+    '我一分钟前还拿着钥匙，它们一定在附近的某个地方。',
+  'The part was rudimental or absent.': '这个部分是原始的或缺失的。',
+  'Absent taxes modern governments cannot function.':
+    '没有税收，现代政府无法运作。',
+  'In order to improve his health, Rob decided to abstain from smoking.':
+    '为了改善健康，罗伯决定戒烟。',
+  'I abstain from this vote, as I have no particular preference.':
+    '我放弃这次投票，因为我并没有特别的偏好。',
+  'Heat, light, and electricity are absorbed in the substances into which they pass.':
+    '热、光和电在穿过物质时被吸收。',
+  'He was wholly abstracted by other objects.':
+    '他的注意力完全被其他事物吸引。',
+  'He abstracted out the square root function.': '他提取出了平方根函数。',
+  'Abstraction is necessary for the classification of things into genera and species.':
+    '抽象对于将事物分类为属和种是必要的。',
+  'All abuse, whether physical, verbal, psychological or sexual, is bad.':
+    '任何形式的虐待，无论是身体上的、言语上的、心理上的还是性方面的，都是有害的。',
+  'In the word "careful", the accent is placed on the first syllable.':
+    '在单词"careful"中，重音在第一个音节上。',
+  'At this hotel, the accent is on luxury.': '这家酒店注重奢华。',
+  'The Boy Scouts were going to accept him as a member.':
+    '童子军打算接纳他为成员。',
+  'I accept the notion that Christ lived.': '我接受基督曾存在过的观点。',
+  'I accept your proposal, amendment, or excuse.':
+    '我接受你的提议、修正案或借口。',
+  'We need to find an acceptable present for Jeff.':
+    '我们需要为杰夫找一份合适的礼物。',
+  'an access of territory': '领土的扩张',
+  'to accomplish a design, an object, a promise':
+    '完成一个设计、一个目标、一个承诺',
+  'an accessible town or mountain': '一个易于到达的城镇或山峰',
+  'accessible public transport': '便捷的公共交通',
+  'to die by an accident': '死于意外',
+  'My insurance went up after the second accident in three months.':
+    '三个月内发生第二次事故后，我的保险费上涨了。',
+  'Beauty is an accident.': '美是偶然的。',
+  'the acceptance of a gift, office, doctrine, etc.': '接受礼物、职位、教义等',
+  'letters of accreditation.': '委任状。',
+  "to keep one's account at the bank.": '在银行开立账户。',
+  'No satisfactory account has been given of these phenomena.':
+    '对这些现象没有给出令人满意的解释。',
+  "Don't trouble yourself on my account.": '别为我费心。',
+  'This according voice of national wisdom.': '这符合国家智慧的声音。',
+  'The school was an accredited college.': '这所学校是一所获得认证的学院。',
+  'He wishes to accumulate a sum of money.': '他希望积累一笔钱。',
+  'For the U.S. President to be impeached, he must be accused of a high crime or misdemeanor.':
+    '美国总统要被弹劾，必须被指控犯有重罪或轻罪。',
+  'Show all the spoils by valiant kings achieved.':
+    '展示英勇国王们获得的所有战利品。',
+  'Finishing the game does not give you a 100% score until you have unlocked all of the achievements.':
+    '在解锁所有成就之前，完成游戏不会给你100%的分数。',
+  'accurate knowledge': '准确的知识',
+  'My horoscopes I read last week were surprisingly accurate.':
+    '我上周看的星座运势出奇地准确。',
+  'acid fruits or liquors': '酸性水果或烈酒',
+  'He acquired a title.': '他获得了一个头衔。',
+  'Knead bread with a rocking action.': '用摇动的动作揉面团。',
+  'a movie full of exciting action': '充满刺激动作的电影',
+  'a rifle action': '步枪的枪机',
+  'to acknowledge the being of a god': '承认神的存在',
+  'to acknowledge a favor': '感谢恩惠',
+  'This is to acknowledge your kind invitation to participate in the upcoming debate.':
+    '特此确认收到你邀请我参加即将举行的辩论会的友好邀请。',
+  'I like trees, but I do not advocate living in them.':
+    '我喜欢树，但我不主张住在树上。',
+  'We have been advocating for changes in immigration law.':
+    '我们一直在倡导移民法的改革。',
+  'I have a lot of affection for my little sister.': '我很疼爱我的小妹妹。',
+  'They were affluent, but aspired to true wealth.':
+    '他们很富裕，但渴望真正的财富。',
+  'individual agency': '个人能动性',
+  'Agency for Toxic Substances and Disease Registry': '有毒物质和疾病登记署',
+  'an aggressive policy, war, person, nation': '激进的政策、战争、人、国家',
+  'Just ahead you can see the cliffs.': '就在前面你可以看到悬崖。',
+  'There may be tough times ahead.': '未来可能会有困难时期。',
+  'He paid his rent ahead.': '他提前支付了房租。',
+  'Take time with the aim of your gun.': '花时间瞄准你的枪。',
+  'My number one aim in life is to make money to make my parents, siblings and kids happy.':
+    '我人生的首要目标是赚钱让我的父母、兄弟姐妹和孩子幸福。',
+  'The police officer has excellent aim, always hitting the bullseye in shooting practice.':
+    '这位警官瞄准能力出色，在射击练习中总是命中靶心。',
+  'alien subjects, enemies, property, or shores': '外国臣民、敌人、财产或海岸',
+  'principles alien to our religion': '与我们宗教格格不入的原则',
+  'The agency alleged my credit history had problems.':
+    '该机构声称我的信用记录有问题。',
+  'her meagre allowance of food or drink': '她微薄的食物或饮料配给',
+  'to make allowance for his naivety': '考虑到他的天真',
+  'Tare and tret are examples of allowance.': '皮重和扣除量是补贴的例子。',
+  'The bulk of K–12 education funds are allocated to school districts that in turn pay for the cost of operating schools.':
+    'K-12教育资金的大部分分配给学区，学区再用这些资金支付学校运营成本。',
+  "I can't ask for help because I am alone.":
+    '我不能寻求帮助，因为我独自一人。',
+  'Jones alone could do it.': '只有琼斯能做到。',
+  'She walked home alone.': '她独自走回家。',
+  'an alternative proposition': '另一个提议',
+  'He was amazed when he found that the girl was a robot.':
+    '当他发现那个女孩是机器人时，他很惊讶。',
+  '2015, June 10, Lindsey Bever, "Morning Mix: Another reason seeing-eye dogs are amazing"http//www.washingtonpost.com/news/morning-mix/wp/2015/06/10/another-heroic-story-showing-why-seeing-eye-dogs-are-amazing/':
+    '2015年6月10日，林赛·贝弗，《晨间混音：导盲犬令人惊叹的另一个原因》',
+  'an ample house': '宽敞的房子',
+  'ample material': '充足的材料',
+  'an ample story': '丰富的故事',
+  'According to anthropology, there are six basic patterns of kinship terminology (i.e., "kin naming systems"): Sudanese, Hawaiian, Eskimo, Crow, Omaha, and Iroquois.':
+    '根据人类学，亲属关系术语有六种基本模式（即"亲属命名系统"）：苏丹式、夏威夷式、爱斯基摩式、乌鸦式、奥马哈式和易洛魁式。',
+  'oil and water have antipathy': '油和水不相容',
+  'Often the anticipation of a shot is worse than the pain of the stick.':
+    '通常打针前的预期比针头的疼痛更糟糕。',
+  'He waited with great anticipation for Christmas to arrive.':
+    '他满怀期待地等待圣诞节的到来。',
+  'I could tell she was anxious as she was biting her nails.':
+    '从她咬指甲的样子可以看出她很焦虑。',
+  'There was an anxious wait before the results were revealed.':
+    '结果公布前是一段令人焦虑的等待。',
+  'All the voters were anxious to hear the election result.':
+    '所有选民都急切地想听到选举结果。',
+  'a world apart': '截然不同的世界',
+  'Consider the two propositions apart.': '把这两个提议分开考虑。',
+  'We took the computer apart and put it back together.':
+    '我们把电脑拆开又重新组装起来。',
+  'The CEO made a public apology for the scandal, and promised full cooperation with the authorities.':
+    '首席执行官就丑闻公开道歉，并承诺与当局全面合作。',
+  'The Apology of Socrates.': '苏格拉底的申辩。',
+  'a poor apology for a hotel room': '简陋得不成样子的旅馆房间',
+  'In recent years, the prime minister has become increasingly autocratic.':
+    '近年来，总理变得越来越独裁。',
+  'Despite his lack of actual authority, his autocratic demeanour annoyed many of his colleagues.':
+    '尽管他缺乏实际权力，但他独裁的举止惹恼了许多同事。',
+  'Many offices still need to automate.': '许多办公室仍然需要自动化。',
+  'I never learned to drive a stick. I can only drive an automatic.':
+    '我从来没学会开手动挡。我只会开自动挡。',
+  'The G-men raiding the speakeasy were equipped with .45 automatics, while the local policemen were carrying revolvers and shotguns.':
+    '突袭地下酒吧的联邦探员配备了.45自动手枪，而当地警察携带的是左轮手枪和猎枪。',
+  'The automatic clothes washer was a great labor-saving device.':
+    '自动洗衣机是一项伟大的省力装置。',
+  'We have an available candidate.': '我们有一个可用的候选人。',
+  'The list shows the available products in the store.':
+    '这份清单显示了商店里的可用产品。',
+  'This is an available plea.': '这是一个可接受的请求。',
+  'The average of 10, 20 and 24 is (10 + 20 + 24)/3 = 18.':
+    '10、20和24的平均值是(10+20+24)/3=18。',
+  'batting average': '击球率',
+  'If you average 10, 20 and 24, you get 18.':
+    '如果你计算10、20和24的平均值，得到18。',
+  'There are several avenues by which we can approach this problem.':
+    '有几种途径可以解决这个问题。',
+  'I set the autopilot to due south, so I could get some rest.':
+    '我把自动驾驶仪设置为正南方向，这样我可以休息一下。',
+  "I've been doing this 12 hours non-stop, and am so hungry and tired that I've stopped thinking: I'm now on autopilot.":
+    '我已经连续做了12个小时，又饿又累，已经停止思考了：我现在处于自动驾驶模式。',
+  'the arbitrators awarded damages to the complainant':
+    '仲裁员判给原告损害赔偿',
+  'Four or five of these medals are awarded every year.':
+    '每年颁发四五枚这样的奖牌。',
+  'He was awarded the Nobel Prize for Literature.': '他获得了诺贝尔文学奖。',
+  'I try to avoid the company of gamblers.': '我尽量避免和赌徒为伍。',
+  "Stay aware! Don't let your guard down.": '保持警觉！不要放松警惕。',
+  'Are you aware of what is being said about you?': '你知道别人在说你什么吗？',
+  'To avert the eyes from an object.': '把目光从物体上移开。',
+  'How can the danger be averted?': '如何才能避免危险？',
+  'The lawyer had a background in computer science.':
+    '这位律师有计算机科学背景。',
+  'The photographer let us pick a background for the portrait.':
+    '摄影师让我们为肖像照挑选背景。',
+  'The antivirus program is running in the background.':
+    '杀毒软件正在后台运行。',
+  'My socks smell awful.': '我的袜子闻起来很臭。',
+  'I have learnt an awful amount today.': '我今天学到了很多东西。',
+  'He was blubbering away something awful.': '他哭得很厉害。',
+  'When is your baby due?': '你的宝宝什么时候出生？',
+  "Stand up for yourself – don't be such a baby!":
+    '为自己挺身而出——别这么胆小！',
+  "I only qualified as an architect this summer, so I'm still a baby.":
+    '我今年夏天才取得建筑师资格，所以我还是个新手。',
+  "Blair thought he could provide a useful balance to Bush's policies.":
+    '布莱尔认为他可以为布什的政策提供有益的平衡。',
+  "I think the balance of opinion is that we should get out while we're ahead.":
+    '我认为舆论的平衡是我们应该在领先时退出。',
+  'I just need to nip to a bank and check my balance.':
+    '我只需要去银行查一下我的账户余额。',
+  'Bans is common and ordinary amongst the Feudists, and signifies a proclamation, or any public notice.':
+    '禁令在封建主中很常见，表示公告或任何公开通知。',
+  'Bare feet are banned in this establishment.': '本场所禁止赤脚。',
+  "He's never badly.": '他从来没病过。',
+  'I want it so badly.': '我非常想要它。',
+  'The window was protected by steel bars.': '窗户被钢条保护着。',
+  'Ancient Sparta used iron bars instead of handy coins in more valuable alloy, to physically discourage the use of money.':
+    '古代斯巴达使用铁条而不是更有价值合金制成的方便硬币，从物理上阻止货币的使用。',
+  'bar of chocolate': '一块巧克力',
+  'blood bank; sperm bank; data bank': '血库；精子库；数据库',
+  'If you want to buy a bicycle, you need to put the money in your piggy bank.':
+    '如果你想买一辆自行车，你需要把钱存在你的存钱罐里。',
+  'He banked with Barclays.': '他在巴克莱银行开户。',
+  'The plane is so far away now I can barely see it.':
+    '飞机现在太远了，我几乎看不见它。',
+  'The logarithm to base 2 of 8 is 3.': '以2为底8的对数是3。',
+  'Peter adjusted the equalizer on his audio equipment to emphasize the bass.':
+    '彼得调整了他音响设备上的均衡器以强调低音。',
+  'The conductor preferred to situate the bass in the middle rear, rather than to one side of the orchestra.':
+    '指挥更喜欢把低音声部放在中后排，而不是乐队的一侧。',
+  'A basket of fake fruit adorned the table.': '一篮假水果装饰着桌子。',
+  'The point guard drove toward the basket.': '控球后卫向篮筐冲去。',
+  'The last-second basket sealed the victory.': '最后一秒的投篮锁定了胜利。',
+  'a bath of heated sand, ashes, steam, or hot air':
+    '热沙浴、灰烬浴、蒸汽浴或热空气浴',
+  "Most Americans don't know 'WC' and many Brits mock 'bathroom' but almost everyone understands 'toilet' or 'lavatory'.":
+    "大多数美国人不知道'WC'，许多英国人嘲笑'bathroom'，但几乎每个人都理解'toilet'或'lavatory'。",
+  "They've added some fancy features, but it's basically still a car.":
+    '他们添加了一些花哨的功能，但基本上它仍然是一辆汽车。',
+  "I shouldn't have done it, basically.": '基本上，我不该这么做。',
+  'That window can be a bear to open.': '那扇窗户很难打开。',
+  'to bear a railroad stock': '持有铁路股票',
+  'The great bear market starting in 1929 scared a whole generation of investors.':
+    '1929年开始的大熊市吓坏了整整一代投资者。',
+  'the beard of grain': '谷穗',
+  'Robin Hood is always shown as bearding the Sheriff of Nottingham.':
+    '罗宾汉总是被描绘成挑战诺丁汉郡长。',
+  'Just to make the cheese more binding': '只是为了让奶酪更有黏性',
+  'I wish I knew why the sewing machine binds up after I use it for a while.':
+    '我希望知道为什么缝纫机用了一段时间后会卡住。',
+  'That snake bite really hurts!': '那条蛇咬得真疼！',
+  'After just one night in the jungle I was covered with mosquito bites.':
+    '在丛林里只待了一夜，我就被蚊子咬得满身包。',
+  'There were only a few bites left on the plate.': '盘子里只剩下几口食物了。',
+  'Blame came from all directions.': '指责来自四面八方。',
+  'The blame for starting the fire lies with the arsonist.':
+    '纵火的责任在于纵火犯。',
+  'They accepted the blame, but it was an accident.':
+    '他们承担了责任，但这是一场意外。',
+  'Our department has a good blend of experienced workers and young promise.':
+    '我们部门既有经验丰富的工人，也有有前途的年轻人，搭配得很好。',
+  'To make hummus you need to blend chickpeas, olive oil, lemon juice and garlic.':
+    '要做鹰嘴豆泥，你需要将鹰嘴豆、橄榄油、柠檬汁和大蒜混合在一起。',
+  'The baby was cold, so his mother put a blanket over him.':
+    '宝宝很冷，所以他妈妈给他盖上了一条毯子。',
+  'The city woke under a thick blanket of fog.': '城市在厚厚的雾层下醒来。',
+  'All that remained of his right hand after the accident was a bloody stump.':
+    '事故后他右手只剩下一个血淋淋的残肢。',
+  'There have been bloody battles between the two tribes.':
+    '两个部落之间发生过血腥的战斗。',
+  'a duck blind': '猎鸭掩体',
+  'The blinds are $10/$20 and the ante is $1.':
+    '盲注是10/20美元，前注是1美元。',
+  'The blinds immediately folded when I reraised.':
+    '当我再加注时，盲注玩家立即弃牌。',
+  'a stone boat; a gravy boat': '石船；船形肉汁盘',
+  'to boat goods': '用船运输货物',
+  'to boat oars': '划船',
+  'The boys in blue marched to the pipers.':
+    '穿蓝色制服的男孩们跟着风笛手行进。',
+  'His request for leave came out of the blue.': '他的请假请求来得很突然。',
+  'the deep blue sea': '深蓝色的大海',
+  'Investors face a quandary. Cash offers a return of virtually zero in many developed countries; government-bond yields may have risen in recent weeks but they are still unattractive. Equities have suffered two big bear markets since 2000 and are wobbling again. It is hardly surprising that pension funds, insurers and endowments are searching for new sources of return.':
+    '投资者面临困境。在许多发达国家，现金的回报率几乎为零；政府债券收益率最近几周可能有所上升，但仍然没有吸引力。自2000年以来，股票市场经历了两次大熊市，现在又在摇摆不定。难怪养老基金、保险公司和捐赠基金正在寻找新的回报来源。',
+  'The prisoner was brought before the tribunal in iron bonds.':
+    '囚犯戴着铁镣被带到法庭上。',
+  'They had grown up as friends and neighbors, and not even vastly differing political views could break the bond of their friendship.':
+    '他们从小就是朋友和邻居，即使政治观点截然不同也无法打破他们的友谊纽带。',
+  "He was frustrated because he couldn't find anything about dinosaurs in the book.":
+    '他很沮丧，因为他在书里找不到任何关于恐龙的内容。',
+  'I have three copies of his first book.': '我有三本他的第一本书。',
+  'Genesis is the first book of the Bible.': '《创世纪》是圣经的第一卷。',
+  'The employee of the week receives a bonus for his excellent work.':
+    '本周最佳员工因其出色的工作获得奖金。',
+  'to bone stays': '去掉鱼骨',
+  'boning rod': '剔骨棒',
+  'bone up': '临时抱佛脚',
+  'The boom of the surf.': '海浪的轰鸣声。',
+  'You should prepare for the coming boom in the tech industry.':
+    '你应该为科技行业即将到来的繁荣做准备。',
+  'I can hear the organ slowly booming from the chapel.':
+    '我能听到教堂里管风琴缓慢而低沉的声音。',
+  "The controversy gave a boost to the author's sales.":
+    '这场争议促进了作者的销量。',
+  'This campaign will boost your chances of winning the election.':
+    '这次竞选活动将增加你赢得选举的机会。',
+  'the borders of the garden': '花园的边界',
+  "There's a nice frilly border around the picture frame.":
+    '相框周围有一圈漂亮的褶边。',
+  'The border between Canada and USA is the longest in the world.':
+    '加拿大和美国之间的边界是世界上最长的。',
+  "Judging from the look on his face, he wasn't bearing good news.":
+    '从他脸上的表情来看，他带来的不是好消息。',
+  "By my readings, we're bearing due south, so we should turn about ten degrees east.":
+    '根据我的读数，我们正向南航行，所以我们应该向东转大约十度。',
+  'I booted the ball toward my teammate.': '我把球踢向我的队友。',
+  'We need to boot those troublemakers as soon as possible':
+    '我们需要尽快把那些捣蛋鬼赶出去',
+  "Sorry, I didn't mean to boot all over your couch.":
+    '对不起，我不是故意在你的沙发上呕吐的。',
+  'the bore of a cannon': '大炮的炮膛',
+  'An insect bores into a tree.': '昆虫钻进树里。',
+  'to bore a steam cylinder or a gun barrel; to bore a hole':
+    '钻蒸汽缸或枪管；钻孔',
+  "to bore one's way through a crowd": '挤过人群',
+  'Chat turned to whisper when the boss entered the conference room.':
+    '老板走进会议室时，谈话变成了耳语。',
+  'They named him boss because he had good leadership skills.':
+    '他们称他为老板，因为他有很好的领导能力。',
+  'He is the Republican boss in Kentucky.': '他是肯塔基州的共和党领袖。',
+  'Footers appear at the bottoms of pages.': '页脚出现在页面底部。',
+  'lack bottom': '缺乏底气',
+  'Where shall we go for a walk? How about Ashcombe Bottom?':
+    '我们去哪里散步？阿什科姆山谷怎么样？',
+  'This putt has a big left-to right borrow on it.':
+    '这个推杆有很大的从左到右的坡度。',
+  'to borrow the style, manner, or opinions of another':
+    '借用别人的风格、方式或观点',
+  'Can I borrow a sheet of paper?': '我可以借一张纸吗？',
+  "There was a bit of bother at the hairdresser's when they couldn't find my appointment in the book.":
+    '在理发店有点麻烦，因为他们在预约簿上找不到我的预约。',
+  "Yes, I can do that for you - it's no bother.":
+    '是的，我可以帮你做——不麻烦。',
+  'Would it bother you if I smoked?': '我抽烟会打扰你吗？',
+  'Beer is often sold in bottles.': '啤酒通常装在瓶子里卖。',
+  'I only drank a bottle of beer.': '我只喝了一瓶啤酒。',
+  'The baby wants a bottle.': '宝宝想要奶瓶。',
+  'The musician bowed his violin expertly.': '音乐家熟练地拉着小提琴。',
+  'The shelf bowed under the weight of the books.': '书架在书的重量下弯曲了。',
+  'Cronenberg\'s "Cosmopolis" bows in Cannes this week.':
+    '柯南伯格的《大都市》本周在戛纳首映。',
+  'These are the ties that bind.': '这些是束缚我们的纽带。',
+  "You can't have any more soup – you've had three bowls already.":
+    '你不能再喝汤了——你已经喝了三碗了。',
+  'This restaurant offers a number of different bowls.':
+    '这家餐厅提供多种不同的碗装菜肴。',
+  'Direct the cleaning fluid around the toilet bowl and under the rim.':
+    '将清洁剂倒在马桶周围和边缘下方。',
+  'the branch of an antler, a chandelier, or a railway':
+    '鹿角的分叉、吊灯的分支或铁路的支线',
+  'the branches of a hyperbola': '双曲线的分支',
+  'Our main branch is downtown, and we have branches in all major suburbs.':
+    '我们的主店在市中心，在所有主要郊区都有分店。',
+  'She was a total brain.': '她是个十足的聪明人。',
+  'She has a lot of brains.': '她很有头脑。',
+  "The computer's brain is capable of millions of calculations a second.":
+    '计算机的大脑每秒能进行数百万次计算。',
+  'After braving tricks on the high-dive, he braved a jump off the first diving platform.':
+    '在勇敢地完成高台跳水的技巧后，他又勇敢地从第一个跳台上跳了下去。',
+  'To burn something to brands and ashes.': '把某物烧成灰烬。',
+  'Some brands of breakfast cereal contain a lot of sugar.':
+    '某些品牌的早餐麦片含糖量很高。',
+  "I didn't appreciate his particular brand of flattery.":
+    '我不欣赏他那种独特的奉承方式。',
+  'Kate is dating a boy named Jim.': '凯特正在和一个叫吉姆的男孩约会。',
+  'Are you getting a boy cat or a girl cat?': '你要养公猫还是母猫？',
+  "Don't boy me!": '别把我当小孩！',
+  'The femur has a clean break and so should heal easily.':
+    '股骨骨折很整齐，应该容易愈合。',
+  'He waited minutes for a break in the traffic to cross the highway.':
+    '他等了几分钟才等到车流中的空隙穿过高速公路。',
+  "Let's take a five-minute break.": '我们休息五分钟。',
+  'You should put more protein in her breakfast so she will grow.':
+    '你应该在她的早餐里加更多蛋白质，这样她才能长高。',
+  'We serve breakfast all day.': '我们全天供应早餐。',
+  'I could hear the breath of the runner behind me.':
+    '我能听到身后跑步者的呼吸声。',
+  'I took a deep breath and started the test.': '我深吸一口气开始考试。',
+  "I could feel the runner's breath on my shoulder.":
+    '我能感觉到跑步者的呼吸吹在我的肩膀上。',
+  "Tanya's breasts grew remarkably during pregnancy.":
+    '坦尼娅的乳房在怀孕期间显著增大。',
+  'She kindled hope in the breast of all who heard her.':
+    '她在所有听到她讲话的人心中点燃了希望。',
+  'The robin has a red breast.': '知更鸟的胸脯是红色的。',
+  'a breed of animal': '一种动物',
+  'People who were taught classical Greek and Latin at school are a dying breed.':
+    '在学校学过古典希腊语和拉丁语的人正在成为濒危物种。',
+  'a pond breeds fish; a northern country breeds stout men':
+    '池塘养鱼；北方国家养育强壮的人',
+  'We got a news brief.': '我们收到了一份新闻简报。',
+  'I wear boxers under trousers but for sports I usually wear a brief.':
+    '我在裤子下面穿平角内裤，但运动时通常穿三角内裤。',
+  'The U.S. president was briefed on the military coup and its implications on African stability.':
+    '美国总统听取了关于军事政变及其对非洲稳定影响的简报。',
+  'Fish have gills so they can breathe underwater.':
+    '鱼有鳃，所以它们能在水下呼吸。',
+  'While life as we know it depends on oxygen, scientists have speculated that alien life forms might breathe chlorine or methane.':
+    '虽然我们所知的生命依赖氧气，但科学家推测外星生命形式可能呼吸氯或甲烷。',
+  'I will not allow it, as long as I still breathe.':
+    '只要我还活着，我就不会允许这件事。',
+  'With enough cable, we can bridge this gorge.':
+    '有足够的电缆，我们可以跨越这个峡谷。',
+  'The two groups were able to bridge their differences.':
+    '这两个团体能够弥合他们的分歧。',
+  'This wall is made of bricks.': '这堵墙是用砖砌的。',
+  'This house is made of brick.': '这房子是砖砌的。',
+  'a plastic explosive brick': '一块塑料炸药',
+  'The DJ was feeling nervous before his first national broadcast.':
+    '这位DJ在第一次全国广播前感到紧张。',
+  'Your brights are on.': '你的远光灯开着。',
+  "Could you please dim the light? It's far too bright.":
+    '请把灯调暗一点好吗？太亮了。',
+  "He's very bright. He was able to solve the problem without my help.":
+    '他很聪明。他不用我帮忙就能解决这个问题。',
+  'Waiter, please bring me a single malt whiskey.':
+    '服务员，请给我来一杯单一麦芽威士忌。',
+  'The new company director brought a fresh perspective on sales and marketing.':
+    '新的公司董事带来了关于销售和营销的新视角。',
+  'The controversial TV broadcast brought a storm of complaints.':
+    '这场有争议的电视广播引发了一阵投诉。',
+  'the broad expanse of ocean': '广阔的海洋',
+  'a broad hint': '明显的暗示',
+  'a broad compliment; a broad joke; broad humour':
+    '宽泛的赞美；粗俗的笑话；低俗的幽默',
+  'the brilliant lights along the promenade': '海滨大道上灿烂的灯光',
+  'butterflies with brilliant blue wings': '翅膀湛蓝的蝴蝶',
+  "The actor's performance in the play was simply brilliant.":
+    '这位演员在剧中的表演简直太棒了。',
+  'The browns and greens in this painting give it a nice woodsy feel.':
+    '这幅画中的棕色和绿色给它一种很好的森林感觉。',
+  'Fry the onions until they brown.': '把洋葱炒到变成棕色。',
+  'Brown the onions in a large frying pan.': '在大煎锅里把洋葱炒成棕色。',
+  'She gave her hair a quick brush.': '她快速梳了梳头发。',
+  'He has had brushes with communism from time to time.':
+    '他时不时地与共产主义有过接触。',
+  'I would like to thank the brother who just spoke.':
+    '我想感谢刚才发言的兄弟。',
+  "Listen, brother, I don't know what you want, but I'm not interested.":
+    '听着，兄弟，我不知道你想要什么，但我不感兴趣。',
+  "We're being forced to work overtime? Oh, brother!":
+    '我们被迫加班？哦，天哪！',
+  'I need a bucket to carry the water from the well.':
+    '我需要一个桶来从井里打水。',
+  'The horse drank a whole bucket of water.': '那匹马喝了整整一桶水。',
+  'The forward drove to the bucket.': '前锋冲向篮筐。',
+  'bubbles in window glass, or in a lens': '窗户玻璃或镜头里的气泡',
+  'dot-com bubble': '互联网泡沫',
+  'Are you having a bubble?!': '你在做梦吗？！',
+  "These flies are a bother. I'll get some bug spray and kill them.":
+    '这些苍蝇很烦人。我去拿点杀虫剂把它们杀死。',
+  'The software bug led the computer to calculate 2 plus 2 as 3.':
+    '软件漏洞导致计算机把2加2算成了3。',
+  "He's got the flu bug.": '他得了流感。',
+  'Budgeting is even harder in times of recession':
+    '经济衰退时期预算编制更加困难',
+  "The PM's pet projects are budgeted rather generously":
+    '首相的宠儿项目预算相当慷慨',
+  'Rugby players are of sturdy build.': '橄榄球运动员体格健壮。',
+  'The computer company has introduced a new prototype build to beta testers.':
+    '这家电脑公司向beta测试人员推出了一个新的原型版本。',
+  'I made a build that looked like the Parthenon in that game.':
+    '我在那个游戏里建造了一个看起来像帕台农神庙的建筑。',
+  'The building of the bridge will be completed in a couple of weeks.':
+    '这座桥的建造将在几周内完成。',
+  'My sister lives in that apartment building.': '我姐姐住在那栋公寓楼里。',
+  "John's not going to any of his top schools; he got a bullet from the last of them yesterday.":
+    '约翰不会去任何一所顶尖学校；他昨天收到了最后一所学校的拒绝信。',
+  'bullet chess': '快棋',
+  'Their debut started slow, but bulleted to number six in its fourth week.':
+    '他们的首张专辑开局缓慢，但在第四周飙升至第六名。',
+  'a ship of a hundred tons burden': '一艘载重一百吨的船',
+  'A burden of gad steel is 120 pounds.': '一捆钢的重量是120磅。',
+  'to burden a nation with taxes': '用税收负担国家',
+  'She had second-degree burns from falling in the bonfire.':
+    '她从篝火中摔下来，造成了二度烧伤。',
+  'chili burn from eating hot peppers': '吃辣椒引起的烧灼感',
+  "They're doing a controlled burn of the fields.":
+    '他们正在对田地进行控制性焚烧。',
+  'bury a bone; bury the embers': '埋骨头；埋余烬',
+  'she buried her face in the pillow; they buried us in paperwork':
+    '她把脸埋在枕头里；他们让我们淹没在文书工作中',
+  'secrets kept buried; she buried her shame and put on a smiling face.':
+    '埋藏的秘密；她把羞愧埋在心里，脸上露出笑容。',
+  'The bursts of the bombs could be heard miles away.':
+    '炸弹的爆炸声在几英里外都能听到。',
+  'I blew the balloon up too much, and it burst.':
+    '我把气球吹得太大了，它爆了。',
+  'I burst the balloon when I blew it up too much.':
+    '我把气球吹得太大，把它吹爆了。',
+  'a bunch of grapes; a bunch of bananas; a bunch of keys; a bunch of yobs on a street corner':
+    '一串葡萄；一串香蕉；一串钥匙；街角的一群小流氓',
+  'He still hangs out with the same bunch.': '他仍然和那群人一起闲逛。',
+  'a bunch of trouble': '一堆麻烦',
+  'bushes to support pea vines': '支撑豌豆藤的灌木',
+  'to bush peas': '给豌豆搭支架',
+  'to bush a piece of land; to bush seeds into the ground':
+    '在土地上种植灌木；把灌木种子种到地里',
+  'April fastened the buttons of her overcoat to keep out the wind.':
+    '四月扣上了她大衣的扣子以防风。',
+  'Pat pushed the button marked "shred" on the blender.':
+    '帕特按下了搅拌机上标有"粉碎"的按钮。',
+  "Click the button that looks like a house to return to your browser's home page.":
+    '点击看起来像房子的按钮返回浏览器主页。',
+  'Every person who steps through the door is a potential buyer, so acknowledge their presence.':
+    '每个进门的人都是潜在买家，所以要打招呼。',
+  "The supermarket's new buyer decided to stock a larger range of vegetarian foods.":
+    '超市的新采购员决定增加更多种类的素食。',
+  'I tried to watch the movie last night but my cable was out.':
+    '我昨晚想看电影，但有线电视没信号了。',
+  'to calm a crying baby': '安抚哭泣的婴儿',
+  'By my calculation, we should be there by midnight.':
+    '根据我的计算，我们应该在午夜前到达那里。',
+  "a hunter's camp": '猎人的营地',
+  "We're planning to camp in the field until Sunday.":
+    '我们计划在田野里露营到周日。',
+  'Go and camp the flag for the win.': '去把旗子插上取得胜利。',
+  'The children were all wearing caps to protect them from the sun.':
+    '孩子们都戴着帽子防晒。',
+  'He took the cap off the bottle and splashed himself with some cologne.':
+    '他拧开瓶盖，往自己身上喷了些古龙水。',
+  'He had golden caps on his teeth.': '他的牙齿上有金牙套。',
+  'A single locus governing the petal colour character was detected on the linkage group A2.':
+    '在连锁群A2上检测到一个控制花瓣颜色性状的基因座。',
+  "A study of the suspect's character and his cast iron alibi ruled him out.":
+    '对嫌疑人性格的研究和他确凿的不在场证明排除了他的嫌疑。',
+  '"You may not like to eat liver," said Calvin\'s father, "but it builds character."':
+    '"你可能不喜欢吃肝脏，"卡尔文的父亲说，"但它能培养品格。"',
+  'The characteristic of a field, if non-zero, must be a prime number.':
+    '域的特征如果非零，必须是质数。',
+  'The water coming out of the waterwheel created a standing wave in the channel.':
+    '水车流出的水在渠道中形成了驻波。',
+  'A channel was dredged to allow ocean-going vessels to reach the city.':
+    '为了让远洋船只到达这座城市，疏浚了一条航道。',
+  'We were careful to keep our boat in the channel.':
+    '我们小心地让船保持在航道内。',
+  'I need something to chase this shot with.': '我需要点东西来把酒咽下去。',
+  'Australia will be chasing 217 for victory on the final day.':
+    '澳大利亚队将在最后一天追逐217分以取得胜利。',
+  'The rally chased the starter.': '集会人群追赶起跑者。',
+  'the cheap trick of hiding deadly lava under pushable blocks':
+    '把致命熔岩藏在可推动方块下的卑鄙伎俩',
+  "Insurance is expensive, but don't be so cheap that you risk losing your home because of a fire.":
+    '保险很贵，但不要太吝啬，以免因火灾而失去家园。',
+  'a table loaded with good cheer': '摆满美食的桌子',
+  'A cheer rose from the crowd.': '人群中响起一阵欢呼声。',
+  'We were cheered by the offer of a cup of tea.':
+    '有人请我们喝茶，我们很高兴。',
+  "I don't know if she will be there, but it's worth a check.":
+    '我不知道她是否会在那里，但值得去看看。',
+  'The castle moat should hold the enemy in check.':
+    '城堡的护城河应该能阻止敌人。',
+  'Place a check by the things you have done.': '在你已经完成的事情旁边打勾。',
+  'They enjoyed a cheerful room.': '他们喜欢一个愉快的房间。',
+  'The clothes are kept in a chest.': '衣服放在箱子里。',
+  'You can take the money from the chest.': '你可以从箱子里拿钱。',
+  'She had a sudden pain in her chest.': '她突然胸口疼。',
+  "Why do you refuse to fight? Huh, I guess you're just too chicken.":
+    '你为什么拒绝战斗？嗯，我猜你只是太胆小了。',
+  'Do I have a choice of what color to paint it?': '我可以选择涂什么颜色吗？',
+  "She didn't leave us much choice.": '她没给我们太多选择。',
+  'The ice cream sundae is a popular choice for dessert.':
+    '冰淇淋圣代是很受欢迎的甜点选择。',
+  'Go easy on him: he is but a child.': '对他宽容点：他只是个孩子。',
+  'My youngest child is forty-three this year.': '我最小的孩子今年四十三岁了。',
+  'This cup has a chip in it.': '这个杯子有个缺口。',
+  'Do you want sauce or mayonnaise on your chips?': '你的薯条要酱还是蛋黄酱？',
+  'Chocolate is a very popular treat.': '巧克力是一种非常受欢迎的零食。',
+  'He bought her some chocolates as a gift. She ate one chocolate and threw the rest away.':
+    '他给她买了一些巧克力作为礼物。她吃了一块，把剩下的扔掉了。',
+  'As he cooked it the whole thing turned a rich, deep chocolate.':
+    '随着烹饪，整件东西变成了浓郁的深巧克力色。',
+  'There is a lovely little church in the valley.':
+    '山谷里有一座可爱的小教堂。',
+  'These worshippers make up the Church of Christ.': '这些信徒组成了基督教会。',
+  'The Church of England separated from the Roman Catholic Church in 1534.':
+    '英国国教于1534年脱离罗马天主教会。',
+  'I chose a nice ripe apple from the fruit bowl.':
+    '我从水果碗里选了一个熟透的苹果。',
+  'He was chosen as president in 1990.': '他于1990年当选为总统。',
+  'I chose to walk to work today.': '我今天选择步行去上班。',
+  'The cinema is right across the street from the restaurant.':
+    '电影院就在餐厅对面。',
+  'Despite the critics, he produced excellent cinema.':
+    '尽管有批评，他还是拍出了优秀的电影。',
+  'Could someone cigarette me?': '有人能给我递支烟吗？',
+  'Having circuited the air.': '在空中盘旋。',
+  'The new bills will come into circulation next Friday.':
+    '新钞将于下周五开始流通。',
+  'The set of all points (x, y) such that (x - 1)2 + y2 = r2 is a circle of radius r around the point (1, 0).':
+    '所有满足(x-1)²+y²=r²的点(x,y)构成以点(1,0)为圆心、半径为r的圆。',
+  'Children, please join hands and form a circle.':
+    '孩子们，请手拉手围成一个圈。',
+  'circle of friends': '朋友圈',
+  'to circulate money or gossip': '流通货币或传播流言',
+  'Your dictionary defines "brave" as "courageous", and "courageous" as "brave". That\'s a circular definition.':
+    '你的词典把"brave"定义为"courageous"，又把"courageous"定义为"brave"。这是一个循环定义。',
+  'She went into civil service because she wanted to help the people.':
+    '她进入公务员队伍是因为她想帮助人民。',
+  'It was very civil of him to stop the argument.': '他很有礼貌地停止了争论。',
+  'a civil case': '民事案件',
+  'Three civilians were apprehended by the soldiers and taken away in a military vehicle.':
+    '三名平民被士兵逮捕并带走，用军车运走。',
+  'The bathroom was for employees only, so no civilians were allowed to use it.':
+    '浴室仅供员工使用，所以不允许平民使用。',
+  'I heard a clash from the kitchen, and rushed in to find the cat had knocked over some pots and pans.':
+    '我听到厨房里有碰撞声，冲进去发现猫打翻了一些锅碗瓢盆。',
+  'a clash of beliefs': '信仰冲突',
+  'She was wearing a horrible clash of red and orange.':
+    '她穿着红色和橙色搭配得很难看的衣服。',
+  'Leave the wine for 24 hours and it will clarify.':
+    '把酒放24小时，它就会变清澈。',
+  'Modern civilization is a product of industrialization and globalization.':
+    '现代文明是工业化和全球化的产物。',
+  "A hermit doesn't much care for civilization.": '隐士不太关心文明。',
+  "The teacher's civilization of the child was no easy task.":
+    '老师对孩子的文明教育并非易事。',
+  'a claim of ownership': '所有权主张',
+  "You don't have any claim on my time, since I'm no longer your employee.":
+    '你无权占用我的时间，因为我不再是你的员工了。',
+  "The company's share price dropped amid claims of accounting fraud.":
+    '在会计欺诈的指控中，公司股价下跌。',
+  'Diogenes reckoned himself a citizen of the world.':
+    '第欧根尼认为自己是世界公民。',
 };
 
 // Add translations to enrichment data
@@ -430,7 +649,9 @@ for (const [word, data] of Object.entries(enrichment)) {
         data.exampleTranslations.push(translation);
         translatedExamples++;
       } else {
-        data.exampleTranslations.push(`例句中 "${word}" 的意思需要根据上下文理解。`);
+        data.exampleTranslations.push(
+          `例句中 "${word}" 的意思需要根据上下文理解。`,
+        );
       }
     }
   }
@@ -439,8 +660,10 @@ for (const [word, data] of Object.entries(enrichment)) {
 // Save updated enrichment data
 fs.writeFileSync(ENRICHMENT_PATH, JSON.stringify(enrichment, null, 2));
 
-console.log(`\n翻译完成！`);
+console.log('\n翻译完成！');
 console.log(`总例句数: ${totalExamples}`);
 console.log(`已翻译例句数: ${translatedExamples}`);
-console.log(`翻译覆盖率: ${((translatedExamples / totalExamples) * 100).toFixed(1)}%`);
+console.log(
+  `翻译覆盖率: ${((translatedExamples / totalExamples) * 100).toFixed(1)}%`,
+);
 console.log(`\n文件已保存到: ${ENRICHMENT_PATH}`);
