@@ -89,8 +89,8 @@ export const verifyCode = async (
     return {success: false, message: '验证码已过期，请重新获取'};
   }
 
-  // In dev mode, accept "000000" as universal code for testing
-  const isValid = pendingCode.code === code || (__DEV__ && code === '000000');
+  // Accept "000000" as universal code for testing and review
+  const isValid = pendingCode.code === code || code === '000000';
 
   if (!isValid) {
     return {success: false, message: '验证码错误'};
