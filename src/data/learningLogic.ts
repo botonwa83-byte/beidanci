@@ -22,6 +22,12 @@ const getStorageKey = (phone?: string): string =>
 
 // ==================== Persistence ====================
 
+// Merge saved data with defaults to handle missing fields from older versions
+const mergeWithDefaults = (data: any): UserProgress => {
+  const defaults = getInitialProgress();
+  return {...defaults, ...data};
+};
+
 export const loadProgress = async (): Promise<UserProgress> => {
   try {
     const user = await loadAuth();
@@ -29,7 +35,20 @@ export const loadProgress = async (): Promise<UserProgress> => {
     const stored = await AsyncStorage.getItem(key);
 
     if (stored) {
-      return JSON.parse(stored);
+      return mergeWithDefaults(JSON.parse(stored));
+    }
+
+    // Migrate: phone format changed from "13800001234" to "+8613800001234"
+    // Try loading with the old (bare number) key
+    if (user?.phone && user.phone.startsWith('+')) {
+      const barePhone = user.phone.replace(/^\+\d{1,4}/, '');
+      const oldKey = getStorageKey(barePhone);
+      const oldData = await AsyncStorage.getItem(oldKey);
+      if (oldData) {
+        await AsyncStorage.setItem(key, oldData);
+        await AsyncStorage.removeItem(oldKey);
+        return mergeWithDefaults(JSON.parse(oldData));
+      }
     }
 
     // Migrate: if user-specific key is empty but legacy key has data, migrate it
@@ -38,11 +57,11 @@ export const loadProgress = async (): Promise<UserProgress> => {
       if (legacy) {
         await AsyncStorage.setItem(key, legacy);
         await AsyncStorage.removeItem(LEGACY_KEY);
-        return JSON.parse(legacy);
+        return mergeWithDefaults(JSON.parse(legacy));
       }
     }
   } catch (e) {
-    // silent fail, return default progress
+    console.warn('[Progress] 读取学习进度失败:', e);
   }
   return getInitialProgress();
 };
@@ -53,7 +72,8 @@ export const saveProgress = async (progress: UserProgress): Promise<void> => {
     const key = getStorageKey(user?.phone);
     await AsyncStorage.setItem(key, JSON.stringify(progress));
   } catch (e) {
-    // silent fail
+    console.warn('[Progress] 保存学习进度失败:', e);
+    throw e;
   }
 };
 

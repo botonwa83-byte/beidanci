@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {Word} from '../data/types';
-import {theme} from '../theme';
+import {useAppTheme, ThemeColors} from '../theme';
 
 interface WordCardProps {
   word: Word;
@@ -9,6 +9,9 @@ interface WordCardProps {
 }
 
 export const WordCard: React.FC<WordCardProps> = ({word, onPress}) => {
+  const {colors} = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.7} style={styles.card}>
       <View style={styles.header}>
@@ -49,7 +52,7 @@ export const WordCard: React.FC<WordCardProps> = ({word, onPress}) => {
         </View>
       )}
 
-      <View style={styles.footer}>
+      <View style={[styles.footer, {borderTopColor: colors.footerBorder}]}>
         <Text style={styles.footerText} numberOfLines={1}>
           {word.associationStory}
         </Text>
@@ -59,90 +62,90 @@ export const WordCard: React.FC<WordCardProps> = ({word, onPress}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  card: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 18,
-    marginBottom: 12,
-    shadowColor: '#4A6AE5',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.06,
-    shadowRadius: 12,
-    elevation: 3,
-  },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 6,
-  },
-  headerLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  word: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-  },
-  phonetic: {
-    fontSize: 12,
-    color: theme.colors.textTertiary,
-  },
-  posTag: {
-    fontSize: 11,
-    color: theme.colors.primary,
-    backgroundColor: theme.colors.primaryLight,
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-    overflow: 'hidden',
-    fontWeight: '600',
-  },
-  meaning: {
-    fontSize: 17,
-    color: theme.colors.textPrimary,
-    marginBottom: 12,
-    fontWeight: '500',
-  },
-  morphemeContainer: {
-    flexDirection: 'row',
-    gap: 8,
-    marginBottom: 14,
-  },
-  morpheme: {
-    flex: 1,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
-    borderRadius: 10,
-    alignItems: 'center',
-    gap: 3,
-  },
-  morphemeText: {
-    fontSize: 14,
-    fontWeight: 'bold',
-  },
-  morphemeMeaning: {
-    fontSize: 10,
-  },
-  footer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingTop: 10,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F4F8',
-  },
-  footerText: {
-    fontSize: 12,
-    color: theme.colors.textTertiary,
-    flex: 1,
-    marginRight: 8,
-  },
-  arrow: {
-    fontSize: 18,
-    color: theme.colors.textTertiary,
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    card: {
+      backgroundColor: colors.surface,
+      borderRadius: 16,
+      padding: 18,
+      marginBottom: 12,
+      shadowColor: '#4A6AE5',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.06,
+      shadowRadius: 12,
+      elevation: 3,
+    },
+    header: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 6,
+    },
+    headerLeft: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+    },
+    word: {
+      fontSize: 24,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+    },
+    phonetic: {
+      fontSize: 12,
+      color: colors.textTertiary,
+    },
+    posTag: {
+      fontSize: 11,
+      color: colors.primary,
+      backgroundColor: colors.primaryLight,
+      paddingHorizontal: 8,
+      paddingVertical: 3,
+      borderRadius: 6,
+      overflow: 'hidden',
+      fontWeight: '600',
+    },
+    meaning: {
+      fontSize: 17,
+      color: colors.textPrimary,
+      marginBottom: 12,
+      fontWeight: '500',
+    },
+    morphemeContainer: {
+      flexDirection: 'row',
+      gap: 8,
+      marginBottom: 14,
+    },
+    morpheme: {
+      flex: 1,
+      paddingHorizontal: 10,
+      paddingVertical: 10,
+      borderRadius: 10,
+      alignItems: 'center',
+      gap: 3,
+    },
+    morphemeText: {
+      fontSize: 14,
+      fontWeight: 'bold',
+    },
+    morphemeMeaning: {
+      fontSize: 10,
+    },
+    footer: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingTop: 10,
+      borderTopWidth: 1,
+    },
+    footerText: {
+      fontSize: 12,
+      color: colors.textTertiary,
+      flex: 1,
+      marginRight: 8,
+    },
+    arrow: {
+      fontSize: 18,
+      color: colors.textTertiary,
+    },
+  });

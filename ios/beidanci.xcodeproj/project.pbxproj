@@ -14,6 +14,7 @@
 		781E136771AB9BCC95BDDBD4 /* libPods-WordPulse-beidanciTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE6C568975A41435E7786076 /* libPods-WordPulse-beidanciTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		AA0001000000000000000002 /* SpeechModule.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0001000000000000000001 /* SpeechModule.m */; };
+		BB0001000000000000000001 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = BB0001000000000000000002 /* PrivacyInfo.xcprivacy */; };
 		DC23A7C627E93FD76C39B04B /* libPods-WordPulse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E6856E98C7D663669391F5DE /* libPods-WordPulse.a */; };
 /* End PBXBuildFile section */
 
@@ -45,6 +46,7 @@
 		89C6BE57DB24E9ADA2F236DE /* Pods-beidanci-beidanciTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-beidanci-beidanciTests.release.xcconfig"; path = "Target Support Files/Pods-beidanci-beidanciTests/Pods-beidanci-beidanciTests.release.xcconfig"; sourceTree = "<group>"; };
 		A79AE0572DFCC75E1F584817 /* Pods-WordPulse-beidanciTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordPulse-beidanciTests.debug.xcconfig"; path = "Target Support Files/Pods-WordPulse-beidanciTests/Pods-WordPulse-beidanciTests.debug.xcconfig"; sourceTree = "<group>"; };
 		AA0001000000000000000001 /* SpeechModule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpeechModule.m; path = beidanci/SpeechModule.m; sourceTree = "<group>"; };
+		BB0001000000000000000002 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = beidanci/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		C0022990D8ADB979CAB77F0F /* Pods-WordPulse.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordPulse.release.xcconfig"; path = "Target Support Files/Pods-WordPulse/Pods-WordPulse.release.xcconfig"; sourceTree = "<group>"; };
 		CE6C568975A41435E7786076 /* libPods-WordPulse-beidanciTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-WordPulse-beidanciTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E176902A0C5698B7F4FA5FC0 /* Pods-WordPulse.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WordPulse.debug.xcconfig"; path = "Target Support Files/Pods-WordPulse/Pods-WordPulse.debug.xcconfig"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
 				13B07FB71A68108700A75B9A /* main.m */,
+				BB0001000000000000000002 /* PrivacyInfo.xcprivacy */,
 			);
 			name = beidanci;
 			sourceTree = "<group>";
@@ -253,6 +256,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				BB0001000000000000000001 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,7 +418,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = beidanciTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -438,7 +442,7 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = beidanciTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -469,7 +473,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -477,8 +481,11 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.botonwa83.wordpulse;
 				PRODUCT_NAME = WordPulse;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -496,7 +503,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.2.4;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -504,7 +511,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.botonwa83.wordpulse;
 				PRODUCT_NAME = WordPulse;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
@@ -559,7 +569,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",
@@ -634,7 +644,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					/usr/lib/swift,
 					"$(inherited)",

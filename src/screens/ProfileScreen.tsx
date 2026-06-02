@@ -1,4 +1,4 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import {
   View,
   Text,
@@ -6,10 +6,11 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
+  Modal,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {theme} from '../theme';
+import {theme, useAppTheme, ThemeColors} from '../theme';
 import {UserProgress} from '../data/types';
 import {
   loadProgress,
@@ -26,11 +27,15 @@ import {
   AuthUser,
 } from '../data/authService';
 import {triggerLogout} from '../data/authState';
+import {PrivacyScreen} from './PrivacyScreen';
 
 export const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
+  const {colors} = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [privacyType, setPrivacyType] = useState<'privacy' | 'terms' | null>(null);
 
   const reload = useCallback(async () => {
     const p = await loadProgress();
@@ -76,13 +81,17 @@ export const ProfileScreen: React.FC = () => {
     if (!progress?.studyPlan) {
       return;
     }
-    const totalDays = Math.ceil(allWords.length / wordsPerDay);
-    const updated = {
-      ...progress,
-      studyPlan: {...progress.studyPlan, wordsPerDay, totalDays},
-    };
-    await saveProgress(updated);
-    setProgress(updated);
+    try {
+      const totalDays = Math.ceil(allWords.length / wordsPerDay);
+      const updated = {
+        ...progress,
+        studyPlan: {...progress.studyPlan, wordsPerDay, totalDays},
+      };
+      await saveProgress(updated);
+      setProgress(updated);
+    } catch {
+      Alert.alert('保存失败', '学习计划更新失败，请重试');
+    }
   };
 
   const handleReset = () => {
@@ -92,9 +101,13 @@ export const ProfileScreen: React.FC = () => {
         text: '确认重置',
         style: 'destructive',
         onPress: async () => {
-          const initial = getInitialProgress();
-          await saveProgress(initial);
-          setProgress(initial);
+          try {
+            const initial = getInitialProgress();
+            await saveProgress(initial);
+            setProgress(initial);
+          } catch {
+            Alert.alert('重置失败', '操作失败，请重试');
+          }
         },
       },
     ]);
@@ -111,17 +124,17 @@ export const ProfileScreen: React.FC = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{paddingTop: insets.top + 16, paddingBottom: 120}}>
+      contentContainerStyle={{paddingTop: insets.top + 16, paddingBottom: 120, maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'}}>
       <Text style={styles.title}>我的</Text>
 
       {/* User info */}
       {authUser && (
-        <View style={styles.userCard}>
-          <View style={styles.avatar}>
+        <View style={styles.userCard} accessibilityLabel="用户信息">
+          <View style={styles.avatar} accessibilityLabel={`头像 ${authUser.nickname}`}>
             <Text style={styles.avatarText}>{authUser.nickname[0]}</Text>
           </View>
           <View style={styles.userInfo}>
-            <TouchableOpacity onPress={handleEditNickname} activeOpacity={0.7}>
+            <TouchableOpacity onPress={handleEditNickname} activeOpacity={0.7} accessibilityLabel="修改昵称" accessibilityRole="button">
               <Text style={styles.userName}>
                 {authUser.nickname}{' '}
                 <Text style={styles.editHint}>{'\u270E'}</Text>
@@ -141,13 +154,13 @@ export const ProfileScreen: React.FC = () => {
               <Text style={styles.ovLabel}>已学单词</Text>
             </View>
             <View style={styles.ovItem}>
-              <Text style={[styles.ovNum, {color: theme.colors.secondary}]}>
+              <Text style={[styles.ovNum, {color: colors.secondary}]}>
                 {stats.learnedRoots}
               </Text>
               <Text style={styles.ovLabel}>已学词根</Text>
             </View>
             <View style={styles.ovItem}>
-              <Text style={[styles.ovNum, {color: theme.colors.accent}]}>
+              <Text style={[styles.ovNum, {color: colors.accent}]}>
                 {stats.streak}
               </Text>
               <Text style={styles.ovLabel}>连续天数</Text>
@@ -203,7 +216,10 @@ export const ProfileScreen: React.FC = () => {
                   plan.wordsPerDay === n && styles.paceBtnActive,
                 ]}
                 onPress={() => handleChangePace(n)}
-                activeOpacity={0.7}>
+                activeOpacity={0.7}
+                accessibilityLabel={`每日学习${n}个单词`}
+                accessibilityRole="button"
+                accessibilityState={{selected: plan.wordsPerDay === n}}>
                 <Text
                   style={[
                     styles.paceBtnText,
@@ -272,217 +288,235 @@ export const ProfileScreen: React.FC = () => {
       {/* Actions */}
       <View style={styles.section}>
         <TouchableOpacity
+          style={styles.menuBtn}
+          onPress={() => setPrivacyType('terms')}
+          activeOpacity={0.7}
+          accessibilityLabel="查看用户协议"
+          accessibilityRole="button">
+          <Text style={styles.menuBtnText}>用户协议</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.menuBtn}
+          onPress={() => setPrivacyType('privacy')}
+          activeOpacity={0.7}
+          accessibilityLabel="查看隐私政策"
+          accessibilityRole="button">
+          <Text style={styles.menuBtnText}>隐私政策</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
           style={styles.resetBtn}
           onPress={handleReset}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          accessibilityLabel="重置所有学习进度"
+          accessibilityRole="button">
           <Text style={styles.resetText}>重置所有进度</Text>
         </TouchableOpacity>
-        <View style={{height: 10}} />
         <TouchableOpacity
           style={styles.logoutBtn}
           onPress={handleLogout}
-          activeOpacity={0.7}>
+          activeOpacity={0.7}
+          accessibilityLabel="退出登录"
+          accessibilityRole="button">
           <Text style={styles.logoutText}>退出登录</Text>
         </TouchableOpacity>
       </View>
+
+      <Modal visible={privacyType !== null} animationType="slide">
+        {privacyType && (
+          <PrivacyScreen
+            type={privacyType}
+            onClose={() => setPrivacyType(null)}
+          />
+        )}
+      </Modal>
     </ScrollView>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: theme.colors.background},
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    paddingHorizontal: 20,
-    marginBottom: 20,
-  },
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {flex: 1, backgroundColor: colors.background},
+    title: {
+      fontSize: 30,
+      fontWeight: '800',
+      color: colors.textPrimary,
+      paddingHorizontal: 20,
+      marginBottom: 20,
+    },
 
-  overviewCard: {
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 24,
-    shadowColor: '#4A6AE5',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 4,
-  },
-  ovRow: {flexDirection: 'row', marginBottom: 16},
-  ovItem: {flex: 1, alignItems: 'center'},
-  ovNum: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-    marginBottom: 4,
-  },
-  ovLabel: {fontSize: 12, color: theme.colors.textSecondary},
-  progressBar: {
-    height: 8,
-    backgroundColor: theme.colors.surfaceLight,
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginBottom: 8,
-  },
-  progressFill: {
-    height: 8,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 4,
-  },
-  ovMeta: {fontSize: 12, color: theme.colors.textTertiary, textAlign: 'center'},
+    overviewCard: {
+      marginHorizontal: 20,
+      backgroundColor: colors.surface,
+      borderRadius: theme.borderRadius.xl,
+      padding: 24,
+      marginBottom: 24,
+      ...theme.shadow.lg,
+    },
+    ovRow: {flexDirection: 'row', marginBottom: 20},
+    ovItem: {flex: 1, alignItems: 'center'},
+    ovNum: {
+      fontSize: 32,
+      fontWeight: '800',
+      color: colors.primary,
+      marginBottom: 4,
+    },
+    ovLabel: {fontSize: 12, color: colors.textTertiary, fontWeight: '500'},
+    progressBar: {
+      height: 6,
+      backgroundColor: colors.surfaceLight,
+      borderRadius: 3,
+      overflow: 'hidden',
+      marginBottom: 10,
+    },
+    progressFill: {
+      height: 6,
+      backgroundColor: colors.primary,
+      borderRadius: 3,
+    },
+    ovMeta: {fontSize: 12, color: colors.textTertiary, textAlign: 'center'},
 
-  section: {paddingHorizontal: 20, marginBottom: 24},
-  sectionTitle: {
-    fontSize: 12,
-    color: theme.colors.primary,
-    marginBottom: 10,
-    fontWeight: '700',
-    letterSpacing: 1,
-  },
-  subTitle: {
-    fontSize: 13,
-    color: theme.colors.textSecondary,
-    marginTop: 14,
-    marginBottom: 8,
-  },
+    section: {paddingHorizontal: 20, marginBottom: 28},
+    sectionTitle: {
+      fontSize: 11,
+      color: colors.primary,
+      marginBottom: 12,
+      fontWeight: '700',
+      letterSpacing: 1.5,
+      textTransform: 'uppercase',
+    },
+    subTitle: {
+      fontSize: 13,
+      color: colors.textSecondary,
+      marginTop: 16,
+      marginBottom: 10,
+    },
 
-  planCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 16,
-    gap: 10,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
-  },
-  planRow: {flexDirection: 'row', justifyContent: 'space-between'},
-  planLabel: {fontSize: 14, color: theme.colors.textSecondary},
-  planValue: {fontSize: 14, fontWeight: '600', color: theme.colors.textPrimary},
+    planCard: {
+      backgroundColor: colors.surface,
+      borderRadius: theme.borderRadius.lg,
+      padding: 18,
+      gap: 14,
+      ...theme.shadow.sm,
+    },
+    planRow: {flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'},
+    planLabel: {fontSize: 14, color: colors.textSecondary},
+    planValue: {fontSize: 14, fontWeight: '600', color: colors.textPrimary},
 
-  paceRow: {flexDirection: 'row', gap: 10},
-  paceBtn: {
-    flex: 1,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 12,
-    padding: 12,
-    alignItems: 'center',
-    borderWidth: 2,
-    borderColor: 'transparent',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  paceBtnActive: {
-    borderColor: theme.colors.primary,
-    backgroundColor: theme.colors.primaryLight,
-  },
-  paceBtnText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: theme.colors.textSecondary,
-  },
-  paceBtnTextActive: {color: theme.colors.primary},
+    paceRow: {flexDirection: 'row', gap: 10},
+    paceBtn: {
+      flex: 1,
+      backgroundColor: colors.surfaceLight,
+      borderRadius: 12,
+      paddingVertical: 14,
+      alignItems: 'center',
+      borderWidth: 2,
+      borderColor: 'transparent',
+    },
+    paceBtnActive: {
+      borderColor: colors.primary,
+      backgroundColor: colors.primaryLight,
+      ...theme.shadow.colored(colors.primary),
+    },
+    paceBtnText: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: colors.textTertiary,
+    },
+    paceBtnTextActive: {color: colors.primary},
 
-  levelCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 14,
-    gap: 6,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 6,
-    elevation: 1,
-  },
-  levelRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 8,
-    borderRadius: 10,
-    gap: 10,
-  },
-  levelRowActive: {backgroundColor: theme.colors.primaryLight},
-  levelDot: {width: 10, height: 10, borderRadius: 5},
-  levelDotDone: {backgroundColor: theme.colors.success},
-  levelDotActive: {backgroundColor: theme.colors.primary},
-  levelDotPending: {backgroundColor: theme.colors.textTertiary + '40'},
-  levelName: {fontSize: 14, color: theme.colors.textSecondary, flex: 1},
-  levelNameActive: {color: theme.colors.primary, fontWeight: '600'},
-  levelTarget: {fontSize: 12, color: theme.colors.textTertiary},
+    levelCard: {
+      backgroundColor: colors.surface,
+      borderRadius: theme.borderRadius.lg,
+      padding: 6,
+      gap: 2,
+      ...theme.shadow.sm,
+    },
+    levelRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: 10,
+      paddingHorizontal: 12,
+      borderRadius: 12,
+      gap: 12,
+    },
+    levelRowActive: {backgroundColor: colors.primaryLight},
+    levelDot: {width: 8, height: 8, borderRadius: 4},
+    levelDotDone: {backgroundColor: colors.success},
+    levelDotActive: {backgroundColor: colors.primary},
+    levelDotPending: {backgroundColor: colors.textTertiary + '30'},
+    levelName: {fontSize: 14, color: colors.textSecondary, flex: 1},
+    levelNameActive: {color: colors.primary, fontWeight: '600'},
+    levelTarget: {fontSize: 12, color: colors.textTertiary, fontWeight: '500'},
 
-  histRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    backgroundColor: theme.colors.surface,
-    borderRadius: 10,
-    padding: 12,
-    marginBottom: 6,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.02,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  histDate: {fontSize: 13, color: theme.colors.textSecondary},
-  histDetail: {fontSize: 13, color: theme.colors.textTertiary},
+    histRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      marginBottom: 6,
+      ...theme.shadow.sm,
+    },
+    histDate: {fontSize: 13, color: colors.textSecondary, fontWeight: '500'},
+    histDetail: {fontSize: 13, color: colors.textTertiary},
 
-  userCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 20,
-    padding: 20,
-    marginBottom: 24,
-    gap: 16,
-    shadowColor: '#4A6AE5',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 4,
-  },
-  avatar: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
-    backgroundColor: theme.colors.primary,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  avatarText: {fontSize: 24, fontWeight: 'bold', color: '#FFFFFF'},
-  userInfo: {flex: 1},
-  userName: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 4,
-  },
-  editHint: {fontSize: 14, color: theme.colors.textTertiary},
-  userPhone: {fontSize: 13, color: theme.colors.textTertiary},
+    userCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: 20,
+      backgroundColor: colors.surface,
+      borderRadius: theme.borderRadius.xl,
+      padding: 20,
+      marginBottom: 24,
+      gap: 16,
+      ...theme.shadow.lg,
+    },
+    avatar: {
+      width: 56,
+      height: 56,
+      borderRadius: 18,
+      backgroundColor: colors.primary,
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...theme.shadow.colored(colors.primary),
+    },
+    avatarText: {fontSize: 22, fontWeight: '800', color: '#FFFFFF'},
+    userInfo: {flex: 1},
+    userName: {
+      fontSize: 18,
+      fontWeight: '700',
+      color: colors.textPrimary,
+      marginBottom: 4,
+    },
+    editHint: {fontSize: 14, color: colors.textTertiary},
+    userPhone: {fontSize: 13, color: colors.textTertiary, fontWeight: '500'},
 
-  resetBtn: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 16,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#FFE0E0',
-  },
-  resetText: {fontSize: 14, color: theme.colors.error},
-  logoutBtn: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 16,
-    alignItems: 'center',
-    borderWidth: 1,
-    borderColor: '#E8ECF2',
-  },
-  logoutText: {fontSize: 14, color: theme.colors.textSecondary},
-});
+    menuBtn: {
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      paddingVertical: 15,
+      paddingHorizontal: 16,
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 8,
+      ...theme.shadow.sm,
+    },
+    menuBtnText: {fontSize: 15, color: colors.textPrimary, fontWeight: '500'},
+    resetBtn: {
+      backgroundColor: colors.error + '08',
+      borderRadius: 14,
+      paddingVertical: 15,
+      alignItems: 'center',
+      marginBottom: 8,
+      marginTop: 8,
+    },
+    resetText: {fontSize: 14, color: colors.error, fontWeight: '500'},
+    logoutBtn: {
+      borderRadius: 14,
+      paddingVertical: 15,
+      alignItems: 'center',
+    },
+    logoutText: {fontSize: 14, color: colors.textTertiary, fontWeight: '500'},
+  });

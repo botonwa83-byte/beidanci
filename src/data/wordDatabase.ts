@@ -1,6 +1,7 @@
 import {Word, WordRoot, Prefix, Suffix, Level} from './types';
 import rawData from './wordDatabaseRaw.json';
 import enrichmentData from './wordEnrichment.json';
+import wordExamplesData from './wordExamples.json';
 import rootsExtendedData from './rootsExtended.json';
 import {translationService} from '../services/translationService';
 
@@ -8,6 +9,9 @@ const enrichment: Record<
   string,
   {phonetic: string; examples: string[]; exampleTranslations?: string[]}
 > = enrichmentData as any;
+
+const wordExamples: Record<string, {en: string; zh: string}> =
+  wordExamplesData as any;
 const extendedRoots = rootsExtendedData.roots;
 
 // === Levels ===
@@ -16,57 +20,57 @@ export const levels: Level[] = [
     level: 1,
     name: '入门',
     description: '核心词根 + 高频词',
-    targetWords: 100,
+    targetWords: 140,
     rootsCount: 6,
   },
   {
     level: 2,
     name: '基础',
     description: '扩展词根词缀',
-    targetWords: 250,
-    rootsCount: 12,
+    targetWords: 290,
+    rootsCount: 13,
   },
   {
     level: 3,
     name: '进阶',
     description: '中频词根 + 组合词',
-    targetWords: 450,
-    rootsCount: 18,
+    targetWords: 520,
+    rootsCount: 31,
   },
   {
     level: 4,
     name: '中级',
     description: '多词素词汇',
-    targetWords: 700,
-    rootsCount: 24,
+    targetWords: 830,
+    rootsCount: 65,
   },
   {
     level: 5,
     name: '中高',
     description: '专业词根',
-    targetWords: 1000,
-    rootsCount: 30,
+    targetWords: 1160,
+    rootsCount: 108,
   },
   {
     level: 6,
     name: '高级',
     description: '综合运用词根词缀',
-    targetWords: 1500,
-    rootsCount: 40,
+    targetWords: 1390,
+    rootsCount: 128,
   },
   {
     level: 7,
     name: '精通',
     description: '深度词根扩展',
-    targetWords: 2200,
-    rootsCount: 60,
+    targetWords: 1600,
+    rootsCount: 148,
   },
   {
     level: 8,
     name: '大师',
     description: '全部词汇掌握',
-    targetWords: 3272,
-    rootsCount: 99,
+    targetWords: 3467,
+    rootsCount: 148,
   },
 ];
 
@@ -5534,12 +5538,19 @@ const translateExample = (
   return `句中 ${word} 的意思是"${m}"。`;
 };
 
-// Get real example sentence from enrichment data, with fallback
+// Get real example sentence from wordExamples / enrichment data, with fallback
 const generateExample = (
   word: string,
   meaning: string,
   pos: string,
 ): {example: string; translation: string} => {
+  // Priority 1: curated daily-life examples
+  const exData = wordExamples[word.toLowerCase()];
+  if (exData?.en && exData?.zh) {
+    return {example: exData.en, translation: exData.zh};
+  }
+
+  // Priority 2: enrichment data
   const data = enrichment[word.toLowerCase()];
   if (data?.examples && data.examples.length > 0) {
     const sorted = [...data.examples].sort((a, b) => a.length - b.length);
@@ -5575,97 +5586,97 @@ const generateExample = (
     return {example: withPeriod, translation};
   }
 
-  // Fallback: more varied and natural templates
+  // Fallback: daily-life templates
   const templates: Record<
     string,
     Array<{en: (w: string) => string; cn: (m: string) => string}>
   > = {
     v: [
       {
-        en: w => `The company plans to ${w} new products next year.`,
-        cn: m => `公司计划明年${m}新产品。`,
+        en: w => `I need to ${w} this before dinner tonight.`,
+        cn: m => `我今晚晚饭前需要${m}这个。`,
       },
       {
-        en: w => `Can you ${w} this document for me?`,
-        cn: m => `你能帮我${m}这份文件吗？`,
+        en: w => `She asked me to ${w} the package for her.`,
+        cn: m => `她让我帮她${m}这个包裹。`,
       },
       {
-        en: w => `Scientists are trying to ${w} the phenomenon.`,
-        cn: m => `科学家们正在尝试${m}这一现象。`,
+        en: w => `We decided to ${w} during the weekend.`,
+        cn: m => `我们决定周末${m}。`,
       },
       {
-        en: w => `The government decided to ${w} the new policy.`,
-        cn: m => `政府决定${m}新政策。`,
+        en: w => `My mom taught me how to ${w} when I was young.`,
+        cn: m => `我妈妈在我小时候教我怎么${m}。`,
       },
       {
-        en: w => `He managed to ${w} the problem quickly.`,
-        cn: m => `他设法迅速${m}了这个问题。`,
+        en: w => `Can you help me ${w} this? I really appreciate it.`,
+        cn: m => `你能帮我${m}这个吗？非常感谢。`,
       },
       {
-        en: w => `They will ${w} the agreement tomorrow.`,
-        cn: m => `他们明天将${m}这项协议。`,
+        en: w => `He likes to ${w} in his free time.`,
+        cn: m => `他喜欢在空闲时间${m}。`,
       },
     ],
     n: [
       {
-        en: w => `The ${w} of the project exceeded expectations.`,
-        cn: m => `该项目的${m}超出了预期。`,
+        en: w => `The ${w} at the store was on sale yesterday.`,
+        cn: m => `商店的${m}昨天在打折。`,
       },
       {
-        en: w => `Her ${w} in this field is widely recognized.`,
-        cn: m => `她在这一领域的${m}得到了广泛认可。`,
+        en: w => `I forgot to bring my ${w} to school today.`,
+        cn: m => `我今天忘记带${m}去学校了。`,
       },
       {
-        en: w => `The ${w} between the two systems is significant.`,
-        cn: m => `两个系统之间的${m}是显著的。`,
+        en: w => `This ${w} is really important for our daily life.`,
+        cn: m => `这个${m}对我们的日常生活很重要。`,
       },
       {
-        en: w => `This ${w} has been debated for decades.`,
-        cn: m => `这个${m}已经争论了数十年。`,
+        en: w => `She got a new ${w} as a birthday gift.`,
+        cn: m => `她收到了一个${m}作为生日礼物。`,
       },
       {
-        en: w => `A clear ${w} is essential for success.`,
-        cn: m => `明确的${m}对成功至关重要。`,
+        en: w => `The ${w} near our house is always crowded on weekends.`,
+        cn: m => `我们家附近的${m}周末总是很拥挤。`,
       },
       {
-        en: w => `The ${w} of modern technology has changed our lives.`,
-        cn: m => `现代技术的${m}改变了我们的生活。`,
+        en: w => `His ${w} surprised everyone at the party.`,
+        cn: m => `他的${m}让聚会上的每个人都很惊讶。`,
       },
     ],
     a: [
       {
-        en: w => `This is a highly ${w} method.`,
-        cn: m => `这是一种非常${m}的方法。`,
+        en: w => `The weather today is really ${w}.`,
+        cn: m => `今天的天气真的很${m}。`,
       },
       {
-        en: w => `The situation became increasingly ${w}.`,
-        cn: m => `情况变得越来越${m}。`,
+        en: w => `She looked ${w} in her new dress.`,
+        cn: m => `她穿着新裙子看起来很${m}。`,
       },
       {
-        en: w => `His work is considered ${w} by experts.`,
-        cn: m => `他的工作被专家认为是${m}的。`,
+        en: w => `This coffee tastes ${w}, I like it a lot.`,
+        cn: m => `这杯咖啡味道很${m}，我很喜欢。`,
       },
       {
-        en: w => `It would be ${w} to consider all options.`,
-        cn: m => `考虑所有选项是${m}的。`,
+        en: w => `The hotel room was clean and ${w}.`,
+        cn: m => `酒店房间干净而${m}。`,
       },
       {
-        en: w => `The ${w} nature of this discovery surprised everyone.`,
-        cn: m => `这一发现${m}的性质让所有人惊讶。`,
+        en: w => `I feel so ${w} after a good night's sleep.`,
+        cn: m => `睡了个好觉后我感觉特别${m}。`,
       },
     ],
     ad: [
       {
-        en: w => `The project progressed ${w} under new leadership.`,
-        cn: m => `在新领导下，项目${m}地推进。`,
+        en: w => `She ${w} finished all her homework before bedtime.`,
+        cn: m => `她在睡觉前${m}地完成了所有作业。`,
       },
       {
-        en: w => `She ${w} explained the complex theory.`,
-        cn: m => `她${m}地解释了这个复杂理论。`,
+        en: w => `The bus arrived ${w} on time this morning.`,
+        cn: m => `今天早上公交车${m}地准时到达了。`,
       },
       {
-        en: w => `The economy has ${w} improved this year.`,
-        cn: m => `经济今年${m}地改善了。`,
+        en: w => `He ${w} thanked his friend for the help.`,
+        cn: m => `他${m}地感谢了朋友的帮助。`,
       },
     ],
   };
@@ -5863,17 +5874,30 @@ const buildSupplementWords = (): Word[] => {
   return words;
 };
 
-// Initialize database
+// === Initialize database with indexes ===
 const {words: rootWords, roots} = buildRootWords();
 const supplementWords = buildSupplementWords();
 
 export const allWords: Word[] = [...rootWords, ...supplementWords];
 export const coreRoots: WordRoot[] = roots;
 
+// Build root index for O(1) lookup instead of O(n) filter
+const rootIndex = new Map<string, Word[]>();
+for (const w of allWords) {
+  if (w.rootId) {
+    const list = rootIndex.get(w.rootId);
+    if (list) {
+      list.push(w);
+    } else {
+      rootIndex.set(w.rootId, [w]);
+    }
+  }
+}
+
 // === Lookup helpers ===
 
 export const getWordsByRoot = (rootId: string): Word[] => {
-  return allWords.filter(w => w.rootId === rootId);
+  return rootIndex.get(rootId) || [];
 };
 
 export const searchWords = (query: string): Word[] => {

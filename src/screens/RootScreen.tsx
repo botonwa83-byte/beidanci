@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
@@ -17,7 +18,7 @@ import {
   searchWords,
   allWords,
 } from '../data/wordDatabase';
-import {theme} from '../theme';
+import {theme, useAppTheme, ThemeColors} from '../theme';
 import {Word} from '../data/types';
 
 type RootStackParamList = {
@@ -28,6 +29,9 @@ type RootStackParamList = {
 type TabType = 'root' | 'prefix' | 'suffix' | 'search';
 
 export const RootScreen: React.FC = () => {
+  const insets = useSafeAreaInsets();
+  const {colors} = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [activeTab, setActiveTab] = useState<TabType>('root');
@@ -95,7 +99,9 @@ export const RootScreen: React.FC = () => {
       key={word.id}
       style={styles.wordItem}
       onPress={() => handleWordPress(word)}
-      activeOpacity={0.7}>
+      activeOpacity={0.7}
+      accessibilityLabel={`${word.word}，${word.meaning}`}
+      accessibilityRole="button">
       <View style={styles.wordItemLeft}>
         <Text style={styles.wordText}>{word.word}</Text>
         <Text style={styles.wordPhonetic}>{word.phonetic}</Text>
@@ -111,7 +117,7 @@ export const RootScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={[styles.header, {paddingTop: insets.top + 12}]}>
         <Text style={styles.title}>词根探索</Text>
         <Text style={styles.subtitle}>
           {coreRoots.length}词根 {prefixes.length}前缀 {suffixes.length}后缀
@@ -127,7 +133,10 @@ export const RootScreen: React.FC = () => {
               styles.mainTab,
               activeTab === tab.key && styles.mainTabActive,
             ]}
-            onPress={() => setActiveTab(tab.key)}>
+            onPress={() => setActiveTab(tab.key)}
+            accessibilityLabel={tab.label}
+            accessibilityRole="tab"
+            accessibilityState={{selected: activeTab === tab.key}}>
             <Text
               style={[
                 styles.mainTabText,
@@ -145,16 +154,20 @@ export const RootScreen: React.FC = () => {
           <TextInput
             style={styles.searchInput}
             placeholder="输入单词、中文或词根..."
-            placeholderTextColor={theme.colors.textTertiary}
+            placeholderTextColor={colors.textTertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
             autoCorrect={false}
             autoCapitalize="none"
+            accessibilityLabel="搜索单词"
+            accessibilityHint="输入单词、中文释义或词根进行搜索"
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity
               style={styles.clearButton}
-              onPress={() => setSearchQuery('')}>
+              onPress={() => setSearchQuery('')}
+              accessibilityLabel="清除搜索"
+              accessibilityRole="button">
               <Text style={styles.clearText}>{'\u2715'}</Text>
             </TouchableOpacity>
           )}
@@ -357,7 +370,7 @@ export const RootScreen: React.FC = () => {
         </>
       )}
 
-      {/* Word list */}
+      {/* Content area */}
       <View style={styles.wordListSection}>
         <Text style={styles.wordListTitle}>
           {activeTab === 'root' && `词汇家族 (${rootMatchedWords.length})`}
@@ -383,221 +396,214 @@ export const RootScreen: React.FC = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-  },
-  header: {
-    paddingHorizontal: 20,
-    paddingTop: 52,
-    paddingBottom: 12,
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 4,
-  },
-  subtitle: {
-    fontSize: 12,
-    color: theme.colors.textTertiary,
-  },
-  mainTabs: {
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.surfaceLight,
-    borderRadius: 12,
-    padding: 3,
-    marginBottom: 12,
-  },
-  mainTab: {
-    flex: 1,
-    paddingVertical: 9,
-    alignItems: 'center',
-    borderRadius: 10,
-  },
-  mainTabActive: {
-    backgroundColor: theme.colors.primary,
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  mainTabText: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-    fontWeight: '500',
-  },
-  mainTabTextActive: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-  },
-  searchContainer: {
-    marginHorizontal: 20,
-    marginBottom: 12,
-    position: 'relative',
-  },
-  searchInput: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 14,
-    fontSize: 15,
-    color: theme.colors.textPrimary,
-    borderWidth: 1,
-    borderColor: '#E8ECF2',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  clearButton: {
-    position: 'absolute',
-    right: 14,
-    top: 14,
-  },
-  clearText: {
-    fontSize: 16,
-    color: theme.colors.textTertiary,
-  },
-  morphemeScroll: {
-    marginBottom: 12,
-    maxHeight: 40,
-  },
-  morphemeScrollContent: {
-    paddingHorizontal: 20,
-    gap: 8,
-  },
-  morphemeChip: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 10,
-    backgroundColor: theme.colors.surface,
-    borderWidth: 1.5,
-    borderColor: 'transparent',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.03,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  morphemeChipText: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-  },
-  morphemeChipCount: {
-    fontSize: 10,
-    color: theme.colors.textTertiary,
-  },
-  infoCard: {
-    marginHorizontal: 20,
-    padding: 16,
-    borderRadius: 16,
-    marginBottom: 12,
-    borderWidth: 1,
-  },
-  infoHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 8,
-  },
-  infoRoot: {
-    fontSize: 28,
-    fontWeight: 'bold',
-  },
-  levelTag: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-  },
-  levelTagText: {
-    fontSize: 11,
-    fontWeight: 'bold',
-    color: '#FFFFFF',
-  },
-  typeBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 3,
-    borderRadius: 6,
-  },
-  typeBadgeText: {
-    fontSize: 11,
-    fontWeight: '600',
-    color: '#FFFFFF',
-  },
-  infoMeaning: {
-    fontSize: 18,
-    color: theme.colors.textPrimary,
-    marginBottom: 4,
-    fontWeight: '600',
-  },
-  infoOrigin: {
-    fontSize: 12,
-    color: theme.colors.textSecondary,
-  },
-  wordListSection: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  wordListTitle: {
-    fontSize: 12,
-    color: theme.colors.primary,
-    marginBottom: 8,
-    fontWeight: '700',
-    letterSpacing: 1,
-  },
-  wordList: {
-    flex: 1,
-  },
-  wordListContent: {
-    gap: 8,
-    paddingBottom: 100,
-  },
-  wordItem: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: 14,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  wordItemLeft: {
-    flex: 1,
-  },
-  wordItemRight: {
-    alignItems: 'flex-end',
-    marginLeft: 12,
-    flexShrink: 0,
-  },
-  wordText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-  },
-  wordPhonetic: {
-    fontSize: 12,
-    color: theme.colors.textTertiary,
-    marginTop: 2,
-  },
-  wordMeaning: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-    maxWidth: 120,
-  },
-  wordPos: {
-    fontSize: 11,
-    color: theme.colors.textTertiary,
-    marginTop: 2,
-  },
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: colors.background,
+    },
+    header: {
+      paddingHorizontal: 20,
+      paddingBottom: 14,
+    },
+    title: {
+      fontSize: 30,
+      fontWeight: '800',
+      color: colors.textPrimary,
+      marginBottom: 4,
+    },
+    subtitle: {
+      fontSize: 12,
+      color: colors.textTertiary,
+      letterSpacing: 0.5,
+    },
+    mainTabs: {
+      flexDirection: 'row',
+      marginHorizontal: 20,
+      backgroundColor: colors.surfaceLight,
+      borderRadius: 14,
+      padding: 3,
+      marginBottom: 14,
+    },
+    mainTab: {
+      flex: 1,
+      paddingVertical: 10,
+      alignItems: 'center',
+      borderRadius: 12,
+    },
+    mainTabActive: {
+      backgroundColor: colors.primary,
+      ...theme.shadow.colored(colors.primary),
+    },
+    mainTabText: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      fontWeight: '500',
+    },
+    mainTabTextActive: {
+      color: '#FFFFFF',
+      fontWeight: '700',
+    },
+    searchContainer: {
+      marginHorizontal: 20,
+      marginBottom: 14,
+      position: 'relative',
+    },
+    searchInput: {
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      paddingVertical: 13,
+      paddingHorizontal: 16,
+      paddingRight: 40,
+      fontSize: 15,
+      color: colors.textPrimary,
+      borderWidth: 1,
+      borderColor: colors.divider,
+      ...theme.shadow.sm,
+    },
+    clearButton: {
+      position: 'absolute',
+      right: 14,
+      top: 13,
+    },
+    clearText: {
+      fontSize: 15,
+      color: colors.textTertiary,
+    },
+    morphemeScroll: {
+      marginBottom: 12,
+      maxHeight: 40,
+    },
+    morphemeScrollContent: {
+      paddingHorizontal: 20,
+      gap: 8,
+    },
+    morphemeChip: {
+      paddingHorizontal: 14,
+      paddingVertical: 7,
+      borderRadius: theme.borderRadius.pill,
+      backgroundColor: colors.surface,
+      borderWidth: 1.5,
+      borderColor: 'transparent',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 5,
+      ...theme.shadow.sm,
+    },
+    morphemeChipText: {
+      fontSize: 13,
+      color: colors.textSecondary,
+      fontWeight: '500',
+    },
+    morphemeChipCount: {
+      fontSize: 10,
+      color: colors.textTertiary,
+      fontWeight: '600',
+    },
+    infoCard: {
+      marginHorizontal: 20,
+      padding: 18,
+      borderRadius: theme.borderRadius.lg,
+      marginBottom: 14,
+      borderWidth: 1,
+    },
+    infoHeader: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 8,
+    },
+    infoRoot: {
+      fontSize: 28,
+      fontWeight: '800',
+    },
+    levelTag: {
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 8,
+    },
+    levelTagText: {
+      fontSize: 11,
+      fontWeight: '700',
+      color: '#FFFFFF',
+    },
+    typeBadge: {
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 8,
+    },
+    typeBadgeText: {
+      fontSize: 11,
+      fontWeight: '700',
+      color: '#FFFFFF',
+    },
+    infoMeaning: {
+      fontSize: 18,
+      color: colors.textPrimary,
+      marginBottom: 4,
+      fontWeight: '600',
+    },
+    infoOrigin: {
+      fontSize: 12,
+      color: colors.textSecondary,
+      fontWeight: '500',
+    },
+    wordListSection: {
+      flex: 1,
+      paddingHorizontal: 20,
+    },
+    wordListTitle: {
+      fontSize: 11,
+      color: colors.primary,
+      marginBottom: 10,
+      fontWeight: '700',
+      letterSpacing: 1.5,
+      textTransform: 'uppercase',
+    },
+    wordList: {
+      flex: 1,
+    },
+    wordListContent: {
+      gap: 6,
+      paddingBottom: 100,
+    },
+    wordItem: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingVertical: 14,
+      paddingHorizontal: 16,
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      ...theme.shadow.sm,
+    },
+    wordItemLeft: {
+      flex: 1,
+    },
+    wordItemRight: {
+      alignItems: 'flex-end',
+      marginLeft: 12,
+      flexShrink: 0,
+    },
+    wordText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: colors.textPrimary,
+    },
+    wordPhonetic: {
+      fontSize: 12,
+      color: colors.textTertiary,
+      marginTop: 3,
+    },
+    wordMeaning: {
+      fontSize: 14,
+      color: colors.textSecondary,
+    },
+    wordPos: {
+      fontSize: 11,
+      color: colors.textTertiary,
+      marginTop: 3,
+      fontWeight: '500',
+    },
+
+  });

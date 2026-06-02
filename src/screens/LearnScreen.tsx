@@ -1,14 +1,15 @@
-import React, {useState, useCallback} from 'react';
+import React, {useState, useCallback, useMemo} from 'react';
 import {
   View,
   Text,
   StyleSheet,
   ScrollView,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {theme} from '../theme';
+import {theme, useAppTheme, ThemeColors} from '../theme';
 import {UserProgress, SessionStep, DailyMission} from '../data/types';
 import {
   loadProgress,
@@ -31,6 +32,8 @@ type AppMode = 'dashboard' | 'setup' | 'session';
 
 export const LearnScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
+  const {colors} = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [mission, setMission] = useState<DailyMission | null>(null);
   const [mode, setMode] = useState<AppMode>('dashboard');
@@ -47,20 +50,23 @@ export const LearnScreen: React.FC = () => {
   // Setup state
   const [selectedPace, setSelectedPace] = useState(25);
 
+  const safeSave = async (p: UserProgress) => {
+    try {
+      await saveProgress(p);
+    } catch {
+      Alert.alert('保存失败', '学习进度保存失败，请重试');
+    }
+  };
+
   const reload = useCallback(async () => {
-    const p = await loadProgress();
+    const p = await loadProgress().catch(() => null);
+    if (!p) {
+      return;
+    }
     setProgress(p);
+    setMission(getTodayMission(p));
     if (!p.studyPlan) {
       setMode('setup');
-    } else {
-      const m = getTodayMission(p);
-      setMission(m);
-      if (!p.todayMission || p.todayMission.date !== m.date) {
-        const updated = {...p, todayMission: m};
-        await saveProgress(updated);
-        setProgress(updated);
-      }
-      setMode('dashboard');
     }
   }, []);
 
@@ -70,146 +76,67 @@ export const LearnScreen: React.FC = () => {
     }, [reload]),
   );
 
-  // ==================== Setup ====================
-  const handleSetup = async () => {
+  // Start plan
+  const handleStartPlan = async () => {
     if (!progress) {
       return;
     }
     const plan = createStudyPlan(selectedPace);
-    const p = {...progress, studyPlan: plan};
-    const m = getTodayMission(p);
-    const updated = {...p, todayMission: m};
-    await saveProgress(updated);
-    setProgress(updated);
-    setMission(m);
+    const p: UserProgress = {...progress, studyPlan: plan};
+    await safeSave(p);
+    setProgress(p);
+    setMission(getTodayMission(p));
     setMode('dashboard');
   };
 
-  if (mode === 'setup') {
-    const paces = [
-      {
-        n: 15,
-        label: '轻松',
-        desc: `${getEstimatedDays(15)}天完成`,
-        sub: '每天约10分钟',
-      },
-      {
-        n: 25,
-        label: '标准',
-        desc: `${getEstimatedDays(25)}天完成`,
-        sub: '每天约15分钟',
-      },
-      {
-        n: 40,
-        label: '冲刺',
-        desc: `${getEstimatedDays(40)}天完成`,
-        sub: '每天约25分钟',
-      },
-      {
-        n: 60,
-        label: '极限',
-        desc: `${getEstimatedDays(60)}天完成`,
-        sub: '每天约35分钟',
-      },
-    ];
-    return (
-      <View style={[styles.container, {paddingTop: insets.top + 20}]}>
-        <View style={styles.setupWrap}>
-          <Text style={styles.setupTitle}>制定你的背词计划</Text>
-          <Text style={styles.setupSub}>
-            共 {allWords.length} 个核心词汇，通过词根联想高效记忆
-          </Text>
-
-          <View style={styles.paceList}>
-            {paces.map(p => (
-              <TouchableOpacity
-                key={p.n}
-                style={[
-                  styles.paceCard,
-                  selectedPace === p.n && styles.paceCardActive,
-                ]}
-                onPress={() => setSelectedPace(p.n)}
-                activeOpacity={0.7}>
-                <View style={styles.paceHeader}>
-                  <Text
-                    style={[
-                      styles.paceLabel,
-                      selectedPace === p.n && styles.paceLabelActive,
-                    ]}>
-                    {p.label}
-                  </Text>
-                  <Text
-                    style={[
-                      styles.paceNum,
-                      selectedPace === p.n && styles.paceNumActive,
-                    ]}>
-                    {p.n}词/天
-                  </Text>
-                </View>
-                <Text style={styles.paceDesc}>{p.desc}</Text>
-                <Text style={styles.paceSub}>{p.sub}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-
-          <TouchableOpacity
-            style={styles.startBtn}
-            onPress={handleSetup}
-            activeOpacity={0.7}>
-            <Text style={styles.startBtnText}>开始背单词</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
-  }
-
-  // ==================== Session ====================
-  const startSession = async () => {
-    if (!progress) {
+  // Start session
+  const startSession = useCallback(() => {
+    if (!progress || !mission) {
       return;
     }
-
-    let currentMission = mission;
-
-    // If current mission is fully done, generate a fresh batch
-    if (currentMission) {
-      const allNewDone =
-        currentMission.completedNewWords.length >=
-        currentMission.newWordIds.length;
-      const allReviewDone =
-        currentMission.completedReviews.length >=
-        currentMission.reviewWordIds.length;
-      if (allNewDone && allReviewDone) {
-        currentMission = generateNextBatch(progress);
-        const updated = {...progress, todayMission: currentMission};
-        await saveProgress(updated);
-        setProgress(updated);
-        setMission(currentMission);
+    const allDone =
+      mission.completedNewWords.length >= mission.newWordIds.length &&
+      mission.completedReviews.length >= mission.reviewWordIds.length;
+    let sessionSteps: SessionStep[];
+    if (allDone) {
+      const nextMission = generateNextBatch(progress);
+      if (nextMission.newWordIds.length === 0 && nextMission.reviewWordIds.length === 0) {
+        return;
       }
+      sessionSteps = buildLearningSession(nextMission, progress);
+    } else {
+      sessionSteps = buildLearningSession(mission, progress);
     }
-
-    if (!currentMission) {
+    if (sessionSteps.length === 0) {
       return;
     }
-
-    const s = buildLearningSession(currentMission, progress);
-    setSteps(s);
+    setSteps(sessionSteps);
     setStepIdx(0);
-    setSessionScore(0);
-    setQuizIdx(0);
     setQuizAnswer(null);
     setQuizRevealed(false);
+    setQuizIdx(0);
+    setSessionScore(0);
     setFlipReview(false);
     setMode('session');
-  };
+  }, [progress, mission]);
 
-  const nextStep = async () => {
+  const nextStep = () => {
     setQuizAnswer(null);
     setQuizRevealed(false);
+    setQuizIdx(0);
     setFlipReview(false);
-    if (stepIdx < steps.length - 1) {
-      setStepIdx(i => i + 1);
+    setStepIdx(i => i + 1);
+  };
+
+  const handleRootDone = async () => {
+    const step = steps[stepIdx];
+    if (!progress || step.type !== 'root-intro') {
+      return;
     }
+    const p = markRootLearned(progress, step.rootId);
+    await safeSave(p);
+    setProgress(p);
+    nextStep();
   };
 
   const handleSessionComplete = async () => {
@@ -217,14 +144,84 @@ export const LearnScreen: React.FC = () => {
       return;
     }
     const p = finishDailySession(progress, sessionScore);
-    await saveProgress(p);
+    await safeSave(p);
     setProgress(p);
+    setMission(getTodayMission(p));
     setMode('dashboard');
-    reload();
   };
 
+  // ==================== Setup Mode ====================
+  if (mode === 'setup') {
+    const paces = [
+      {num: 15, label: '轻松', desc: '每天15词，适合保持节奏'},
+      {num: 25, label: '推荐', desc: '每天25词，高效且可持续'},
+      {num: 40, label: '强化', desc: '每天40词，快速突破'},
+      {num: 60, label: '冲刺', desc: '每天60词，适合集中备考'},
+    ];
+
+    return (
+      <View style={[styles.container, {paddingTop: insets.top}]}>
+        <View style={styles.setupWrap}>
+          <Text style={styles.setupTitle}>制定学习计划</Text>
+          <Text style={styles.setupSub}>
+            选择你的学习节奏，随时可以调整
+          </Text>
+          <View style={styles.paceList}>
+            {paces.map(p => (
+              <TouchableOpacity
+                key={p.num}
+                style={[
+                  styles.paceCard,
+                  selectedPace === p.num && styles.paceCardActive,
+                ]}
+                onPress={() => setSelectedPace(p.num)}
+                activeOpacity={0.7}
+                accessibilityLabel={`${p.label}模式，${p.desc}`}
+                accessibilityRole="button"
+                accessibilityState={{selected: selectedPace === p.num}}>
+                <View style={styles.paceHeader}>
+                  <Text
+                    style={[
+                      styles.paceLabel,
+                      selectedPace === p.num && styles.paceLabelActive,
+                    ]}>
+                    {p.label}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.paceNum,
+                      selectedPace === p.num && styles.paceNumActive,
+                    ]}>
+                    {p.num}词/天
+                  </Text>
+                </View>
+                <Text style={styles.paceDesc}>{p.desc}</Text>
+                <Text style={styles.paceSub}>
+                  约 {getEstimatedDays(p.num)} 天完成全部{allWords.length}词
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+          <TouchableOpacity
+            style={styles.startBtn}
+            onPress={handleStartPlan}
+            activeOpacity={0.7}
+            accessibilityLabel="开始学习"
+            accessibilityRole="button">
+            <Text style={styles.startBtnText}>开始学习</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
+
+  // ==================== Session Mode ====================
   if (mode === 'session' && steps.length > 0) {
     const step = steps[stepIdx];
+    if (!step) {
+      handleSessionComplete();
+      return null;
+    }
     const totalSteps = steps.length;
     const pct = ((stepIdx + 1) / totalSteps) * 100;
 
@@ -235,17 +232,7 @@ export const LearnScreen: React.FC = () => {
         nextStep();
         return null;
       }
-      const rootWords = getWordsByRoot(root.id).slice(0, 8);
-
-      const handleRootDone = async () => {
-        if (!progress) {
-          return;
-        }
-        const p = markRootLearned(progress, root.id);
-        await saveProgress(p);
-        setProgress(p);
-        nextStep();
-      };
+      const rootWords = getWordsByRoot(root.id);
 
       return (
         <View style={[styles.container, {paddingTop: insets.top}]}>
@@ -253,8 +240,9 @@ export const LearnScreen: React.FC = () => {
             pct={pct}
             step={stepIdx + 1}
             total={totalSteps}
-            label="学习词根"
+            label="词根学习"
             onClose={() => setMode('dashboard')}
+            styles={styles}
           />
           <ScrollView
             style={styles.sessionBody}
@@ -314,7 +302,7 @@ export const LearnScreen: React.FC = () => {
           return;
         }
         const p = markWordLearned(progress, word.id, 4);
-        await saveProgress(p);
+        await safeSave(p);
         setProgress(p);
         setSessionScore(s => s + 1);
         nextStep();
@@ -324,7 +312,7 @@ export const LearnScreen: React.FC = () => {
           return;
         }
         const p = markWordLearned(progress, word.id, 2);
-        await saveProgress(p);
+        await safeSave(p);
         setProgress(p);
         nextStep();
       };
@@ -337,6 +325,7 @@ export const LearnScreen: React.FC = () => {
             total={totalSteps}
             label="学习新词"
             onClose={() => setMode('dashboard')}
+            styles={styles}
           />
           <ScrollView
             style={styles.sessionBody}
@@ -431,7 +420,7 @@ export const LearnScreen: React.FC = () => {
         } else {
           if (progress) {
             const p = markQuizDone(progress);
-            await saveProgress(p);
+            await safeSave(p);
             setProgress(p);
           }
           nextStep();
@@ -446,6 +435,7 @@ export const LearnScreen: React.FC = () => {
             total={totalSteps}
             label={`测验 ${quizIdx + 1}/${qs.length}`}
             onClose={() => setMode('dashboard')}
+            styles={styles}
           />
           <ScrollView
             style={styles.sessionBody}
@@ -461,23 +451,23 @@ export const LearnScreen: React.FC = () => {
               <Text style={styles.quizQText}>{q.question}</Text>
             </View>
             {q.options.map((opt, idx) => {
-              let bg = theme.colors.surface;
-              let border = '#E8ECF2';
-              let color = theme.colors.textPrimary;
+              let bg = colors.surface;
+              let border = colors.cardBorder;
+              let color = colors.textPrimary;
               if (quizRevealed) {
                 if (opt.isCorrect) {
-                  bg = theme.colors.secondaryLight;
-                  border = theme.colors.success;
-                  color = theme.colors.success;
+                  bg = colors.secondaryLight;
+                  border = colors.success;
+                  color = colors.success;
                 } else if (quizAnswer === idx) {
-                  bg = '#FFF0F0';
-                  border = theme.colors.error;
-                  color = theme.colors.error;
+                  bg = colors.errorBg;
+                  border = colors.error;
+                  color = colors.error;
                 }
               } else if (quizAnswer === idx) {
-                border = theme.colors.primary;
-                color = theme.colors.primary;
-                bg = theme.colors.primaryLight;
+                border = colors.primary;
+                color = colors.primary;
+                bg = colors.primaryLight;
               }
               return (
                 <TouchableOpacity
@@ -539,7 +529,7 @@ export const LearnScreen: React.FC = () => {
           return;
         }
         const p = markWordLearned(progress, word.id, quality);
-        await saveProgress(p);
+        await safeSave(p);
         setProgress(p);
         if (quality >= 3) {
           setSessionScore(s => s + 1);
@@ -555,6 +545,7 @@ export const LearnScreen: React.FC = () => {
             total={totalSteps}
             label="复习"
             onClose={() => setMode('dashboard')}
+            styles={styles}
           />
           <View style={styles.sessionBody}>
             <View style={styles.flashCard}>
@@ -594,36 +585,36 @@ export const LearnScreen: React.FC = () => {
           {flipReview && (
             <View style={styles.gradeRow}>
               <TouchableOpacity
-                style={[styles.gradeBtn, {backgroundColor: '#FFF0F0'}]}
+                style={[styles.gradeBtn, {backgroundColor: colors.errorBg}]}
                 onPress={() => handleGrade(1)}>
-                <Text style={[styles.gradeText, {color: theme.colors.error}]}>
+                <Text style={[styles.gradeText, {color: colors.error}]}>
                   忘了
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
-                style={[styles.gradeBtn, {backgroundColor: '#FFF8E8'}]}
+                style={[styles.gradeBtn, {backgroundColor: colors.warningBg}]}
                 onPress={() => handleGrade(3)}>
-                <Text style={[styles.gradeText, {color: theme.colors.warning}]}>
+                <Text style={[styles.gradeText, {color: colors.warning}]}>
                   模糊
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
                   styles.gradeBtn,
-                  {backgroundColor: theme.colors.secondaryLight},
+                  {backgroundColor: colors.secondaryLight},
                 ]}
                 onPress={() => handleGrade(4)}>
-                <Text style={[styles.gradeText, {color: theme.colors.success}]}>
+                <Text style={[styles.gradeText, {color: colors.success}]}>
                   记得
                 </Text>
               </TouchableOpacity>
               <TouchableOpacity
                 style={[
                   styles.gradeBtn,
-                  {backgroundColor: theme.colors.primaryLight},
+                  {backgroundColor: colors.primaryLight},
                 ]}
                 onPress={() => handleGrade(5)}>
-                <Text style={[styles.gradeText, {color: theme.colors.primary}]}>
+                <Text style={[styles.gradeText, {color: colors.primary}]}>
                   秒杀
                 </Text>
               </TouchableOpacity>
@@ -639,7 +630,6 @@ export const LearnScreen: React.FC = () => {
       const handleContinue = async () => {
         await handleSessionComplete();
         if (!allDone) {
-          // Immediately start next batch after returning to dashboard
           setTimeout(() => startSession(), 100);
         }
       };
@@ -665,7 +655,7 @@ export const LearnScreen: React.FC = () => {
                 <Text
                   style={[
                     styles.completeStatNum,
-                    {color: theme.colors.accent},
+                    {color: colors.accent},
                   ]}>
                   {mission?.completedReviews.length || 0}
                 </Text>
@@ -675,7 +665,7 @@ export const LearnScreen: React.FC = () => {
                 <Text
                   style={[
                     styles.completeStatNum,
-                    {color: theme.colors.secondary},
+                    {color: colors.secondary},
                   ]}>
                   {progress?.completedWords.length || 0}/{allWords.length}
                 </Text>
@@ -716,7 +706,7 @@ export const LearnScreen: React.FC = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{paddingTop: insets.top + 16, paddingBottom: 120}}>
+      contentContainerStyle={{paddingTop: insets.top + 16, paddingBottom: 120, maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'}}>
       {/* Header */}
       <View style={styles.dashHeader}>
         <View>
@@ -774,7 +764,7 @@ export const LearnScreen: React.FC = () => {
             <View
               style={[
                 styles.missionItem,
-                {borderLeftColor: theme.colors.primary},
+                {borderLeftColor: colors.primary},
               ]}>
               <Text style={styles.missionItemTitle}>新词根</Text>
               <Text style={styles.missionItemNum}>
@@ -790,7 +780,7 @@ export const LearnScreen: React.FC = () => {
             <View
               style={[
                 styles.missionItem,
-                {borderLeftColor: theme.colors.secondary},
+                {borderLeftColor: colors.secondary},
               ]}>
               <Text style={styles.missionItemTitle}>新单词</Text>
               <Text style={styles.missionItemNum}>
@@ -800,7 +790,7 @@ export const LearnScreen: React.FC = () => {
             <View
               style={[
                 styles.missionItem,
-                {borderLeftColor: theme.colors.accent},
+                {borderLeftColor: colors.accent},
               ]}>
               <Text style={styles.missionItemTitle}>复习</Text>
               <Text style={styles.missionItemNum}>
@@ -873,13 +863,13 @@ export const LearnScreen: React.FC = () => {
             <Text style={styles.qStatLabel}>词/天</Text>
           </View>
           <View style={styles.qStat}>
-            <Text style={[styles.qStatNum, {color: theme.colors.secondary}]}>
+            <Text style={[styles.qStatNum, {color: colors.secondary}]}>
               {stats.learnedRoots}
             </Text>
             <Text style={styles.qStatLabel}>已学词根</Text>
           </View>
           <View style={styles.qStat}>
-            <Text style={[styles.qStatNum, {color: theme.colors.accent}]}>
+            <Text style={[styles.qStatNum, {color: colors.accent}]}>
               {stats.streak}
             </Text>
             <Text style={styles.qStatLabel}>连续天数</Text>
@@ -904,7 +894,8 @@ const SessionHeader: React.FC<{
   total: number;
   label: string;
   onClose: () => void;
-}> = ({pct, step, total, label, onClose}) => (
+  styles: ReturnType<typeof createStyles>;
+}> = ({pct, step, total, label, onClose, styles}) => (
   <View style={styles.sessHead}>
     <TouchableOpacity onPress={onClose}>
       <Text style={styles.sessClose}>{'\u2715'}</Text>
@@ -923,607 +914,611 @@ const SessionHeader: React.FC<{
 
 // ==================== Styles ====================
 
-const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: theme.colors.background},
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {flex: 1, backgroundColor: colors.background},
 
-  // Setup
-  setupWrap: {flex: 1, paddingHorizontal: 24, justifyContent: 'center'},
-  setupTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    textAlign: 'center',
-    marginBottom: 8,
-  },
-  setupSub: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  paceList: {gap: 12, marginBottom: 32},
-  paceCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 18,
-    borderWidth: 2,
-    borderColor: 'transparent',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  paceCardActive: {
-    borderColor: theme.colors.primary,
-    backgroundColor: theme.colors.primaryLight,
-  },
-  paceHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 4,
-  },
-  paceLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-  },
-  paceLabelActive: {color: theme.colors.primary},
-  paceNum: {fontSize: 16, fontWeight: '600', color: theme.colors.textSecondary},
-  paceNumActive: {color: theme.colors.primary},
-  paceDesc: {fontSize: 13, color: theme.colors.textSecondary},
-  paceSub: {fontSize: 12, color: theme.colors.textTertiary, marginTop: 2},
-  startBtn: {
-    backgroundColor: theme.colors.primary,
-    padding: 18,
-    borderRadius: 16,
-    alignItems: 'center',
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  startBtnText: {fontSize: 18, fontWeight: 'bold', color: '#FFFFFF'},
+    // Setup
+    setupWrap: {flex: 1, paddingHorizontal: 24, justifyContent: 'center', maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'},
+    setupTitle: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      textAlign: 'center',
+      marginBottom: 8,
+    },
+    setupSub: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      textAlign: 'center',
+      marginBottom: 32,
+    },
+    paceList: {gap: 12, marginBottom: 32},
+    paceCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 16,
+      padding: 18,
+      borderWidth: 2,
+      borderColor: 'transparent',
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.04,
+      shadowRadius: 8,
+      elevation: 2,
+    },
+    paceCardActive: {
+      borderColor: colors.primary,
+      backgroundColor: colors.primaryLight,
+    },
+    paceHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 4,
+    },
+    paceLabel: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+    },
+    paceLabelActive: {color: colors.primary},
+    paceNum: {fontSize: 16, fontWeight: '600', color: colors.textSecondary},
+    paceNumActive: {color: colors.primary},
+    paceDesc: {fontSize: 13, color: colors.textSecondary},
+    paceSub: {fontSize: 12, color: colors.textTertiary, marginTop: 2},
+    startBtn: {
+      backgroundColor: colors.primary,
+      padding: 18,
+      borderRadius: 16,
+      alignItems: 'center',
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    startBtnText: {fontSize: 18, fontWeight: 'bold', color: '#FFFFFF'},
 
-  // Dashboard
-  dashHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 16,
-  },
-  dashTitle: {
-    fontSize: 32,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-  },
-  dashTitleSub: {
-    fontSize: 11,
-    color: theme.colors.textTertiary,
-    letterSpacing: 2,
-  },
-  dayBadge: {
-    backgroundColor: theme.colors.primary,
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 20,
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  dayBadgeText: {fontSize: 14, fontWeight: 'bold', color: '#FFFFFF'},
+    // Dashboard
+    dashHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      paddingHorizontal: 20,
+      marginBottom: 16,
+    },
+    dashTitle: {
+      fontSize: 32,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+    },
+    dashTitleSub: {
+      fontSize: 11,
+      color: colors.textTertiary,
+      letterSpacing: 2,
+    },
+    dayBadge: {
+      backgroundColor: colors.primary,
+      paddingHorizontal: 14,
+      paddingVertical: 6,
+      borderRadius: 20,
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.3,
+      shadowRadius: 4,
+      elevation: 3,
+    },
+    dayBadgeText: {fontSize: 14, fontWeight: 'bold', color: '#FFFFFF'},
 
-  overallCard: {
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 20,
-    padding: 18,
-    marginBottom: 16,
-    shadowColor: '#4A6AE5',
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.08,
-    shadowRadius: 16,
-    elevation: 4,
-  },
-  overallRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
-  },
-  overallLabel: {fontSize: 14, color: theme.colors.textSecondary},
-  overallNum: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-  },
-  progressBar: {
-    height: 8,
-    backgroundColor: theme.colors.surfaceLight,
-    borderRadius: 4,
-    overflow: 'hidden',
-    marginBottom: 10,
-  },
-  progressFill: {
-    height: 8,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 4,
-    minWidth: 0,
-  },
-  overallMeta: {flexDirection: 'row', gap: 16},
-  overallMetaText: {fontSize: 12, color: theme.colors.textTertiary},
+    overallCard: {
+      marginHorizontal: 20,
+      backgroundColor: colors.surface,
+      borderRadius: 20,
+      padding: 18,
+      marginBottom: 16,
+      shadowColor: '#4A6AE5',
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.08,
+      shadowRadius: 16,
+      elevation: 4,
+    },
+    overallRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginBottom: 10,
+    },
+    overallLabel: {fontSize: 14, color: colors.textSecondary},
+    overallNum: {
+      fontSize: 14,
+      fontWeight: '600',
+      color: colors.textPrimary,
+    },
+    progressBar: {
+      height: 8,
+      backgroundColor: colors.surfaceLight,
+      borderRadius: 4,
+      overflow: 'hidden',
+      marginBottom: 10,
+    },
+    progressFill: {
+      height: 8,
+      backgroundColor: colors.primary,
+      borderRadius: 4,
+      minWidth: 0,
+    },
+    overallMeta: {flexDirection: 'row', gap: 16},
+    overallMetaText: {fontSize: 12, color: colors.textTertiary},
 
-  missionCard: {
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 20,
-    padding: 18,
-    marginBottom: 20,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  missionTitle: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 14,
-  },
-  missionRow: {flexDirection: 'row', gap: 10},
-  missionItem: {
-    flex: 1,
-    backgroundColor: theme.colors.background,
-    borderRadius: 12,
-    padding: 12,
-    borderLeftWidth: 3,
-  },
-  missionItemTitle: {
-    fontSize: 11,
-    color: theme.colors.textTertiary,
-    marginBottom: 4,
-  },
-  missionItemNum: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 2,
-  },
-  missionItemSub: {fontSize: 10, color: theme.colors.textTertiary},
+    missionCard: {
+      marginHorizontal: 20,
+      backgroundColor: colors.surface,
+      borderRadius: 20,
+      padding: 18,
+      marginBottom: 20,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.04,
+      shadowRadius: 8,
+      elevation: 2,
+    },
+    missionTitle: {
+      fontSize: 16,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      marginBottom: 14,
+    },
+    missionRow: {flexDirection: 'row', gap: 10},
+    missionItem: {
+      flex: 1,
+      backgroundColor: colors.background,
+      borderRadius: 12,
+      padding: 12,
+      borderLeftWidth: 3,
+    },
+    missionItemTitle: {
+      fontSize: 11,
+      color: colors.textTertiary,
+      marginBottom: 4,
+    },
+    missionItemNum: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      marginBottom: 2,
+    },
+    missionItemSub: {fontSize: 10, color: colors.textTertiary},
 
-  ctaBtn: {
-    marginHorizontal: 20,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 18,
-    padding: 20,
-    alignItems: 'center',
-    marginBottom: 24,
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 6},
-    shadowOpacity: 0.35,
-    shadowRadius: 12,
-    elevation: 6,
-  },
-  ctaDone: {
-    backgroundColor: theme.colors.surface,
-    borderWidth: 2,
-    borderColor: theme.colors.success,
-    shadowOpacity: 0,
-  },
-  ctaText: {fontSize: 20, fontWeight: 'bold', color: '#FFFFFF'},
-  ctaDoneText: {color: theme.colors.success, fontSize: 16},
-  ctaSub: {fontSize: 12, color: 'rgba(255,255,255,0.75)', marginTop: 4},
-  ctaDoneSub: {fontSize: 12, color: theme.colors.textTertiary, marginTop: 4},
+    ctaBtn: {
+      marginHorizontal: 20,
+      backgroundColor: colors.primary,
+      borderRadius: 18,
+      padding: 20,
+      alignItems: 'center',
+      marginBottom: 24,
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 6},
+      shadowOpacity: 0.35,
+      shadowRadius: 12,
+      elevation: 6,
+    },
+    ctaDone: {
+      backgroundColor: colors.surface,
+      borderWidth: 2,
+      borderColor: colors.success,
+      shadowOpacity: 0,
+    },
+    ctaText: {fontSize: 20, fontWeight: 'bold', color: '#FFFFFF'},
+    ctaDoneText: {color: colors.success, fontSize: 16},
+    ctaSub: {fontSize: 12, color: 'rgba(255,255,255,0.75)', marginTop: 4},
+    ctaDoneSub: {fontSize: 12, color: colors.textTertiary, marginTop: 4},
 
-  section: {paddingHorizontal: 20, marginBottom: 20},
-  sectionTitle: {
-    fontSize: 12,
-    color: theme.colors.primary,
-    marginBottom: 10,
-    fontWeight: '700',
-    letterSpacing: 1,
-  },
-  rootPreview: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 14,
-    marginBottom: 10,
-    borderLeftWidth: 4,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  rootPreviewHead: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    marginBottom: 6,
-  },
-  rootPreviewName: {fontSize: 22, fontWeight: 'bold'},
-  rootPreviewMeaning: {fontSize: 15, color: theme.colors.textPrimary},
-  rootPreviewWords: {
-    fontSize: 13,
-    color: theme.colors.textTertiary,
-    lineHeight: 20,
-  },
+    section: {paddingHorizontal: 20, marginBottom: 20},
+    sectionTitle: {
+      fontSize: 12,
+      color: colors.primary,
+      marginBottom: 10,
+      fontWeight: '700',
+      letterSpacing: 1,
+    },
+    rootPreview: {
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      padding: 14,
+      marginBottom: 10,
+      borderLeftWidth: 4,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 0.04,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+    rootPreviewHead: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 10,
+      marginBottom: 6,
+    },
+    rootPreviewName: {fontSize: 22, fontWeight: 'bold'},
+    rootPreviewMeaning: {fontSize: 15, color: colors.textPrimary},
+    rootPreviewWords: {
+      fontSize: 13,
+      color: colors.textTertiary,
+      lineHeight: 20,
+    },
 
-  quickStats: {
-    flexDirection: 'row',
-    marginHorizontal: 20,
-    gap: 8,
-    marginBottom: 20,
-  },
-  qStat: {
-    flex: 1,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 14,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  qStatNum: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-    marginBottom: 4,
-  },
-  qStatLabel: {fontSize: 10, color: theme.colors.textSecondary},
+    quickStats: {
+      flexDirection: 'row',
+      marginHorizontal: 20,
+      gap: 8,
+      marginBottom: 20,
+    },
+    qStat: {
+      flex: 1,
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      padding: 14,
+      alignItems: 'center',
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 0.04,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+    qStatNum: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: colors.primary,
+      marginBottom: 4,
+    },
+    qStatLabel: {fontSize: 10, color: colors.textSecondary},
 
-  // Session common
-  sessHead: {paddingHorizontal: 16, paddingVertical: 10, gap: 6},
-  sessClose: {fontSize: 18, color: theme.colors.textTertiary, width: 30},
-  sessInfo: {flexDirection: 'row', justifyContent: 'space-between'},
-  sessLabel: {fontSize: 13, color: theme.colors.primary, fontWeight: '600'},
-  sessStep: {fontSize: 13, color: theme.colors.textTertiary},
-  sessProg: {
-    height: 4,
-    backgroundColor: theme.colors.surfaceLight,
-    borderRadius: 2,
-  },
-  sessProgFill: {
-    height: 4,
-    backgroundColor: theme.colors.primary,
-    borderRadius: 2,
-  },
+    // Session common
+    sessHead: {paddingHorizontal: 16, paddingVertical: 10, gap: 6},
+    sessClose: {fontSize: 18, color: colors.textTertiary, width: 30},
+    sessInfo: {flexDirection: 'row', justifyContent: 'space-between'},
+    sessLabel: {fontSize: 13, color: colors.primary, fontWeight: '600'},
+    sessStep: {fontSize: 13, color: colors.textTertiary},
+    sessProg: {
+      height: 4,
+      backgroundColor: colors.surfaceLight,
+      borderRadius: 2,
+    },
+    sessProgFill: {
+      height: 4,
+      backgroundColor: colors.primary,
+      borderRadius: 2,
+    },
 
-  sessionBody: {flex: 1},
-  sessionContent: {paddingHorizontal: 20, paddingBottom: 20},
-  sessionFooter: {padding: 20},
-  sessionFooterRow: {flexDirection: 'row', padding: 20, gap: 12},
+    sessionBody: {flex: 1},
+    sessionContent: {paddingHorizontal: 20, paddingBottom: 20, maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'},
+    sessionFooter: {padding: 20},
+    sessionFooterRow: {flexDirection: 'row', padding: 20, gap: 12},
 
-  nextBtn: {
-    backgroundColor: theme.colors.primary,
-    padding: 16,
-    borderRadius: 16,
-    alignItems: 'center',
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 4,
-  },
-  nextBtnText: {fontSize: 17, fontWeight: 'bold', color: '#FFFFFF'},
-  btnDisabled: {
-    backgroundColor: theme.colors.textTertiary + '40',
-    shadowOpacity: 0,
-  },
+    nextBtn: {
+      backgroundColor: colors.primary,
+      padding: 16,
+      borderRadius: 16,
+      alignItems: 'center',
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.3,
+      shadowRadius: 8,
+      elevation: 4,
+    },
+    nextBtnText: {fontSize: 17, fontWeight: 'bold', color: '#FFFFFF'},
+    btnDisabled: {
+      backgroundColor: colors.textTertiary + '40',
+      shadowOpacity: 0,
+    },
 
-  // Root intro
-  rootIntroCard: {
-    borderRadius: 24,
-    padding: 28,
-    alignItems: 'center',
-    marginBottom: 24,
-    borderWidth: 1,
-  },
-  rootBig: {fontSize: 48, fontWeight: 'bold', marginBottom: 8},
-  rootMeaningBig: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-    marginBottom: 4,
-  },
-  rootOriginText: {fontSize: 13, color: theme.colors.textSecondary},
-  sessionLabel: {
-    fontSize: 13,
-    color: theme.colors.primary,
-    marginBottom: 10,
-    fontWeight: '600',
-  },
-  rootWordRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: theme.colors.surface,
-    borderRadius: 12,
-    padding: 14,
-    marginBottom: 8,
-    gap: 12,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.03,
-    shadowRadius: 3,
-    elevation: 1,
-  },
-  rootWordNum: {
-    fontSize: 14,
-    fontWeight: 'bold',
-    color: theme.colors.textTertiary,
-    width: 20,
-  },
-  rootWordInfo: {flex: 1},
-  rootWordText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-  },
-  rootWordMeaning: {
-    fontSize: 13,
-    color: theme.colors.textSecondary,
-    marginTop: 2,
-  },
-  rootWordPos: {fontSize: 11, color: theme.colors.textTertiary},
-  rootFamilyHint: {
-    fontSize: 14,
-    color: theme.colors.primary,
-    textAlign: 'center',
-    marginTop: 16,
-    fontWeight: '600',
-  },
+    // Root intro
+    rootIntroCard: {
+      borderRadius: 24,
+      padding: 28,
+      alignItems: 'center',
+      marginBottom: 24,
+      borderWidth: 1,
+    },
+    rootBig: {fontSize: 48, fontWeight: 'bold', marginBottom: 8},
+    rootMeaningBig: {
+      fontSize: 24,
+      fontWeight: '600',
+      color: colors.textPrimary,
+      marginBottom: 4,
+    },
+    rootOriginText: {fontSize: 13, color: colors.textSecondary},
+    sessionLabel: {
+      fontSize: 13,
+      color: colors.primary,
+      marginBottom: 10,
+      fontWeight: '600',
+    },
+    rootWordRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      backgroundColor: colors.surface,
+      borderRadius: 12,
+      padding: 14,
+      marginBottom: 8,
+      gap: 12,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 0.03,
+      shadowRadius: 3,
+      elevation: 1,
+    },
+    rootWordNum: {
+      fontSize: 14,
+      fontWeight: 'bold',
+      color: colors.textTertiary,
+      width: 20,
+    },
+    rootWordInfo: {flex: 1},
+    rootWordText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: colors.textPrimary,
+    },
+    rootWordMeaning: {
+      fontSize: 13,
+      color: colors.textSecondary,
+      marginTop: 2,
+    },
+    rootWordPos: {fontSize: 11, color: colors.textTertiary},
+    rootFamilyHint: {
+      fontSize: 14,
+      color: colors.primary,
+      textAlign: 'center',
+      marginTop: 16,
+      fontWeight: '600',
+    },
 
-  // Word learn
-  wordBig: {
-    fontSize: 36,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    textAlign: 'center',
-    marginTop: 20,
-    marginBottom: 4,
-  },
-  speakerIcon: {fontSize: 20, color: theme.colors.textTertiary},
-  wordPhonetic: {
-    fontSize: 14,
-    color: theme.colors.textTertiary,
-    textAlign: 'center',
-    marginBottom: 12,
-  },
-  wordMeaningBig: {
-    fontSize: 22,
-    fontWeight: '600',
-    color: theme.colors.textPrimary,
-    textAlign: 'center',
-    marginBottom: 20,
-  },
-  morphRow: {flexDirection: 'row', gap: 8, marginBottom: 20},
-  morphBlock: {
-    flex: 1,
-    borderRadius: 12,
-    padding: 12,
-    alignItems: 'center',
-    gap: 4,
-  },
-  morphText: {fontSize: 15, fontWeight: 'bold', color: '#FFF'},
-  morphSub: {fontSize: 10, color: 'rgba(255,255,255,0.85)'},
-  assocCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 16,
-    marginBottom: 14,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  assocLabel: {
-    fontSize: 11,
-    color: theme.colors.primary,
-    fontWeight: '700',
-    marginBottom: 6,
-    letterSpacing: 1,
-  },
-  assocText: {fontSize: 14, color: theme.colors.textSecondary, lineHeight: 22},
-  exCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 14,
-    padding: 16,
-    borderLeftWidth: 3,
-    borderLeftColor: theme.colors.primary,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 1},
-    shadowOpacity: 0.04,
-    shadowRadius: 4,
-    elevation: 1,
-  },
-  exText: {
-    fontSize: 14,
-    color: theme.colors.textPrimary,
-    fontStyle: 'italic',
-    marginBottom: 6,
-  },
-  exTrans: {fontSize: 13, color: theme.colors.textSecondary},
+    // Word learn
+    wordBig: {
+      fontSize: 36,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      textAlign: 'center',
+      marginTop: 20,
+      marginBottom: 4,
+    },
+    speakerIcon: {fontSize: 20, color: colors.textTertiary},
+    wordPhonetic: {
+      fontSize: 14,
+      color: colors.textTertiary,
+      textAlign: 'center',
+      marginBottom: 12,
+    },
+    wordMeaningBig: {
+      fontSize: 22,
+      fontWeight: '600',
+      color: colors.textPrimary,
+      textAlign: 'center',
+      marginBottom: 20,
+    },
+    morphRow: {flexDirection: 'row', gap: 8, marginBottom: 20},
+    morphBlock: {
+      flex: 1,
+      borderRadius: 12,
+      padding: 12,
+      alignItems: 'center',
+      gap: 4,
+    },
+    morphText: {fontSize: 15, fontWeight: 'bold', color: '#FFF'},
+    morphSub: {fontSize: 10, color: 'rgba(255,255,255,0.85)'},
+    assocCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      padding: 16,
+      marginBottom: 14,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 0.04,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+    assocLabel: {
+      fontSize: 11,
+      color: colors.primary,
+      fontWeight: '700',
+      marginBottom: 6,
+      letterSpacing: 1,
+    },
+    assocText: {fontSize: 14, color: colors.textSecondary, lineHeight: 22},
+    exCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 14,
+      padding: 16,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.primary,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 1},
+      shadowOpacity: 0.04,
+      shadowRadius: 4,
+      elevation: 1,
+    },
+    exText: {
+      fontSize: 14,
+      color: colors.textPrimary,
+      fontStyle: 'italic',
+      marginBottom: 6,
+    },
+    exTrans: {fontSize: 13, color: colors.textSecondary},
 
-  knowBtn: {
-    flex: 1,
-    backgroundColor: theme.colors.success,
-    borderRadius: 16,
-    padding: 16,
-    alignItems: 'center',
-    shadowColor: theme.colors.success,
-    shadowOffset: {width: 0, height: 3},
-    shadowOpacity: 0.3,
-    shadowRadius: 6,
-    elevation: 3,
-  },
-  knowText: {fontSize: 17, fontWeight: 'bold', color: '#FFF'},
-  dontKnowBtn: {
-    flex: 1,
-    backgroundColor: theme.colors.surface,
-    borderRadius: 16,
-    padding: 16,
-    alignItems: 'center',
-    borderWidth: 1.5,
-    borderColor: '#E8ECF2',
-  },
-  dontKnowText: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: theme.colors.textSecondary,
-  },
+    knowBtn: {
+      flex: 1,
+      backgroundColor: colors.success,
+      borderRadius: 16,
+      padding: 16,
+      alignItems: 'center',
+      shadowColor: colors.success,
+      shadowOffset: {width: 0, height: 3},
+      shadowOpacity: 0.3,
+      shadowRadius: 6,
+      elevation: 3,
+    },
+    knowText: {fontSize: 17, fontWeight: 'bold', color: '#FFF'},
+    dontKnowBtn: {
+      flex: 1,
+      backgroundColor: colors.surface,
+      borderRadius: 16,
+      padding: 16,
+      alignItems: 'center',
+      borderWidth: 1.5,
+      borderColor: colors.cardBorder,
+    },
+    dontKnowText: {
+      fontSize: 17,
+      fontWeight: '600',
+      color: colors.textSecondary,
+    },
 
-  // Quiz
-  quizQCard: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 18,
-    padding: 20,
-    marginBottom: 16,
-    shadowColor: '#000',
-    shadowOffset: {width: 0, height: 2},
-    shadowOpacity: 0.04,
-    shadowRadius: 8,
-    elevation: 2,
-  },
-  quizQType: {
-    fontSize: 11,
-    color: theme.colors.primary,
-    fontWeight: '700',
-    letterSpacing: 1,
-    marginBottom: 8,
-  },
-  quizQText: {fontSize: 18, color: theme.colors.textPrimary, lineHeight: 28},
-  quizOpt: {padding: 16, borderRadius: 14, borderWidth: 1.5, marginBottom: 10},
-  quizOptText: {fontSize: 16},
-  quizExpl: {
-    backgroundColor: theme.colors.secondaryLight,
-    borderRadius: 14,
-    padding: 14,
-    marginTop: 4,
-  },
-  quizExplText: {
-    fontSize: 13,
-    color: theme.colors.textSecondary,
-    lineHeight: 20,
-  },
+    // Quiz
+    quizQCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 18,
+      padding: 20,
+      marginBottom: 16,
+      shadowColor: '#000',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.04,
+      shadowRadius: 8,
+      elevation: 2,
+    },
+    quizQType: {
+      fontSize: 11,
+      color: colors.primary,
+      fontWeight: '700',
+      letterSpacing: 1,
+      marginBottom: 8,
+    },
+    quizQText: {fontSize: 18, color: colors.textPrimary, lineHeight: 28},
+    quizOpt: {padding: 16, borderRadius: 14, borderWidth: 1.5, marginBottom: 10},
+    quizOptText: {fontSize: 16},
+    quizExpl: {
+      backgroundColor: colors.secondaryLight,
+      borderRadius: 14,
+      padding: 14,
+      marginTop: 4,
+    },
+    quizExplText: {
+      fontSize: 13,
+      color: colors.textSecondary,
+      lineHeight: 20,
+    },
 
-  // Review
-  flashCard: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  flashCardInner: {
-    backgroundColor: theme.colors.surface,
-    borderRadius: 24,
-    padding: 32,
-    alignItems: 'center',
-    width: '100%',
-    shadowColor: '#4A6AE5',
-    shadowOffset: {width: 0, height: 6},
-    shadowOpacity: 0.1,
-    shadowRadius: 20,
-    elevation: 6,
-  },
-  flashWord: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 20,
-  },
-  flashMeaning: {
-    fontSize: 24,
-    color: theme.colors.textPrimary,
-    fontWeight: '600',
-    marginBottom: 12,
-  },
-  flashMorphRow: {
-    flexDirection: 'row',
-    gap: 8,
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-  },
-  flashMorph: {fontSize: 14, fontWeight: '500'},
-  flipBtn: {
-    backgroundColor: theme.colors.primaryLight,
-    paddingHorizontal: 32,
-    paddingVertical: 14,
-    borderRadius: 14,
-  },
-  flipBtnText: {fontSize: 16, color: theme.colors.primary, fontWeight: '500'},
-  gradeRow: {
-    flexDirection: 'row',
-    paddingHorizontal: 16,
-    paddingBottom: 20,
-    gap: 8,
-  },
-  gradeBtn: {flex: 1, borderRadius: 14, padding: 14, alignItems: 'center'},
-  gradeText: {fontSize: 15, fontWeight: '600'},
+    // Review
+    flashCard: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+    },
+    flashCardInner: {
+      backgroundColor: colors.surface,
+      borderRadius: 24,
+      padding: 32,
+      alignItems: 'center',
+      width: '100%',
+      shadowColor: '#4A6AE5',
+      shadowOffset: {width: 0, height: 6},
+      shadowOpacity: 0.1,
+      shadowRadius: 20,
+      elevation: 6,
+    },
+    flashWord: {
+      fontSize: 40,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      marginBottom: 20,
+    },
+    flashMeaning: {
+      fontSize: 24,
+      color: colors.textPrimary,
+      fontWeight: '600',
+      marginBottom: 12,
+    },
+    flashMorphRow: {
+      flexDirection: 'row',
+      gap: 8,
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+    },
+    flashMorph: {fontSize: 14, fontWeight: '500'},
+    flipBtn: {
+      backgroundColor: colors.primaryLight,
+      paddingHorizontal: 32,
+      paddingVertical: 14,
+      borderRadius: 14,
+    },
+    flipBtnText: {fontSize: 16, color: colors.primary, fontWeight: '500'},
+    gradeRow: {
+      flexDirection: 'row',
+      paddingHorizontal: 16,
+      paddingBottom: 20,
+      gap: 8,
+    },
+    gradeBtn: {flex: 1, borderRadius: 14, padding: 14, alignItems: 'center'},
+    gradeText: {fontSize: 15, fontWeight: '600'},
 
-  // Complete
-  completeWrap: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  completeTitle: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    color: theme.colors.textPrimary,
-    marginBottom: 24,
-  },
-  completeCircle: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    backgroundColor: theme.colors.primaryLight,
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 8,
-    shadowColor: theme.colors.primary,
-    shadowOffset: {width: 0, height: 4},
-    shadowOpacity: 0.2,
-    shadowRadius: 12,
-    elevation: 4,
-  },
-  completeScore: {
-    fontSize: 40,
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-  completeLabel: {
-    fontSize: 14,
-    color: theme.colors.textSecondary,
-    marginBottom: 28,
-  },
-  completeSummary: {flexDirection: 'row', gap: 24, marginBottom: 40},
-  completeStat: {alignItems: 'center'},
-  completeStatNum: {
-    fontSize: 22,
-    fontWeight: 'bold',
-    color: theme.colors.primary,
-  },
-  completeStatLabel: {fontSize: 12, color: theme.colors.textTertiary},
-  secondaryBtn: {
-    backgroundColor: theme.colors.surfaceLight,
-    padding: 16,
-    borderRadius: 16,
-    alignItems: 'center',
-    marginTop: 10,
-  },
-  secondaryBtnText: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: theme.colors.textSecondary,
-  },
-});
+    // Complete
+    completeWrap: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      padding: 20,
+      maxWidth: theme.layout.maxContentWidth,
+      width: '100%',
+      alignSelf: 'center',
+    },
+    completeTitle: {
+      fontSize: 28,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      marginBottom: 24,
+    },
+    completeCircle: {
+      width: 100,
+      height: 100,
+      borderRadius: 50,
+      backgroundColor: colors.primaryLight,
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 8,
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.2,
+      shadowRadius: 12,
+      elevation: 4,
+    },
+    completeScore: {
+      fontSize: 40,
+      fontWeight: 'bold',
+      color: colors.primary,
+    },
+    completeLabel: {
+      fontSize: 14,
+      color: colors.textSecondary,
+      marginBottom: 28,
+    },
+    completeSummary: {flexDirection: 'row', gap: 24, marginBottom: 40},
+    completeStat: {alignItems: 'center'},
+    completeStatNum: {
+      fontSize: 22,
+      fontWeight: 'bold',
+      color: colors.primary,
+    },
+    completeStatLabel: {fontSize: 12, color: colors.textTertiary},
+    secondaryBtn: {
+      backgroundColor: colors.surfaceLight,
+      padding: 16,
+      borderRadius: 16,
+      alignItems: 'center',
+      marginTop: 10,
+    },
+    secondaryBtnText: {
+      fontSize: 16,
+      fontWeight: '600',
+      color: colors.textSecondary,
+    },
+  });

@@ -1,46 +1,62 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {theme} from '../theme';
+import {useAppTheme, ThemeColors} from '../theme';
 
 interface TabBarIconProps {
-  name: 'learn' | 'library' | 'review' | 'profile';
+  name: 'learn' | 'library' | 'grammar' | 'review' | 'profile';
   label: string;
   focused: boolean;
 }
 
-const iconMap: Record<string, {icon: string; sub: string}> = {
-  learn: {icon: '~', sub: '学习'},
-  library: {icon: '~', sub: '词库'},
-  review: {icon: '~', sub: '复习'},
-  profile: {icon: '~', sub: '我的'},
-};
-
 const emojiMap: Record<string, string> = {
   learn: '\u{1F4D6}',
   library: '\u{1F50D}',
+  grammar: '\u{1F4DD}',
   review: '\u{1F504}',
   profile: '\u{1F464}',
 };
 
+const labelMap: Record<string, string> = {
+  learn: '学习',
+  library: '词库',
+  grammar: '语法',
+  review: '复习',
+  profile: '我的',
+};
+
 export const TabBarIcon: React.FC<TabBarIconProps> = ({name, focused}) => {
-  const color = focused ? theme.colors.primary : theme.colors.textTertiary;
-  const sub = iconMap[name]?.sub || name;
+  const {colors} = useAppTheme();
+  const styles = useMemo(() => createStyles(colors), [colors]);
+  const color = focused ? colors.primary : colors.textTertiary;
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.icon, {opacity: focused ? 1 : 0.5}]}>
-        {emojiMap[name]}
-      </Text>
+      <View style={[styles.iconWrap, focused && styles.iconWrapActive]}>
+        <Text style={[styles.icon, {opacity: focused ? 1 : 0.45}]}>
+          {emojiMap[name]}
+        </Text>
+      </View>
       <Text
         style={[styles.subLabel, {color, fontWeight: focused ? '700' : '500'}]}>
-        {sub}
+        {labelMap[name]}
       </Text>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {alignItems: 'center', justifyContent: 'center', gap: 3},
-  icon: {fontSize: 22},
-  subLabel: {fontSize: 10},
-});
+const createStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    container: {alignItems: 'center', justifyContent: 'center', gap: 3},
+    iconWrap: {
+      width: 32,
+      height: 26,
+      alignItems: 'center',
+      justifyContent: 'center',
+      borderRadius: 8,
+    },
+    iconWrapActive: {
+      backgroundColor: colors.primaryLight,
+    },
+    icon: {fontSize: 20},
+    subLabel: {fontSize: 10, letterSpacing: 0.3},
+  });

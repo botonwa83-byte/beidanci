@@ -1,830 +1,2314 @@
 {
   "roots": {
     "port": {
-      "meaning": "携带，运送",
+      "meaning": "搬运",
       "origin": "拉丁语 portare",
-      "color": "#E74C3C",
+      "color": "#3B82A0",
       "level": 1,
-      "words": ["transport", "export", "import", "portable", "report", "support", "deport", "passport", "airport", "portrait"]
-    },
-    "struct": {
-      "meaning": "建造，构建",
-      "origin": "拉丁语 struere",
-      "color": "#3498DB",
-      "level": 1,
-      "words": ["structure", "construct", "instruct", "destruct", "obstruct", "reconstruct", "infrastructure", "superstructure"]
-    },
-    "spect": {
-      "meaning": "看，观察",
-      "origin": "拉丁语 spectare",
-      "color": "#2ECC71",
-      "level": 1,
-      "words": ["inspect", "respect", "expect", "prospect", "spectacle", "spectrum", "speculate", "perspective"]
-    },
-    "ject": {
-      "meaning": "投掷，扔",
-      "origin": "拉丁语 jacere",
-      "color": "#9B59B6",
-      "level": 1,
-      "words": ["project", "inject", "reject", "object", "subject", "eject", "conjecture", "abject"]
-    },
-    "dict": {
-      "meaning": "说，言",
-      "origin": "拉丁语 dicere",
-      "color": "#F39C12",
-      "level": 1,
-      "words": ["dictionary", "predict", "contradict", "verdict", "dictate", "addict", "dedicate", "indicate"]
-    },
-    "vis": {
-      "meaning": "看",
-      "origin": "拉丁语 videre",
-      "color": "#1ABC9C",
-      "level": 1,
-      "words": ["visible", "vision", "visit", "visual", "revise", "supervise", "television", "visualize"]
-    },
-    "vid": {
-      "meaning": "看",
-      "origin": "拉丁语 videre",
-      "color": "#1ABC9C",
-      "level": 1,
-      "words": ["video", "evidence", "provide", "divide", "individual", "providence"]
+      "words": [
+        "transport",
+        "transportation",
+        "import",
+        "importation",
+        "importer",
+        "important",
+        "importance",
+        "export",
+        "exportation",
+        "exporter"
+      ]
     },
     "duct": {
-      "meaning": "引导，带领",
+      "meaning": "引导",
       "origin": "拉丁语 ducere",
+      "color": "#2E6B8A",
+      "level": 1,
+      "words": [
+        "conduct",
+        "conductor",
+        "produce",
+        "producer",
+        "product",
+        "production",
+        "productive",
+        "productivity",
+        "reduce",
+        "reduction"
+      ]
+    },
+    "spect": {
+      "meaning": "看",
+      "origin": "拉丁语 specere",
+      "color": "#4A90B8",
+      "level": 1,
+      "words": [
+        "inspect",
+        "inspector",
+        "inspection",
+        "respect",
+        "respectful",
+        "respective",
+        "suspect",
+        "suspicious",
+        "expect",
+        "expectation"
+      ]
+    },
+    "ject": {
+      "meaning": "投掷",
+      "origin": "拉丁语 jacere",
+      "color": "#3674A0",
+      "level": 1,
+      "words": [
+        "reject",
+        "rejection",
+        "inject",
+        "injection",
+        "project",
+        "projection",
+        "projector",
+        "object",
+        "objection",
+        "objective"
+      ]
+    },
+    "struct": {
+      "meaning": "建造",
+      "origin": "拉丁语 struere",
       "color": "#2980B9",
-      "level": 2,
-      "words": ["conduct", "produce", "reduce", "introduce", "deduce", "reproduce", "semiconductor", "educate"]
-    },
-    "duc": {
-      "meaning": "引导，带领",
-      "origin": "拉丁语 ducere",
-      "color": "#2980B9",
-      "level": 2,
-      "words": ["durable", "duration", "endure", "produce", "reduce", "introduce"]
-    },
-    "form": {
-      "meaning": "形状，形式",
-      "origin": "拉丁语 forma",
-      "color": "#E67E22",
-      "level": 2,
-      "words": ["reform", "transform", "inform", "perform", "uniform", "formal", "formation", "formula"]
-    },
-    "tract": {
-      "meaning": "拉，拖",
-      "origin": "拉丁语 trahere",
-      "color": "#95A5A6",
-      "level": 2,
-      "words": ["attract", "extract", "contract", "distract", "abstract", "subtract", "tractor", "intractable"]
+      "level": 1,
+      "words": [
+        "construct",
+        "construction",
+        "constructive",
+        "structure",
+        "structural",
+        "destroy",
+        "destruction",
+        "destructive",
+        "instruct",
+        "instruction"
+      ]
     },
     "rupt": {
-      "meaning": "破裂，断裂",
+      "meaning": "破裂",
       "origin": "拉丁语 rumpere",
-      "color": "#D35400",
-      "level": 2,
-      "words": ["interrupt", "corrupt", "abrupt", "bankrupt", "disrupt", "erupt", "rupture"]
+      "color": "#1A6B8A",
+      "level": 1,
+      "words": [
+        "interrupt",
+        "interruption",
+        "corrupt",
+        "corruption",
+        "erupt",
+        "eruption",
+        "disrupt",
+        "disruption",
+        "disruptive",
+        "bankrupt"
+      ]
     },
     "scrib": {
       "meaning": "写",
       "origin": "拉丁语 scribere",
-      "color": "#8E44AD",
+      "color": "#82A03B",
       "level": 2,
-      "words": ["describe", "subscribe", "prescribe", "inscribe", "transcript", "manuscript", "scripture"]
-    },
-    "script": {
-      "meaning": "写",
-      "origin": "拉丁语 scribere",
-      "color": "#8E44AD",
-      "level": 2,
-      "words": ["script", "manuscript", "transcript", "prescription", "subscription"]
-    },
-    "mit": {
-      "meaning": "发送，放",
-      "origin": "拉丁语 mittere",
-      "color": "#16A085",
-      "level": 3,
-      "words": ["transmit", "permit", "submit", "commit", "admit", "emit", "remit", "commission"]
-    },
-    "miss": {
-      "meaning": "发送，放",
-      "origin": "拉丁语 mittere",
-      "color": "#16A085",
-      "level": 3,
-      "words": ["mission", "dismiss", "permission", "admission", "emission", "missile", "missing"]
-    },
-    "pos": {
-      "meaning": "放置",
-      "origin": "拉丁语 ponere",
-      "color": "#C0392B",
-      "level": 3,
-      "words": ["position", "compose", "dispose", "expose", "propose", "oppose", "deposit", "transpose"]
-    },
-    "pon": {
-      "meaning": "放置",
-      "origin": "拉丁语 ponere",
-      "color": "#C0392B",
-      "level": 3,
-      "words": ["component", "opponent", "postpone", "exponent", "propone"]
+      "words": [
+        "describe",
+        "description",
+        "descriptive",
+        "prescribe",
+        "prescription",
+        "subscribe",
+        "subscription",
+        "subscriber",
+        "inscribe",
+        "inscription"
+      ]
     },
     "cred": {
       "meaning": "相信",
       "origin": "拉丁语 credere",
-      "color": "#27AE60",
+      "color": "#A03B82",
+      "level": 2,
+      "words": [
+        "credit",
+        "creditor",
+        "incredible",
+        "incredibly",
+        "credible",
+        "credibility",
+        "credential",
+        "credulous",
+        "accredit",
+        "accreditation"
+      ]
+    },
+    "dict": {
+      "meaning": "说/宣告",
+      "origin": "拉丁语 dicere",
+      "color": "#7B3BA0",
+      "level": 2,
+      "words": [
+        "predict",
+        "prediction",
+        "predictable",
+        "contradict",
+        "contradiction",
+        "contradictory",
+        "dictate",
+        "dictation",
+        "dictator",
+        "dictatorship"
+      ]
+    },
+    "fac": {
+      "meaning": "做/制造",
+      "origin": "拉丁语 facere",
+      "color": "#3B9B82",
+      "level": 2,
+      "words": [
+        "factory",
+        "factor",
+        "fact",
+        "factual",
+        "effect",
+        "effective",
+        "effectiveness",
+        "affect",
+        "affection",
+        "perfect"
+      ]
+    },
+    "tract": {
+      "meaning": "拉/拽",
+      "origin": "拉丁语 trahere",
+      "color": "#9B3B6B",
+      "level": 2,
+      "words": [
+        "attract",
+        "attraction",
+        "attractive",
+        "contract",
+        "contractor",
+        "extract",
+        "extraction",
+        "distract",
+        "distraction",
+        "subtract"
+      ]
+    },
+    "mit": {
+      "meaning": "送/发",
+      "origin": "拉丁语 mittere",
+      "color": "#6B4BA0",
+      "level": 2,
+      "words": [
+        "transmit",
+        "transmission",
+        "submit",
+        "submission",
+        "permit",
+        "permission",
+        "admit",
+        "admission",
+        "commit",
+        "commitment"
+      ]
+    },
+    "magn": {
+      "meaning": "大/伟大",
+      "origin": "拉丁语 magnus",
+      "color": "#A06F3B",
       "level": 3,
-      "words": ["credit", "credible", "incredible", "credential", "accredit", "credulous"]
-    },
-    "mem": {
-      "meaning": "记忆",
-      "origin": "拉丁语 memor",
-      "color": "#F1C40F",
-      "level": 3,
-      "words": ["memory", "remember", "memorial", "memorize", "memoir", "memorable"]
-    },
-    "graph": {
-      "meaning": "写，画",
-      "origin": "希腊语 graphein",
-      "color": "#8B4513",
-      "level": 3,
-      "words": ["photograph", "telegraph", "biography", "autograph", "geography", "graphic", "paragraph"]
-    },
-    "phon": {
-      "meaning": "声音",
-      "origin": "希腊语 phone",
-      "color": "#7D3C98",
-      "level": 3,
-      "words": ["telephone", "microphone", "symphony", "phonetic", "saxophone", "phonology"]
-    },
-    "log": {
-      "meaning": "言语，学科",
-      "origin": "希腊语 logos",
-      "color": "#17A589",
-      "level": 4,
-      "words": ["biology", "psychology", "technology", "dialogue", "catalog", "logic", "apology"]
-    },
-    "ology": {
-      "meaning": "...学",
-      "origin": "希腊语 logos",
-      "color": "#17A589",
-      "level": 4,
-      "words": ["biology", "psychology", "technology", "sociology", "ecology", "geology"]
-    },
-    "vert": {
-      "meaning": "转",
-      "origin": "拉丁语 vertere",
-      "color": "#F0932B",
-      "level": 4,
-      "words": ["convert", "revert", "divert", "invert", "advertise", "vertical", "reversible"]
-    },
-    "vers": {
-      "meaning": "转",
-      "origin": "拉丁语 vertere",
-      "color": "#F0932B",
-      "level": 4,
-      "words": ["reverse", "universe", "version", "diverse", "converse", "traverse", "universal"]
-    },
-    "cap": {
-      "meaning": "抓住，容纳",
-      "origin": "拉丁语 capere",
-      "color": "#EB4D4B",
-      "level": 4,
-      "words": ["capture", "capable", "capacity", "captain", "capital", "caption", "accept"]
-    },
-    "cept": {
-      "meaning": "抓住，接受",
-      "origin": "拉丁语 capere",
-      "color": "#EB4D4B",
-      "level": 4,
-      "words": ["accept", "except", "concept", "intercept", "receptive", "perceive"]
-    },
-    "ceiv": {
-      "meaning": "抓住，接受",
-      "origin": "拉丁语 capere",
-      "color": "#EB4D4B",
-      "level": 4,
-      "words": ["receive", "perceive", "deceive", "conceive", "achieve"]
-    },
-    "sens": {
-      "meaning": "感觉",
-      "origin": "拉丁语 sentire",
-      "color": "#6C5CE7",
-      "level": 4,
-      "words": ["sense", "sensitive", "sensible", "sensation", "consent", "resent", "present"]
-    },
-    "sent": {
-      "meaning": "感觉，发送",
-      "origin": "拉丁语 sentire",
-      "color": "#6C5CE7",
-      "level": 4,
-      "words": ["sentence", "sentiment", "consent", "resent", "dissent", "assent"]
-    },
-    "pend": {
-      "meaning": "悬挂，称重",
-      "origin": "拉丁语 pendere",
-      "color": "#00CEC9",
-      "level": 5,
-      "words": ["depend", "suspend", "append", "pending", "independent", "expend", "suspense"]
-    },
-    "pens": {
-      "meaning": "悬挂，称重",
-      "origin": "拉丁语 pendere",
-      "color": "#00CEC9",
-      "level": 5,
-      "words": ["expense", "compensate", "dispense", "pension", "suspense"]
-    },
-    "tens": {
-      "meaning": "拉伸，紧张",
-      "origin": "拉丁语 tendere",
-      "color": "#DDA0DD",
-      "level": 5,
-      "words": ["tense", "tension", "intense", "extensive", "dense", "sensible"]
-    },
-    "tend": {
-      "meaning": "拉伸，趋向",
-      "origin": "拉丁语 tendere",
-      "color": "#DDA0DD",
-      "level": 5,
-      "words": ["extend", "intend", "attend", "pretend", "contend", "tendency"]
-    },
-    "vent": {
-      "meaning": "来",
-      "origin": "拉丁语 venire",
-      "color": "#FF7F50",
-      "level": 5,
-      "words": ["event", "prevent", "invent", "adventure", "convention", "intervention", "controversy"]
+      "words": [
+        "magnify",
+        "magnitude",
+        "magnate",
+        "magnanimous",
+        "magnet",
+        "magnetic",
+        "magnetism",
+        "magnum"
+      ]
     },
     "ven": {
       "meaning": "来",
       "origin": "拉丁语 venire",
-      "color": "#FF7F50",
-      "level": 5,
-      "words": ["venue", "avenue", "revenue", "intervene", "supervene"]
+      "color": "#3BA06F",
+      "level": 3,
+      "words": [
+        "event",
+        "eventual",
+        "eventually",
+        "prevent",
+        "prevention",
+        "preventive",
+        "invent",
+        "invention",
+        "inventor",
+        "inventive"
+      ]
     },
-    "fac": {
-      "meaning": "做，制作",
-      "origin": "拉丁语 facere",
-      "color": "#20B2AA",
-      "level": 5,
-      "words": ["factory", "manufacture", "facility", "faculty", "faction", "benefactor"]
+    "cap": {
+      "meaning": "抓/取",
+      "origin": "拉丁语 capere",
+      "color": "#2B9B6B",
+      "level": 3,
+      "words": [
+        "capture",
+        "accept",
+        "acceptance",
+        "acceptable",
+        "concept",
+        "conceptual",
+        "capable",
+        "capability",
+        "capacity",
+        "incapable"
+      ]
     },
-    "fect": {
-      "meaning": "做，制作",
-      "origin": "拉丁语 facere",
-      "color": "#20B2AA",
-      "level": 5,
-      "words": ["perfect", "effect", "infect", "defect", "reflect", "select", "intellect"]
+    "ced": {
+      "meaning": "走/让步",
+      "origin": "拉丁语 cedere",
+      "color": "#3B8B6B",
+      "level": 3,
+      "words": [
+        "proceed",
+        "procedure",
+        "process",
+        "procession",
+        "success",
+        "successful",
+        "succeed",
+        "succession",
+        "successive",
+        "successor"
+      ]
+    },
+    "pend": {
+      "meaning": "挂/称/付",
+      "origin": "拉丁语 pendere",
+      "color": "#4A9B5B",
+      "level": 3,
+      "words": [
+        "depend",
+        "dependent",
+        "dependence",
+        "independence",
+        "independent",
+        "spend",
+        "expenditure",
+        "expense",
+        "expensive",
+        "inexpensive"
+      ]
+    },
+    "press": {
+      "meaning": "压",
+      "origin": "拉丁语 premere",
+      "color": "#2B7B5B",
+      "level": 3,
+      "words": [
+        "express",
+        "expression",
+        "expressive",
+        "impress",
+        "impression",
+        "impressive",
+        "compress",
+        "compression",
+        "depress",
+        "depression"
+      ]
     },
     "fer": {
-      "meaning": "带来，携带",
+      "meaning": "带来/承受",
       "origin": "拉丁语 ferre",
-      "color": "#FF69B4",
-      "level": 5,
-      "words": ["transfer", "refer", "prefer", "infer", "confer", "differ", "suffer", "offer"]
-    },
-    "mot": {
-      "meaning": "移动",
-      "origin": "拉丁语 movere",
-      "color": "#9370DB",
-      "level": 6,
-      "words": ["motion", "motor", "promote", "remote", "emotion", "locomotion", "commotion"]
-    },
-    "mov": {
-      "meaning": "移动",
-      "origin": "拉丁语 movere",
-      "color": "#9370DB",
-      "level": 6,
-      "words": ["move", "movement", "remove", "prove", "improve", "approve", "disapprove"]
-    },
-    "pel": {
-      "meaning": "推，驱使",
-      "origin": "拉丁语 pellere",
-      "color": "#87CEEB",
-      "level": 6,
-      "words": ["compel", "expel", "repel", "propel", "impel", "dispel", "pellet"]
-    },
-    "pul": {
-      "meaning": "推，驱使",
-      "origin": "拉丁语 pellere",
-      "color": "#87CEEB",
-      "level": 6,
-      "words": ["pull", "pulse", "expulsion", "repulsion", "compulsion"]
-    },
-    "clam": {
-      "meaning": "喊叫",
-      "origin": "拉丁语 clamare",
-      "color": "#CD853F",
-      "level": 6,
-      "words": ["claim", "exclaim", "proclaim", "acclaim", "clamor", "reclaim"]
-    },
-    "clar": {
-      "meaning": "清楚，明白",
-      "origin": "拉丁语 clarus",
-      "color": "#F4A460",
-      "level": 6,
-      "words": ["clarify", "declare", "clarity", "declaration", "clarinet"]
-    },
-    "mort": {
-      "meaning": "死亡",
-      "origin": "拉丁语 mors",
-      "color": "#708090",
-      "level": 7,
-      "words": ["mortal", "immortal", "mortgage", "mortuary", "morbidity"]
-    },
-    "vit": {
-      "meaning": "生命",
-      "origin": "拉丁语 vita",
-      "color": "#32CD32",
-      "level": 7,
-      "words": ["vital", "vitamin", "vivid", "revitalize", "vitally"]
-    },
-    "viv": {
-      "meaning": "生命，活",
-      "origin": "拉丁语 vivere",
-      "color": "#32CD32",
-      "level": 7,
-      "words": ["vivid", "survive", "revive", "vivify", "vivacious"]
-    },
-    "aud": {
-      "meaning": "听",
-      "origin": "拉丁语 audire",
-      "color": "#4169E1",
-      "level": 7,
-      "words": ["audio", "audience", "audition", "auditorium", "audible", "auditor"]
-    },
-    "cred": {
-      "meaning": "相信",
-      "origin": "拉丁语 credere",
-      "color": "#27AE60",
-      "level": 3,
-      "words": ["credit", "credible", "incredible", "credential", "accredit"]
-    },
-    "graph": {
-      "meaning": "写，画",
-      "origin": "希腊语 graphein",
-      "color": "#8B4513",
-      "level": 3,
-      "words": ["photograph", "telegraph", "biography", "autograph"]
-    },
-    "log": {
-      "meaning": "言语，学科",
-      "origin": "希腊语 logos",
-      "color": "#17A589",
+      "color": "#B07040",
       "level": 4,
-      "words": ["biology", "psychology", "technology", "dialogue"]
-    },
-    "phon": {
-      "meaning": "声音",
-      "origin": "希腊语 phone",
-      "color": "#7D3C98",
-      "level": 3,
-      "words": ["telephone", "microphone", "symphony"]
-    },
-    "scope": {
-      "meaning": "看，观察",
-      "origin": "希腊语 skopein",
-      "color": "#00CED1",
-      "level": 7,
-      "words": ["telescope", "microscope", "periscope", "horoscope"]
-    },
-    "chron": {
-      "meaning": "时间",
-      "origin": "希腊语 chronos",
-      "color": "#DAA520",
-      "level": 8,
-      "words": ["chronic", "chronicle", "synchronize", "chronological", "anachronism"]
-    },
-    "geo": {
-      "meaning": "地球，土地",
-      "origin": "希腊语 ge",
-      "color": "#228B22",
-      "level": 8,
-      "words": ["geography", "geology", "geometry", "geopolitical", "geocentric"]
-    },
-    "hydr": {
-      "meaning": "水",
-      "origin": "希腊语 hydor",
-      "color": "#1E90FF",
-      "level": 8,
-      "words": ["hydrogen", "hydrate", "hydraulic", "hydroelectric", "dehydrate"]
-    },
-    "path": {
-      "meaning": "感情，疾病",
-      "origin": "希腊语 pathos",
-      "color": "#DC143C",
-      "level": 8,
-      "words": ["sympathy", "apathy", "empathy", "pathology", "pathetic"]
-    },
-    "manu": {
-      "meaning": "手",
-      "origin": "拉丁语 manus",
-      "color": "#D2691E",
-      "level": 8,
-      "words": ["manual", "manufacture", "manuscript", "manipulate", "manumission"]
-    },
-    "scrib": {
-      "meaning": "写",
-      "origin": "拉丁语 scribere",
-      "color": "#8E44AD",
-      "level": 2,
-      "words": ["describe", "subscribe", "prescribe", "inscribe"]
-    },
-    "script": {
-      "meaning": "写",
-      "origin": "拉丁语 scribere",
-      "color": "#8E44AD",
-      "level": 2,
-      "words": ["script", "manuscript", "transcript", "prescription"]
-    },
-    "spect": {
-      "meaning": "看，观察",
-      "origin": "拉丁语 spectare",
-      "color": "#2ECC71",
-      "level": 1,
-      "words": ["inspect", "respect", "expect", "prospect"]
-    },
-    "struct": {
-      "meaning": "建造，构建",
-      "origin": "拉丁语 struere",
-      "color": "#3498DB",
-      "level": 1,
-      "words": ["structure", "construct", "instruct", "destruct"]
-    },
-    "tract": {
-      "meaning": "拉，拖",
-      "origin": "拉丁语 trahere",
-      "color": "#95A5A6",
-      "level": 2,
-      "words": ["attract", "extract", "contract", "distract"]
-    },
-    "vent": {
-      "meaning": "来",
-      "origin": "拉丁语 venire",
-      "color": "#FF7F50",
-      "level": 5,
-      "words": ["event", "prevent", "invent", "adventure"]
-    },
-    "vers": {
-      "meaning": "转",
-      "origin": "拉丁语 vertere",
-      "color": "#F0932B",
-      "level": 4,
-      "words": ["reverse", "universe", "version", "diverse"]
-    },
-    "vid": {
-      "meaning": "看",
-      "origin": "拉丁语 videre",
-      "color": "#1ABC9C",
-      "level": 1,
-      "words": ["video", "evidence", "provide", "divide"]
-    },
-    "vis": {
-      "meaning": "看",
-      "origin": "拉丁语 videre",
-      "color": "#1ABC9C",
-      "level": 1,
-      "words": ["visible", "vision", "visit", "visual"]
-    },
-    "voc": {
-      "meaning": "声音，呼叫",
-      "origin": "拉丁语 vocare",
-      "color": "#9B59B6",
-      "level": 5,
-      "words": ["voice", "vocation", "vocabulary", "advocate", "provoke"]
-    },
-    "vok": {
-      "meaning": "声音，呼叫",
-      "origin": "拉丁语 vocare",
-      "color": "#9B59B6",
-      "level": 5,
-      "words": ["invoke", "revoke", "provoke", "equivalent"]
-    },
-    "capit": {
-      "meaning": "头",
-      "origin": "拉丁语 caput",
-      "color": "#E74C3C",
-      "level": 6,
-      "words": ["capital", "captain", "capitol", "decapitate", "capitation"]
-    },
-    "corp": {
-      "meaning": "身体",
-      "origin": "拉丁语 corpus",
-      "color": "#3498DB",
-      "level": 6,
-      "words": ["corporate", "corpse", "incorporate", "corpulent", "corpus"]
-    },
-    "cur": {
-      "meaning": "跑，发生",
-      "origin": "拉丁语 currere",
-      "color": "#2ECC71",
-      "level": 6,
-      "words": ["current", "occur", "recur", "incur", "curriculum", "cursive"]
-    },
-    "dent": {
-      "meaning": "牙齿",
-      "origin": "拉丁语 dens",
-      "color": "#9B59B6",
-      "level": 6,
-      "words": ["dental", "dentist", "indent", "dentition", "trident"]
-    },
-    "fin": {
-      "meaning": "结束，边界",
-      "origin": "拉丁语 finis",
-      "color": "#F39C12",
-      "level": 6,
-      "words": ["final", "finish", "define", "confine", "refine", "finite"]
-    },
-    "firm": {
-      "meaning": "坚固",
-      "origin": "拉丁语 firmus",
-      "color": "#1ABC9C",
-      "level": 6,
-      "words": ["firm", "confirm", "infirm", "firmware", "affirm"]
+      "words": [
+        "transfer",
+        "conference",
+        "confer",
+        "refer",
+        "reference",
+        "referee",
+        "prefer",
+        "preference",
+        "preferable",
+        "differ"
+      ]
     },
     "flu": {
       "meaning": "流",
       "origin": "拉丁语 fluere",
-      "color": "#2980B9",
-      "level": 7,
-      "words": ["fluid", "influence", "fluent", "fluidity", "affluent", "confluent"]
-    },
-    "gen": {
-      "meaning": "产生，种类",
-      "origin": "拉丁语 genus",
-      "color": "#E67E22",
-      "level": 7,
-      "words": ["generate", "general", "genius", "genuine", "gene", "genetic"]
-    },
-    "grad": {
-      "meaning": "步，级",
-      "origin": "拉丁语 gradus",
-      "color": "#95A5A6",
-      "level": 7,
-      "words": ["grade", "graduate", "gradual", "gradient", "upgrade", "retrograde"]
-    },
-    "gress": {
-      "meaning": "走，步",
-      "origin": "拉丁语 gradi",
-      "color": "#D35400",
-      "level": 7,
-      "words": ["progress", "congress", "aggressive", "regress", "transgress", "egress"]
-    },
-    "ject": {
-      "meaning": "投掷，扔",
-      "origin": "拉丁语 jacere",
-      "color": "#9B59B6",
-      "level": 1,
-      "words": ["project", "inject", "reject", "object"]
-    },
-    "junct": {
-      "meaning": "连接",
-      "origin": "拉丁语 jungere",
-      "color": "#8E44AD",
-      "level": 7,
-      "words": ["conjunction", "junction", "adjunct", "disjunction", "injunction"]
-    },
-    "leg": {
-      "meaning": "法律，阅读",
-      "origin": "拉丁语 lex",
-      "color": "#16A085",
-      "level": 7,
-      "words": ["legal", "legislate", "legend", "legitimate", "colleague", "illegible"]
-    },
-    "liber": {
-      "meaning": "自由，书",
-      "origin": "拉丁语 liber",
-      "color": "#C0392B",
-      "level": 7,
-      "words": ["liberty", "liberal", "liberate", "library", "illiberal"]
-    },
-    "loc": {
-      "meaning": "地方",
-      "origin": "拉丁语 locus",
-      "color": "#27AE60",
-      "level": 7,
-      "words": ["local", "locate", "location", "allocate", "collocate", "dislocate"]
-    },
-    "medi": {
-      "meaning": "中间",
-      "origin": "拉丁语 medius",
-      "color": "#F1C40F",
-      "level": 7,
-      "words": ["medium", "mediate", "mediator", "median", "immediate", "intermediate"]
-    },
-    "mem": {
-      "meaning": "记忆",
-      "origin": "拉丁语 memor",
-      "color": "#8B4513",
-      "level": 3,
-      "words": ["memory", "remember", "memorial", "memorize"]
-    },
-    "miss": {
-      "meaning": "发送，放",
-      "origin": "拉丁语 mittere",
-      "color": "#16A085",
-      "level": 3,
-      "words": ["mission", "dismiss", "permission", "admission"]
-    },
-    "mit": {
-      "meaning": "发送，放",
-      "origin": "拉丁语 mittere",
-      "color": "#16A085",
-      "level": 3,
-      "words": ["transmit", "permit", "submit", "commit"]
-    },
-    "nat": {
-      "meaning": "出生",
-      "origin": "拉丁语 nasci",
-      "color": "#7D3C98",
-      "level": 8,
-      "words": ["nature", "nation", "native", "natural", "innate", "prenatal"]
-    },
-    "ord": {
-      "meaning": "顺序",
-      "origin": "拉丁语 ordo",
-      "color": "#17A589",
-      "level": 8,
-      "words": ["order", "ordinary", "ordinal", "disorder", "coordinate", "subordinate"]
-    },
-    "par": {
-      "meaning": "相等，准备",
-      "origin": "拉丁语 par",
-      "color": "#F0932B",
-      "level": 8,
-      "words": ["parent", "parity", "prepare", "compare", "repair", "apparent"]
-    },
-    "pat": {
-      "meaning": "忍受，感情",
-      "origin": "拉丁语 pati",
-      "color": "#EB4D4B",
-      "level": 8,
-      "words": ["patient", "patience", "compatible", "pathetic", "sympathy", "empathy"]
-    },
-    "pede": {
-      "meaning": "脚",
-      "origin": "拉丁语 pes",
-      "color": "#6C5CE7",
-      "level": 8,
-      "words": ["pedestrian", "biped", "quadruped", "pedal", "expedite"]
-    },
-    "pend": {
-      "meaning": "悬挂，称重",
-      "origin": "拉丁语 pendere",
-      "color": "#00CEC9",
-      "level": 5,
-      "words": ["depend", "suspend", "append", "pending"]
-    },
-    "ple": {
-      "meaning": "填满",
-      "origin": "拉丁语 plere",
-      "color": "#FF7F50",
-      "level": 8,
-      "words": ["complete", "complement", "plenty", "plenary", "replenish", "supplement"]
-    },
-    "plic": {
-      "meaning": "折叠，重复",
-      "origin": "拉丁语 plicare",
-      "color": "#20B2AA",
-      "level": 8,
-      "words": ["complicate", "implicate", "explicate", "replicate", "duplicate"]
-    },
-    "ply": {
-      "meaning": "折叠，重复",
-      "origin": "拉丁语 plicare",
-      "color": "#20B2AA",
-      "level": 8,
-      "words": ["apply", "supply", "reply", "imply", "comply", "multiply"]
-    },
-    "pos": {
-      "meaning": "放置",
-      "origin": "拉丁语 ponere",
-      "color": "#C0392B",
-      "level": 3,
-      "words": ["position", "compose", "dispose", "expose"]
-    },
-    "prim": {
-      "meaning": "第一",
-      "origin": "拉丁语 primus",
-      "color": "#FF69B4",
-      "level": 8,
-      "words": ["primary", "prime", "primitive", "primacy", "primordial", "primrose"]
-    },
-    "rupt": {
-      "meaning": "破裂，断裂",
-      "origin": "拉丁语 rumpere",
-      "color": "#D35400",
-      "level": 2,
-      "words": ["interrupt", "corrupt", "abrupt", "bankrupt"]
-    },
-    "sec": {
-      "meaning": "跟随，切",
-      "origin": "拉丁语 sequi/secare",
-      "color": "#9370DB",
-      "level": 8,
-      "words": ["second", "secret", "section", "secure", "sequence", "consecutive"]
-    },
-    "sent": {
-      "meaning": "感觉，发送",
-      "origin": "拉丁语 sentire",
-      "color": "#6C5CE7",
+      "color": "#3B7BA0",
       "level": 4,
-      "words": ["sentence", "sentiment", "consent", "resent"]
-    },
-    "sens": {
-      "meaning": "感觉",
-      "origin": "拉丁语 sentire",
-      "color": "#6C5CE7",
-      "level": 4,
-      "words": ["sense", "sensitive", "sensible", "sensation"]
-    },
-    "sign": {
-      "meaning": "标记，信号",
-      "origin": "拉丁语 signum",
-      "color": "#87CEEB",
-      "level": 8,
-      "words": ["sign", "signal", "signature", "design", "assign", "resign"]
-    },
-    "sol": {
-      "meaning": "单独，太阳",
-      "origin": "拉丁语 solus/sol",
-      "color": "#CD853F",
-      "level": 8,
-      "words": ["solo", "solitary", "solar", "solution", "solve", "absolute"]
-    },
-    "stit": {
-      "meaning": "站立",
-      "origin": "拉丁语 stare",
-      "color": "#F4A460",
-      "level": 8,
-      "words": ["constitute", "institute", "substitute", "prostitute", "destitute"]
-    },
-    "tact": {
-      "meaning": "接触",
-      "origin": "拉丁语 tangere",
-      "color": "#708090",
-      "level": 8,
-      "words": ["contact", "tactile", "intact", "tactic", "contagious"]
-    },
-    "tang": {
-      "meaning": "接触",
-      "origin": "拉丁语 tangere",
-      "color": "#708090",
-      "level": 8,
-      "words": ["tangible", "tangent", "contagious", "tangential"]
-    },
-    "ten": {
-      "meaning": "保持，伸展",
-      "origin": "拉丁语 tenere",
-      "color": "#32CD32",
-      "level": 8,
-      "words": ["tense", "tension", "maintain", "contain", "obtain", "retain"]
-    },
-    "termin": {
-      "meaning": "界限，结束",
-      "origin": "拉丁语 terminus",
-      "color": "#4169E1",
-      "level": 8,
-      "words": ["terminal", "terminate", "terminology", "determine", "interminable"]
-    },
-    "test": {
-      "meaning": "证明，测试",
-      "origin": "拉丁语 testis",
-      "color": "#DAA520",
-      "level": 8,
-      "words": ["test", "testify", "contest", "protest", "testament", "detest"]
-    },
-    "text": {
-      "meaning": "编织",
-      "origin": "拉丁语 texere",
-      "color": "#228B22",
-      "level": 8,
-      "words": ["text", "textile", "texture", "context", "pretext", "subtext"]
-    },
-    "vac": {
-      "meaning": "空",
-      "origin": "拉丁语 vacuus",
-      "color": "#1E90FF",
-      "level": 8,
-      "words": ["vacant", "vacuum", "vacation", "vacate", "evacuate"]
-    },
-    "val": {
-      "meaning": "价值，强壮",
-      "origin": "拉丁语 valere",
-      "color": "#DC143C",
-      "level": 8,
-      "words": ["value", "valid", "evaluate", "prevail", "valiant", "equivalent"]
-    },
-    "ven": {
-      "meaning": "来",
-      "origin": "拉丁语 venire",
-      "color": "#FF7F50",
-      "level": 5,
-      "words": ["venue", "avenue", "revenue", "intervene"]
+      "words": [
+        "influence",
+        "influential",
+        "fluent",
+        "fluency",
+        "fluid",
+        "affluent",
+        "affluence",
+        "fluctuate",
+        "fluctuation",
+        "influx"
+      ]
     },
     "vert": {
       "meaning": "转",
       "origin": "拉丁语 vertere",
-      "color": "#F0932B",
+      "color": "#7B8B3B",
       "level": 4,
-      "words": ["convert", "revert", "divert", "invert"]
+      "words": [
+        "convert",
+        "conversion",
+        "converter",
+        "reverse",
+        "reversal",
+        "reversible",
+        "advertise",
+        "advertisement",
+        "diverse",
+        "diversity"
+      ]
+    },
+    "ten": {
+      "meaning": "持有/保持",
+      "origin": "拉丁语 tenere",
+      "color": "#6B9B4B",
+      "level": 4,
+      "words": [
+        "contain",
+        "container",
+        "maintain",
+        "maintenance",
+        "obtain",
+        "retain",
+        "retention",
+        "sustain",
+        "sustainable",
+        "sustainability"
+      ]
+    },
+    "vis": {
+      "meaning": "看",
+      "origin": "拉丁语 videre",
+      "color": "#4B7B9B",
+      "level": 4,
+      "words": [
+        "visible",
+        "visibility",
+        "invisible",
+        "vision",
+        "visionary",
+        "visual",
+        "visualize",
+        "visit",
+        "visitor",
+        "evidence"
+      ]
+    },
+    "cur": {
+      "meaning": "跑/流",
+      "origin": "拉丁语 currere",
+      "color": "#5B6BA0",
+      "level": 4,
+      "words": [
+        "current",
+        "currently",
+        "currency",
+        "occur",
+        "occurrence",
+        "excursion",
+        "curriculum",
+        "cursor",
+        "incur",
+        "recur"
+      ]
+    },
+    "graph": {
+      "meaning": "写/画",
+      "origin": "希腊语 graphein",
+      "color": "#8B5B3B",
+      "level": 5,
+      "words": [
+        "photograph",
+        "photographer",
+        "photography",
+        "geographic",
+        "geography",
+        "biography",
+        "autograph",
+        "paragraph",
+        "telegraph",
+        "graphic"
+      ]
+    },
+    "log": {
+      "meaning": "言/学/理",
+      "origin": "希腊语 logos",
+      "color": "#6B7B4B",
+      "level": 5,
+      "words": [
+        "dialogue",
+        "catalog",
+        "prologue",
+        "epilogue",
+        "apology",
+        "apologize",
+        "biology",
+        "biological",
+        "biologist",
+        "technology"
+      ]
+    },
+    "path": {
+      "meaning": "感受/病痛",
+      "origin": "希腊语 pathos",
+      "color": "#9B4B5B",
+      "level": 5,
+      "words": [
+        "sympathy",
+        "sympathetic",
+        "sympathize",
+        "empathy",
+        "empathetic",
+        "pathetic",
+        "apathy",
+        "apathetic",
+        "pathology",
+        "pathological"
+      ]
+    },
+    "auto": {
+      "meaning": "自己",
+      "origin": "希腊语 autos",
+      "color": "#5B5BA0",
+      "level": 5,
+      "words": [
+        "automatic",
+        "automatically",
+        "automation",
+        "automate",
+        "automobile",
+        "autonomy",
+        "autonomous",
+        "autobiography",
+        "autopilot",
+        "autopsy"
+      ]
+    },
+    "bene": {
+      "meaning": "好/坏",
+      "origin": "拉丁语 bene/malus",
+      "color": "#4B8B4B",
+      "level": 5,
+      "words": [
+        "beneficiary",
+        "benevolent",
+        "benevolence",
+        "benign",
+        "malice",
+        "malicious",
+        "malfunction",
+        "malignant",
+        "malcontent",
+        "malediction"
+      ]
+    },
+    "tele": {
+      "meaning": "远",
+      "origin": "希腊语 tele",
+      "color": "#7B4B7B",
+      "level": 5,
+      "words": [
+        "telephone",
+        "telescope",
+        "telegram",
+        "teleport",
+        "telecommunication",
+        "telework",
+        "telemedicine",
+        "telemetry"
+      ]
+    },
+    "act": {
+      "meaning": "做/行动",
+      "origin": "拉丁语 agere",
+      "color": "#C06050",
+      "level": 6,
+      "words": [
+        "act",
+        "action",
+        "active",
+        "activate",
+        "activity",
+        "actual",
+        "actually",
+        "actor",
+        "actress",
+        "react"
+      ]
+    },
+    "form": {
+      "meaning": "形状",
+      "origin": "拉丁语 forma",
+      "color": "#D07060",
+      "level": 6,
+      "words": [
+        "form",
+        "formal",
+        "formality",
+        "format",
+        "formation",
+        "formula",
+        "formulate",
+        "reform",
+        "inform",
+        "information"
+      ]
+    },
+    "pos": {
+      "meaning": "放置",
+      "origin": "拉丁语 ponere",
+      "color": "#B08060",
+      "level": 6,
+      "words": [
+        "position",
+        "positive",
+        "compose",
+        "composer",
+        "composition",
+        "component",
+        "deposit",
+        "dispose",
+        "disposal",
+        "disposable"
+      ]
+    },
+    "mov": {
+      "meaning": "动",
+      "origin": "拉丁语 movere",
+      "color": "#A07070",
+      "level": 6,
+      "words": [
+        "move",
+        "movement",
+        "remove",
+        "removal",
+        "remote",
+        "promote",
+        "promotion",
+        "motivate",
+        "motivation",
+        "motive"
+      ]
+    },
+    "gen": {
+      "meaning": "产生/种类",
+      "origin": "拉丁语 genus",
+      "color": "#90A060",
+      "level": 6,
+      "words": [
+        "generate",
+        "generation",
+        "generator",
+        "general",
+        "generalize",
+        "generous",
+        "generosity",
+        "genetic",
+        "genetics",
+        "gene"
+      ]
+    },
+    "sign": {
+      "meaning": "标记",
+      "origin": "拉丁语 signum",
+      "color": "#80A070",
+      "level": 6,
+      "words": [
+        "sign",
+        "signal",
+        "signature",
+        "significant",
+        "significance",
+        "insignificant",
+        "assign",
+        "assignment",
+        "design",
+        "designer"
+      ]
+    },
+    "loc": {
+      "meaning": "地方",
+      "origin": "拉丁语 locus",
+      "color": "#70A080",
+      "level": 6,
+      "words": [
+        "local",
+        "locality",
+        "localize",
+        "locate",
+        "location",
+        "allocate",
+        "allocation",
+        "relocate",
+        "locomotive",
+        "dislocate"
+      ]
+    },
+    "reg": {
+      "meaning": "统治/直",
+      "origin": "拉丁语 regere",
+      "color": "#6090A0",
+      "level": 6,
+      "words": [
+        "regular",
+        "regularly",
+        "regulate",
+        "regulation",
+        "regulator",
+        "irregular",
+        "regime",
+        "region",
+        "regional",
+        "register"
+      ]
+    },
+    "voc": {
+      "meaning": "叫/声",
+      "origin": "拉丁语 vocare",
+      "color": "#A06090",
+      "level": 6,
+      "words": [
+        "voice",
+        "vocal",
+        "vocabulary",
+        "vocation",
+        "vocational",
+        "advocate",
+        "provoke",
+        "provocative",
+        "invoke",
+        "invocation"
+      ]
+    },
+    "clude": {
+      "meaning": "关闭",
+      "origin": "拉丁语 claudere",
+      "color": "#9060A0",
+      "level": 6,
+      "words": [
+        "include",
+        "inclusion",
+        "inclusive",
+        "exclude",
+        "exclusion",
+        "exclusive",
+        "conclude",
+        "conclusion",
+        "conclusive",
+        "preclude"
+      ]
+    },
+    "ann": {
+      "meaning": "年",
+      "origin": "拉丁语 annus",
+      "color": "#A08050",
+      "level": 7,
+      "words": [
+        "annual",
+        "annually",
+        "annuity",
+        "perennial",
+        "millennium",
+        "biennial"
+      ]
+    },
+    "aud": {
+      "meaning": "听",
+      "origin": "拉丁语 audire",
+      "color": "#50A080",
+      "level": 7,
+      "words": [
+        "audience",
+        "audio",
+        "audible",
+        "inaudible",
+        "audit",
+        "auditor",
+        "auditorium",
+        "audition"
+      ]
+    },
+    "circ": {
+      "meaning": "圆/环",
+      "origin": "拉丁语 circus",
+      "color": "#8050A0",
+      "level": 7,
+      "words": [
+        "circle",
+        "circular",
+        "circulate",
+        "circulation",
+        "circuit",
+        "circumstance",
+        "circumvent"
+      ]
+    },
+    "corp": {
+      "meaning": "身体",
+      "origin": "拉丁语 corpus",
+      "color": "#A05080",
+      "level": 7,
+      "words": [
+        "corporate",
+        "corporation",
+        "corpse",
+        "corps",
+        "incorporate",
+        "incorporated"
+      ]
+    },
+    "equ": {
+      "meaning": "平等",
+      "origin": "拉丁语 aequus",
+      "color": "#50A050",
+      "level": 7,
+      "words": [
+        "equal",
+        "equality",
+        "equalize",
+        "equate",
+        "equation",
+        "equip",
+        "equipment",
+        "equivalent",
+        "equity",
+        "adequate"
+      ]
+    },
+    "fin": {
+      "meaning": "结束/边界",
+      "origin": "拉丁语 finis",
+      "color": "#A0A050",
+      "level": 7,
+      "words": [
+        "final",
+        "finally",
+        "finalist",
+        "finance",
+        "financial",
+        "finish",
+        "finite",
+        "infinite",
+        "infinity",
+        "define"
+      ]
+    },
+    "man": {
+      "meaning": "手",
+      "origin": "拉丁语 manus",
+      "color": "#50A0A0",
+      "level": 7,
+      "words": [
+        "manual",
+        "manage",
+        "manager",
+        "management",
+        "manifest",
+        "manipulate",
+        "manipulation",
+        "manner",
+        "command",
+        "commander"
+      ]
+    },
+    "med": {
+      "meaning": "中间",
+      "origin": "拉丁语 medius",
+      "color": "#A050A0",
+      "level": 7,
+      "words": [
+        "medium",
+        "media",
+        "mediate",
+        "mediation",
+        "mediator",
+        "medieval",
+        "immediate",
+        "immediately",
+        "intermediate",
+        "Mediterranean"
+      ]
+    },
+    "mem": {
+      "meaning": "记忆",
+      "origin": "拉丁语 memor",
+      "color": "#A0A080",
+      "level": 7,
+      "words": [
+        "memory",
+        "memorial",
+        "memorize",
+        "memorable",
+        "memoir",
+        "remember",
+        "remind",
+        "reminder",
+        "commemorate",
+        "immemorial"
+      ]
+    },
+    "min": {
+      "meaning": "小",
+      "origin": "拉丁语 minus",
+      "color": "#80A0A0",
+      "level": 7,
+      "words": [
+        "minor",
+        "minority",
+        "minimum",
+        "minimal",
+        "minimize",
+        "minute",
+        "diminish",
+        "miniature",
+        "minister",
+        "ministry"
+      ]
+    },
+    "mort": {
+      "meaning": "死",
+      "origin": "拉丁语 mors",
+      "color": "#A08080",
+      "level": 7,
+      "words": [
+        "mortal",
+        "mortality",
+        "immortal",
+        "immortality",
+        "mortgage",
+        "mortify",
+        "mortician"
+      ]
+    },
+    "nat": {
+      "meaning": "出生",
+      "origin": "拉丁语 nasci",
+      "color": "#8080A0",
+      "level": 7,
+      "words": [
+        "nature",
+        "natural",
+        "naturally",
+        "nation",
+        "national",
+        "nationality",
+        "international",
+        "native",
+        "innate",
+        "prenatal"
+      ]
+    },
+    "nov": {
+      "meaning": "新",
+      "origin": "拉丁语 novus",
+      "color": "#80A080",
+      "level": 7,
+      "words": [
+        "novel",
+        "novelist",
+        "novelty",
+        "innovate",
+        "innovation",
+        "innovative",
+        "renovate",
+        "renovation",
+        "novice"
+      ]
+    },
+    "ped": {
+      "meaning": "脚",
+      "origin": "拉丁语 pes",
+      "color": "#A08060",
+      "level": 7,
+      "words": [
+        "pedestrian",
+        "pedal",
+        "expedition",
+        "impede",
+        "impediment",
+        "centipede",
+        "biped"
+      ]
+    },
+    "plic": {
+      "meaning": "折叠",
+      "origin": "拉丁语 plicare",
+      "color": "#6080A0",
+      "level": 7,
+      "words": [
+        "apply",
+        "application",
+        "applicant",
+        "applicable",
+        "complicate",
+        "complicated",
+        "complication",
+        "imply",
+        "implication",
+        "implicit"
+      ]
+    },
+    "sci": {
+      "meaning": "知道",
+      "origin": "拉丁语 scire",
+      "color": "#A06080",
+      "level": 7,
+      "words": [
+        "science",
+        "scientific",
+        "scientist",
+        "conscious",
+        "consciousness",
+        "conscience",
+        "subconscious",
+        "omniscient"
+      ]
+    },
+    "sens": {
+      "meaning": "感觉",
+      "origin": "拉丁语 sentire",
+      "color": "#60A080",
+      "level": 7,
+      "words": [
+        "sense",
+        "sensible",
+        "sensitive",
+        "sensitivity",
+        "sensor",
+        "sensory",
+        "sensation",
+        "sensational",
+        "sentiment",
+        "sentimental"
+      ]
+    },
+    "temp": {
+      "meaning": "时间",
+      "origin": "拉丁语 tempus",
+      "color": "#80A060",
+      "level": 7,
+      "words": [
+        "temporary",
+        "temporarily",
+        "contemporary",
+        "contemplate",
+        "temple",
+        "tempo",
+        "temporal"
+      ]
+    },
+    "val": {
+      "meaning": "值/强",
+      "origin": "拉丁语 valere",
+      "color": "#A06060",
+      "level": 7,
+      "words": [
+        "value",
+        "valuable",
+        "invaluable",
+        "evaluate",
+        "evaluation",
+        "valid",
+        "validity",
+        "invalid",
+        "prevail",
+        "prevalent"
+      ]
+    },
+    "viv": {
+      "meaning": "生活",
+      "origin": "拉丁语 vivere",
+      "color": "#60A060",
+      "level": 7,
+      "words": [
+        "vivid",
+        "survive",
+        "survival",
+        "survivor",
+        "revive",
+        "revival",
+        "vital",
+        "vitality",
+        "vitamin"
+      ]
+    },
+    "lect": {
+      "meaning": "选择/读",
+      "origin": "拉丁语 legere",
+      "color": "#4A90D9",
+      "level": 2,
+      "words": [
+        "select",
+        "selection",
+        "selective",
+        "collector",
+        "neglect",
+        "intellect",
+        "intellectual",
+        "lecture",
+        "dialect",
+        "elegant"
+      ]
+    },
+    "terr": {
+      "meaning": "地/土",
+      "origin": "拉丁语 terra",
+      "color": "#8B6914",
+      "level": 3,
+      "words": [
+        "territory",
+        "territorial",
+        "terrain",
+        "terrestrial",
+        "terrace",
+        "subterranean",
+        "extraterrestrial",
+        "terra",
+        "terrarium"
+      ]
+    },
+    "liber": {
+      "meaning": "自由",
+      "origin": "拉丁语 liber",
+      "color": "#2ECC71",
+      "level": 3,
+      "words": [
+        "liberty",
+        "liberal",
+        "liberate",
+        "liberation",
+        "liberator",
+        "deliberately"
+      ]
+    },
+    "labor": {
+      "meaning": "劳动",
+      "origin": "拉丁语 labor",
+      "color": "#D4A017",
+      "level": 3,
+      "words": [
+        "labor",
+        "laboratory",
+        "collaborate",
+        "collaboration",
+        "collaborator",
+        "laborer"
+      ]
+    },
+    "jud": {
+      "meaning": "判断",
+      "origin": "拉丁语 judicare",
+      "color": "#8E44AD",
+      "level": 3,
+      "words": [
+        "judge",
+        "judgment",
+        "judicial",
+        "prejudice",
+        "prejudicial",
+        "adjudicate",
+        "judicious"
+      ]
+    },
+    "norm": {
+      "meaning": "标准/规范",
+      "origin": "拉丁语 norma",
+      "color": "#3498DB",
+      "level": 3,
+      "words": [
+        "normal",
+        "abnormal",
+        "normalize",
+        "norm",
+        "normative"
+      ]
+    },
+    "popul": {
+      "meaning": "人民",
+      "origin": "拉丁语 populus",
+      "color": "#E74C3C",
+      "level": 3,
+      "words": [
+        "popular",
+        "popularity",
+        "population",
+        "populate",
+        "unpopular",
+        "populace",
+        "popularize"
+      ]
+    },
+    "simil": {
+      "meaning": "相似",
+      "origin": "拉丁语 similis",
+      "color": "#1ABC9C",
+      "level": 4,
+      "words": [
+        "similar",
+        "similarity",
+        "similarly",
+        "simulate",
+        "simulation",
+        "simultaneous",
+        "assimilate",
+        "assimilation",
+        "resemble",
+        "resemblance"
+      ]
+    },
+    "grat": {
+      "meaning": "感恩/喜悦",
+      "origin": "拉丁语 gratus",
+      "color": "#F39C12",
+      "level": 4,
+      "words": [
+        "grateful",
+        "gratitude",
+        "congratulate",
+        "congratulation",
+        "grace",
+        "graceful",
+        "gracious",
+        "ingratitude",
+        "gratify"
+      ]
+    },
+    "liter": {
+      "meaning": "文字",
+      "origin": "拉丁语 littera",
+      "color": "#2C3E50",
+      "level": 4,
+      "words": [
+        "literal",
+        "literally",
+        "literary",
+        "literature",
+        "literate",
+        "illiterate",
+        "literacy",
+        "illiteracy"
+      ]
+    },
+    "clar": {
+      "meaning": "清楚/明亮",
+      "origin": "拉丁语 clarus",
+      "color": "#F1C40F",
+      "level": 4,
+      "words": [
+        "clarification",
+        "clarity"
+      ]
+    },
+    "dur": {
+      "meaning": "持久/硬",
+      "origin": "拉丁语 durus",
+      "color": "#7F8C8D",
+      "level": 4,
+      "words": [
+        "durable",
+        "endurance",
+        "during"
+      ]
+    },
+    "firm": {
+      "meaning": "坚固/坚定",
+      "origin": "拉丁语 firmus",
+      "color": "#34495E",
+      "level": 4,
+      "words": [
+        "firm",
+        "confirm",
+        "confirmation",
+        "affirm",
+        "affirmative",
+        "infirm"
+      ]
+    },
+    "fort": {
+      "meaning": "强壮/力量",
+      "origin": "拉丁语 fortis",
+      "color": "#C0392B",
+      "level": 4,
+      "words": [
+        "fortune",
+        "fortunate",
+        "unfortunate",
+        "unfortunately",
+        "uncomfortable",
+        "effort",
+        "enforcement",
+        "reinforce",
+        "reinforcement",
+        "fortress"
+      ]
+    },
+    "gress": {
+      "meaning": "走/步",
+      "origin": "拉丁语 gradi",
+      "color": "#16A085",
+      "level": 4,
+      "words": [
+        "progress",
+        "progressive",
+        "aggression",
+        "digress",
+        "regress",
+        "regression",
+        "transgress"
+      ]
+    },
+    "oper": {
+      "meaning": "工作",
+      "origin": "拉丁语 operari",
+      "color": "#2980B9",
+      "level": 4,
+      "words": [
+        "operate",
+        "operation",
+        "operator",
+        "cooperative"
+      ]
+    },
+    "ord": {
+      "meaning": "顺序/命令",
+      "origin": "拉丁语 ordo",
+      "color": "#D35400",
+      "level": 5,
+      "words": [
+        "order",
+        "ordinary",
+        "disorder",
+        "coordinate",
+        "coordination",
+        "subordinate",
+        "ordinal"
+      ]
+    },
+    "serv": {
+      "meaning": "服务/保持",
+      "origin": "拉丁语 servare",
+      "color": "#27AE60",
+      "level": 5,
+      "words": [
+        "serve",
+        "service",
+        "servant",
+        "preserve",
+        "preservation",
+        "conserve",
+        "conservation",
+        "observe",
+        "observation",
+        "observer"
+      ]
+    },
+    "test": {
+      "meaning": "证明/测试",
+      "origin": "拉丁语 testis",
+      "color": "#9B59B6",
+      "level": 5,
+      "words": [
+        "test",
+        "testify",
+        "testimony",
+        "protest",
+        "contestant",
+        "detest",
+        "attest"
+      ]
+    },
+    "cert": {
+      "meaning": "确定/区分",
+      "origin": "拉丁语 certus",
+      "color": "#1A5276",
+      "level": 5,
+      "words": [
+        "certainty",
+        "uncertain",
+        "uncertainty",
+        "certify",
+        "certification",
+        "concert",
+        "discern"
+      ]
+    },
+    "lumin": {
+      "meaning": "光",
+      "origin": "拉丁语 lumen",
+      "color": "#F4D03F",
+      "level": 5,
+      "words": [
+        "illuminate",
+        "illumination",
+        "luminous",
+        "luminary"
+      ]
+    },
+    "sect": {
+      "meaning": "切割",
+      "origin": "拉丁语 secare",
+      "color": "#AF601A",
+      "level": 5,
+      "words": [
+        "section",
+        "sector",
+        "insect",
+        "intersect",
+        "intersection",
+        "dissect",
+        "bisect"
+      ]
+    },
+    "sist": {
+      "meaning": "站立/存在",
+      "origin": "拉丁语 sistere",
+      "color": "#5D6D7E",
+      "level": 5,
+      "words": [
+        "resist",
+        "resistance",
+        "resistant",
+        "consistency",
+        "persist",
+        "persistent",
+        "insist",
+        "insistence",
+        "subsist"
+      ]
+    },
+    "mand": {
+      "meaning": "命令/委托",
+      "origin": "拉丁语 mandare",
+      "color": "#6C3483",
+      "level": 5,
+      "words": [
+        "demanding",
+        "mandate",
+        "recommend",
+        "recommendation"
+      ]
+    },
+    "cept": {
+      "meaning": "拿/接受",
+      "origin": "拉丁语 capere",
+      "color": "#117A65",
+      "level": 5,
+      "words": [
+        "conception",
+        "deception",
+        "intercept"
+      ]
+    },
+    "volv": {
+      "meaning": "转/卷",
+      "origin": "拉丁语 volvere",
+      "color": "#A04000",
+      "level": 6,
+      "words": [
+        "involve",
+        "involvement",
+        "revolutionary",
+        "revolve",
+        "revolution",
+        "resolve",
+        "resolution"
+      ]
+    },
+    "prim": {
+      "meaning": "第一/首要",
+      "origin": "拉丁语 primus",
+      "color": "#B7950B",
+      "level": 6,
+      "words": [
+        "primary",
+        "primarily",
+        "prime",
+        "primitive",
+        "prince",
+        "princess",
+        "principal",
+        "principle"
+      ]
+    },
+    "spec": {
+      "meaning": "特殊/种类",
+      "origin": "拉丁语 species",
+      "color": "#1B4F72",
+      "level": 6,
+      "words": [
+        "specialty",
+        "specifically"
+      ]
+    },
+    "plex": {
+      "meaning": "编织/折叠",
+      "origin": "拉丁语 plectere",
+      "color": "#4A235A",
+      "level": 6,
+      "words": [
+        "perplex",
+        "perplexing",
+        "duplex",
+        "multiplex"
+      ]
+    },
+    "ling": {
+      "meaning": "语言",
+      "origin": "拉丁语 lingua",
+      "color": "#E67E22",
+      "level": 5,
+      "words": [
+        "language",
+        "linguistic",
+        "bilingual",
+        "multilingual",
+        "slang",
+        "lingo"
+      ]
+    },
+    "carn": {
+      "meaning": "肉",
+      "origin": "拉丁语 caro",
+      "color": "#E74C3C",
+      "level": 6,
+      "words": [
+        "carnival",
+        "carnivore",
+        "incarnate",
+        "reincarnation",
+        "carnal"
+      ]
+    },
+    "chron": {
+      "meaning": "时间",
+      "origin": "希腊语 chronos",
+      "color": "#3498DB",
+      "level": 5,
+      "words": [
+        "chronological",
+        "anachronism"
+      ]
+    },
+    "morph": {
+      "meaning": "形态",
+      "origin": "希腊语 morphe",
+      "color": "#9B59B6",
+      "level": 6,
+      "words": [
+        "morphology",
+        "metamorphosis",
+        "amorphous",
+        "anthropomorphic",
+        "polymorphism"
+      ]
+    },
+    "phil": {
+      "meaning": "爱",
+      "origin": "希腊语 philos",
+      "color": "#E91E63",
+      "level": 5,
+      "words": [
+        "philosophy",
+        "philosopher",
+        "philanthropy",
+        "bibliophile",
+        "philharmonic"
+      ]
+    },
+    "crypt": {
+      "meaning": "隐藏",
+      "origin": "希腊语 kryptos",
+      "color": "#2C3E50",
+      "level": 6,
+      "words": [
+        "encrypt",
+        "cryptic",
+        "cryptography",
+        "crypt"
+      ]
+    },
+    "dem": {
+      "meaning": "人民",
+      "origin": "希腊语 demos",
+      "color": "#E67E22",
+      "level": 4,
+      "words": [
+        "democrat",
+        "pandemic",
+        "endemic"
+      ]
+    },
+    "arch": {
+      "meaning": "统治/首要",
+      "origin": "希腊语 arche",
+      "color": "#8E44AD",
+      "level": 5,
+      "words": [
+        "monarchy",
+        "anarchy",
+        "architect",
+        "architecture",
+        "matriarch",
+        "patriarch",
+        "archive"
+      ]
+    },
+    "civ": {
+      "meaning": "公民",
+      "origin": "拉丁语 civis",
+      "color": "#27AE60",
+      "level": 4,
+      "words": [
+        "civilize",
+        "civic"
+      ]
+    },
+    "greg": {
+      "meaning": "群/聚集",
+      "origin": "拉丁语 grex",
+      "color": "#16A085",
+      "level": 6,
+      "words": [
+        "aggregate",
+        "congregation",
+        "segregate"
+      ]
+    },
+    "sta": {
+      "meaning": "站立/状态",
+      "origin": "拉丁语 stare",
+      "color": "#E67E22",
+      "level": 3,
+      "words": [
+        "state",
+        "status",
+        "stable",
+        "station",
+        "statue",
+        "stage",
+        "establish",
+        "standard",
+        "instance",
+        "instant"
+      ]
+    },
+    "vid": {
+      "meaning": "看/视",
+      "origin": "拉丁语 videre",
+      "color": "#1ABC9C",
+      "level": 4,
+      "words": [
+        "view",
+        "review",
+        "interview",
+        "overview",
+        "preview",
+        "envision",
+        "survey"
+      ]
+    },
+    "mot": {
+      "meaning": "移动",
+      "origin": "拉丁语 movere",
+      "color": "#E74C3C",
+      "level": 4,
+      "words": [
+        "motion",
+        "mob"
+      ]
+    },
+    "ply": {
+      "meaning": "折/填",
+      "origin": "拉丁语 plicare",
+      "color": "#3498DB",
+      "level": 5,
+      "words": [
+        "comply",
+        "display",
+        "employ",
+        "deploy"
+      ]
+    },
+    "coun": {
+      "meaning": "计算/一起",
+      "origin": "拉丁语 computare",
+      "color": "#27AE60",
+      "level": 3,
+      "words": [
+        "account",
+        "count",
+        "counter",
+        "country",
+        "encounter",
+        "discount",
+        "amount",
+        "mount",
+        "mountain",
+        "fountain"
+      ]
+    },
+    "mun": {
+      "meaning": "交换/共同",
+      "origin": "拉丁语 munus",
+      "color": "#C0392B",
+      "level": 5,
+      "words": [
+        "community",
+        "communicate",
+        "communication",
+        "common",
+        "immune",
+        "municipal",
+        "mutual",
+        "commute"
+      ]
+    },
+    "cult": {
+      "meaning": "耕种/培养",
+      "origin": "拉丁语 colere",
+      "color": "#16A085",
+      "level": 4,
+      "words": [
+        "culture",
+        "cultural",
+        "agriculture",
+        "cultivate",
+        "cultivation",
+        "difficulty",
+        "particular"
+      ]
+    },
+    "quest": {
+      "meaning": "寻求/询问",
+      "origin": "拉丁语 quaerere",
+      "color": "#2980B9",
+      "level": 5,
+      "words": [
+        "question",
+        "request",
+        "require",
+        "requirement",
+        "acquire",
+        "acquisition",
+        "inquire",
+        "inquiry",
+        "conquer",
+        "conquest"
+      ]
+    },
+    "sol": {
+      "meaning": "太阳/单独",
+      "origin": "拉丁语 sol/solus",
+      "color": "#F1C40F",
+      "level": 5,
+      "words": [
+        "solar",
+        "solve",
+        "solution",
+        "absolute",
+        "solo",
+        "solid",
+        "isolate",
+        "console",
+        "dissolve"
+      ]
+    },
+    "ment": {
+      "meaning": "心智/思考",
+      "origin": "拉丁语 mens",
+      "color": "#9B59B6",
+      "level": 4,
+      "words": [
+        "mental",
+        "mention",
+        "comment",
+        "monument",
+        "document",
+        "experiment",
+        "argument",
+        "element",
+        "supplement",
+        "implement"
+      ]
+    },
+    "par": {
+      "meaning": "准备/相等",
+      "origin": "拉丁语 parare",
+      "color": "#E67E22",
+      "level": 4,
+      "words": [
+        "compare",
+        "prepare",
+        "separate",
+        "repair",
+        "pair",
+        "apparent",
+        "parallel",
+        "parent",
+        "transparent"
+      ]
+    },
+    "hab": {
+      "meaning": "拥有/居住",
+      "origin": "拉丁语 habere",
+      "color": "#2ECC71",
+      "level": 5,
+      "words": [
+        "habit",
+        "inhabit",
+        "habitat",
+        "exhibit",
+        "exhibition",
+        "prohibit",
+        "inhibit",
+        "rehabilitate"
+      ]
+    },
+    "clar2": {
+      "meaning": "喊叫/宣称",
+      "origin": "拉丁语 clamare",
+      "color": "#E74C3C",
+      "level": 5,
+      "words": [
+        "claim",
+        "exclaim",
+        "proclaim",
+        "acclaim",
+        "reclaim",
+        "disclaim",
+        "disclaimer"
+      ]
+    },
+    "mark2": {
+      "meaning": "标记/贸易",
+      "origin": "日耳曼语",
+      "color": "#F39C12",
+      "level": 4,
+      "words": [
+        "market",
+        "marketing",
+        "trademark",
+        "supermarket",
+        "merchant",
+        "commerce",
+        "commercial",
+        "merchandise",
+        "remark",
+        "remarkable"
+      ]
+    },
+    "lev": {
+      "meaning": "轻/举起",
+      "origin": "拉丁语 levis",
+      "color": "#1ABC9C",
+      "level": 5,
+      "words": [
+        "level",
+        "lever",
+        "elevate",
+        "elevator",
+        "relieve",
+        "relief",
+        "relevant",
+        "alleviate",
+        "leverage"
+      ]
+    },
+    "clos": {
+      "meaning": "关闭",
+      "origin": "拉丁语 claudere",
+      "color": "#8E44AD",
+      "level": 5,
+      "words": [
+        "close",
+        "closet",
+        "closure"
+      ]
+    },
+    "heal": {
+      "meaning": "健康/完整",
+      "origin": "日耳曼语",
+      "color": "#27AE60",
+      "level": 3,
+      "words": [
+        "health",
+        "healthy",
+        "heal",
+        "whole",
+        "wholesale",
+        "welfare"
+      ]
+    },
+    "spec2": {
+      "meaning": "种类/外观",
+      "origin": "拉丁语 species",
+      "color": "#C0392B",
+      "level": 4,
+      "words": [
+        "specify",
+        "especially"
+      ]
+    },
+    "just": {
+      "meaning": "正义/法律",
+      "origin": "拉丁语 jus",
+      "color": "#3498DB",
+      "level": 4,
+      "words": [
+        "just",
+        "justice",
+        "justify",
+        "adjust",
+        "adjustment",
+        "jury",
+        "injure",
+        "injury"
+      ]
+    },
+    "bord": {
+      "meaning": "边界/束缚",
+      "origin": "法语 bonde",
+      "color": "#16A085",
+      "level": 5,
+      "words": [
+        "bound",
+        "boundary",
+        "border",
+        "bond",
+        "band",
+        "abandon",
+        "abundant",
+        "rebound"
+      ]
+    },
+    "div": {
+      "meaning": "分开/不同",
+      "origin": "拉丁语 dividere",
+      "color": "#2980B9",
+      "level": 4,
+      "words": [
+        "divide",
+        "division",
+        "individual",
+        "divorce",
+        "device",
+        "devise"
+      ]
+    },
+    "cover": {
+      "meaning": "覆盖",
+      "origin": "拉丁语 cooperire",
+      "color": "#E74C3C",
+      "level": 3,
+      "words": [
+        "cover",
+        "discover",
+        "discovery",
+        "recover",
+        "recovery",
+        "uncover"
+      ]
+    },
+    "tain": {
+      "meaning": "保持/拿",
+      "origin": "拉丁语 tenere",
+      "color": "#F1C40F",
+      "level": 4,
+      "words": [
+        "attain",
+        "certain",
+        "captain",
+        "curtain"
+      ]
+    },
+    "soci": {
+      "meaning": "同伴/社会",
+      "origin": "拉丁语 socius",
+      "color": "#9B59B6",
+      "level": 4,
+      "words": [
+        "social",
+        "society",
+        "associate",
+        "association",
+        "negotiate"
+      ]
+    },
+    "pract": {
+      "meaning": "实践",
+      "origin": "希腊语 praktikos",
+      "color": "#E67E22",
+      "level": 4,
+      "words": [
+        "practitioner",
+        "impractical"
+      ]
+    },
+    "termin": {
+      "meaning": "终端/界限",
+      "origin": "拉丁语 terminus",
+      "color": "#1ABC9C",
+      "level": 5,
+      "words": [
+        "term",
+        "terminal",
+        "terminate",
+        "determine",
+        "determination",
+        "exterminate"
+      ]
+    },
+    "dom": {
+      "meaning": "统治/家",
+      "origin": "拉丁语 dominus",
+      "color": "#3498DB",
+      "level": 5,
+      "words": [
+        "domain",
+        "domestic",
+        "dominate",
+        "dominant",
+        "kingdom",
+        "freedom",
+        "wisdom",
+        "random"
+      ]
+    },
+    "poli": {
+      "meaning": "城邦/政治",
+      "origin": "希腊语 polis",
+      "color": "#C0392B",
+      "level": 4,
+      "words": [
+        "policy",
+        "politics",
+        "political",
+        "police",
+        "polite",
+        "metropolitan",
+        "cosmopolitan"
+      ]
+    },
+    "logy": {
+      "meaning": "学科/理论",
+      "origin": "希腊语 logos",
+      "color": "#8E44AD",
+      "level": 5,
+      "words": [
+        "methodology"
+      ]
+    },
+    "ques": {
+      "meaning": "抱怨/质问",
+      "origin": "拉丁语 queri",
+      "color": "#27AE60",
+      "level": 6,
+      "words": [
+        "quarrel",
+        "query",
+        "complain",
+        "complaint"
+      ]
+    },
+    "grad": {
+      "meaning": "步/级",
+      "origin": "拉丁语 gradus",
+      "color": "#F39C12",
+      "level": 5,
+      "words": [
+        "grade",
+        "graduate",
+        "gradual",
+        "upgrade",
+        "degrade",
+        "undergraduate",
+        "ingredient"
+      ]
+    },
+    "point": {
+      "meaning": "点/刺",
+      "origin": "拉丁语 punctum",
+      "color": "#16A085",
+      "level": 4,
+      "words": [
+        "point",
+        "appoint",
+        "appointment",
+        "disappoint",
+        "punctual",
+        "puncture",
+        "viewpoint"
+      ]
+    },
+    "ver": {
+      "meaning": "真实",
+      "origin": "拉丁语 verus",
+      "color": "#2980B9",
+      "level": 5,
+      "words": [
+        "very",
+        "verify",
+        "conversation"
+      ]
+    },
+    "eco": {
+      "meaning": "家/环境",
+      "origin": "希腊语 oikos",
+      "color": "#27AE60",
+      "level": 5,
+      "words": [
+        "economy",
+        "economic",
+        "economics",
+        "ecosystem"
+      ]
+    },
+    "bio": {
+      "meaning": "生命",
+      "origin": "希腊语 bios",
+      "color": "#1ABC9C",
+      "level": 5,
+      "words": [
+        "antibiotic",
+        "biodiversity",
+        "biochemistry",
+        "biotechnology"
+      ]
+    },
+    "clim": {
+      "meaning": "倾斜/气候",
+      "origin": "希腊语 klima",
+      "color": "#E74C3C",
+      "level": 5,
+      "words": [
+        "climate",
+        "climb",
+        "decline",
+        "incline",
+        "clinic",
+        "clinical"
+      ]
+    },
+    "cent": {
+      "meaning": "百/中心",
+      "origin": "拉丁语 centum",
+      "color": "#F1C40F",
+      "level": 4,
+      "words": [
+        "center",
+        "central",
+        "century",
+        "percent",
+        "concentrate",
+        "concern",
+        "incentive",
+        "accent",
+        "innocent",
+        "decent"
+      ]
+    },
+    "preci": {
+      "meaning": "价值/赞扬",
+      "origin": "拉丁语 pretium",
+      "color": "#9B59B6",
+      "level": 5,
+      "words": [
+        "price",
+        "precious",
+        "appreciate",
+        "praise",
+        "appraise",
+        "enterprise"
+      ]
+    },
+    "pass": {
+      "meaning": "通过/忍受",
+      "origin": "拉丁语 passus",
+      "color": "#3498DB",
+      "level": 3,
+      "words": [
+        "pass",
+        "passage",
+        "passenger",
+        "passion",
+        "passive",
+        "compassion",
+        "patient",
+        "patience"
+      ]
+    },
+    "rang": {
+      "meaning": "排列/范围",
+      "origin": "法语 rang",
+      "color": "#E67E22",
+      "level": 5,
+      "words": [
+        "range",
+        "arrange",
+        "arrangement",
+        "rank",
+        "exchange",
+        "challenge",
+        "strange",
+        "stranger"
+      ]
+    },
+    "net": {
+      "meaning": "连接/网",
+      "origin": "拉丁语 nectere",
+      "color": "#16A085",
+      "level": 5,
+      "words": [
+        "network",
+        "internet",
+        "connect",
+        "connection",
+        "disconnect"
+      ]
+    },
+    "mass": {
+      "meaning": "大/块",
+      "origin": "拉丁语 massa",
+      "color": "#C0392B",
+      "level": 5,
+      "words": [
+        "mass",
+        "massive",
+        "master",
+        "masterpiece",
+        "disaster",
+        "major",
+        "majority",
+        "mayor",
+        "maximum"
+      ]
+    },
+    "crit": {
+      "meaning": "判断/危机",
+      "origin": "希腊语 krinein",
+      "color": "#2980B9",
+      "level": 5,
+      "words": [
+        "crisis",
+        "critic",
+        "critical",
+        "criticism",
+        "criteria",
+        "crime",
+        "criminal"
+      ]
+    },
+    "mater": {
+      "meaning": "母亲/物质",
+      "origin": "拉丁语 mater",
+      "color": "#8E44AD",
+      "level": 5,
+      "words": [
+        "material",
+        "matter",
+        "mature",
+        "matrix",
+        "maternal"
+      ]
+    },
+    "stru2": {
+      "meaning": "拉/条纹",
+      "origin": "拉丁语 stringere",
+      "color": "#27AE60",
+      "level": 6,
+      "words": [
+        "strategy",
+        "strategic",
+        "strict",
+        "restrict",
+        "restriction",
+        "district",
+        "string",
+        "strip",
+        "strike",
+        "struggle"
+      ]
+    },
+    "camp": {
+      "meaning": "田野/战场",
+      "origin": "拉丁语 campus",
+      "color": "#F39C12",
+      "level": 4,
+      "words": [
+        "camp",
+        "campaign",
+        "campus",
+        "champion",
+        "championship",
+        "sample",
+        "example"
+      ]
+    },
+    "poss": {
+      "meaning": "力量/可能",
+      "origin": "拉丁语 posse",
+      "color": "#1ABC9C",
+      "level": 4,
+      "words": [
+        "possible",
+        "possibility",
+        "impossible",
+        "potential",
+        "power",
+        "powerful",
+        "possess",
+        "possession"
+      ]
+    },
+    "found": {
+      "meaning": "基础/底部",
+      "origin": "拉丁语 fundus",
+      "color": "#E74C3C",
+      "level": 5,
+      "words": [
+        "found",
+        "foundation",
+        "founder",
+        "fund",
+        "profound",
+        "refund"
+      ]
+    },
+    "lead": {
+      "meaning": "引导/自由",
+      "origin": "日耳曼语",
+      "color": "#F1C40F",
+      "level": 3,
+      "words": [
+        "lead",
+        "leader",
+        "leadership",
+        "mislead",
+        "league",
+        "colleague",
+        "legacy",
+        "legal",
+        "legislation",
+        "legitimate"
+      ]
     }
   }
 }
