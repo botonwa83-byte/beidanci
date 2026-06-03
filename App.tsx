@@ -8,6 +8,7 @@ import {theme, useAppTheme, ThemeProvider} from './src/theme';
 import {LearnScreen} from './src/screens/LearnScreen';
 import {RootScreen} from './src/screens/RootScreen';
 import {GrammarScreen} from './src/screens/GrammarScreen';
+import {GuessWordScreen} from './src/screens/GuessWordScreen';
 import {ReviewScreen} from './src/screens/ReviewScreen';
 import {ProfileScreen} from './src/screens/ProfileScreen';
 import {WordDetailScreen} from './src/screens/WordDetailScreen';
@@ -72,6 +73,16 @@ const TabNavigator: React.FC = () => {
         tabBarAccessibilityLabel: '语法',
         tabBarIcon: ({focused}) => (
           <TabBarIcon name="grammar" label="语法" focused={focused} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Guess"
+      component={GuessWordScreen}
+      options={{
+        tabBarAccessibilityLabel: '猜词',
+        tabBarIcon: ({focused}) => (
+          <TabBarIcon name="guess" label="猜词" focused={focused} />
         ),
       }}
     />

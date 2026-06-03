@@ -1,6 +1,6 @@
 {
   "name": "wordpulse",
-  "version": "1.2.4",
+  "version": "1.4.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {useAppTheme, ThemeColors} from '../theme';
 
 interface TabBarIconProps {
-  name: 'learn' | 'library' | 'grammar' | 'review' | 'profile';
+  name: 'learn' | 'library' | 'grammar' | 'guess' | 'review' | 'profile';
   label: string;
   focused: boolean;
 }
@@ -12,6 +12,7 @@ const emojiMap: Record<string, string> = {
   learn: '\u{1F4D6}',
   library: '\u{1F50D}',
   grammar: '\u{1F4DD}',
+  guess: '\u{1F52E}',
   review: '\u{1F504}',
   profile: '\u{1F464}',
 };
@@ -20,6 +21,7 @@ const labelMap: Record<string, string> = {
   learn: '学习',
   library: '词库',
   grammar: '语法',
+  guess: '猜词',
   review: '复习',
   profile: '我的',
 };
