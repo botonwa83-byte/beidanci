@@ -28,6 +28,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
     new Animated.Value(0),
     new Animated.Value(0),
     new Animated.Value(0),
+    new Animated.Value(0),
   ]).current;
 
   useEffect(() => {
@@ -64,6 +65,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
   }, [fadeAnim, slideAnim, logoScale, featureFades]);
 
   const features = [
+    {icon: '🔮', title: '猜词超能力 · 词根破译', desc: '看到陌生长难词，拆开词根就能猜出意思，越破译段位越高'},
     {icon: '~', title: '词根词缀记忆法', desc: '科学拆解单词结构，举一反三记住海量词汇'},
     {icon: '>', title: '智能学习算法', desc: '间隔重复 + 艾宾浩斯曲线，遗忘率降低80%'},
     {icon: '#', title: '语法速查手册', desc: '23条核心语法规则，随时查阅随时学'},
@@ -93,10 +95,10 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
 
         {/* 核心卖点 */}
         <Animated.View style={[styles.heroSection, {opacity: fadeAnim}]}>
-          <Text style={styles.heroTitle}>用词根词缀，解锁英语词汇的密码</Text>
+          <Text style={styles.heroTitle}>装上 WordPulse，解锁「猜词超能力」</Text>
           <Text style={styles.heroSubtitle}>
             148个词根，覆盖考研 / 四六级 / 雅思 / 托福{'\n'}
-            一个词根，串联数十个高频词汇
+            看到没背过的长单词，拆开词根也能猜出意思
           </Text>
         </Animated.View>
 
@@ -159,7 +161,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
 
         {/* 底部版权 */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>WordPulse v1.2.10</Text>
+          <Text style={styles.footerText}>WordPulse v1.5.0</Text>
           <Text style={styles.footerCopy}>
             {'(c)'} 2024-2026 King Top. All rights reserved.
           </Text>
