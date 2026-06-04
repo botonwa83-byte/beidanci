@@ -78,8 +78,8 @@ android {
         applicationId "com.beidanci"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 4
-        versionName "2.1.0"
+        versionCode 3
+        versionName "1.5.0"
     }
     signingConfigs {
         debug {
