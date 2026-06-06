@@ -15,13 +15,14 @@ App 从付费下载改为「免费下载 + 买断解锁完整版」(freemium)。
 - **依赖已装好**：react-native-iap 12.16.4（JS+Pod 都已 link），node 经 brew 装在 /opt/homebrew（v26），CocoaPods 1.16.2 经 brew 装。
 - **会员绑定**：绑 Apple ID，换机靠「恢复购买」，与本地手机号登录无关。当前纯客户端校验（无服务端验收据），起步够用，后期防破解再加服务端。
 
-**免费/付费切法**（每天差一点不够用 → 转化）：
-- 学习：第 1 关(~50词)免费，其余锁
-- 猜词(卖点)：每天 5 次免费，超出弹 Paywall（0 点重置）
-- 复习：基础可用，完整记忆曲线锁
-- 语法：试看前 3 条
-- 词库：可浏览，词根拆解/例句/联想故事锁
+**最终门禁（仅 3 处，复习/词库经用户决定不加门禁、保持免费）**：
+- **猜词(卖点)**：非会员每天 5 次免费破译，超出弹 Paywall（0 点按本地日期重置）→ `src/data/guessQuota.ts` + GuessWordScreen「破译答案」处
+- **学习**：非会员学满第 1 级「入门」(=levels[0].targetWords=140 词)即拦截，弹 Paywall；复习走独立 Tab 不受影响 → LearnScreen startSession
+- **语法**：非会员仅试看全表前 3 条，点其余条目弹 Paywall、卡片显示🔒 → GrammarScreen
+- 复习：❌ 不加门禁（用户决定，全免费）
+- 词库/WordDetail：❌ 不加门禁（用户决定，全免费）
 
-**已完成（地基）**：`src/data/entitlementService.ts`、`src/data/useEntitlement.tsx`(EntitlementProvider+useEntitlement)、`src/screens/PaywallScreen.tsx`、App.tsx 接入 Provider+Paywall 模态路由、ProfileScreen 会员入口。
-**待办（门禁阶段）**：在各 Tab 功能触发点用 `isPremium` 加门禁；猜词每日次数计数模块。
-**用户需手动跑**：`npm install` + `cd ios && pod install`（本会话取不到 node/npm）。
+**已完成**：地基(`entitlementService.ts`/`useEntitlement.tsx`/`PaywallScreen.tsx`/App.tsx 接入/ProfileScreen 入口) + 上述 3 处门禁 + `guessQuota.ts`。全项目 tsc 0 错误。真机沙盒购买/恢复已验证通过。
+**已知问题**：`__tests__/App.test.tsx` 失败是既有问题（safe-area-context 缺 Dimensions mock），与内购无关。
+**未提交**：功能代码尚未 git commit（仅 claude-memory 同步过 GitHub）。
+**依赖已装**：react-native-iap 12.16.4（JS+Pod link 完成）。
