@@ -23,6 +23,6 @@ App 从付费下载改为「免费下载 + 买断解锁完整版」(freemium)。
 - 词库/WordDetail：❌ 不加门禁（用户决定，全免费）
 
 **已完成**：地基(`entitlementService.ts`/`useEntitlement.tsx`/`PaywallScreen.tsx`/App.tsx 接入/ProfileScreen 入口) + 上述 3 处门禁 + `guessQuota.ts`。全项目 tsc 0 错误。真机沙盒购买/恢复已验证通过。
-**已知问题**：`__tests__/App.test.tsx` 失败是既有问题（safe-area-context 缺 Dimensions mock），与内购无关。
+**测试**：原 `__tests__/App.test.tsx` 失败（既有问题，非内购引起）已修复——新增 `jest.setup.js`（mock safe-area-context/keychain/iap）+ 改用 `await act` 异步渲染并 unmount + fake timers。jest 通过、tsc 0 错误。
 **未提交**：功能代码尚未 git commit（仅 claude-memory 同步过 GitHub）。
 **依赖已装**：react-native-iap 12.16.4（JS+Pod link 完成）。
