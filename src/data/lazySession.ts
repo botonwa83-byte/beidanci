@@ -116,3 +116,56 @@ export const lazyTimings = (pass: 1 | 2 | 3) =>
   pass === 1
     ? {meaningAt: 2500, exampleAt: 4000, nextAt: 8000}
     : {meaningAt: 3000, exampleAt: 4500, nextAt: 8000};
+
+export const STEP_MS = 8000;
+
+/** 本批预告：多少词、几遍、共几步、约几分钟——先让用户心里有数 */
+export const lazyPlanSummary = (queue: LazyQueue) => {
+  const totalMs = queue.steps.length * STEP_MS;
+  return {
+    newCount: queue.newWords.length,
+    reviewCount: queue.reviewWords.length,
+    totalSteps: queue.steps.length,
+    minutes: Math.max(1, Math.round(totalMs / 60000)),
+  };
+};
+
+export interface LazySegment {
+  /** 段标题："复习热身" / "第 1 遍 · 见个面" 等 */
+  label: string;
+  startIdx: number;
+  count: number;
+}
+
+const SEG_LABELS: Record<string, string> = {
+  'review': '🔁 复习热身',
+  'pass1': '✨ 第 1 遍 · 见个面',
+  'pass2': '🤔 第 2 遍 · 先回忆',
+  'pass3': '🎯 第 3 遍 · 钉进脑子',
+};
+
+/** 把队列切成连续段（复习/第N遍），播放时显示"第 2 遍 · 8/10"的小目标进度 */
+export const lazySegments = (queue: LazyQueue): LazySegment[] => {
+  const segs: LazySegment[] = [];
+  queue.steps.forEach((s, i) => {
+    const key = s.isReview ? 'review' : `pass${s.pass}`;
+    const label = SEG_LABELS[key];
+    const last = segs[segs.length - 1];
+    if (last && last.label === label && last.startIdx + last.count === i) {
+      last.count++;
+    } else {
+      segs.push({label, startIdx: i, count: 1});
+    }
+  });
+  return segs;
+};
+
+/** 当前步所在段及段内进度 */
+export const segmentAt = (segs: LazySegment[], idx: number): {label: string; pos: number; count: number} => {
+  for (let i = segs.length - 1; i >= 0; i--) {
+    if (idx >= segs[i].startIdx) {
+      return {label: segs[i].label, pos: idx - segs[i].startIdx + 1, count: segs[i].count};
+    }
+  }
+  return {label: '', pos: 1, count: 1};
+};

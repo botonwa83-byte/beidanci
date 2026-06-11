@@ -18,11 +18,20 @@ import {
   buildLazyQueue,
   finishLazySession,
   lazyTimings,
+  lazyPlanSummary,
+  lazySegments,
+  segmentAt,
+  STEP_MS,
 } from '../data/lazySession';
 import {getFullMeaning, getWordOrigin} from '../data/wordDatabase';
 import {speak} from '../utils/speech';
 
 const TICK_MS = 250;
+
+const fmtMinutes = (ms: number): string => {
+  const m = Math.ceil(ms / 60000);
+  return m <= 1 ? '不到 1 分钟' : `约 ${m} 分钟`;
+};
 
 // 懒人模式：零操作自动播放。点屏幕暂停/继续，左上角退出。
 export const LazyModeScreen: React.FC = () => {
@@ -33,28 +42,29 @@ export const LazyModeScreen: React.FC = () => {
 
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [queue, setQueue] = useState<LazyQueue | null>(null);
+  const [phase, setPhase] = useState<'preview' | 'playing' | 'done'>('preview');
   const [idx, setIdx] = useState(0);
   const [elapsed, setElapsed] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [done, setDone] = useState(false);
   const [saving, setSaving] = useState(false);
   const spokenRef = useRef(-1);
 
-  const startBatch = useCallback((p: UserProgress) => {
+  const prepareBatch = useCallback((p: UserProgress) => {
     const q = buildLazyQueue(p);
     setQueue(q);
     setIdx(0);
     setElapsed(0);
-    setDone(false);
+    setPhase('preview');
+    setPaused(false);
     spokenRef.current = -1;
   }, []);
 
   useEffect(() => {
     loadProgress().then(p => {
       setProgress(p);
-      startBatch(p);
+      prepareBatch(p);
     });
-  }, [startBatch]);
+  }, [prepareBatch]);
 
   // 切后台自动暂停
   useEffect(() => {
@@ -66,7 +76,13 @@ export const LazyModeScreen: React.FC = () => {
     return () => sub.remove();
   }, []);
 
-  const step = queue && !done ? queue.steps[idx] : null;
+  const summary = useMemo(
+    () => (queue ? lazyPlanSummary(queue) : null),
+    [queue],
+  );
+  const segments = useMemo(() => (queue ? lazySegments(queue) : []), [queue]);
+
+  const step = queue && phase === 'playing' ? queue.steps[idx] : null;
   const timings = step ? lazyTimings(step.pass) : null;
 
   // 自动朗读：每个曝光步首次出现时读一遍
@@ -86,7 +102,7 @@ export const LazyModeScreen: React.FC = () => {
       const p = finishLazySession(progress, queue);
       await saveProgress(p);
       setProgress(p);
-      setDone(true);
+      setPhase('done');
     } catch {
       Alert.alert('保存失败', '进度保存失败，请重试');
     } finally {
@@ -96,12 +112,12 @@ export const LazyModeScreen: React.FC = () => {
 
   // 播放心跳
   useEffect(() => {
-    if (!step || paused || done) {
+    if (!step || paused) {
       return;
     }
     const t = setInterval(() => setElapsed(e => e + TICK_MS), TICK_MS);
     return () => clearInterval(t);
-  }, [step, paused, done]);
+  }, [step, paused]);
 
   // 到点切词/收尾
   useEffect(() => {
@@ -136,8 +152,54 @@ export const LazyModeScreen: React.FC = () => {
     );
   }
 
+  // ==================== 本批预告 ====================
+  if (phase === 'preview') {
+    return (
+      <View style={[styles.container, styles.center]}>
+        <Text style={styles.previewEmoji}>😴</Text>
+        <Text style={styles.previewTitle}>这批要躺多久，先说清楚</Text>
+        <View style={styles.previewCard}>
+          <View style={styles.previewRow}>
+            <Text style={styles.previewNum}>{summary!.newCount}</Text>
+            <Text style={styles.previewLabel}>个新词 × 3 遍</Text>
+          </View>
+          {summary!.reviewCount > 0 && (
+            <View style={styles.previewRow}>
+              <Text style={styles.previewNum}>{summary!.reviewCount}</Text>
+              <Text style={styles.previewLabel}>个到期复习 × 1 遍</Text>
+            </View>
+          )}
+          <View style={styles.previewDivider} />
+          <Text style={styles.previewTotal}>
+            共 {summary!.totalSteps} 步 · 每步 8 秒 · 全程
+            {fmtMinutes(summary!.totalSteps * STEP_MS)}
+          </Text>
+          <Text style={styles.previewNote}>
+            你只管盯着看：单词会自动朗读，意思和例句自己浮现，{'\n'}
+            同一个词会按记忆曲线回来找你 3 次
+          </Text>
+        </View>
+        <TouchableOpacity
+          style={styles.againBtn}
+          onPress={() => setPhase('playing')}
+          activeOpacity={0.8}
+          accessibilityRole="button"
+          accessibilityLabel="开始自动播放">
+          <Text style={styles.againBtnText}>开始躺 ▶</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.exitBtn}
+          onPress={() => navigation.goBack()}
+          activeOpacity={0.7}>
+          <Text style={styles.exitBtnText}>先不了</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
+
   // ==================== 结算页 ====================
-  if (done) {
+  if (phase === 'done') {
+    const today = progress.learningHistory[progress.learningHistory.length - 1];
     return (
       <View style={[styles.container, styles.center]}>
         <Text style={styles.doneEmoji}>😴✨</Text>
@@ -147,9 +209,21 @@ export const LazyModeScreen: React.FC = () => {
           {queue.reviewWords.length} 个{'\n'}
           已按记忆曲线排好下次见面的日子
         </Text>
+        <View style={styles.doneStatsRow}>
+          <View style={styles.doneStat}>
+            <Text style={styles.doneStatNum}>🔥 {progress.streak}</Text>
+            <Text style={styles.doneStatLabel}>连续天数</Text>
+          </View>
+          <View style={styles.doneStat}>
+            <Text style={styles.doneStatNum}>
+              {(today?.wordsLearned || 0) + (today?.wordsReviewed || 0)}
+            </Text>
+            <Text style={styles.doneStatLabel}>今日已学+复习</Text>
+          </View>
+        </View>
         <TouchableOpacity
           style={styles.againBtn}
-          onPress={() => startBatch(progress)}
+          onPress={() => prepareBatch(progress)}
           activeOpacity={0.8}
           accessibilityRole="button">
           <Text style={styles.againBtnText}>再来一批</Text>
@@ -165,18 +239,23 @@ export const LazyModeScreen: React.FC = () => {
     );
   }
 
+  // ==================== 播放 ====================
   const word = step!.word;
   const showMeaning = elapsed >= timings!.meaningAt;
   const showExample = elapsed >= timings!.exampleAt;
   const origin = getWordOrigin(word.word);
   const pct = Math.round(((idx + 1) / queue.steps.length) * 100);
+  const seg = segmentAt(segments, idx);
+  const remainMs = (queue.steps.length - idx) * STEP_MS - elapsed;
+  const halfway = idx + 1 > queue.steps.length / 2;
+  const wordPct = Math.min(100, Math.round((elapsed / timings!.nextAt) * 100));
 
   return (
     <Pressable
       style={[styles.container, {paddingTop: insets.top + 8}]}
       onPress={() => setPaused(p => !p)}
       accessibilityLabel={paused ? '继续播放' : '暂停播放'}>
-      {/* 顶栏：退出 + 进度 */}
+      {/* 顶栏：退出 + 总进度 + 剩余时间 */}
       <View style={styles.topBar}>
         <TouchableOpacity
           onPress={() => navigation.goBack()}
@@ -189,18 +268,17 @@ export const LazyModeScreen: React.FC = () => {
           <View style={[styles.progressFill, {width: `${pct}%`}]} />
         </View>
         <Text style={styles.counter}>
-          {idx + 1}/{queue.steps.length}
+          {idx + 1}/{queue.steps.length} · 剩{fmtMinutes(remainMs)}
         </Text>
       </View>
 
       <View style={styles.cardArea}>
-        {step!.isReview ? (
-          <Text style={styles.passTag}>🔁 复习 · 还记得吗</Text>
-        ) : (
-          <Text style={styles.passTag}>
-            {step!.pass === 1 ? '✨ 新词' : `第 ${step!.pass} 遍 · 先回忆一下`}
-          </Text>
-        )}
+        {/* 轮次小目标：把一长批切成可完成的小段 */}
+        <Text style={styles.passTag}>
+          {step!.isReview
+            ? `${seg.label} · 还记得吗`
+            : `${seg.label} · ${seg.pos}/${seg.count}`}
+        </Text>
 
         <Text style={styles.word}>{word.word}</Text>
         {!!word.phonetic && (
@@ -217,6 +295,22 @@ export const LazyModeScreen: React.FC = () => {
           </Text>
         )}
 
+        {/* 可拆词亮出词根块：8 秒里多塞一层记忆抓手 */}
+        {showMeaning && word.morphemes.length >= 2 && (
+          <View style={styles.morphRow}>
+            {word.morphemes.map((m, i) => (
+              <View
+                key={i}
+                style={[styles.morphChip, {backgroundColor: m.color + '22'}]}>
+                <Text style={[styles.morphChipText, {color: m.color}]}>
+                  {m.text}
+                </Text>
+                <Text style={styles.morphChipMeaning}>{m.meaning}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+
         {showExample && (
           <View style={styles.exampleBox}>
             <Text style={styles.exampleText}>{word.example}</Text>
@@ -228,8 +322,16 @@ export const LazyModeScreen: React.FC = () => {
         )}
       </View>
 
+      {/* 本词 8 秒倒计时细条：节奏可感知 */}
+      <View style={styles.wordTimerTrack}>
+        <View style={[styles.wordTimerFill, {width: `${wordPct}%`}]} />
+      </View>
       <Text style={styles.hint}>
-        {paused ? '⏸ 已暂停 · 点屏幕继续' : '全自动播放 · 点屏幕暂停'}
+        {paused
+          ? '⏸ 已暂停 · 点屏幕继续'
+          : halfway
+          ? `已过半，稳住 😌 剩${fmtMinutes(remainMs)}`
+          : '全自动播放 · 点屏幕暂停'}
       </Text>
     </Pressable>
   );
@@ -295,8 +397,25 @@ const createStyles = (colors: ThemeColors) =>
       textAlign: 'center',
       lineHeight: 32,
     },
+    morphRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      justifyContent: 'center',
+      gap: 8,
+      marginTop: 14,
+    },
+    morphChip: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      gap: 5,
+      borderRadius: 10,
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+    },
+    morphChipText: {fontSize: 15, fontWeight: '700'},
+    morphChipMeaning: {fontSize: 12, color: colors.textSecondary},
     exampleBox: {
-      marginTop: 24,
+      marginTop: 22,
       backgroundColor: colors.surface,
       borderRadius: 14,
       padding: 16,
@@ -315,11 +434,62 @@ const createStyles = (colors: ThemeColors) =>
       marginTop: 10,
       lineHeight: 20,
     },
+    wordTimerTrack: {
+      height: 3,
+      marginHorizontal: 28,
+      borderRadius: 2,
+      backgroundColor: colors.surfaceLight,
+      overflow: 'hidden',
+      marginBottom: 10,
+    },
+    wordTimerFill: {
+      height: '100%',
+      backgroundColor: colors.primary + '88',
+    },
     hint: {
       textAlign: 'center',
       fontSize: 12,
       color: colors.textTertiary,
       marginBottom: 28,
+    },
+    previewEmoji: {fontSize: 44, marginBottom: 10},
+    previewTitle: {
+      fontSize: 20,
+      fontWeight: 'bold',
+      color: colors.textPrimary,
+      marginBottom: 20,
+    },
+    previewCard: {
+      backgroundColor: colors.surface,
+      borderRadius: 18,
+      padding: 22,
+      width: '100%',
+      maxWidth: 360,
+      marginBottom: 26,
+    },
+    previewRow: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      gap: 8,
+      marginBottom: 6,
+    },
+    previewNum: {fontSize: 26, fontWeight: 'bold', color: colors.primary},
+    previewLabel: {fontSize: 15, color: colors.textSecondary},
+    previewDivider: {
+      height: 1,
+      backgroundColor: colors.surfaceLight,
+      marginVertical: 12,
+    },
+    previewTotal: {
+      fontSize: 15,
+      fontWeight: '600',
+      color: colors.textPrimary,
+      marginBottom: 8,
+    },
+    previewNote: {
+      fontSize: 13,
+      color: colors.textTertiary,
+      lineHeight: 20,
     },
     doneEmoji: {fontSize: 48, marginBottom: 12},
     doneTitle: {
@@ -333,8 +503,12 @@ const createStyles = (colors: ThemeColors) =>
       color: colors.textSecondary,
       textAlign: 'center',
       lineHeight: 22,
-      marginBottom: 28,
+      marginBottom: 20,
     },
+    doneStatsRow: {flexDirection: 'row', gap: 36, marginBottom: 26},
+    doneStat: {alignItems: 'center'},
+    doneStatNum: {fontSize: 22, fontWeight: 'bold', color: colors.textPrimary},
+    doneStatLabel: {fontSize: 12, color: colors.textTertiary, marginTop: 4},
     againBtn: {
       backgroundColor: colors.primary,
       borderRadius: 16,

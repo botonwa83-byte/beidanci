@@ -71,3 +71,27 @@ describe('懒人模式（lazySession）', () => {
     expect(NEW_WORD_PASSES).toBe(3);
   });
 });
+
+describe('懒人模式·预告与分段', () => {
+  const {lazyPlanSummary, lazySegments, segmentAt, STEP_MS} =
+    require('../src/data/lazySession');
+
+  it('预告：步数×8秒=总时长，新词复习数与队列一致', () => {
+    const queue = buildLazyQueue(freshProgress())!;
+    const s = lazyPlanSummary(queue);
+    expect(s.totalSteps).toBe(queue.steps.length);
+    expect(s.newCount).toBe(queue.newWords.length);
+    expect(s.minutes).toBe(Math.max(1, Math.round((s.totalSteps * STEP_MS) / 60000)));
+  });
+
+  it('分段连续覆盖整个队列，段内进度从 1 数到 count', () => {
+    const queue = buildLazyQueue(freshProgress())!;
+    const segs = lazySegments(queue);
+    const covered = segs.reduce((sum: number, g: any) => sum + g.count, 0);
+    expect(covered).toBe(queue.steps.length);
+    const first = segmentAt(segs, 0);
+    expect(first.pos).toBe(1);
+    const last = segmentAt(segs, queue.steps.length - 1);
+    expect(last.pos).toBe(last.count);
+  });
+});
