@@ -42,6 +42,8 @@ export const ReviewScreen: React.FC = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
   const [qIdx, setQIdx] = useState(0);
   const [selected, setSelected] = useState<number | null>(null);
+  // 拼词工坊：多选碎片瓦片下标
+  const [buildSel, setBuildSel] = useState<number[]>([]);
   const [revealed, setRevealed] = useState(false);
   const [correct, setCorrect] = useState(0);
   const [wrong, setWrong] = useState(0);
@@ -74,6 +76,7 @@ export const ReviewScreen: React.FC = () => {
     setQuestions(qs);
     setQIdx(0);
     setSelected(null);
+    setBuildSel([]);
     setRevealed(false);
     setCorrect(0);
     setWrong(0);
@@ -84,20 +87,38 @@ export const ReviewScreen: React.FC = () => {
   const startQuiz = () => startQuizWith(reviewWords);
   const startFreePractice = () => startQuizWith(learnedWords);
 
+  const isBuildQ = (q: Question | undefined) => q?.type === 'word-build';
+  // 拼词题：选中集合恰好 = 全部正确碎片才算对
+  const buildAnswerCorrect = (q: Question, sel: number[]): boolean => {
+    const correctCount = q.options.filter(o => o.isCorrect).length;
+    return (
+      sel.length === correctCount && sel.every(i => q.options[i].isCorrect)
+    );
+  };
+
   const handleSelect = (idx: number) => {
     if (revealed) {
       return;
     }
-    setSelected(idx);
+    if (isBuildQ(questions[qIdx])) {
+      setBuildSel(sel =>
+        sel.includes(idx) ? sel.filter(i => i !== idx) : [...sel, idx],
+      );
+    } else {
+      setSelected(idx);
+    }
   };
 
   const handleConfirm = async () => {
-    if (selected === null || !progress) {
+    const q = questions[qIdx];
+    const isBuild = isBuildQ(q);
+    if ((isBuild ? buildSel.length === 0 : selected === null) || !progress) {
       return;
     }
     setRevealed(true);
-    const q = questions[qIdx];
-    const isCorrect = q.options[selected].isCorrect;
+    const isCorrect = isBuild
+      ? buildAnswerCorrect(q, buildSel)
+      : q.options[selected as number].isCorrect;
     if (isCorrect) {
       setCorrect(n => n + 1);
       if (q.wordId) {
@@ -134,6 +155,7 @@ export const ReviewScreen: React.FC = () => {
     if (qIdx < questions.length - 1) {
       setQIdx(i => i + 1);
       setSelected(null);
+      setBuildSel([]);
       setRevealed(false);
     } else {
       setMode('result');
@@ -158,7 +180,14 @@ export const ReviewScreen: React.FC = () => {
       'root-meaning': '词根含义',
       'morpheme-match': '词根匹配',
       'fill-blank': '例句填空',
+      'word-build': '拼词工坊',
     };
+    const isBuild = isBuildQ(q);
+    const answeredCorrectly =
+      revealed &&
+      (isBuild
+        ? buildAnswerCorrect(q, buildSel)
+        : selected !== null && q.options[selected].isCorrect);
 
     return (
       <View style={[styles.container, {paddingTop: insets.top + 8}]}>
@@ -185,41 +214,90 @@ export const ReviewScreen: React.FC = () => {
               {typeLabel[q.type] || '练习'}
             </Text>
             <Text style={styles.questionText}>{q.question}</Text>
+            {isBuild && !revealed && (
+              <Text style={styles.buildHint}>
+                选出能拼成这个词的全部碎片（已选 {buildSel.length} 块）
+              </Text>
+            )}
           </View>
 
-          {q.options.map((opt, idx) => {
-            let bg = colors.surface;
-            let border = colors.cardBorder;
-            let color = colors.textPrimary;
-            if (revealed) {
-              if (opt.isCorrect) {
-                bg = colors.secondaryLight;
-                border = colors.success;
-                color = colors.success;
+          {isBuild ? (
+            <View style={styles.buildRow}>
+              {q.options.map((opt, idx) => {
+                const sel = buildSel.includes(idx);
+                let bg = colors.surface;
+                let border = colors.cardBorder;
+                let color = colors.textPrimary;
+                if (revealed) {
+                  if (opt.isCorrect) {
+                    bg = colors.secondaryLight;
+                    border = colors.success;
+                    color = colors.success;
+                  } else if (sel) {
+                    bg = colors.errorBg;
+                    border = colors.error;
+                    color = colors.error;
+                  }
+                } else if (sel) {
+                  bg = colors.primaryLight;
+                  border = colors.primary;
+                  color = colors.primary;
+                }
+                return (
+                  <TouchableOpacity
+                    key={idx}
+                    style={[
+                      styles.buildTile,
+                      {backgroundColor: bg, borderColor: border},
+                    ]}
+                    onPress={() => handleSelect(idx)}
+                    disabled={revealed}
+                    activeOpacity={0.7}
+                    accessibilityLabel={`碎片 ${opt.text}`}
+                    accessibilityRole="button"
+                    accessibilityState={{selected: sel}}>
+                    <Text style={[styles.buildTileText, {color}]}>
+                      {opt.text}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          ) : (
+            q.options.map((opt, idx) => {
+              let bg = colors.surface;
+              let border = colors.cardBorder;
+              let color = colors.textPrimary;
+              if (revealed) {
+                if (opt.isCorrect) {
+                  bg = colors.secondaryLight;
+                  border = colors.success;
+                  color = colors.success;
+                } else if (selected === idx) {
+                  bg = colors.errorBg;
+                  border = colors.error;
+                  color = colors.error;
+                }
               } else if (selected === idx) {
-                bg = colors.errorBg;
-                border = colors.error;
-                color = colors.error;
+                bg = colors.primaryLight;
+                border = colors.primary;
+                color = colors.primary;
               }
-            } else if (selected === idx) {
-              bg = colors.primaryLight;
-              border = colors.primary;
-              color = colors.primary;
-            }
-            return (
-              <TouchableOpacity
-                key={idx}
-                style={[
-                  styles.optionBtn,
-                  {backgroundColor: bg, borderColor: border},
-                ]}
-                onPress={() => handleSelect(idx)}
-                disabled={revealed}
-                activeOpacity={0.7}>
-                <Text style={[styles.optionText, {color}]}>{opt.text}</Text>
-              </TouchableOpacity>
-            );
-          })}
+              return (
+                <TouchableOpacity
+                  key={idx}
+                  style={[
+                    styles.optionBtn,
+                    {backgroundColor: bg, borderColor: border},
+                  ]}
+                  onPress={() => handleSelect(idx)}
+                  disabled={revealed}
+                  activeOpacity={0.7}>
+                  <Text style={[styles.optionText, {color}]}>{opt.text}</Text>
+                </TouchableOpacity>
+              );
+            })
+          )}
 
           {revealed && (
             <View style={styles.explanationCard}>
@@ -233,15 +311,15 @@ export const ReviewScreen: React.FC = () => {
             <TouchableOpacity
               style={[
                 styles.confirmBtn,
-                selected === null && styles.btnDisabled,
+                (isBuild ? buildSel.length === 0 : selected === null) &&
+                  styles.btnDisabled,
               ]}
               onPress={handleConfirm}
-              disabled={selected === null}
+              disabled={isBuild ? buildSel.length === 0 : selected === null}
               activeOpacity={0.7}>
               <Text style={styles.confirmBtnText}>确认</Text>
             </TouchableOpacity>
-          ) : selected !== null &&
-            !questions[qIdx].options[selected].isCorrect ? (
+          ) : !answeredCorrectly ? (
             <TouchableOpacity
               style={styles.confirmBtn}
               onPress={handleNext}
@@ -273,8 +351,7 @@ export const ReviewScreen: React.FC = () => {
 
           <View style={styles.resultStats}>
             <View style={styles.resultStat}>
-              <Text
-                style={[styles.resultStatNum, {color: colors.success}]}>
+              <Text style={[styles.resultStatNum, {color: colors.success}]}>
                 {correct}
               </Text>
               <Text style={styles.resultStatLabel}>正确</Text>
@@ -286,8 +363,7 @@ export const ReviewScreen: React.FC = () => {
               <Text style={styles.resultStatLabel}>错误</Text>
             </View>
             <View style={styles.resultStat}>
-              <Text
-                style={[styles.resultStatNum, {color: colors.primary}]}>
+              <Text style={[styles.resultStatNum, {color: colors.primary}]}>
                 {total}
               </Text>
               <Text style={styles.resultStatLabel}>总题数</Text>
@@ -345,7 +421,13 @@ export const ReviewScreen: React.FC = () => {
   return (
     <ScrollView
       style={styles.container}
-      contentContainerStyle={{paddingTop: insets.top + 16, paddingBottom: 120, maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'}}>
+      contentContainerStyle={{
+        paddingTop: insets.top + 16,
+        paddingBottom: 120,
+        maxWidth: theme.layout.maxContentWidth,
+        width: '100%',
+        alignSelf: 'center',
+      }}>
       <View style={styles.header}>
         <Text style={styles.title}>复习</Text>
         <Text style={styles.subtitle}>习题练习，巩固记忆</Text>
@@ -416,6 +498,7 @@ export const ReviewScreen: React.FC = () => {
                 color: colors.accent,
               },
               {label: '词根匹配', desc: '找同根词', color: '#C57BDB'},
+              {label: '拼词工坊', desc: '用碎片拼词', color: '#8B5CF6'},
             ].map((t, i) => (
               <View key={i} style={styles.typeCard}>
                 <View style={[styles.typeDot, {backgroundColor: t.color}]} />
@@ -655,7 +738,13 @@ const createStyles = (colors: ThemeColors) =>
     },
 
     quizBody: {flex: 1},
-    quizContent: {paddingHorizontal: 20, paddingBottom: 20, maxWidth: theme.layout.maxContentWidth, width: '100%', alignSelf: 'center'},
+    quizContent: {
+      paddingHorizontal: 20,
+      paddingBottom: 20,
+      maxWidth: theme.layout.maxContentWidth,
+      width: '100%',
+      alignSelf: 'center',
+    },
     questionCard: {
       backgroundColor: colors.surface,
       borderRadius: 18,
@@ -693,6 +782,24 @@ const createStyles = (colors: ThemeColors) =>
       elevation: 1,
     },
     optionText: {fontSize: 16},
+
+    // 拼词工坊（碎片瓦片多选）
+    buildHint: {fontSize: 12, color: colors.textTertiary, marginTop: 8},
+    buildRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: 10,
+      marginBottom: 10,
+    },
+    buildTile: {
+      paddingHorizontal: 18,
+      paddingVertical: 14,
+      borderRadius: 14,
+      borderWidth: 1.5,
+      minWidth: 80,
+      alignItems: 'center',
+    },
+    buildTileText: {fontSize: 17, fontWeight: '600'},
 
     explanationCard: {
       backgroundColor: colors.secondaryLight,

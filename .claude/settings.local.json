@@ -144,7 +144,11 @@
       "Bash(git stash *)",
       "Bash(npx jest *)",
       "Bash(cp /tmp/coverage.test.ts __tests__/tmp_coverage.test.ts)",
-      "Bash(sed -i '' 's|../Documents/trae_projects/beidanci/src|../src|' __tests__/tmp_coverage.test.ts)"
+      "Bash(sed -i '' 's|../Documents/trae_projects/beidanci/src|../src|' __tests__/tmp_coverage.test.ts)",
+      "Bash(git fetch *)",
+      "Bash(git restore *)",
+      "Bash(git rebase *)",
+      "Bash(git push *)"
     ]
   }
 }

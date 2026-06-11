@@ -5792,7 +5792,36 @@ const DECOMPOSE_BLOCKLIST = new Set<string>([
   'lucrative',
   'tectonic',
   'allegory',
+  // 第二批审查（2026-06）：accord/cordial 是 cor(心)；persevere 是 severus(严厉)；
+  // spiral 是希腊 speira(线圈)；proximity 是 proximus(最近)；intent/latent 分别来自
+  // tendere(伸展)/latere(隐藏)；eminent/predominant/preliminary/nominate 不含 min(小)；
+  // emigrate 是 migrare 但拼写撞上 grat；solidarity 是 solidus(坚固)；
+  // segment 是 secare(切)；torment 是 torquere(扭)；impart 是 pars(部分)；
+  // intact 是 tangere(触)
+  'accord',
+  'cordial',
+  'persevere',
+  'spiral',
+  'proximity',
+  'intent',
+  'latent',
+  'eminent',
+  'predominant',
+  'preliminary',
+  'nominate',
+  'emigrate',
+  'solidarity',
+  'segment',
+  'torment',
+  'impart',
+  'intact',
 ]);
+
+// 词根条目按长度降序：长词根更具体，必须先于短词根匹配
+// （sequence 必须命中 sequ 而不是 equ）
+const extendedRootEntries = Object.entries(extendedRoots).sort(
+  (a, b) => b[0].length - a[0].length,
+);
 
 type StrictMorpheme = {
   text: string;
@@ -5946,10 +5975,7 @@ export const strictDecompose = (word: string): StrictMorpheme[] | null => {
     return null;
   }
   // 长词根优先（覆盖更具体），词根 <3 字母不参与
-  const rootEntries = Object.entries(extendedRoots).sort(
-    (a, b) => b[0].length - a[0].length,
-  );
-  for (const [rootId, rootData] of rootEntries) {
+  for (const [rootId, rootData] of extendedRootEntries) {
     if (rootId.length < 3) {
       continue;
     }
@@ -6072,7 +6098,7 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
     ];
   }
 
-  for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+  for (const [rootId, rootData] of extendedRootEntries) {
     if (lowerWord.includes(rootId) && lowerWord.length > rootId.length + 1) {
       return buildMorphemes(
         word,
@@ -6091,7 +6117,7 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
       lowerWord.length > cleanPrefix.length + 2
     ) {
       const afterPrefix = lowerWord.slice(cleanPrefix.length);
-      for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+      for (const [rootId, rootData] of extendedRootEntries) {
         if (afterPrefix.includes(rootId)) {
           return buildMorphemes(
             word,
@@ -6110,7 +6136,7 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
     for (const v of variants) {
       if (lowerWord.endsWith(v) && lowerWord.length > v.length + 2) {
         const beforeSuffix = lowerWord.slice(0, -v.length);
-        for (const [rootId, rootData] of Object.entries(extendedRoots)) {
+        for (const [rootId, rootData] of extendedRootEntries) {
           if (beforeSuffix.includes(rootId)) {
             return buildMorphemes(
               word,
