@@ -16,7 +16,12 @@ import {
   saveProgress,
   markWordLearned,
 } from '../data/learningLogic';
-import {getWordsByRoot, coreRoots, getSimilarWords} from '../data/wordDatabase';
+import {
+  getWordsByRoot,
+  coreRoots,
+  getSimilarWords,
+  getWordOrigin,
+} from '../data/wordDatabase';
 import {speak} from '../utils/speech';
 
 type RootStackParamList = {
@@ -177,6 +182,16 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({
           {currentMorpheme.origin ? (
             <Text style={styles.detailOrigin}>{currentMorpheme.origin}</Text>
           ) : null}
+        </View>
+      )}
+
+      {/* Etymology origin story */}
+      {getWordOrigin(word.word) && (
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>📜 身世 · 它从哪来</Text>
+          <View style={styles.originCard}>
+            <Text style={styles.originText}>{getWordOrigin(word.word)}</Text>
+          </View>
         </View>
       )}
 
@@ -456,6 +471,18 @@ const createStyles = (colors: ThemeColors) =>
       shadowOpacity: 0.04,
       shadowRadius: 6,
       elevation: 1,
+    },
+    originCard: {
+      backgroundColor: colors.warningBg,
+      padding: 16,
+      borderRadius: 14,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.warning,
+    },
+    originText: {
+      fontSize: 15,
+      color: colors.textSecondary,
+      lineHeight: 24,
     },
     storyText: {
       fontSize: 15,

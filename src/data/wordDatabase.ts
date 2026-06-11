@@ -4,6 +4,7 @@ import enrichmentData from './wordEnrichment.json';
 import wordExamplesData from './wordExamples.json';
 import rootsExtendedData from './rootsExtended.json';
 import wordSensesData from './wordSenses.json';
+import wordOriginsData from './wordOrigins.json';
 import {translationService} from '../services/translationService';
 
 const enrichment: Record<
@@ -6236,6 +6237,14 @@ export const allWords: Word[] = [...rootWords, ...supplementWords];
 // 完整释义：多义项用"；"连接展示（学习卡/详情页用），单义项回退 meaning
 export const getFullMeaning = (w: Word): string =>
   w.meanings && w.meanings.length > 1 ? w.meanings.join('；') : w.meaning;
+
+// ==================== 词源身世（词源宇宙·身世层） ====================
+// wordOrigins.json 是人工编写的词源故事词典，主要覆盖不可拆解的"哑词"
+// （window=风之眼，salary=盐钱）。质量铁律：必须真实词源，民间/争议词源标注"传说/一说"。
+const wordOrigins = wordOriginsData as Record<string, string>;
+
+export const getWordOrigin = (word: string): string | null =>
+  wordOrigins[word.toLowerCase()] ?? null;
 
 // ==================== 词内基词分解（哑词升级二号通道） ====================
 // 大量"哑词"其实是派生词：happiness = happy + -ness，useful = use + -ful。

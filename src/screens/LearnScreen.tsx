@@ -32,6 +32,7 @@ import {
   coreRoots,
   getWordsByRoot,
   getFullMeaning,
+  getWordOrigin,
   levels,
 } from '../data/wordDatabase';
 import {
@@ -593,6 +594,15 @@ export const LearnScreen: React.FC = () => {
 
             {revealed && (
               <>
+                {getWordOrigin(word.word) && (
+                  <View style={styles.originCard}>
+                    <Text style={styles.originLabel}>📜 身世 · 它从哪来</Text>
+                    <Text style={styles.originText}>
+                      {getWordOrigin(word.word)}
+                    </Text>
+                  </View>
+                )}
+
                 <View style={styles.assocCard}>
                   <Text style={styles.assocLabel}>联想记忆</Text>
                   <Text style={styles.assocText}>{word.associationStory}</Text>
@@ -1978,6 +1988,22 @@ const createStyles = (colors: ThemeColors) =>
       letterSpacing: 1,
     },
     assocText: {fontSize: 14, color: colors.textSecondary, lineHeight: 22},
+    originCard: {
+      backgroundColor: colors.warningBg,
+      borderRadius: 14,
+      padding: 16,
+      marginBottom: 14,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.warning,
+    },
+    originLabel: {
+      fontSize: 11,
+      color: colors.warning,
+      fontWeight: '700',
+      marginBottom: 6,
+      letterSpacing: 1,
+    },
+    originText: {fontSize: 14, color: colors.textSecondary, lineHeight: 22},
     exCard: {
       backgroundColor: colors.surface,
       borderRadius: 14,

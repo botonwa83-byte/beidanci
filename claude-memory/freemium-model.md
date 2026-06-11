@@ -24,5 +24,5 @@ App 从付费下载改为「免费下载 + 买断解锁完整版」(freemium)。
 
 **已完成**：地基(`entitlementService.ts`/`useEntitlement.tsx`/`PaywallScreen.tsx`/App.tsx 接入/ProfileScreen 入口) + 上述 3 处门禁 + `guessQuota.ts`。全项目 tsc 0 错误。真机沙盒购买/恢复已验证通过。
 **测试**：原 `__tests__/App.test.tsx` 失败（既有问题，非内购引起）已修复——新增 `jest.setup.js`（mock safe-area-context/keychain/iap）+ 改用 `await act` 异步渲染并 unmount + fake timers。jest 通过、tsc 0 错误。
-**未提交**：功能代码尚未 git commit（仅 claude-memory 同步过 GitHub）。
+**已提交（2026-06-11）**：内购代码已在原电脑合并进 master（squash 提交「feat: 付费墙与内购功能合入最新主线」），与五波改造的 LearnScreen 冲突已手工解决（扫荡入口与付费门禁共存，付费墙样式改名 paywallHint 避免与扫荡 unlockHint 撞名）。跨机丢失风险解除，待推送 GitHub。
 **依赖已装**：react-native-iap 12.16.4（JS+Pod link 完成）。

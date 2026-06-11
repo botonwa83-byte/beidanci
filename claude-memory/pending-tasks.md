@@ -7,17 +7,14 @@ metadata:
   originSessionId: c8176f09-50b7-459b-80a4-83186c4d3e7a
 ---
 
-# 待办任务清单（2026-06-11 盘点，同日新增词源宇宙计划）
+# 待办任务清单（2026-06-11 盘点，同日新增词源宇宙计划；同日晚更新：内购风险解除、词源 A 项完成）
 
-## ⚠️ 最高优先级风险（1 项）
-1. **另一台电脑的内购代码未提交**（见 [[freemium-model]]）：entitlementService/useEntitlement/PaywallScreen/3 处门禁/guessQuota/jest.setup（App.test 修复）只存在于那台机器。
-   - 必须尽快在那台电脑 commit + push
-   - **合并冲突预警**：门禁改了 LearnScreen startSession / GuessWordScreen / GrammarScreen，而本机五波改造大改了 LearnScreen——合并时 LearnScreen 必然冲突，需手工处理
-   - 本机 App.test.tsx 仍失败，修复随内购代码一并到来
+## ✅ 已解除：跨机内购代码风险（原最高优先级）
+1. ~~另一台电脑的内购代码未提交~~ **已解决（2026-06-11）**：内购代码已在原电脑与远程最新代码合并并提交 master（LearnScreen 冲突已手工解决），tsc+jest 全过。**尚未推送 GitHub**——推送前另一台电脑不要再动代码。
 
 ## 新方向：词源宇宙（4 项，用户已拍板，见 [[etymology-universe-plan]]）
-- A. 第一批 wordOrigins（~300 高频哑词身世故事）+ 哑词"📜 身世"卡 ← **下一个动手项**
-- B. 今日词源冷知识 + 分享卡（流行性最高杠杆）
+- A. ~~第一批 wordOrigins + 哑词"📜 身世"卡~~ **已完成（2026-06-11）**：wordOrigins.json 307 条（首批 149 + 二批 158，二批全部从词库高频哑词导出编写），词库内命中 204 词；getWordOrigin() 挂载 wordDatabase，身世卡已上线学习卡揭晓后（LearnScreen，琥珀色 originCard）+ 详情页（WordDetailScreen，联想记忆上方）；新增 wordOrigins.test.ts 4 项数据质量测试
+- B. 今日词源冷知识 + 分享卡（流行性最高杠杆）← **下一个动手项**；首批 149 条里 103 条词库外的故事（sandwich/robot/boycott…）正好做冷知识池
 - C. 猜来历题型（词源故事选择题）
 - D. 词源版图（替代原阶段4星系图，#6 作废合并于此）
 
