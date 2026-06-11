@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme, useAppTheme, ThemeColors} from '../theme';
+import {useEntitlement} from '../data/useEntitlement';
 import {UserProgress, SessionStep, DailyMission, Word} from '../data/types';
 import {
   loadProgress,
@@ -31,6 +32,7 @@ import {
   coreRoots,
   getWordsByRoot,
   getFullMeaning,
+  levels,
 } from '../data/wordDatabase';
 import {
   computeDecipherPower,
@@ -44,10 +46,15 @@ import {speak} from '../utils/speech';
 
 type AppMode = 'dashboard' | 'setup' | 'session' | 'harvest';
 
+// 非会员免费额度：学完第 1 级「入门」即到顶（其余需解锁完整版）
+const FREE_WORD_LIMIT = levels[0].targetWords;
+
 export const LearnScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const {colors} = useAppTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
+  const navigation = useNavigation<any>();
+  const {isPremium} = useEntitlement();
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [mission, setMission] = useState<DailyMission | null>(null);
   const [mode, setMode] = useState<AppMode>('dashboard');
@@ -142,6 +149,11 @@ export const LearnScreen: React.FC = () => {
     if (!progress || !mission) {
       return;
     }
+    // 非会员学满第 1 级即拦截（复习仍可在「复习」Tab 进行）
+    if (!isPremium && progress.completedWords.length >= FREE_WORD_LIMIT) {
+      navigation.navigate('Paywall', {feature: '全部词库与关卡'});
+      return;
+    }
     const allDone =
       mission.completedNewWords.length >= mission.newWordIds.length &&
       mission.completedReviews.length >= mission.reviewWordIds.length;
@@ -175,7 +187,7 @@ export const LearnScreen: React.FC = () => {
       ? {reach: decipher.reachCount, learned: progress.completedWords.length}
       : null;
     setMode('session');
-  }, [progress, mission, decipher]);
+  }, [progress, mission, decipher, isPremium, navigation]);
 
   const nextStep = () => {
     clearQuizTimer();
@@ -1311,6 +1323,23 @@ export const LearnScreen: React.FC = () => {
         </TouchableOpacity>
       )}
 
+      {/* 非会员学满免费额度的解锁提示 */}
+      {!isPremium &&
+        progress &&
+        progress.completedWords.length >= FREE_WORD_LIMIT && (
+          <TouchableOpacity
+            style={styles.paywallHint}
+            onPress={() =>
+              navigation.navigate('Paywall', {feature: '全部词库与关卡'})
+            }
+            activeOpacity={0.7}
+            accessibilityRole="button">
+            <Text style={styles.paywallHintText}>
+              🔒 免费的「入门」{FREE_WORD_LIMIT} 词已学完，解锁完整版继续全部词库 ›
+            </Text>
+          </TouchableOpacity>
+        )}
+
       {/* Today's roots preview */}
       {mission && mission.newRoots.length > 0 && (
         <View style={styles.section}>
@@ -1666,6 +1695,22 @@ const createStyles = (colors: ThemeColors) =>
     ctaDoneText: {color: colors.success, fontSize: 16},
     ctaSub: {fontSize: 12, color: 'rgba(255,255,255,0.75)', marginTop: 4},
     ctaDoneSub: {fontSize: 12, color: colors.textTertiary, marginTop: 4},
+    paywallHint: {
+      marginHorizontal: 20,
+      marginTop: -12,
+      marginBottom: 24,
+      backgroundColor: colors.primaryLight,
+      borderRadius: 14,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      alignItems: 'center',
+    },
+    paywallHintText: {
+      fontSize: 13,
+      color: colors.primary,
+      fontWeight: '600',
+      textAlign: 'center',
+    },
 
     // 扫荡入口（琥珀色：收割的颜色）
     harvestBtn: {

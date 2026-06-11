@@ -14,10 +14,12 @@ import {ProfileScreen} from './src/screens/ProfileScreen';
 import {WordDetailScreen} from './src/screens/WordDetailScreen';
 import {LoginScreen} from './src/screens/LoginScreen';
 import {SplashScreen} from './src/screens/SplashScreen';
+import {PaywallScreen} from './src/screens/PaywallScreen';
 import {TabBarIcon} from './src/components/TabBarIcon';
 import {loadAuth, clearAuth, AuthUser} from './src/data/authService';
 import {migrateAuthToKeychain} from './src/data/secureStorage';
 import {setLogoutListener} from './src/data/authState';
+import {EntitlementProvider} from './src/data/useEntitlement';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -169,7 +171,9 @@ const App: React.FC = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <AppContent />
+        <EntitlementProvider>
+          <AppContent />
+        </EntitlementProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );
@@ -186,6 +190,11 @@ const AppContent: React.FC = () => {
         }}>
         <Stack.Screen name="Tab" component={TabNavigator} />
         <Stack.Screen name="WordDetail" component={WordDetailScreen as any} />
+        <Stack.Screen
+          name="Paywall"
+          component={PaywallScreen}
+          options={{presentation: 'modal'}}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

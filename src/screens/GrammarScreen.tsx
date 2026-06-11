@@ -7,20 +7,33 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 import {
   grammarRules,
   grammarCategories,
   getGrammarByCategory,
   GrammarRule,
 } from '../data/grammarData';
+import {useEntitlement} from '../data/useEntitlement';
 import {theme, useAppTheme, ThemeColors} from '../theme';
+
+// 非会员可免费试看的语法条数（全表前 N 条）
+const FREE_GRAMMAR_COUNT = 3;
 
 export const GrammarScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const {colors} = useAppTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
+  const navigation = useNavigation<any>();
+  const {isPremium} = useEntitlement();
   const [grammarCategory, setGrammarCategory] = useState<GrammarRule['category']>('morphology');
   const [expandedRule, setExpandedRule] = useState<string | null>(null);
+
+  // 免费试看的语法 id（全表前 FREE_GRAMMAR_COUNT 条）
+  const freeRuleIds = useMemo(
+    () => new Set(grammarRules.slice(0, FREE_GRAMMAR_COUNT).map(r => r.id)),
+    [],
+  );
 
   const filteredGrammar = useMemo(() => {
     return getGrammarByCategory(grammarCategory);
@@ -28,11 +41,16 @@ export const GrammarScreen: React.FC = () => {
 
   const renderGrammarRule = (rule: GrammarRule) => {
     const isExpanded = expandedRule === rule.id;
+    const locked = !isPremium && !freeRuleIds.has(rule.id);
     return (
       <View key={rule.id} style={styles.grammarCard}>
         <TouchableOpacity
           style={styles.grammarHeader}
-          onPress={() => setExpandedRule(isExpanded ? null : rule.id)}
+          onPress={() =>
+            locked
+              ? navigation.navigate('Paywall', {feature: '\u5168\u90E8\u8BED\u6CD5\u7CBE\u8BB2'})
+              : setExpandedRule(isExpanded ? null : rule.id)
+          }
           activeOpacity={0.7}
           accessibilityLabel={rule.title}
           accessibilityRole="button"
@@ -50,7 +68,9 @@ export const GrammarScreen: React.FC = () => {
             <View style={[styles.levelBadge, {backgroundColor: rule.color + '20'}]}>
               <Text style={[styles.levelBadgeText, {color: rule.color}]}>L{rule.level}</Text>
             </View>
-            <Text style={styles.expandArrow}>{isExpanded ? '\u25B2' : '\u25BC'}</Text>
+            <Text style={styles.expandArrow}>
+              {locked ? '\uD83D\uDD12' : isExpanded ? '\u25B2' : '\u25BC'}
+            </Text>
           </View>
         </TouchableOpacity>
 
@@ -86,6 +106,7 @@ export const GrammarScreen: React.FC = () => {
         <Text style={styles.title}>语法手册</Text>
         <Text style={styles.subtitle}>
           {grammarRules.length} 条核心语法规则
+          {!isPremium ? ` · 免费试看前 ${FREE_GRAMMAR_COUNT} 条` : ''}
         </Text>
       </View>
 

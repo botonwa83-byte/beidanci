@@ -394,6 +394,8 @@ PODS:
   - RNGestureHandler (2.14.1):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
+  - RNIap (12.16.4):
+    - React-Core
   - RNKeychain (10.0.0):
     - RCT-Folly (= 2021.07.22.00)
     - React-Core
@@ -445,6 +447,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNIap (from `../node_modules/react-native-iap`)
   - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -535,6 +538,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNIap:
+    :path: "../node_modules/react-native-iap"
   RNKeychain:
     :path: "../node_modules/react-native-keychain"
   RNScreens:
@@ -584,6 +589,7 @@ SPEC CHECKSUMS:
   ReactCommon: 3a7c359a28c6973c304fb1b0152b096b195dd5fc
   RNCAsyncStorage: aa75595c1aefa18f868452091fa0c411a516ce11
   RNGestureHandler: 6530721cfc87d2625506e00ea5cba27b6bea4d86
+  RNIap: 65051c94a29a17bd8356bcf16a878821862eecd0
   RNKeychain: 026b497e46154520bcd0796448cbce50e5bea272
   RNScreens: c6ae949c292bee8ed7f355ab2adcfc9a51629951
   SocketRocket: f32cd54efbe0f095c4d7594881e52619cfe80b17

@@ -8,9 +8,10 @@ import {
   Alert,
   Modal,
 } from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {theme, useAppTheme, ThemeColors} from '../theme';
+import {useEntitlement} from '../data/useEntitlement';
 import {UserProgress} from '../data/types';
 import {
   loadProgress,
@@ -33,6 +34,8 @@ export const ProfileScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const {colors} = useAppTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
+  const navigation = useNavigation<any>();
+  const {isPremium} = useEntitlement();
   const [progress, setProgress] = useState<UserProgress | null>(null);
   const [authUser, setAuthUser] = useState<AuthUser | null>(null);
   const [privacyType, setPrivacyType] = useState<'privacy' | 'terms' | null>(null);
@@ -144,6 +147,26 @@ export const ProfileScreen: React.FC = () => {
           </View>
         </View>
       )}
+
+      {/* 会员入口 */}
+      <TouchableOpacity
+        style={[styles.memberCard, isPremium && styles.memberCardOwned]}
+        onPress={() => navigation.navigate('Paywall')}
+        activeOpacity={0.85}
+        accessibilityRole="button"
+        accessibilityLabel={isPremium ? '完整版用户' : '升级完整版'}>
+        <View style={styles.memberLeft}>
+          <Text style={styles.memberTitle}>
+            {isPremium ? '✓ 完整版用户' : '升级完整版'}
+          </Text>
+          <Text style={styles.memberDesc}>
+            {isPremium
+              ? '已解锁全部功能，感谢支持'
+              : '一次买断，永久解锁无限猜词 / 全部词库'}
+          </Text>
+        </View>
+        {!isPremium && <Text style={styles.memberArrow}>解锁 ›</Text>}
+      </TouchableOpacity>
 
       {/* Overview */}
       {stats && (
@@ -343,6 +366,32 @@ const createStyles = (colors: ThemeColors) =>
       paddingHorizontal: 20,
       marginBottom: 20,
     },
+
+    memberCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginHorizontal: 20,
+      marginBottom: 24,
+      backgroundColor: colors.primary,
+      borderRadius: theme.borderRadius.xl,
+      paddingVertical: 18,
+      paddingHorizontal: 20,
+      ...theme.shadow.colored(colors.primary),
+    },
+    memberCardOwned: {
+      backgroundColor: colors.secondary,
+      ...theme.shadow.colored(colors.secondary),
+    },
+    memberLeft: {flex: 1, paddingRight: 12},
+    memberTitle: {
+      fontSize: 17,
+      fontWeight: '800',
+      color: '#FFFFFF',
+      marginBottom: 4,
+    },
+    memberDesc: {fontSize: 12, color: 'rgba(255,255,255,0.85)', lineHeight: 17},
+    memberArrow: {fontSize: 15, fontWeight: '800', color: '#FFFFFF'},
 
     overviewCard: {
       marginHorizontal: 20,

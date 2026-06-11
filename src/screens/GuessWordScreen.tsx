@@ -9,6 +9,7 @@ import {
   Share,
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useNavigation} from '@react-navigation/native';
 import {
   GuessWord,
   GuessSegment,
@@ -23,6 +24,12 @@ import {
   getDailyWord,
   comboCheer,
 } from '../data/guessProgress';
+import {
+  DAILY_FREE_GUESSES,
+  loadGuessRemaining,
+  consumeGuess,
+} from '../data/guessQuota';
+import {useEntitlement} from '../data/useEntitlement';
 import {speak} from '../utils/speech';
 import {theme, useAppTheme, ThemeColors} from '../theme';
 
@@ -30,6 +37,11 @@ export const GuessWordScreen: React.FC = () => {
   const insets = useSafeAreaInsets();
   const {colors} = useAppTheme();
   const styles = useMemo(() => createStyles(colors), [colors]);
+  const navigation = useNavigation<any>();
+  const {isPremium} = useEntitlement();
+
+  // 非会员每日免费破译次数
+  const [remaining, setRemaining] = useState(DAILY_FREE_GUESSES);
 
   const [deck] = useState(() => shuffleGuessWords());
   const [index, setIndex] = useState(0);
@@ -64,6 +76,26 @@ export const GuessWordScreen: React.FC = () => {
       setMaxCombo(p.maxCombo);
     });
   }, []);
+
+  useEffect(() => {
+    if (!isPremium) {
+      loadGuessRemaining().then(setRemaining);
+    }
+  }, [isPremium]);
+
+  // 破译答案：会员无限；非会员消耗每日免费额度，用完弹付费页
+  const handleReveal = useCallback(() => {
+    if (isPremium) {
+      setRevealed(true);
+      return;
+    }
+    if (remaining <= 0) {
+      navigation.navigate('Paywall', {feature: '无限猜词'});
+      return;
+    }
+    consumeGuess().then(setRemaining);
+    setRevealed(true);
+  }, [isPremium, remaining, navigation]);
 
   const total = deck.length;
   const word = deck[index];
@@ -324,14 +356,28 @@ export const GuessWordScreen: React.FC = () => {
           </View>
 
           {!revealed ? (
-            <TouchableOpacity
-              style={styles.revealButton}
-              onPress={() => setRevealed(true)}
-              activeOpacity={0.85}
-              accessibilityRole="button"
-              accessibilityLabel="破译答案">
-              <Text style={styles.revealButtonText}>破译答案</Text>
-            </TouchableOpacity>
+            <>
+              <TouchableOpacity
+                style={styles.revealButton}
+                onPress={handleReveal}
+                activeOpacity={0.85}
+                accessibilityRole="button"
+                accessibilityLabel="破译答案">
+                <Text style={styles.revealButtonText}>破译答案</Text>
+              </TouchableOpacity>
+              {!isPremium && (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate('Paywall', {feature: '无限猜词'})}
+                  activeOpacity={0.7}
+                  accessibilityRole="button">
+                  <Text style={styles.quotaHint}>
+                    {remaining > 0
+                      ? `今日还可免费破译 ${remaining} 次 · 解锁无限 ›`
+                      : '今日免费次数已用完 · 解锁无限猜词 ›'}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </>
           ) : (
             <View style={styles.answerCard}>
               <View style={styles.answerMeaningRow}>
@@ -609,6 +655,13 @@ const createStyles = (colors: ThemeColors) =>
       ...theme.shadow.colored(colors.primary),
     },
     revealButtonText: {color: '#FFFFFF', fontSize: 16, fontWeight: '700'},
+    quotaHint: {
+      fontSize: 12,
+      color: colors.primary,
+      fontWeight: '600',
+      textAlign: 'center',
+      marginTop: 12,
+    },
     answerCard: {
       marginTop: 16,
       backgroundColor: colors.surface,
