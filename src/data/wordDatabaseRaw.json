@@ -11145,6 +11145,6926 @@
     "word": "furious",
     "pos": "a",
     "meaning": "狂怒的"
+   },
+   {
+    "word": "ability",
+    "pos": "n",
+    "meaning": "能力/才能"
+   },
+   {
+    "word": "able",
+    "pos": "a",
+    "meaning": "能够的/有能力的"
+   },
+   {
+    "word": "ache",
+    "pos": "n",
+    "meaning": "疼痛；v 疼"
+   },
+   {
+    "word": "across",
+    "pos": "prep",
+    "meaning": "横过/在对面"
+   },
+   {
+    "word": "add",
+    "pos": "v",
+    "meaning": "添加/相加"
+   },
+   {
+    "word": "afraid",
+    "pos": "a",
+    "meaning": "害怕的/担心的"
+   },
+   {
+    "word": "afternoon",
+    "pos": "n",
+    "meaning": "下午"
+   },
+   {
+    "word": "age",
+    "pos": "n",
+    "meaning": "年龄/时代"
+   },
+   {
+    "word": "agree",
+    "pos": "v",
+    "meaning": "同意/赞成"
+   },
+   {
+    "word": "air",
+    "pos": "n",
+    "meaning": "空气/空中"
+   },
+   {
+    "word": "aircraft",
+    "pos": "n",
+    "meaning": "飞机/航空器"
+   },
+   {
+    "word": "airline",
+    "pos": "n",
+    "meaning": "航空公司"
+   },
+   {
+    "word": "airplane",
+    "pos": "n",
+    "meaning": "飞机"
+   },
+   {
+    "word": "almost",
+    "pos": "ad",
+    "meaning": "几乎/差不多"
+   },
+   {
+    "word": "along",
+    "pos": "prep",
+    "meaning": "沿着；ad 向前"
+   },
+   {
+    "word": "aloud",
+    "pos": "ad",
+    "meaning": "出声地/大声地"
+   },
+   {
+    "word": "alphabet",
+    "pos": "n",
+    "meaning": "字母表"
+   },
+   {
+    "word": "already",
+    "pos": "ad",
+    "meaning": "已经"
+   },
+   {
+    "word": "also",
+    "pos": "ad",
+    "meaning": "也/而且"
+   },
+   {
+    "word": "although",
+    "pos": "conj",
+    "meaning": "虽然/尽管"
+   },
+   {
+    "word": "always",
+    "pos": "ad",
+    "meaning": "总是/一直"
+   },
+   {
+    "word": "anger",
+    "pos": "n",
+    "meaning": "愤怒；v 激怒"
+   },
+   {
+    "word": "angry",
+    "pos": "a",
+    "meaning": "生气的/愤怒的"
+   },
+   {
+    "word": "animal",
+    "pos": "n",
+    "meaning": "动物"
+   },
+   {
+    "word": "answer",
+    "pos": "n",
+    "meaning": "回答/答案；v 回答"
+   },
+   {
+    "word": "ant",
+    "pos": "n",
+    "meaning": "蚂蚁"
+   },
+   {
+    "word": "area",
+    "pos": "n",
+    "meaning": "地区/面积/领域"
+   },
+   {
+    "word": "art",
+    "pos": "n",
+    "meaning": "艺术/美术"
+   },
+   {
+    "word": "artist",
+    "pos": "n",
+    "meaning": "艺术家/画家"
+   },
+   {
+    "word": "ash",
+    "pos": "n",
+    "meaning": "灰/灰烬"
+   },
+   {
+    "word": "ask",
+    "pos": "v",
+    "meaning": "问/请求"
+   },
+   {
+    "word": "asleep",
+    "pos": "a",
+    "meaning": "睡着的"
+   },
+   {
+    "word": "aunt",
+    "pos": "n",
+    "meaning": "姑妈/姨妈"
+   },
+   {
+    "word": "autumn",
+    "pos": "n",
+    "meaning": "秋天"
+   },
+   {
+    "word": "awake",
+    "pos": "a",
+    "meaning": "醒着的；v 唤醒"
+   },
+   {
+    "word": "away",
+    "pos": "ad",
+    "meaning": "离开/远离"
+   },
+   {
+    "word": "back",
+    "pos": "n",
+    "meaning": "背部/后面；ad 回来"
+   },
+   {
+    "word": "bacon",
+    "pos": "n",
+    "meaning": "培根/咸猪肉"
+   },
+   {
+    "word": "bad",
+    "pos": "a",
+    "meaning": "坏的/严重的"
+   },
+   {
+    "word": "baggage",
+    "pos": "n",
+    "meaning": "行李"
+   },
+   {
+    "word": "bake",
+    "pos": "v",
+    "meaning": "烘烤/烤"
+   },
+   {
+    "word": "balcony",
+    "pos": "n",
+    "meaning": "阳台"
+   },
+   {
+    "word": "ball",
+    "pos": "n",
+    "meaning": "球/舞会"
+   },
+   {
+    "word": "balloon",
+    "pos": "n",
+    "meaning": "气球"
+   },
+   {
+    "word": "bamboo",
+    "pos": "n",
+    "meaning": "竹子"
+   },
+   {
+    "word": "banana",
+    "pos": "n",
+    "meaning": "香蕉"
+   },
+   {
+    "word": "bang",
+    "pos": "v",
+    "meaning": "猛敲/砰然作响；n 巨响"
+   },
+   {
+    "word": "barber",
+    "pos": "n",
+    "meaning": "理发师"
+   },
+   {
+    "word": "bark",
+    "pos": "v",
+    "meaning": "狗叫；n 树皮/吠声"
+   },
+   {
+    "word": "baseball",
+    "pos": "n",
+    "meaning": "棒球"
+   },
+   {
+    "word": "basketball",
+    "pos": "n",
+    "meaning": "篮球"
+   },
+   {
+    "word": "bat",
+    "pos": "n",
+    "meaning": "球棒/蝙蝠"
+   },
+   {
+    "word": "bathe",
+    "pos": "v",
+    "meaning": "洗澡/浸泡"
+   },
+   {
+    "word": "bathroom",
+    "pos": "n",
+    "meaning": "浴室/卫生间"
+   },
+   {
+    "word": "battery",
+    "pos": "n",
+    "meaning": "电池"
+   },
+   {
+    "word": "beam",
+    "pos": "n",
+    "meaning": "梁/光束；v 照耀/微笑"
+   },
+   {
+    "word": "bean",
+    "pos": "n",
+    "meaning": "豆/豆子"
+   },
+   {
+    "word": "beast",
+    "pos": "n",
+    "meaning": "野兽/牲畜"
+   },
+   {
+    "word": "because",
+    "pos": "conj",
+    "meaning": "因为"
+   },
+   {
+    "word": "bedroom",
+    "pos": "n",
+    "meaning": "卧室"
+   },
+   {
+    "word": "bee",
+    "pos": "n",
+    "meaning": "蜜蜂"
+   },
+   {
+    "word": "beef",
+    "pos": "n",
+    "meaning": "牛肉"
+   },
+   {
+    "word": "before",
+    "pos": "prep",
+    "meaning": "在…之前"
+   },
+   {
+    "word": "beg",
+    "pos": "v",
+    "meaning": "乞求/恳求"
+   },
+   {
+    "word": "begin",
+    "pos": "v",
+    "meaning": "开始"
+   },
+   {
+    "word": "being",
+    "pos": "n",
+    "meaning": "存在/生物"
+   },
+   {
+    "word": "best",
+    "pos": "a",
+    "meaning": "最好的"
+   },
+   {
+    "word": "better",
+    "pos": "a",
+    "meaning": "更好的"
+   },
+   {
+    "word": "big",
+    "pos": "a",
+    "meaning": "大的/重要的"
+   },
+   {
+    "word": "bike",
+    "pos": "n",
+    "meaning": "自行车"
+   },
+   {
+    "word": "biscuit",
+    "pos": "n",
+    "meaning": "饼干"
+   },
+   {
+    "word": "black",
+    "pos": "a",
+    "meaning": "黑色的；n 黑色"
+   },
+   {
+    "word": "blackboard",
+    "pos": "n",
+    "meaning": "黑板"
+   },
+   {
+    "word": "blouse",
+    "pos": "n",
+    "meaning": "女衬衫"
+   },
+   {
+    "word": "brake",
+    "pos": "n",
+    "meaning": "刹车；v 刹车"
+   },
+   {
+    "word": "brass",
+    "pos": "n",
+    "meaning": "黄铜/铜管乐器"
+   },
+   {
+    "word": "broom",
+    "pos": "n",
+    "meaning": "扫帚"
+   },
+   {
+    "word": "bull",
+    "pos": "n",
+    "meaning": "公牛"
+   },
+   {
+    "word": "business",
+    "pos": "n",
+    "meaning": "商业/生意/事务"
+   },
+   {
+    "word": "butterfly",
+    "pos": "n",
+    "meaning": "蝴蝶"
+   },
+   {
+    "word": "cab",
+    "pos": "n",
+    "meaning": "出租车/驾驶室"
+   },
+   {
+    "word": "cabbage",
+    "pos": "n",
+    "meaning": "卷心菜"
+   },
+   {
+    "word": "cafe",
+    "pos": "n",
+    "meaning": "咖啡馆/小餐馆"
+   },
+   {
+    "word": "cage",
+    "pos": "n",
+    "meaning": "笼子"
+   },
+   {
+    "word": "cake",
+    "pos": "n",
+    "meaning": "蛋糕"
+   },
+   {
+    "word": "call",
+    "pos": "v",
+    "meaning": "叫/打电话；n 电话/呼叫"
+   },
+   {
+    "word": "camel",
+    "pos": "n",
+    "meaning": "骆驼"
+   },
+   {
+    "word": "candy",
+    "pos": "n",
+    "meaning": "糖果"
+   },
+   {
+    "word": "car",
+    "pos": "n",
+    "meaning": "汽车/车厢"
+   },
+   {
+    "word": "carpenter",
+    "pos": "n",
+    "meaning": "木匠"
+   },
+   {
+    "word": "carriage",
+    "pos": "n",
+    "meaning": "马车/车厢"
+   },
+   {
+    "word": "carrot",
+    "pos": "n",
+    "meaning": "胡萝卜"
+   },
+   {
+    "word": "cart",
+    "pos": "n",
+    "meaning": "手推车/大车"
+   },
+   {
+    "word": "castle",
+    "pos": "n",
+    "meaning": "城堡"
+   },
+   {
+    "word": "cat",
+    "pos": "n",
+    "meaning": "猫"
+   },
+   {
+    "word": "cent",
+    "pos": "n",
+    "meaning": "分(货币)"
+   },
+   {
+    "word": "chalk",
+    "pos": "n",
+    "meaning": "粉笔"
+   },
+   {
+    "word": "change",
+    "pos": "v",
+    "meaning": "改变/兑换；n 变化/零钱"
+   },
+   {
+    "word": "chess",
+    "pos": "n",
+    "meaning": "国际象棋"
+   },
+   {
+    "word": "chew",
+    "pos": "v",
+    "meaning": "咀嚼"
+   },
+   {
+    "word": "chin",
+    "pos": "n",
+    "meaning": "下巴"
+   },
+   {
+    "word": "china",
+    "pos": "n",
+    "meaning": "瓷器"
+   },
+   {
+    "word": "chop",
+    "pos": "v",
+    "meaning": "砍/剁；n 排骨"
+   },
+   {
+    "word": "city",
+    "pos": "n",
+    "meaning": "城市"
+   },
+   {
+    "word": "claw",
+    "pos": "n",
+    "meaning": "爪子"
+   },
+   {
+    "word": "clay",
+    "pos": "n",
+    "meaning": "黏土/陶土"
+   },
+   {
+    "word": "cock",
+    "pos": "n",
+    "meaning": "公鸡"
+   },
+   {
+    "word": "coke",
+    "pos": "n",
+    "meaning": "可乐/焦炭"
+   },
+   {
+    "word": "collar",
+    "pos": "n",
+    "meaning": "衣领/项圈"
+   },
+   {
+    "word": "college",
+    "pos": "n",
+    "meaning": "学院/大学"
+   },
+   {
+    "word": "comb",
+    "pos": "n",
+    "meaning": "梳子；v 梳理"
+   },
+   {
+    "word": "come",
+    "pos": "v",
+    "meaning": "来/到来"
+   },
+   {
+    "word": "computer",
+    "pos": "n",
+    "meaning": "计算机/电脑"
+   },
+   {
+    "word": "confident",
+    "pos": "a",
+    "meaning": "自信的/确信的"
+   },
+   {
+    "word": "corn",
+    "pos": "n",
+    "meaning": "玉米/谷物"
+   },
+   {
+    "word": "cough",
+    "pos": "v",
+    "meaning": "咳嗽；n 咳嗽"
+   },
+   {
+    "word": "crown",
+    "pos": "n",
+    "meaning": "王冠/王位"
+   },
+   {
+    "word": "cupboard",
+    "pos": "n",
+    "meaning": "碗柜/橱柜"
+   },
+   {
+    "word": "curve",
+    "pos": "n",
+    "meaning": "曲线/弯道；v 弯曲"
+   },
+   {
+    "word": "dad",
+    "pos": "n",
+    "meaning": "爸爸"
+   },
+   {
+    "word": "daily",
+    "pos": "a",
+    "meaning": "每日的；ad 每天"
+   },
+   {
+    "word": "damp",
+    "pos": "a",
+    "meaning": "潮湿的"
+   },
+   {
+    "word": "dash",
+    "pos": "v",
+    "meaning": "猛冲/疾驰；n 破折号"
+   },
+   {
+    "word": "day",
+    "pos": "n",
+    "meaning": "天/白天"
+   },
+   {
+    "word": "delicious",
+    "pos": "a",
+    "meaning": "美味的"
+   },
+   {
+    "word": "dentist",
+    "pos": "n",
+    "meaning": "牙医"
+   },
+   {
+    "word": "depth",
+    "pos": "n",
+    "meaning": "深度/深处"
+   },
+   {
+    "word": "devil",
+    "pos": "n",
+    "meaning": "魔鬼"
+   },
+   {
+    "word": "die",
+    "pos": "v",
+    "meaning": "死/凋谢"
+   },
+   {
+    "word": "difficult",
+    "pos": "a",
+    "meaning": "困难的"
+   },
+   {
+    "word": "dip",
+    "pos": "v",
+    "meaning": "蘸/浸"
+   },
+   {
+    "word": "direct",
+    "pos": "a",
+    "meaning": "直接的；v 指导/导演"
+   },
+   {
+    "word": "disagree",
+    "pos": "v",
+    "meaning": "不同意/有分歧"
+   },
+   {
+    "word": "dislike",
+    "pos": "v",
+    "meaning": "不喜欢"
+   },
+   {
+    "word": "dizzy",
+    "pos": "a",
+    "meaning": "头晕的"
+   },
+   {
+    "word": "dock",
+    "pos": "n",
+    "meaning": "码头；v 停靠"
+   },
+   {
+    "word": "dog",
+    "pos": "n",
+    "meaning": "狗"
+   },
+   {
+    "word": "doll",
+    "pos": "n",
+    "meaning": "玩偶/娃娃"
+   },
+   {
+    "word": "down",
+    "pos": "ad",
+    "meaning": "向下；a 沮丧的"
+   },
+   {
+    "word": "dozen",
+    "pos": "n",
+    "meaning": "一打/十二个"
+   },
+   {
+    "word": "drown",
+    "pos": "v",
+    "meaning": "淹死/淹没"
+   },
+   {
+    "word": "early",
+    "pos": "a",
+    "meaning": "早的；ad 早"
+   },
+   {
+    "word": "earthquake",
+    "pos": "n",
+    "meaning": "地震"
+   },
+   {
+    "word": "edit",
+    "pos": "v",
+    "meaning": "编辑/校订"
+   },
+   {
+    "word": "egg",
+    "pos": "n",
+    "meaning": "蛋/鸡蛋"
+   },
+   {
+    "word": "elder",
+    "pos": "a",
+    "meaning": "年长的；n 长辈"
+   },
+   {
+    "word": "elephant",
+    "pos": "n",
+    "meaning": "大象"
+   },
+   {
+    "word": "email",
+    "pos": "n",
+    "meaning": "电子邮件；v 发邮件"
+   },
+   {
+    "word": "embarrass",
+    "pos": "v",
+    "meaning": "使尴尬/使难堪"
+   },
+   {
+    "word": "enlarge",
+    "pos": "v",
+    "meaning": "扩大/放大"
+   },
+   {
+    "word": "enter",
+    "pos": "v",
+    "meaning": "进入/输入"
+   },
+   {
+    "word": "excellent",
+    "pos": "a",
+    "meaning": "极好的/优秀的"
+   },
+   {
+    "word": "excuse",
+    "pos": "v",
+    "meaning": "原谅；n 借口"
+   },
+   {
+    "word": "exit",
+    "pos": "n",
+    "meaning": "出口；v 退出"
+   },
+   {
+    "word": "experience",
+    "pos": "n",
+    "meaning": "经验/经历；v 体验"
+   },
+   {
+    "word": "extend",
+    "pos": "v",
+    "meaning": "延伸/扩大/给予"
+   },
+   {
+    "word": "face",
+    "pos": "n",
+    "meaning": "脸/面容；v 面对"
+   },
+   {
+    "word": "fail",
+    "pos": "v",
+    "meaning": "失败/不及格"
+   },
+   {
+    "word": "faint",
+    "pos": "v",
+    "meaning": "昏倒；a 微弱的"
+   },
+   {
+    "word": "fair",
+    "pos": "a",
+    "meaning": "公平的/相当好的；n 集市/博览会"
+   },
+   {
+    "word": "fairly",
+    "pos": "ad",
+    "meaning": "相当/公正地"
+   },
+   {
+    "word": "faith",
+    "pos": "n",
+    "meaning": "信任/信仰"
+   },
+   {
+    "word": "fall",
+    "pos": "v",
+    "meaning": "落下/跌倒；n 秋天/下降"
+   },
+   {
+    "word": "false",
+    "pos": "a",
+    "meaning": "错误的/虚假的"
+   },
+   {
+    "word": "fame",
+    "pos": "n",
+    "meaning": "名声/名望"
+   },
+   {
+    "word": "familiar",
+    "pos": "a",
+    "meaning": "熟悉的"
+   },
+   {
+    "word": "family",
+    "pos": "n",
+    "meaning": "家庭/家族"
+   },
+   {
+    "word": "famous",
+    "pos": "a",
+    "meaning": "著名的"
+   },
+   {
+    "word": "fan",
+    "pos": "n",
+    "meaning": "扇子/迷(粉丝)"
+   },
+   {
+    "word": "fancy",
+    "pos": "a",
+    "meaning": "花哨的；v 想要/想象"
+   },
+   {
+    "word": "far",
+    "pos": "a",
+    "meaning": "远的；ad 远"
+   },
+   {
+    "word": "farm",
+    "pos": "n",
+    "meaning": "农场；v 务农"
+   },
+   {
+    "word": "fast",
+    "pos": "a",
+    "meaning": "快的；ad 迅速地"
+   },
+   {
+    "word": "fasten",
+    "pos": "v",
+    "meaning": "系牢/扣紧"
+   },
+   {
+    "word": "fat",
+    "pos": "a",
+    "meaning": "胖的；n 脂肪"
+   },
+   {
+    "word": "fate",
+    "pos": "n",
+    "meaning": "命运"
+   },
+   {
+    "word": "father",
+    "pos": "n",
+    "meaning": "父亲"
+   },
+   {
+    "word": "fault",
+    "pos": "n",
+    "meaning": "过错/缺点/故障"
+   },
+   {
+    "word": "favor",
+    "pos": "n",
+    "meaning": "恩惠/赞同；v 偏爱"
+   },
+   {
+    "word": "favorite",
+    "pos": "a",
+    "meaning": "最喜爱的；n 最爱"
+   },
+   {
+    "word": "fear",
+    "pos": "n",
+    "meaning": "恐惧/担忧；v 害怕"
+   },
+   {
+    "word": "feather",
+    "pos": "n",
+    "meaning": "羽毛"
+   },
+   {
+    "word": "feature",
+    "pos": "n",
+    "meaning": "特征/特色；v 以…为特色"
+   },
+   {
+    "word": "fee",
+    "pos": "n",
+    "meaning": "费用/酬金"
+   },
+   {
+    "word": "feed",
+    "pos": "v",
+    "meaning": "喂养/为…提供"
+   },
+   {
+    "word": "feel",
+    "pos": "v",
+    "meaning": "感觉/觉得"
+   },
+   {
+    "word": "fellow",
+    "pos": "n",
+    "meaning": "家伙/同伴；a 同类的"
+   },
+   {
+    "word": "female",
+    "pos": "a",
+    "meaning": "女性的；n 女性"
+   },
+   {
+    "word": "festival",
+    "pos": "n",
+    "meaning": "节日"
+   },
+   {
+    "word": "fetch",
+    "pos": "v",
+    "meaning": "去取来/接来"
+   },
+   {
+    "word": "fever",
+    "pos": "n",
+    "meaning": "发烧/狂热"
+   },
+   {
+    "word": "few",
+    "pos": "a",
+    "meaning": "很少的/几个"
+   },
+   {
+    "word": "field",
+    "pos": "n",
+    "meaning": "田野/领域/球场"
+   },
+   {
+    "word": "fight",
+    "pos": "v",
+    "meaning": "打仗/争论；n 战斗"
+   },
+   {
+    "word": "figure",
+    "pos": "n",
+    "meaning": "数字/身材/人物；v 认为/估算"
+   },
+   {
+    "word": "file",
+    "pos": "n",
+    "meaning": "文件/档案/锉刀；v 归档/提出"
+   },
+   {
+    "word": "fill",
+    "pos": "v",
+    "meaning": "装满/填充"
+   },
+   {
+    "word": "film",
+    "pos": "n",
+    "meaning": "电影/胶卷/薄膜"
+   },
+   {
+    "word": "find",
+    "pos": "v",
+    "meaning": "找到/发现"
+   },
+   {
+    "word": "finger",
+    "pos": "n",
+    "meaning": "手指"
+   },
+   {
+    "word": "fire",
+    "pos": "n",
+    "meaning": "火/火灾；v 开火/解雇"
+   },
+   {
+    "word": "first",
+    "pos": "a",
+    "meaning": "第一的；ad 首先"
+   },
+   {
+    "word": "fish",
+    "pos": "n",
+    "meaning": "鱼；v 钓鱼"
+   },
+   {
+    "word": "fist",
+    "pos": "n",
+    "meaning": "拳头"
+   },
+   {
+    "word": "fit",
+    "pos": "v",
+    "meaning": "适合/安装；a 健康的/合适的"
+   },
+   {
+    "word": "fix",
+    "pos": "v",
+    "meaning": "修理/固定/确定"
+   },
+   {
+    "word": "flag",
+    "pos": "n",
+    "meaning": "旗帜"
+   },
+   {
+    "word": "flame",
+    "pos": "n",
+    "meaning": "火焰"
+   },
+   {
+    "word": "flash",
+    "pos": "n",
+    "meaning": "闪光；v 闪烁"
+   },
+   {
+    "word": "flat",
+    "pos": "a",
+    "meaning": "平的/瘪的；n 公寓"
+   },
+   {
+    "word": "flavor",
+    "pos": "n",
+    "meaning": "味道/风味"
+   },
+   {
+    "word": "flight",
+    "pos": "n",
+    "meaning": "航班/飞行/逃跑"
+   },
+   {
+    "word": "float",
+    "pos": "v",
+    "meaning": "漂浮"
+   },
+   {
+    "word": "floor",
+    "pos": "n",
+    "meaning": "地板/楼层"
+   },
+   {
+    "word": "flour",
+    "pos": "n",
+    "meaning": "面粉"
+   },
+   {
+    "word": "flower",
+    "pos": "n",
+    "meaning": "花"
+   },
+   {
+    "word": "fly",
+    "pos": "v",
+    "meaning": "飞/驾驶飞机；n 苍蝇"
+   },
+   {
+    "word": "focus",
+    "pos": "v",
+    "meaning": "集中/聚焦；n 焦点"
+   },
+   {
+    "word": "fog",
+    "pos": "n",
+    "meaning": "雾"
+   },
+   {
+    "word": "fold",
+    "pos": "v",
+    "meaning": "折叠；n 褶"
+   },
+   {
+    "word": "follow",
+    "pos": "v",
+    "meaning": "跟随/遵循/理解"
+   },
+   {
+    "word": "fond",
+    "pos": "a",
+    "meaning": "喜爱的(be fond of)"
+   },
+   {
+    "word": "food",
+    "pos": "n",
+    "meaning": "食物"
+   },
+   {
+    "word": "fool",
+    "pos": "n",
+    "meaning": "傻瓜；v 愚弄"
+   },
+   {
+    "word": "foolish",
+    "pos": "a",
+    "meaning": "愚蠢的"
+   },
+   {
+    "word": "foot",
+    "pos": "n",
+    "meaning": "脚/英尺"
+   },
+   {
+    "word": "football",
+    "pos": "n",
+    "meaning": "足球"
+   },
+   {
+    "word": "force",
+    "pos": "n",
+    "meaning": "力量/武力；v 强迫"
+   },
+   {
+    "word": "forehead",
+    "pos": "n",
+    "meaning": "前额"
+   },
+   {
+    "word": "foreign",
+    "pos": "a",
+    "meaning": "外国的/陌生的"
+   },
+   {
+    "word": "forest",
+    "pos": "n",
+    "meaning": "森林"
+   },
+   {
+    "word": "forever",
+    "pos": "ad",
+    "meaning": "永远"
+   },
+   {
+    "word": "forget",
+    "pos": "v",
+    "meaning": "忘记"
+   },
+   {
+    "word": "forgive",
+    "pos": "v",
+    "meaning": "原谅/宽恕"
+   },
+   {
+    "word": "fork",
+    "pos": "n",
+    "meaning": "叉子/分岔"
+   },
+   {
+    "word": "former",
+    "pos": "a",
+    "meaning": "以前的；n 前者"
+   },
+   {
+    "word": "forward",
+    "pos": "ad",
+    "meaning": "向前；v 转寄"
+   },
+   {
+    "word": "fox",
+    "pos": "n",
+    "meaning": "狐狸"
+   },
+   {
+    "word": "frame",
+    "pos": "n",
+    "meaning": "框架/边框；v 装框/陷害"
+   },
+   {
+    "word": "free",
+    "pos": "a",
+    "meaning": "自由的/免费的；v 释放"
+   },
+   {
+    "word": "freeze",
+    "pos": "v",
+    "meaning": "结冰/冻结"
+   },
+   {
+    "word": "fresh",
+    "pos": "a",
+    "meaning": "新鲜的/清新的"
+   },
+   {
+    "word": "friend",
+    "pos": "n",
+    "meaning": "朋友"
+   },
+   {
+    "word": "friendship",
+    "pos": "n",
+    "meaning": "友谊"
+   },
+   {
+    "word": "frighten",
+    "pos": "v",
+    "meaning": "使惊吓"
+   },
+   {
+    "word": "frog",
+    "pos": "n",
+    "meaning": "青蛙"
+   },
+   {
+    "word": "front",
+    "pos": "n",
+    "meaning": "前面/前线；a 前面的"
+   },
+   {
+    "word": "fruit",
+    "pos": "n",
+    "meaning": "水果/成果"
+   },
+   {
+    "word": "fry",
+    "pos": "v",
+    "meaning": "油炸/煎"
+   },
+   {
+    "word": "fuel",
+    "pos": "n",
+    "meaning": "燃料；v 加燃料/助长"
+   },
+   {
+    "word": "full",
+    "pos": "a",
+    "meaning": "满的/完全的"
+   },
+   {
+    "word": "fun",
+    "pos": "n",
+    "meaning": "乐趣/有趣"
+   },
+   {
+    "word": "function",
+    "pos": "n",
+    "meaning": "功能/函数；v 运转"
+   },
+   {
+    "word": "funny",
+    "pos": "a",
+    "meaning": "有趣的/奇怪的"
+   },
+   {
+    "word": "fur",
+    "pos": "n",
+    "meaning": "毛皮/软毛"
+   },
+   {
+    "word": "furniture",
+    "pos": "n",
+    "meaning": "家具"
+   },
+   {
+    "word": "further",
+    "pos": "a",
+    "meaning": "更远的；v 促进"
+   },
+   {
+    "word": "future",
+    "pos": "n",
+    "meaning": "未来/前途"
+   },
+   {
+    "word": "gain",
+    "pos": "v",
+    "meaning": "获得/增加；n 收益"
+   },
+   {
+    "word": "gallery",
+    "pos": "n",
+    "meaning": "画廊/美术馆"
+   },
+   {
+    "word": "gallon",
+    "pos": "n",
+    "meaning": "加仑"
+   },
+   {
+    "word": "game",
+    "pos": "n",
+    "meaning": "游戏/比赛/猎物"
+   },
+   {
+    "word": "gap",
+    "pos": "n",
+    "meaning": "缺口/差距"
+   },
+   {
+    "word": "garbage",
+    "pos": "n",
+    "meaning": "垃圾"
+   },
+   {
+    "word": "garden",
+    "pos": "n",
+    "meaning": "花园/菜园"
+   },
+   {
+    "word": "gas",
+    "pos": "n",
+    "meaning": "气体/汽油"
+   },
+   {
+    "word": "gate",
+    "pos": "n",
+    "meaning": "大门/登机口"
+   },
+   {
+    "word": "gather",
+    "pos": "v",
+    "meaning": "聚集/收集"
+   },
+   {
+    "word": "gesture",
+    "pos": "n",
+    "meaning": "手势/姿态"
+   },
+   {
+    "word": "get",
+    "pos": "v",
+    "meaning": "得到/变得/到达"
+   },
+   {
+    "word": "gift",
+    "pos": "n",
+    "meaning": "礼物/天赋"
+   },
+   {
+    "word": "gifted",
+    "pos": "a",
+    "meaning": "有天赋的"
+   },
+   {
+    "word": "give",
+    "pos": "v",
+    "meaning": "给/提供"
+   },
+   {
+    "word": "glad",
+    "pos": "a",
+    "meaning": "高兴的/乐意的"
+   },
+   {
+    "word": "glance",
+    "pos": "v",
+    "meaning": "瞥一眼；n 一瞥"
+   },
+   {
+    "word": "glass",
+    "pos": "n",
+    "meaning": "玻璃/玻璃杯/眼镜"
+   },
+   {
+    "word": "glory",
+    "pos": "n",
+    "meaning": "光荣/荣耀"
+   },
+   {
+    "word": "glove",
+    "pos": "n",
+    "meaning": "手套"
+   },
+   {
+    "word": "go",
+    "pos": "v",
+    "meaning": "去/进行/变得"
+   },
+   {
+    "word": "goal",
+    "pos": "n",
+    "meaning": "目标/球门/进球"
+   },
+   {
+    "word": "goat",
+    "pos": "n",
+    "meaning": "山羊"
+   },
+   {
+    "word": "god",
+    "pos": "n",
+    "meaning": "神/上帝"
+   },
+   {
+    "word": "gold",
+    "pos": "n",
+    "meaning": "黄金；a 金色的"
+   },
+   {
+    "word": "golden",
+    "pos": "a",
+    "meaning": "金色的/宝贵的"
+   },
+   {
+    "word": "golf",
+    "pos": "n",
+    "meaning": "高尔夫球"
+   },
+   {
+    "word": "good",
+    "pos": "a",
+    "meaning": "好的；n 好处"
+   },
+   {
+    "word": "goods",
+    "pos": "n",
+    "meaning": "货物/商品"
+   },
+   {
+    "word": "goose",
+    "pos": "n",
+    "meaning": "鹅"
+   },
+   {
+    "word": "govern",
+    "pos": "v",
+    "meaning": "统治/治理"
+   },
+   {
+    "word": "government",
+    "pos": "n",
+    "meaning": "政府/管理"
+   },
+   {
+    "word": "grain",
+    "pos": "n",
+    "meaning": "谷物/颗粒"
+   },
+   {
+    "word": "grammar",
+    "pos": "n",
+    "meaning": "语法"
+   },
+   {
+    "word": "grand",
+    "pos": "a",
+    "meaning": "宏伟的/重大的"
+   },
+   {
+    "word": "grandmother",
+    "pos": "n",
+    "meaning": "祖母/外婆"
+   },
+   {
+    "word": "grape",
+    "pos": "n",
+    "meaning": "葡萄"
+   },
+   {
+    "word": "graph",
+    "pos": "n",
+    "meaning": "图表/曲线图"
+   },
+   {
+    "word": "great",
+    "pos": "a",
+    "meaning": "伟大的/极好的/大量的"
+   },
+   {
+    "word": "greet",
+    "pos": "v",
+    "meaning": "问候/迎接"
+   },
+   {
+    "word": "grey",
+    "pos": "a",
+    "meaning": "灰色的"
+   },
+   {
+    "word": "grocer",
+    "pos": "n",
+    "meaning": "食品杂货商"
+   },
+   {
+    "word": "ground",
+    "pos": "n",
+    "meaning": "地面/场地/理由"
+   },
+   {
+    "word": "group",
+    "pos": "n",
+    "meaning": "组/群体；v 分组"
+   },
+   {
+    "word": "grow",
+    "pos": "v",
+    "meaning": "生长/种植/变得"
+   },
+   {
+    "word": "growth",
+    "pos": "n",
+    "meaning": "增长/生长"
+   },
+   {
+    "word": "guarantee",
+    "pos": "v",
+    "meaning": "保证/担保；n 保证"
+   },
+   {
+    "word": "guard",
+    "pos": "n",
+    "meaning": "卫兵/看守；v 守卫"
+   },
+   {
+    "word": "guess",
+    "pos": "v",
+    "meaning": "猜测；n 猜想"
+   },
+   {
+    "word": "guest",
+    "pos": "n",
+    "meaning": "客人/嘉宾"
+   },
+   {
+    "word": "guide",
+    "pos": "n",
+    "meaning": "向导/指南；v 引导"
+   },
+   {
+    "word": "guilty",
+    "pos": "a",
+    "meaning": "有罪的/内疚的"
+   },
+   {
+    "word": "guitar",
+    "pos": "n",
+    "meaning": "吉他"
+   },
+   {
+    "word": "gun",
+    "pos": "n",
+    "meaning": "枪/炮"
+   },
+   {
+    "word": "guy",
+    "pos": "n",
+    "meaning": "家伙/人"
+   },
+   {
+    "word": "hair",
+    "pos": "n",
+    "meaning": "头发/毛发"
+   },
+   {
+    "word": "half",
+    "pos": "n",
+    "meaning": "一半；a 一半的"
+   },
+   {
+    "word": "hall",
+    "pos": "n",
+    "meaning": "大厅/会堂/走廊"
+   },
+   {
+    "word": "ham",
+    "pos": "n",
+    "meaning": "火腿"
+   },
+   {
+    "word": "hammer",
+    "pos": "n",
+    "meaning": "锤子；v 锤打"
+   },
+   {
+    "word": "hand",
+    "pos": "n",
+    "meaning": "手/指针；v 递交"
+   },
+   {
+    "word": "handful",
+    "pos": "n",
+    "meaning": "一把/少数"
+   },
+   {
+    "word": "handle",
+    "pos": "v",
+    "meaning": "处理/操作；n 把手"
+   },
+   {
+    "word": "handsome",
+    "pos": "a",
+    "meaning": "英俊的/可观的"
+   },
+   {
+    "word": "handwriting",
+    "pos": "n",
+    "meaning": "笔迹/书法"
+   },
+   {
+    "word": "hang",
+    "pos": "v",
+    "meaning": "悬挂/绞死"
+   },
+   {
+    "word": "happen",
+    "pos": "v",
+    "meaning": "发生/碰巧"
+   },
+   {
+    "word": "happy",
+    "pos": "a",
+    "meaning": "快乐的/幸福的"
+   },
+   {
+    "word": "hard",
+    "pos": "a",
+    "meaning": "硬的/困难的；ad 努力地"
+   },
+   {
+    "word": "hardly",
+    "pos": "ad",
+    "meaning": "几乎不"
+   },
+   {
+    "word": "hardship",
+    "pos": "n",
+    "meaning": "艰难/困苦"
+   },
+   {
+    "word": "harm",
+    "pos": "n",
+    "meaning": "伤害；v 损害"
+   },
+   {
+    "word": "harvest",
+    "pos": "n",
+    "meaning": "收获/收成；v 收割"
+   },
+   {
+    "word": "haste",
+    "pos": "n",
+    "meaning": "匆忙/仓促"
+   },
+   {
+    "word": "hat",
+    "pos": "n",
+    "meaning": "帽子"
+   },
+   {
+    "word": "hate",
+    "pos": "v",
+    "meaning": "憎恨/讨厌；n 仇恨"
+   },
+   {
+    "word": "have",
+    "pos": "v",
+    "meaning": "有/吃/经历"
+   },
+   {
+    "word": "hay",
+    "pos": "n",
+    "meaning": "干草"
+   },
+   {
+    "word": "head",
+    "pos": "n",
+    "meaning": "头/领导；v 朝向/率领"
+   },
+   {
+    "word": "headache",
+    "pos": "n",
+    "meaning": "头痛/麻烦事"
+   },
+   {
+    "word": "headline",
+    "pos": "n",
+    "meaning": "大字标题/头条"
+   },
+   {
+    "word": "hear",
+    "pos": "v",
+    "meaning": "听见/听说"
+   },
+   {
+    "word": "heart",
+    "pos": "n",
+    "meaning": "心脏/内心/核心"
+   },
+   {
+    "word": "heat",
+    "pos": "n",
+    "meaning": "热/高温；v 加热"
+   },
+   {
+    "word": "heaven",
+    "pos": "n",
+    "meaning": "天堂/天空"
+   },
+   {
+    "word": "heavy",
+    "pos": "a",
+    "meaning": "重的/大量的"
+   },
+   {
+    "word": "heel",
+    "pos": "n",
+    "meaning": "脚后跟/鞋跟"
+   },
+   {
+    "word": "height",
+    "pos": "n",
+    "meaning": "高度/身高"
+   },
+   {
+    "word": "hello",
+    "pos": "int",
+    "meaning": "你好/喂"
+   },
+   {
+    "word": "help",
+    "pos": "v",
+    "meaning": "帮助；n 帮助"
+   },
+   {
+    "word": "hen",
+    "pos": "n",
+    "meaning": "母鸡"
+   },
+   {
+    "word": "here",
+    "pos": "ad",
+    "meaning": "这里"
+   },
+   {
+    "word": "hero",
+    "pos": "n",
+    "meaning": "英雄/男主角"
+   },
+   {
+    "word": "hesitate",
+    "pos": "v",
+    "meaning": "犹豫/迟疑"
+   },
+   {
+    "word": "hide",
+    "pos": "v",
+    "meaning": "隐藏/躲藏"
+   },
+   {
+    "word": "high",
+    "pos": "a",
+    "meaning": "高的；ad 高高地"
+   },
+   {
+    "word": "hill",
+    "pos": "n",
+    "meaning": "小山/山丘"
+   },
+   {
+    "word": "hire",
+    "pos": "v",
+    "meaning": "雇用/租用"
+   },
+   {
+    "word": "history",
+    "pos": "n",
+    "meaning": "历史"
+   },
+   {
+    "word": "hit",
+    "pos": "v",
+    "meaning": "打/撞/击中；n 打击/热门"
+   },
+   {
+    "word": "hobby",
+    "pos": "n",
+    "meaning": "爱好"
+   },
+   {
+    "word": "hold",
+    "pos": "v",
+    "meaning": "握住/容纳/举行"
+   },
+   {
+    "word": "hole",
+    "pos": "n",
+    "meaning": "洞/孔"
+   },
+   {
+    "word": "hollow",
+    "pos": "a",
+    "meaning": "空心的/空洞的"
+   },
+   {
+    "word": "holy",
+    "pos": "a",
+    "meaning": "神圣的"
+   },
+   {
+    "word": "home",
+    "pos": "n",
+    "meaning": "家/家乡；ad 在家"
+   },
+   {
+    "word": "homework",
+    "pos": "n",
+    "meaning": "家庭作业"
+   },
+   {
+    "word": "honest",
+    "pos": "a",
+    "meaning": "诚实的/坦率的"
+   },
+   {
+    "word": "honey",
+    "pos": "n",
+    "meaning": "蜂蜜/亲爱的"
+   },
+   {
+    "word": "honor",
+    "pos": "n",
+    "meaning": "荣誉/敬意；v 尊敬"
+   },
+   {
+    "word": "hope",
+    "pos": "v",
+    "meaning": "希望；n 希望"
+   },
+   {
+    "word": "horrible",
+    "pos": "a",
+    "meaning": "可怕的/糟糕的"
+   },
+   {
+    "word": "horror",
+    "pos": "n",
+    "meaning": "恐怖/恐惧"
+   },
+   {
+    "word": "horse",
+    "pos": "n",
+    "meaning": "马"
+   },
+   {
+    "word": "hospital",
+    "pos": "n",
+    "meaning": "医院"
+   },
+   {
+    "word": "host",
+    "pos": "n",
+    "meaning": "主人/主持人；v 主办"
+   },
+   {
+    "word": "hot",
+    "pos": "a",
+    "meaning": "热的/辣的/热门的"
+   },
+   {
+    "word": "hotel",
+    "pos": "n",
+    "meaning": "旅馆/酒店"
+   },
+   {
+    "word": "hour",
+    "pos": "n",
+    "meaning": "小时/时间"
+   },
+   {
+    "word": "house",
+    "pos": "n",
+    "meaning": "房子/住宅"
+   },
+   {
+    "word": "housewife",
+    "pos": "n",
+    "meaning": "家庭主妇"
+   },
+   {
+    "word": "however",
+    "pos": "ad",
+    "meaning": "然而/无论如何"
+   },
+   {
+    "word": "huge",
+    "pos": "a",
+    "meaning": "巨大的"
+   },
+   {
+    "word": "human",
+    "pos": "a",
+    "meaning": "人类的；n 人"
+   },
+   {
+    "word": "humble",
+    "pos": "a",
+    "meaning": "谦逊的/卑微的"
+   },
+   {
+    "word": "humor",
+    "pos": "n",
+    "meaning": "幽默/幽默感"
+   },
+   {
+    "word": "hunger",
+    "pos": "n",
+    "meaning": "饥饿/渴望"
+   },
+   {
+    "word": "hungry",
+    "pos": "a",
+    "meaning": "饥饿的/渴望的"
+   },
+   {
+    "word": "hunt",
+    "pos": "v",
+    "meaning": "打猎/搜寻"
+   },
+   {
+    "word": "hurry",
+    "pos": "v",
+    "meaning": "匆忙；n 急忙"
+   },
+   {
+    "word": "hurt",
+    "pos": "v",
+    "meaning": "伤害/疼痛"
+   },
+   {
+    "word": "husband",
+    "pos": "n",
+    "meaning": "丈夫"
+   },
+   {
+    "word": "hut",
+    "pos": "n",
+    "meaning": "小屋/棚屋"
+   },
+   {
+    "word": "ice",
+    "pos": "n",
+    "meaning": "冰"
+   },
+   {
+    "word": "idea",
+    "pos": "n",
+    "meaning": "主意/想法/概念"
+   },
+   {
+    "word": "ideal",
+    "pos": "a",
+    "meaning": "理想的；n 理想"
+   },
+   {
+    "word": "identity",
+    "pos": "n",
+    "meaning": "身份/特性"
+   },
+   {
+    "word": "ill",
+    "pos": "a",
+    "meaning": "生病的/坏的"
+   },
+   {
+    "word": "illegal",
+    "pos": "a",
+    "meaning": "非法的"
+   },
+   {
+    "word": "illness",
+    "pos": "n",
+    "meaning": "疾病"
+   },
+   {
+    "word": "image",
+    "pos": "n",
+    "meaning": "形象/图像"
+   },
+   {
+    "word": "imagine",
+    "pos": "v",
+    "meaning": "想象/设想"
+   },
+   {
+    "word": "inch",
+    "pos": "n",
+    "meaning": "英寸"
+   },
+   {
+    "word": "incident",
+    "pos": "n",
+    "meaning": "事件/事变"
+   },
+   {
+    "word": "income",
+    "pos": "n",
+    "meaning": "收入"
+   },
+   {
+    "word": "increase",
+    "pos": "v",
+    "meaning": "增加；n 增长"
+   },
+   {
+    "word": "indeed",
+    "pos": "ad",
+    "meaning": "确实/实际上"
+   },
+   {
+    "word": "index",
+    "pos": "n",
+    "meaning": "索引/指数"
+   },
+   {
+    "word": "initial",
+    "pos": "a",
+    "meaning": "最初的；n 首字母"
+   },
+   {
+    "word": "ink",
+    "pos": "n",
+    "meaning": "墨水"
+   },
+   {
+    "word": "inn",
+    "pos": "n",
+    "meaning": "小旅馆/客栈"
+   },
+   {
+    "word": "inner",
+    "pos": "a",
+    "meaning": "内部的/内心的"
+   },
+   {
+    "word": "inspire",
+    "pos": "v",
+    "meaning": "鼓舞/启发"
+   },
+   {
+    "word": "instead",
+    "pos": "ad",
+    "meaning": "代替/反而"
+   },
+   {
+    "word": "intend",
+    "pos": "v",
+    "meaning": "打算/意图"
+   },
+   {
+    "word": "interpret",
+    "pos": "v",
+    "meaning": "解释/口译"
+   },
+   {
+    "word": "invest",
+    "pos": "v",
+    "meaning": "投资/投入"
+   },
+   {
+    "word": "invite",
+    "pos": "v",
+    "meaning": "邀请/招致"
+   },
+   {
+    "word": "iron",
+    "pos": "n",
+    "meaning": "铁/熨斗；v 熨烫"
+   },
+   {
+    "word": "island",
+    "pos": "n",
+    "meaning": "岛屿"
+   },
+   {
+    "word": "issue",
+    "pos": "n",
+    "meaning": "问题/发行；v 发布/颁发"
+   },
+   {
+    "word": "item",
+    "pos": "n",
+    "meaning": "项目/条款/一件商品"
+   },
+   {
+    "word": "jacket",
+    "pos": "n",
+    "meaning": "夹克/外套"
+   },
+   {
+    "word": "jail",
+    "pos": "n",
+    "meaning": "监狱"
+   },
+   {
+    "word": "jam",
+    "pos": "n",
+    "meaning": "果酱/堵塞；v 塞满"
+   },
+   {
+    "word": "jar",
+    "pos": "n",
+    "meaning": "罐子/广口瓶"
+   },
+   {
+    "word": "jaw",
+    "pos": "n",
+    "meaning": "下颌/下巴"
+   },
+   {
+    "word": "jazz",
+    "pos": "n",
+    "meaning": "爵士乐"
+   },
+   {
+    "word": "jealous",
+    "pos": "a",
+    "meaning": "嫉妒的"
+   },
+   {
+    "word": "jeans",
+    "pos": "n",
+    "meaning": "牛仔裤"
+   },
+   {
+    "word": "job",
+    "pos": "n",
+    "meaning": "工作/职责"
+   },
+   {
+    "word": "join",
+    "pos": "v",
+    "meaning": "加入/连接"
+   },
+   {
+    "word": "joint",
+    "pos": "a",
+    "meaning": "共同的/联合的；n 关节/接头"
+   },
+   {
+    "word": "joke",
+    "pos": "n",
+    "meaning": "笑话/玩笑；v 开玩笑"
+   },
+   {
+    "word": "journalist",
+    "pos": "n",
+    "meaning": "记者/新闻工作者"
+   },
+   {
+    "word": "joy",
+    "pos": "n",
+    "meaning": "欢乐/乐事"
+   },
+   {
+    "word": "juice",
+    "pos": "n",
+    "meaning": "果汁"
+   },
+   {
+    "word": "jump",
+    "pos": "v",
+    "meaning": "跳/跃过；n 跳跃"
+   },
+   {
+    "word": "jungle",
+    "pos": "n",
+    "meaning": "丛林"
+   },
+   {
+    "word": "junior",
+    "pos": "a",
+    "meaning": "年少的/资历较浅的；n 晚辈"
+   },
+   {
+    "word": "keep",
+    "pos": "v",
+    "meaning": "保持/保存/继续"
+   },
+   {
+    "word": "key",
+    "pos": "n",
+    "meaning": "钥匙/关键/琴键；a 关键的"
+   },
+   {
+    "word": "keyboard",
+    "pos": "n",
+    "meaning": "键盘"
+   },
+   {
+    "word": "kick",
+    "pos": "v",
+    "meaning": "踢；n 踢"
+   },
+   {
+    "word": "kid",
+    "pos": "n",
+    "meaning": "小孩；v 开玩笑"
+   },
+   {
+    "word": "kill",
+    "pos": "v",
+    "meaning": "杀死/消磨(时间)"
+   },
+   {
+    "word": "kilometer",
+    "pos": "n",
+    "meaning": "千米/公里"
+   },
+   {
+    "word": "kind",
+    "pos": "n",
+    "meaning": "种类；a 友好的/仁慈的"
+   },
+   {
+    "word": "king",
+    "pos": "n",
+    "meaning": "国王"
+   },
+   {
+    "word": "kiss",
+    "pos": "v",
+    "meaning": "吻；n 吻"
+   },
+   {
+    "word": "kitchen",
+    "pos": "n",
+    "meaning": "厨房"
+   },
+   {
+    "word": "kite",
+    "pos": "n",
+    "meaning": "风筝"
+   },
+   {
+    "word": "knee",
+    "pos": "n",
+    "meaning": "膝盖"
+   },
+   {
+    "word": "kneel",
+    "pos": "v",
+    "meaning": "跪下"
+   },
+   {
+    "word": "knife",
+    "pos": "n",
+    "meaning": "刀"
+   },
+   {
+    "word": "knock",
+    "pos": "v",
+    "meaning": "敲/碰撞；n 敲门声"
+   },
+   {
+    "word": "know",
+    "pos": "v",
+    "meaning": "知道/认识"
+   },
+   {
+    "word": "knowledge",
+    "pos": "n",
+    "meaning": "知识/了解"
+   },
+   {
+    "word": "lab",
+    "pos": "n",
+    "meaning": "实验室"
+   },
+   {
+    "word": "label",
+    "pos": "n",
+    "meaning": "标签；v 贴标签/归类"
+   },
+   {
+    "word": "lack",
+    "pos": "n",
+    "meaning": "缺乏；v 缺少"
+   },
+   {
+    "word": "ladder",
+    "pos": "n",
+    "meaning": "梯子/阶梯"
+   },
+   {
+    "word": "lady",
+    "pos": "n",
+    "meaning": "女士/夫人"
+   },
+   {
+    "word": "lake",
+    "pos": "n",
+    "meaning": "湖"
+   },
+   {
+    "word": "lamp",
+    "pos": "n",
+    "meaning": "灯"
+   },
+   {
+    "word": "land",
+    "pos": "n",
+    "meaning": "陆地/土地；v 着陆"
+   },
+   {
+    "word": "lap",
+    "pos": "n",
+    "meaning": "大腿/一圈"
+   },
+   {
+    "word": "large",
+    "pos": "a",
+    "meaning": "大的/大量的"
+   },
+   {
+    "word": "last",
+    "pos": "a",
+    "meaning": "最后的/上一个的；v 持续"
+   },
+   {
+    "word": "late",
+    "pos": "a",
+    "meaning": "迟的/晚的"
+   },
+   {
+    "word": "lately",
+    "pos": "ad",
+    "meaning": "最近/近来"
+   },
+   {
+    "word": "laugh",
+    "pos": "v",
+    "meaning": "笑；n 笑声"
+   },
+   {
+    "word": "laughter",
+    "pos": "n",
+    "meaning": "笑声"
+   },
+   {
+    "word": "launch",
+    "pos": "v",
+    "meaning": "发射/发起/推出"
+   },
+   {
+    "word": "law",
+    "pos": "n",
+    "meaning": "法律/定律"
+   },
+   {
+    "word": "lawyer",
+    "pos": "n",
+    "meaning": "律师"
+   },
+   {
+    "word": "lay",
+    "pos": "v",
+    "meaning": "放置/产卵/铺设"
+   },
+   {
+    "word": "lazy",
+    "pos": "a",
+    "meaning": "懒惰的"
+   },
+   {
+    "word": "leaf",
+    "pos": "n",
+    "meaning": "叶子"
+   },
+   {
+    "word": "leak",
+    "pos": "v",
+    "meaning": "泄漏；n 漏洞"
+   },
+   {
+    "word": "lean",
+    "pos": "v",
+    "meaning": "倾斜/倚靠；a 瘦的/精干的"
+   },
+   {
+    "word": "leap",
+    "pos": "v",
+    "meaning": "跳跃；n 飞跃"
+   },
+   {
+    "word": "learn",
+    "pos": "v",
+    "meaning": "学习/得知"
+   },
+   {
+    "word": "least",
+    "pos": "a",
+    "meaning": "最少的(at least 至少)"
+   },
+   {
+    "word": "leather",
+    "pos": "n",
+    "meaning": "皮革"
+   },
+   {
+    "word": "leave",
+    "pos": "v",
+    "meaning": "离开/留下"
+   },
+   {
+    "word": "left",
+    "pos": "a",
+    "meaning": "左边的；n 左边"
+   },
+   {
+    "word": "leg",
+    "pos": "n",
+    "meaning": "腿"
+   },
+   {
+    "word": "legend",
+    "pos": "n",
+    "meaning": "传说/传奇人物"
+   },
+   {
+    "word": "leisure",
+    "pos": "n",
+    "meaning": "闲暇/悠闲"
+   },
+   {
+    "word": "lemon",
+    "pos": "n",
+    "meaning": "柠檬"
+   },
+   {
+    "word": "lend",
+    "pos": "v",
+    "meaning": "借出"
+   },
+   {
+    "word": "length",
+    "pos": "n",
+    "meaning": "长度/时长"
+   },
+   {
+    "word": "less",
+    "pos": "a",
+    "meaning": "更少的"
+   },
+   {
+    "word": "lesson",
+    "pos": "n",
+    "meaning": "课/教训"
+   },
+   {
+    "word": "let",
+    "pos": "v",
+    "meaning": "让/允许"
+   },
+   {
+    "word": "letter",
+    "pos": "n",
+    "meaning": "信/字母"
+   },
+   {
+    "word": "library",
+    "pos": "n",
+    "meaning": "图书馆"
+   },
+   {
+    "word": "lid",
+    "pos": "n",
+    "meaning": "盖子"
+   },
+   {
+    "word": "lie",
+    "pos": "v",
+    "meaning": "躺/说谎；n 谎言"
+   },
+   {
+    "word": "life",
+    "pos": "n",
+    "meaning": "生命/生活"
+   },
+   {
+    "word": "lift",
+    "pos": "v",
+    "meaning": "举起/解除；n 电梯/搭车"
+   },
+   {
+    "word": "light",
+    "pos": "n",
+    "meaning": "光/灯；a 轻的/明亮的；v 点燃"
+   },
+   {
+    "word": "lightning",
+    "pos": "n",
+    "meaning": "闪电"
+   },
+   {
+    "word": "like",
+    "pos": "v",
+    "meaning": "喜欢；prep 像"
+   },
+   {
+    "word": "likely",
+    "pos": "a",
+    "meaning": "可能的"
+   },
+   {
+    "word": "line",
+    "pos": "n",
+    "meaning": "线/排/台词；v 排队"
+   },
+   {
+    "word": "link",
+    "pos": "v",
+    "meaning": "连接；n 联系/链接"
+   },
+   {
+    "word": "lion",
+    "pos": "n",
+    "meaning": "狮子"
+   },
+   {
+    "word": "lip",
+    "pos": "n",
+    "meaning": "嘴唇"
+   },
+   {
+    "word": "liquid",
+    "pos": "n",
+    "meaning": "液体；a 液态的"
+   },
+   {
+    "word": "list",
+    "pos": "n",
+    "meaning": "清单；v 列出"
+   },
+   {
+    "word": "listen",
+    "pos": "v",
+    "meaning": "听"
+   },
+   {
+    "word": "little",
+    "pos": "a",
+    "meaning": "小的/很少的"
+   },
+   {
+    "word": "live",
+    "pos": "v",
+    "meaning": "居住/生活；a 活的/直播的"
+   },
+   {
+    "word": "lively",
+    "pos": "a",
+    "meaning": "活泼的/生动的"
+   },
+   {
+    "word": "load",
+    "pos": "n",
+    "meaning": "负载/负担；v 装载"
+   },
+   {
+    "word": "loaf",
+    "pos": "n",
+    "meaning": "一条(面包)"
+   },
+   {
+    "word": "loan",
+    "pos": "n",
+    "meaning": "贷款/借出"
+   },
+   {
+    "word": "lock",
+    "pos": "n",
+    "meaning": "锁；v 锁上"
+   },
+   {
+    "word": "lonely",
+    "pos": "a",
+    "meaning": "孤独的/偏僻的"
+   },
+   {
+    "word": "long",
+    "pos": "a",
+    "meaning": "长的；ad 长久"
+   },
+   {
+    "word": "look",
+    "pos": "v",
+    "meaning": "看/看起来；n 外表"
+   },
+   {
+    "word": "loose",
+    "pos": "a",
+    "meaning": "松的/宽松的"
+   },
+   {
+    "word": "lord",
+    "pos": "n",
+    "meaning": "领主/勋爵/上帝"
+   },
+   {
+    "word": "lose",
+    "pos": "v",
+    "meaning": "失去/输掉/迷路"
+   },
+   {
+    "word": "loss",
+    "pos": "n",
+    "meaning": "损失/失败"
+   },
+   {
+    "word": "lost",
+    "pos": "a",
+    "meaning": "迷路的/丢失的"
+   },
+   {
+    "word": "lot",
+    "pos": "n",
+    "meaning": "许多(a lot of)/一块地"
+   },
+   {
+    "word": "loud",
+    "pos": "a",
+    "meaning": "大声的"
+   },
+   {
+    "word": "love",
+    "pos": "v",
+    "meaning": "爱/热爱；n 爱"
+   },
+   {
+    "word": "lovely",
+    "pos": "a",
+    "meaning": "可爱的/美好的"
+   },
+   {
+    "word": "low",
+    "pos": "a",
+    "meaning": "低的/矮的"
+   },
+   {
+    "word": "loyal",
+    "pos": "a",
+    "meaning": "忠诚的"
+   },
+   {
+    "word": "luck",
+    "pos": "n",
+    "meaning": "运气/好运"
+   },
+   {
+    "word": "lucky",
+    "pos": "a",
+    "meaning": "幸运的"
+   },
+   {
+    "word": "lunch",
+    "pos": "n",
+    "meaning": "午餐"
+   },
+   {
+    "word": "lung",
+    "pos": "n",
+    "meaning": "肺"
+   },
+   {
+    "word": "machine",
+    "pos": "n",
+    "meaning": "机器/机械"
+   },
+   {
+    "word": "mad",
+    "pos": "a",
+    "meaning": "疯狂的/恼火的"
+   },
+   {
+    "word": "magic",
+    "pos": "n",
+    "meaning": "魔法/魔术；a 有魔力的"
+   },
+   {
+    "word": "mail",
+    "pos": "n",
+    "meaning": "邮件；v 邮寄"
+   },
+   {
+    "word": "main",
+    "pos": "a",
+    "meaning": "主要的"
+   },
+   {
+    "word": "make",
+    "pos": "v",
+    "meaning": "制造/使得/赚"
+   },
+   {
+    "word": "male",
+    "pos": "a",
+    "meaning": "男性的/雄性的；n 男性"
+   },
+   {
+    "word": "man",
+    "pos": "n",
+    "meaning": "男人/人类"
+   },
+   {
+    "word": "many",
+    "pos": "a",
+    "meaning": "许多的"
+   },
+   {
+    "word": "map",
+    "pos": "n",
+    "meaning": "地图"
+   },
+   {
+    "word": "march",
+    "pos": "v",
+    "meaning": "行军/游行；n 行进"
+   },
+   {
+    "word": "mark",
+    "pos": "n",
+    "meaning": "标记/分数；v 标记/评分"
+   },
+   {
+    "word": "marry",
+    "pos": "v",
+    "meaning": "结婚/嫁娶"
+   },
+   {
+    "word": "match",
+    "pos": "n",
+    "meaning": "比赛/火柴/对手；v 匹配"
+   },
+   {
+    "word": "mate",
+    "pos": "n",
+    "meaning": "伙伴/配偶"
+   },
+   {
+    "word": "mathematics",
+    "pos": "n",
+    "meaning": "数学"
+   },
+   {
+    "word": "maybe",
+    "pos": "ad",
+    "meaning": "也许/大概"
+   },
+   {
+    "word": "meal",
+    "pos": "n",
+    "meaning": "一餐/膳食"
+   },
+   {
+    "word": "mean",
+    "pos": "v",
+    "meaning": "意味着/打算；a 吝啬的/刻薄的"
+   },
+   {
+    "word": "meaning",
+    "pos": "n",
+    "meaning": "意义/含义"
+   },
+   {
+    "word": "means",
+    "pos": "n",
+    "meaning": "方法/手段(by means of)"
+   },
+   {
+    "word": "measure",
+    "pos": "v",
+    "meaning": "测量/衡量；n 措施/尺度"
+   },
+   {
+    "word": "mechanic",
+    "pos": "n",
+    "meaning": "机械工/技工"
+   },
+   {
+    "word": "medal",
+    "pos": "n",
+    "meaning": "奖牌/勋章"
+   },
+   {
+    "word": "meet",
+    "pos": "v",
+    "meaning": "遇见/满足；n 集会"
+   },
+   {
+    "word": "meeting",
+    "pos": "n",
+    "meaning": "会议/集会"
+   },
+   {
+    "word": "mend",
+    "pos": "v",
+    "meaning": "修补/缝补"
+   },
+   {
+    "word": "menu",
+    "pos": "n",
+    "meaning": "菜单"
+   },
+   {
+    "word": "mercy",
+    "pos": "n",
+    "meaning": "仁慈/怜悯"
+   },
+   {
+    "word": "mere",
+    "pos": "a",
+    "meaning": "仅仅的/只不过的"
+   },
+   {
+    "word": "merry",
+    "pos": "a",
+    "meaning": "欢乐的/愉快的"
+   },
+   {
+    "word": "message",
+    "pos": "n",
+    "meaning": "消息/信息"
+   },
+   {
+    "word": "messenger",
+    "pos": "n",
+    "meaning": "送信人/信使"
+   },
+   {
+    "word": "metal",
+    "pos": "n",
+    "meaning": "金属"
+   },
+   {
+    "word": "method",
+    "pos": "n",
+    "meaning": "方法/条理"
+   },
+   {
+    "word": "middle",
+    "pos": "n",
+    "meaning": "中间；a 中间的"
+   },
+   {
+    "word": "midnight",
+    "pos": "n",
+    "meaning": "午夜"
+   },
+   {
+    "word": "might",
+    "pos": "n",
+    "meaning": "力量/威力"
+   },
+   {
+    "word": "mild",
+    "pos": "a",
+    "meaning": "温和的/轻微的"
+   },
+   {
+    "word": "mile",
+    "pos": "n",
+    "meaning": "英里"
+   },
+   {
+    "word": "military",
+    "pos": "a",
+    "meaning": "军事的；n 军队"
+   },
+   {
+    "word": "milk",
+    "pos": "n",
+    "meaning": "牛奶；v 挤奶"
+   },
+   {
+    "word": "mill",
+    "pos": "n",
+    "meaning": "磨坊/工厂"
+   },
+   {
+    "word": "million",
+    "pos": "num",
+    "meaning": "百万"
+   },
+   {
+    "word": "mine",
+    "pos": "n",
+    "meaning": "矿/地雷；v 开采"
+   },
+   {
+    "word": "mineral",
+    "pos": "n",
+    "meaning": "矿物质；a 矿物的"
+   },
+   {
+    "word": "minus",
+    "pos": "prep",
+    "meaning": "减去；a 负的"
+   },
+   {
+    "word": "mirror",
+    "pos": "n",
+    "meaning": "镜子；v 反映"
+   },
+   {
+    "word": "miss",
+    "pos": "v",
+    "meaning": "错过/想念；n 小姐"
+   },
+   {
+    "word": "mistake",
+    "pos": "n",
+    "meaning": "错误；v 弄错"
+   },
+   {
+    "word": "mix",
+    "pos": "v",
+    "meaning": "混合/调配"
+   },
+   {
+    "word": "mixture",
+    "pos": "n",
+    "meaning": "混合物"
+   },
+   {
+    "word": "model",
+    "pos": "n",
+    "meaning": "模型/模特/型号"
+   },
+   {
+    "word": "moderate",
+    "pos": "a",
+    "meaning": "适度的/温和的"
+   },
+   {
+    "word": "modern",
+    "pos": "a",
+    "meaning": "现代的/新式的"
+   },
+   {
+    "word": "modest",
+    "pos": "a",
+    "meaning": "谦虚的/适度的"
+   },
+   {
+    "word": "mommy",
+    "pos": "n",
+    "meaning": "妈妈"
+   },
+   {
+    "word": "monitor",
+    "pos": "n",
+    "meaning": "显示器/班长；v 监控"
+   },
+   {
+    "word": "monkey",
+    "pos": "n",
+    "meaning": "猴子"
+   },
+   {
+    "word": "month",
+    "pos": "n",
+    "meaning": "月/月份"
+   },
+   {
+    "word": "mood",
+    "pos": "n",
+    "meaning": "心情/情绪"
+   },
+   {
+    "word": "moon",
+    "pos": "n",
+    "meaning": "月亮/月球"
+   },
+   {
+    "word": "moral",
+    "pos": "a",
+    "meaning": "道德的；n 寓意"
+   },
+   {
+    "word": "more",
+    "pos": "a",
+    "meaning": "更多的"
+   },
+   {
+    "word": "morning",
+    "pos": "n",
+    "meaning": "早晨/上午"
+   },
+   {
+    "word": "most",
+    "pos": "a",
+    "meaning": "最多的/大多数的"
+   },
+   {
+    "word": "mother",
+    "pos": "n",
+    "meaning": "母亲"
+   },
+   {
+    "word": "mouse",
+    "pos": "n",
+    "meaning": "老鼠/鼠标"
+   },
+   {
+    "word": "mouth",
+    "pos": "n",
+    "meaning": "嘴/口"
+   },
+   {
+    "word": "much",
+    "pos": "ad",
+    "meaning": "非常；a 许多的"
+   },
+   {
+    "word": "mud",
+    "pos": "n",
+    "meaning": "泥/泥浆"
+   },
+   {
+    "word": "murder",
+    "pos": "n",
+    "meaning": "谋杀；v 谋杀"
+   },
+   {
+    "word": "museum",
+    "pos": "n",
+    "meaning": "博物馆"
+   },
+   {
+    "word": "mushroom",
+    "pos": "n",
+    "meaning": "蘑菇；v 迅速增长"
+   },
+   {
+    "word": "music",
+    "pos": "n",
+    "meaning": "音乐"
+   },
+   {
+    "word": "musical",
+    "pos": "a",
+    "meaning": "音乐的；n 音乐剧"
+   },
+   {
+    "word": "mystery",
+    "pos": "n",
+    "meaning": "神秘/谜"
+   },
+   {
+    "word": "nail",
+    "pos": "n",
+    "meaning": "钉子/指甲；v 钉牢"
+   },
+   {
+    "word": "name",
+    "pos": "n",
+    "meaning": "名字/名声；v 命名"
+   },
+   {
+    "word": "narrow",
+    "pos": "a",
+    "meaning": "狭窄的/勉强的；v 缩小"
+   },
+   {
+    "word": "near",
+    "pos": "prep",
+    "meaning": "在…附近；a 近的"
+   },
+   {
+    "word": "nearby",
+    "pos": "a",
+    "meaning": "附近的；ad 在附近"
+   },
+   {
+    "word": "neat",
+    "pos": "a",
+    "meaning": "整洁的/利落的"
+   },
+   {
+    "word": "neck",
+    "pos": "n",
+    "meaning": "脖子/领口"
+   },
+   {
+    "word": "need",
+    "pos": "v",
+    "meaning": "需要；n 需求"
+   },
+   {
+    "word": "neighbor",
+    "pos": "n",
+    "meaning": "邻居"
+   },
+   {
+    "word": "nephew",
+    "pos": "n",
+    "meaning": "侄子/外甥"
+   },
+   {
+    "word": "nerve",
+    "pos": "n",
+    "meaning": "神经/勇气"
+   },
+   {
+    "word": "nervous",
+    "pos": "a",
+    "meaning": "紧张的/神经的"
+   },
+   {
+    "word": "nest",
+    "pos": "n",
+    "meaning": "巢/窝"
+   },
+   {
+    "word": "net",
+    "pos": "n",
+    "meaning": "网/网络；a 净的"
+   },
+   {
+    "word": "never",
+    "pos": "ad",
+    "meaning": "从不/决不"
+   },
+   {
+    "word": "new",
+    "pos": "a",
+    "meaning": "新的"
+   },
+   {
+    "word": "news",
+    "pos": "n",
+    "meaning": "新闻/消息"
+   },
+   {
+    "word": "newspaper",
+    "pos": "n",
+    "meaning": "报纸"
+   },
+   {
+    "word": "next",
+    "pos": "a",
+    "meaning": "下一个的；ad 接下来"
+   },
+   {
+    "word": "nice",
+    "pos": "a",
+    "meaning": "好的/友善的"
+   },
+   {
+    "word": "niece",
+    "pos": "n",
+    "meaning": "侄女/外甥女"
+   },
+   {
+    "word": "night",
+    "pos": "n",
+    "meaning": "夜晚"
+   },
+   {
+    "word": "noble",
+    "pos": "a",
+    "meaning": "高贵的/崇高的；n 贵族"
+   },
+   {
+    "word": "nobody",
+    "pos": "pron",
+    "meaning": "没有人；n 小人物"
+   },
+   {
+    "word": "nod",
+    "pos": "v",
+    "meaning": "点头"
+   },
+   {
+    "word": "noise",
+    "pos": "n",
+    "meaning": "噪音/响声"
+   },
+   {
+    "word": "none",
+    "pos": "pron",
+    "meaning": "没有一个/毫无"
+   },
+   {
+    "word": "noon",
+    "pos": "n",
+    "meaning": "中午"
+   },
+   {
+    "word": "north",
+    "pos": "n",
+    "meaning": "北方；a 北方的"
+   },
+   {
+    "word": "nose",
+    "pos": "n",
+    "meaning": "鼻子"
+   },
+   {
+    "word": "note",
+    "pos": "n",
+    "meaning": "笔记/便条/纸币；v 注意/记下"
+   },
+   {
+    "word": "nothing",
+    "pos": "pron",
+    "meaning": "没有什么/无关紧要的事"
+   },
+   {
+    "word": "notice",
+    "pos": "v",
+    "meaning": "注意到；n 通知/布告"
+   },
+   {
+    "word": "now",
+    "pos": "ad",
+    "meaning": "现在"
+   },
+   {
+    "word": "nowhere",
+    "pos": "ad",
+    "meaning": "无处/任何地方都不"
+   },
+   {
+    "word": "number",
+    "pos": "n",
+    "meaning": "数字/号码/数量"
+   },
+   {
+    "word": "nurse",
+    "pos": "n",
+    "meaning": "护士；v 看护"
+   },
+   {
+    "word": "nut",
+    "pos": "n",
+    "meaning": "坚果/螺母"
+   },
+   {
+    "word": "obey",
+    "pos": "v",
+    "meaning": "服从/遵守"
+   },
+   {
+    "word": "obvious",
+    "pos": "a",
+    "meaning": "明显的"
+   },
+   {
+    "word": "occasion",
+    "pos": "n",
+    "meaning": "场合/时机"
+   },
+   {
+    "word": "ocean",
+    "pos": "n",
+    "meaning": "海洋"
+   },
+   {
+    "word": "office",
+    "pos": "n",
+    "meaning": "办公室/职务"
+   },
+   {
+    "word": "officer",
+    "pos": "n",
+    "meaning": "军官/官员/警察"
+   },
+   {
+    "word": "official",
+    "pos": "a",
+    "meaning": "官方的/正式的；n 官员"
+   },
+   {
+    "word": "often",
+    "pos": "ad",
+    "meaning": "经常"
+   },
+   {
+    "word": "oil",
+    "pos": "n",
+    "meaning": "油/石油"
+   },
+   {
+    "word": "old",
+    "pos": "a",
+    "meaning": "老的/旧的"
+   },
+   {
+    "word": "once",
+    "pos": "ad",
+    "meaning": "一次/曾经；conj 一旦"
+   },
+   {
+    "word": "one",
+    "pos": "num",
+    "meaning": "一；pron 一个"
+   },
+   {
+    "word": "onion",
+    "pos": "n",
+    "meaning": "洋葱"
+   },
+   {
+    "word": "only",
+    "pos": "a",
+    "meaning": "唯一的；ad 仅仅"
+   },
+   {
+    "word": "open",
+    "pos": "a",
+    "meaning": "开着的/公开的；v 打开"
+   },
+   {
+    "word": "opera",
+    "pos": "n",
+    "meaning": "歌剧"
+   },
+   {
+    "word": "opinion",
+    "pos": "n",
+    "meaning": "意见/看法"
+   },
+   {
+    "word": "oral",
+    "pos": "a",
+    "meaning": "口头的/口腔的"
+   },
+   {
+    "word": "organ",
+    "pos": "n",
+    "meaning": "器官/风琴/机构"
+   },
+   {
+    "word": "organize",
+    "pos": "v",
+    "meaning": "组织/安排"
+   },
+   {
+    "word": "origin",
+    "pos": "n",
+    "meaning": "起源/出身"
+   },
+   {
+    "word": "other",
+    "pos": "a",
+    "meaning": "其他的"
+   },
+   {
+    "word": "otherwise",
+    "pos": "ad",
+    "meaning": "否则/另外"
+   },
+   {
+    "word": "our",
+    "pos": "pron",
+    "meaning": "我们的"
+   },
+   {
+    "word": "outcome",
+    "pos": "n",
+    "meaning": "结果/后果"
+   },
+   {
+    "word": "outdoor",
+    "pos": "a",
+    "meaning": "户外的"
+   },
+   {
+    "word": "outer",
+    "pos": "a",
+    "meaning": "外部的/外层的"
+   },
+   {
+    "word": "outside",
+    "pos": "n",
+    "meaning": "外面；prep 在…外面"
+   },
+   {
+    "word": "over",
+    "pos": "prep",
+    "meaning": "在…上方/超过"
+   },
+   {
+    "word": "overcoat",
+    "pos": "n",
+    "meaning": "大衣/外套"
+   },
+   {
+    "word": "overcome",
+    "pos": "v",
+    "meaning": "克服/战胜"
+   },
+   {
+    "word": "owe",
+    "pos": "v",
+    "meaning": "欠/归功于"
+   },
+   {
+    "word": "own",
+    "pos": "a",
+    "meaning": "自己的；v 拥有"
+   },
+   {
+    "word": "owner",
+    "pos": "n",
+    "meaning": "所有者/物主"
+   },
+   {
+    "word": "ox",
+    "pos": "n",
+    "meaning": "牛/公牛"
+   },
+   {
+    "word": "pace",
+    "pos": "n",
+    "meaning": "步伐/速度；v 踱步"
+   },
+   {
+    "word": "pack",
+    "pos": "v",
+    "meaning": "打包/挤满；n 包/一群"
+   },
+   {
+    "word": "package",
+    "pos": "n",
+    "meaning": "包裹/套餐；v 包装"
+   },
+   {
+    "word": "page",
+    "pos": "n",
+    "meaning": "页/页面"
+   },
+   {
+    "word": "pain",
+    "pos": "n",
+    "meaning": "疼痛/痛苦"
+   },
+   {
+    "word": "paint",
+    "pos": "v",
+    "meaning": "画/粉刷；n 油漆/颜料"
+   },
+   {
+    "word": "painting",
+    "pos": "n",
+    "meaning": "绘画/油画"
+   },
+   {
+    "word": "palace",
+    "pos": "n",
+    "meaning": "宫殿"
+   },
+   {
+    "word": "pale",
+    "pos": "a",
+    "meaning": "苍白的/暗淡的"
+   },
+   {
+    "word": "palm",
+    "pos": "n",
+    "meaning": "手掌/棕榈树"
+   },
+   {
+    "word": "pan",
+    "pos": "n",
+    "meaning": "平底锅"
+   },
+   {
+    "word": "pancake",
+    "pos": "n",
+    "meaning": "薄煎饼"
+   },
+   {
+    "word": "pant",
+    "pos": "v",
+    "meaning": "喘气"
+   },
+   {
+    "word": "pants",
+    "pos": "n",
+    "meaning": "裤子"
+   },
+   {
+    "word": "paper",
+    "pos": "n",
+    "meaning": "纸/论文/报纸"
+   },
+   {
+    "word": "pardon",
+    "pos": "n",
+    "meaning": "原谅/赦免；v 原谅"
+   },
+   {
+    "word": "park",
+    "pos": "n",
+    "meaning": "公园；v 停车"
+   },
+   {
+    "word": "part",
+    "pos": "n",
+    "meaning": "部分/角色/零件；v 分开"
+   },
+   {
+    "word": "partner",
+    "pos": "n",
+    "meaning": "伙伴/搭档"
+   },
+   {
+    "word": "party",
+    "pos": "n",
+    "meaning": "聚会/政党/一方"
+   },
+   {
+    "word": "past",
+    "pos": "a",
+    "meaning": "过去的；prep 经过"
+   },
+   {
+    "word": "paste",
+    "pos": "n",
+    "meaning": "糊/酱；v 粘贴"
+   },
+   {
+    "word": "path",
+    "pos": "n",
+    "meaning": "小路/途径"
+   },
+   {
+    "word": "pattern",
+    "pos": "n",
+    "meaning": "模式/图案"
+   },
+   {
+    "word": "pause",
+    "pos": "v",
+    "meaning": "暂停；n 停顿"
+   },
+   {
+    "word": "pay",
+    "pos": "v",
+    "meaning": "支付/给予；n 工资"
+   },
+   {
+    "word": "peace",
+    "pos": "n",
+    "meaning": "和平/平静"
+   },
+   {
+    "word": "peach",
+    "pos": "n",
+    "meaning": "桃子"
+   },
+   {
+    "word": "pear",
+    "pos": "n",
+    "meaning": "梨"
+   },
+   {
+    "word": "pen",
+    "pos": "n",
+    "meaning": "钢笔/围栏"
+   },
+   {
+    "word": "pence",
+    "pos": "n",
+    "meaning": "便士(penny 复数)"
+   },
+   {
+    "word": "people",
+    "pos": "n",
+    "meaning": "人们/民族"
+   },
+   {
+    "word": "pepper",
+    "pos": "n",
+    "meaning": "胡椒/辣椒"
+   },
+   {
+    "word": "perhaps",
+    "pos": "ad",
+    "meaning": "也许/可能"
+   },
+   {
+    "word": "period",
+    "pos": "n",
+    "meaning": "时期/课时/句号"
+   },
+   {
+    "word": "person",
+    "pos": "n",
+    "meaning": "人/个人"
+   },
+   {
+    "word": "personal",
+    "pos": "a",
+    "meaning": "个人的/私人的"
+   },
+   {
+    "word": "persuade",
+    "pos": "v",
+    "meaning": "说服/劝说"
+   },
+   {
+    "word": "pet",
+    "pos": "n",
+    "meaning": "宠物"
+   },
+   {
+    "word": "phone",
+    "pos": "n",
+    "meaning": "电话；v 打电话"
+   },
+   {
+    "word": "photo",
+    "pos": "n",
+    "meaning": "照片"
+   },
+   {
+    "word": "phrase",
+    "pos": "n",
+    "meaning": "短语/措辞"
+   },
+   {
+    "word": "physical",
+    "pos": "a",
+    "meaning": "身体的/物理的"
+   },
+   {
+    "word": "physics",
+    "pos": "n",
+    "meaning": "物理学"
+   },
+   {
+    "word": "piano",
+    "pos": "n",
+    "meaning": "钢琴"
+   },
+   {
+    "word": "pick",
+    "pos": "v",
+    "meaning": "挑选/摘/捡"
+   },
+   {
+    "word": "picnic",
+    "pos": "n",
+    "meaning": "野餐"
+   },
+   {
+    "word": "picture",
+    "pos": "n",
+    "meaning": "图片/照片/电影；v 想象"
+   },
+   {
+    "word": "pie",
+    "pos": "n",
+    "meaning": "馅饼/派"
+   },
+   {
+    "word": "piece",
+    "pos": "n",
+    "meaning": "片/件/篇"
+   },
+   {
+    "word": "pig",
+    "pos": "n",
+    "meaning": "猪"
+   },
+   {
+    "word": "pile",
+    "pos": "n",
+    "meaning": "堆/大量；v 堆放"
+   },
+   {
+    "word": "pill",
+    "pos": "n",
+    "meaning": "药丸"
+   },
+   {
+    "word": "pilot",
+    "pos": "n",
+    "meaning": "飞行员/领航员；v 试行"
+   },
+   {
+    "word": "pin",
+    "pos": "n",
+    "meaning": "别针/大头针；v 钉住"
+   },
+   {
+    "word": "pine",
+    "pos": "n",
+    "meaning": "松树；v 憔悴/渴望"
+   },
+   {
+    "word": "pink",
+    "pos": "a",
+    "meaning": "粉红色的"
+   },
+   {
+    "word": "pint",
+    "pos": "n",
+    "meaning": "品脱"
+   },
+   {
+    "word": "pipe",
+    "pos": "n",
+    "meaning": "管子/烟斗/管乐器"
+   },
+   {
+    "word": "pity",
+    "pos": "n",
+    "meaning": "遗憾/怜悯"
+   },
+   {
+    "word": "pizza",
+    "pos": "n",
+    "meaning": "披萨"
+   },
+   {
+    "word": "place",
+    "pos": "n",
+    "meaning": "地方/位置；v 放置"
+   },
+   {
+    "word": "plain",
+    "pos": "a",
+    "meaning": "简单的/明白的；n 平原"
+   },
+   {
+    "word": "plan",
+    "pos": "n",
+    "meaning": "计划；v 计划"
+   },
+   {
+    "word": "plane",
+    "pos": "n",
+    "meaning": "飞机/平面"
+   },
+   {
+    "word": "planet",
+    "pos": "n",
+    "meaning": "行星"
+   },
+   {
+    "word": "plant",
+    "pos": "n",
+    "meaning": "植物/工厂；v 种植"
+   },
+   {
+    "word": "plastic",
+    "pos": "n",
+    "meaning": "塑料；a 塑料的"
+   },
+   {
+    "word": "plate",
+    "pos": "n",
+    "meaning": "盘子/板块/车牌"
+   },
+   {
+    "word": "play",
+    "pos": "v",
+    "meaning": "玩/演奏/扮演；n 戏剧"
+   },
+   {
+    "word": "pleasant",
+    "pos": "a",
+    "meaning": "令人愉快的/宜人的"
+   },
+   {
+    "word": "please",
+    "pos": "v",
+    "meaning": "请/使高兴"
+   },
+   {
+    "word": "pleasure",
+    "pos": "n",
+    "meaning": "愉快/乐事"
+   },
+   {
+    "word": "plenty",
+    "pos": "n",
+    "meaning": "充足/大量(plenty of)"
+   },
+   {
+    "word": "pocket",
+    "pos": "n",
+    "meaning": "口袋；a 袖珍的"
+   },
+   {
+    "word": "poem",
+    "pos": "n",
+    "meaning": "诗"
+   },
+   {
+    "word": "poet",
+    "pos": "n",
+    "meaning": "诗人"
+   },
+   {
+    "word": "poison",
+    "pos": "n",
+    "meaning": "毒药；v 毒害"
+   },
+   {
+    "word": "policeman",
+    "pos": "n",
+    "meaning": "警察"
+   },
+   {
+    "word": "politician",
+    "pos": "n",
+    "meaning": "政治家/政客"
+   },
+   {
+    "word": "pond",
+    "pos": "n",
+    "meaning": "池塘"
+   },
+   {
+    "word": "pool",
+    "pos": "n",
+    "meaning": "水池/共用资源；v 集中"
+   },
+   {
+    "word": "poor",
+    "pos": "a",
+    "meaning": "贫穷的/差的/可怜的"
+   },
+   {
+    "word": "pop",
+    "pos": "a",
+    "meaning": "流行的；v 突然出现/砰然作响"
+   },
+   {
+    "word": "pork",
+    "pos": "n",
+    "meaning": "猪肉"
+   },
+   {
+    "word": "porridge",
+    "pos": "n",
+    "meaning": "粥/麦片粥"
+   },
+   {
+    "word": "post",
+    "pos": "n",
+    "meaning": "邮政/职位/帖子；v 邮寄/张贴"
+   },
+   {
+    "word": "postpone",
+    "pos": "v",
+    "meaning": "推迟/延期"
+   },
+   {
+    "word": "pot",
+    "pos": "n",
+    "meaning": "锅/壶/盆"
+   },
+   {
+    "word": "potato",
+    "pos": "n",
+    "meaning": "土豆"
+   },
+   {
+    "word": "pound",
+    "pos": "n",
+    "meaning": "英镑/磅；v 猛击"
+   },
+   {
+    "word": "pour",
+    "pos": "v",
+    "meaning": "倒/倾泻/下大雨"
+   },
+   {
+    "word": "powder",
+    "pos": "n",
+    "meaning": "粉末/火药"
+   },
+   {
+    "word": "pray",
+    "pos": "v",
+    "meaning": "祈祷/恳求"
+   },
+   {
+    "word": "pregnant",
+    "pos": "a",
+    "meaning": "怀孕的"
+   },
+   {
+    "word": "present",
+    "pos": "a",
+    "meaning": "出席的/现在的；n 礼物；v 呈现/赠送"
+   },
+   {
+    "word": "president",
+    "pos": "n",
+    "meaning": "总统/校长/总裁"
+   },
+   {
+    "word": "pretend",
+    "pos": "v",
+    "meaning": "假装"
+   },
+   {
+    "word": "pretty",
+    "pos": "a",
+    "meaning": "漂亮的；ad 相当"
+   },
+   {
+    "word": "pride",
+    "pos": "n",
+    "meaning": "自豪/骄傲"
+   },
+   {
+    "word": "print",
+    "pos": "v",
+    "meaning": "打印/印刷；n 印刷品"
+   },
+   {
+    "word": "prison",
+    "pos": "n",
+    "meaning": "监狱"
+   },
+   {
+    "word": "prisoner",
+    "pos": "n",
+    "meaning": "囚犯"
+   },
+   {
+    "word": "private",
+    "pos": "a",
+    "meaning": "私人的/私立的"
+   },
+   {
+    "word": "prize",
+    "pos": "n",
+    "meaning": "奖品/奖金"
+   },
+   {
+    "word": "probable",
+    "pos": "a",
+    "meaning": "很可能的"
+   },
+   {
+    "word": "problem",
+    "pos": "n",
+    "meaning": "问题/难题"
+   },
+   {
+    "word": "profession",
+    "pos": "n",
+    "meaning": "职业/专业"
+   },
+   {
+    "word": "professor",
+    "pos": "n",
+    "meaning": "教授"
+   },
+   {
+    "word": "profit",
+    "pos": "n",
+    "meaning": "利润/收益；v 获益"
+   },
+   {
+    "word": "pronounce",
+    "pos": "v",
+    "meaning": "发音/宣布"
+   },
+   {
+    "word": "proof",
+    "pos": "n",
+    "meaning": "证据/证明"
+   },
+   {
+    "word": "proper",
+    "pos": "a",
+    "meaning": "适当的/正确的"
+   },
+   {
+    "word": "property",
+    "pos": "n",
+    "meaning": "财产/房地产/属性"
+   },
+   {
+    "word": "protect",
+    "pos": "v",
+    "meaning": "保护"
+   },
+   {
+    "word": "proud",
+    "pos": "a",
+    "meaning": "自豪的/骄傲的"
+   },
+   {
+    "word": "prove",
+    "pos": "v",
+    "meaning": "证明/结果是"
+   },
+   {
+    "word": "public",
+    "pos": "a",
+    "meaning": "公共的/公开的；n 公众"
+   },
+   {
+    "word": "publish",
+    "pos": "v",
+    "meaning": "出版/发表"
+   },
+   {
+    "word": "pull",
+    "pos": "v",
+    "meaning": "拉/拔；n 拉力"
+   },
+   {
+    "word": "pump",
+    "pos": "n",
+    "meaning": "泵；v 抽送/打气"
+   },
+   {
+    "word": "pumpkin",
+    "pos": "n",
+    "meaning": "南瓜"
+   },
+   {
+    "word": "punish",
+    "pos": "v",
+    "meaning": "惩罚"
+   },
+   {
+    "word": "purchase",
+    "pos": "v",
+    "meaning": "购买；n 购买物"
+   },
+   {
+    "word": "pure",
+    "pos": "a",
+    "meaning": "纯的/纯粹的"
+   },
+   {
+    "word": "purple",
+    "pos": "a",
+    "meaning": "紫色的"
+   },
+   {
+    "word": "purse",
+    "pos": "n",
+    "meaning": "钱包/手提包"
+   },
+   {
+    "word": "push",
+    "pos": "v",
+    "meaning": "推/催促；n 推动"
+   },
+   {
+    "word": "put",
+    "pos": "v",
+    "meaning": "放/表达"
+   },
+   {
+    "word": "puzzle",
+    "pos": "n",
+    "meaning": "谜/拼图；v 使困惑"
+   },
+   {
+    "word": "quality",
+    "pos": "n",
+    "meaning": "质量/品质"
+   },
+   {
+    "word": "quantity",
+    "pos": "n",
+    "meaning": "数量"
+   },
+   {
+    "word": "quarter",
+    "pos": "n",
+    "meaning": "四分之一/一刻钟/季度"
+   },
+   {
+    "word": "queen",
+    "pos": "n",
+    "meaning": "女王/王后"
+   },
+   {
+    "word": "quick",
+    "pos": "a",
+    "meaning": "快的/敏捷的"
+   },
+   {
+    "word": "quiet",
+    "pos": "a",
+    "meaning": "安静的/平静的"
+   },
+   {
+    "word": "quit",
+    "pos": "v",
+    "meaning": "离开/辞职/戒掉"
+   },
+   {
+    "word": "quite",
+    "pos": "ad",
+    "meaning": "相当/完全"
+   },
+   {
+    "word": "quiz",
+    "pos": "n",
+    "meaning": "测验/智力竞赛"
+   },
+   {
+    "word": "rabbit",
+    "pos": "n",
+    "meaning": "兔子"
+   },
+   {
+    "word": "race",
+    "pos": "n",
+    "meaning": "赛跑/种族；v 比赛"
+   },
+   {
+    "word": "radio",
+    "pos": "n",
+    "meaning": "收音机/无线电"
+   },
+   {
+    "word": "rail",
+    "pos": "n",
+    "meaning": "铁轨/栏杆"
+   },
+   {
+    "word": "railway",
+    "pos": "n",
+    "meaning": "铁路"
+   },
+   {
+    "word": "rain",
+    "pos": "n",
+    "meaning": "雨；v 下雨"
+   },
+   {
+    "word": "raise",
+    "pos": "v",
+    "meaning": "举起/提高/抚养/筹集"
+   },
+   {
+    "word": "rapid",
+    "pos": "a",
+    "meaning": "迅速的"
+   },
+   {
+    "word": "rare",
+    "pos": "a",
+    "meaning": "稀有的/罕见的"
+   },
+   {
+    "word": "rat",
+    "pos": "n",
+    "meaning": "老鼠"
+   },
+   {
+    "word": "rate",
+    "pos": "n",
+    "meaning": "比率/速度/价格；v 评级"
+   },
+   {
+    "word": "rather",
+    "pos": "ad",
+    "meaning": "相当/宁愿(rather than)"
+   },
+   {
+    "word": "raw",
+    "pos": "a",
+    "meaning": "生的/未加工的"
+   },
+   {
+    "word": "ray",
+    "pos": "n",
+    "meaning": "光线/射线"
+   },
+   {
+    "word": "reach",
+    "pos": "v",
+    "meaning": "到达/伸手/联系；n 范围"
+   },
+   {
+    "word": "read",
+    "pos": "v",
+    "meaning": "读/阅读"
+   },
+   {
+    "word": "ready",
+    "pos": "a",
+    "meaning": "准备好的"
+   },
+   {
+    "word": "real",
+    "pos": "a",
+    "meaning": "真实的/真正的"
+   },
+   {
+    "word": "reality",
+    "pos": "n",
+    "meaning": "现实/实际"
+   },
+   {
+    "word": "realize",
+    "pos": "v",
+    "meaning": "意识到/实现"
+   },
+   {
+    "word": "really",
+    "pos": "ad",
+    "meaning": "真正地/确实"
+   },
+   {
+    "word": "reason",
+    "pos": "n",
+    "meaning": "原因/理性；v 推理"
+   },
+   {
+    "word": "recognize",
+    "pos": "v",
+    "meaning": "认出/承认"
+   },
+   {
+    "word": "record",
+    "pos": "n",
+    "meaning": "记录/唱片；v 记录/录制"
+   },
+   {
+    "word": "red",
+    "pos": "a",
+    "meaning": "红色的；n 红色"
+   },
+   {
+    "word": "reflect",
+    "pos": "v",
+    "meaning": "反射/反映/思考"
+   },
+   {
+    "word": "refuse",
+    "pos": "v",
+    "meaning": "拒绝"
+   },
+   {
+    "word": "regard",
+    "pos": "v",
+    "meaning": "把…看作(regard as)；n 尊重/问候"
+   },
+   {
+    "word": "regret",
+    "pos": "v",
+    "meaning": "后悔/遗憾；n 遗憾"
+   },
+   {
+    "word": "relate",
+    "pos": "v",
+    "meaning": "联系/讲述(relate to)"
+   },
+   {
+    "word": "relation",
+    "pos": "n",
+    "meaning": "关系/亲属"
+   },
+   {
+    "word": "relative",
+    "pos": "n",
+    "meaning": "亲戚；a 相对的"
+   },
+   {
+    "word": "relax",
+    "pos": "v",
+    "meaning": "放松/松弛"
+   },
+   {
+    "word": "release",
+    "pos": "v",
+    "meaning": "释放/发布；n 发行"
+   },
+   {
+    "word": "religion",
+    "pos": "n",
+    "meaning": "宗教"
+   },
+   {
+    "word": "rely",
+    "pos": "v",
+    "meaning": "依赖/信赖(rely on)"
+   },
+   {
+    "word": "remain",
+    "pos": "v",
+    "meaning": "保持/留下/剩余"
+   },
+   {
+    "word": "rent",
+    "pos": "v",
+    "meaning": "租用/出租；n 租金"
+   },
+   {
+    "word": "repeat",
+    "pos": "v",
+    "meaning": "重复"
+   },
+   {
+    "word": "replace",
+    "pos": "v",
+    "meaning": "代替/更换"
+   },
+   {
+    "word": "represent",
+    "pos": "v",
+    "meaning": "代表/表现"
+   },
+   {
+    "word": "research",
+    "pos": "n",
+    "meaning": "研究/调查；v 研究"
+   },
+   {
+    "word": "resource",
+    "pos": "n",
+    "meaning": "资源/办法"
+   },
+   {
+    "word": "respond",
+    "pos": "v",
+    "meaning": "回应/反应"
+   },
+   {
+    "word": "responsible",
+    "pos": "a",
+    "meaning": "负责的/有责任的"
+   },
+   {
+    "word": "rest",
+    "pos": "n",
+    "meaning": "休息/其余；v 休息"
+   },
+   {
+    "word": "result",
+    "pos": "n",
+    "meaning": "结果/成绩；v 导致(result in)"
+   },
+   {
+    "word": "return",
+    "pos": "v",
+    "meaning": "返回/归还；n 返回/回报"
+   },
+   {
+    "word": "reward",
+    "pos": "n",
+    "meaning": "报酬/奖赏；v 奖励"
+   },
+   {
+    "word": "rice",
+    "pos": "n",
+    "meaning": "大米/米饭"
+   },
+   {
+    "word": "rich",
+    "pos": "a",
+    "meaning": "富有的/丰富的"
+   },
+   {
+    "word": "rid",
+    "pos": "v",
+    "meaning": "摆脱(get rid of)"
+   },
+   {
+    "word": "ride",
+    "pos": "v",
+    "meaning": "骑/乘；n 兜风"
+   },
+   {
+    "word": "right",
+    "pos": "a",
+    "meaning": "正确的/右边的；n 权利"
+   },
+   {
+    "word": "ring",
+    "pos": "n",
+    "meaning": "戒指/铃声/环；v 打电话/响"
+   },
+   {
+    "word": "rise",
+    "pos": "v",
+    "meaning": "上升/起立/上涨；n 增长"
+   },
+   {
+    "word": "risk",
+    "pos": "n",
+    "meaning": "风险；v 冒险"
+   },
+   {
+    "word": "river",
+    "pos": "n",
+    "meaning": "河流"
+   },
+   {
+    "word": "road",
+    "pos": "n",
+    "meaning": "道路"
+   },
+   {
+    "word": "rob",
+    "pos": "v",
+    "meaning": "抢劫/剥夺"
+   },
+   {
+    "word": "rock",
+    "pos": "n",
+    "meaning": "岩石/摇滚乐；v 摇动"
+   },
+   {
+    "word": "rocket",
+    "pos": "n",
+    "meaning": "火箭"
+   },
+   {
+    "word": "role",
+    "pos": "n",
+    "meaning": "角色/作用"
+   },
+   {
+    "word": "roll",
+    "pos": "v",
+    "meaning": "滚动/卷；n 卷/名册"
+   },
+   {
+    "word": "roof",
+    "pos": "n",
+    "meaning": "屋顶"
+   },
+   {
+    "word": "room",
+    "pos": "n",
+    "meaning": "房间/空间"
+   },
+   {
+    "word": "root",
+    "pos": "n",
+    "meaning": "根/根源；v 生根"
+   },
+   {
+    "word": "rope",
+    "pos": "n",
+    "meaning": "绳子"
+   },
+   {
+    "word": "rose",
+    "pos": "n",
+    "meaning": "玫瑰"
+   },
+   {
+    "word": "rough",
+    "pos": "a",
+    "meaning": "粗糙的/大致的/艰难的"
+   },
+   {
+    "word": "round",
+    "pos": "a",
+    "meaning": "圆的；prep 围绕"
+   },
+   {
+    "word": "route",
+    "pos": "n",
+    "meaning": "路线/途径"
+   },
+   {
+    "word": "row",
+    "pos": "n",
+    "meaning": "排/行；v 划船"
+   },
+   {
+    "word": "royal",
+    "pos": "a",
+    "meaning": "王室的/皇家的"
+   },
+   {
+    "word": "rub",
+    "pos": "v",
+    "meaning": "摩擦/擦"
+   },
+   {
+    "word": "rubber",
+    "pos": "n",
+    "meaning": "橡胶/橡皮"
+   },
+   {
+    "word": "rude",
+    "pos": "a",
+    "meaning": "粗鲁的/无礼的"
+   },
+   {
+    "word": "rule",
+    "pos": "n",
+    "meaning": "规则/统治；v 统治/裁定"
+   },
+   {
+    "word": "ruler",
+    "pos": "n",
+    "meaning": "统治者/尺子"
+   },
+   {
+    "word": "run",
+    "pos": "v",
+    "meaning": "跑/经营/运转"
+   },
+   {
+    "word": "rush",
+    "pos": "v",
+    "meaning": "冲/匆忙；n 高峰/繁忙"
+   },
+   {
+    "word": "sad",
+    "pos": "a",
+    "meaning": "悲伤的"
+   },
+   {
+    "word": "safe",
+    "pos": "a",
+    "meaning": "安全的；n 保险箱"
+   },
+   {
+    "word": "safety",
+    "pos": "n",
+    "meaning": "安全"
+   },
+   {
+    "word": "sail",
+    "pos": "v",
+    "meaning": "航行；n 帆"
+   },
+   {
+    "word": "sailor",
+    "pos": "n",
+    "meaning": "水手/海员"
+   },
+   {
+    "word": "salt",
+    "pos": "n",
+    "meaning": "盐"
+   },
+   {
+    "word": "same",
+    "pos": "a",
+    "meaning": "相同的"
+   },
+   {
+    "word": "sand",
+    "pos": "n",
+    "meaning": "沙/沙滩"
+   },
+   {
+    "word": "satisfy",
+    "pos": "v",
+    "meaning": "使满意/满足"
+   },
+   {
+    "word": "sauce",
+    "pos": "n",
+    "meaning": "酱/调味汁"
+   },
+   {
+    "word": "sausage",
+    "pos": "n",
+    "meaning": "香肠"
+   },
+   {
+    "word": "save",
+    "pos": "v",
+    "meaning": "拯救/节省/储蓄"
+   },
+   {
+    "word": "say",
+    "pos": "v",
+    "meaning": "说/表明"
+   },
+   {
+    "word": "scale",
+    "pos": "n",
+    "meaning": "规模/刻度/天平/鳞片"
+   },
+   {
+    "word": "scare",
+    "pos": "v",
+    "meaning": "惊吓；n 恐慌"
+   },
+   {
+    "word": "scene",
+    "pos": "n",
+    "meaning": "场景/现场/景色"
+   },
+   {
+    "word": "scenery",
+    "pos": "n",
+    "meaning": "风景/景色"
+   },
+   {
+    "word": "schedule",
+    "pos": "n",
+    "meaning": "时间表/计划；v 安排"
+   },
+   {
+    "word": "scholar",
+    "pos": "n",
+    "meaning": "学者"
+   },
+   {
+    "word": "school",
+    "pos": "n",
+    "meaning": "学校/学派"
+   },
+   {
+    "word": "score",
+    "pos": "n",
+    "meaning": "分数/乐谱；v 得分"
+   },
+   {
+    "word": "scream",
+    "pos": "v",
+    "meaning": "尖叫；n 尖叫声"
+   },
+   {
+    "word": "screen",
+    "pos": "n",
+    "meaning": "屏幕/银幕；v 筛选/放映"
+   },
+   {
+    "word": "sea",
+    "pos": "n",
+    "meaning": "海/大海"
+   },
+   {
+    "word": "seal",
+    "pos": "n",
+    "meaning": "海豹/印章；v 密封"
+   },
+   {
+    "word": "search",
+    "pos": "v",
+    "meaning": "搜索/搜查；n 搜寻"
+   },
+   {
+    "word": "season",
+    "pos": "n",
+    "meaning": "季节/赛季；v 调味"
+   },
+   {
+    "word": "seat",
+    "pos": "n",
+    "meaning": "座位/席位"
+   },
+   {
+    "word": "secret",
+    "pos": "n",
+    "meaning": "秘密；a 秘密的"
+   },
+   {
+    "word": "secretary",
+    "pos": "n",
+    "meaning": "秘书/部长"
+   },
+   {
+    "word": "secure",
+    "pos": "a",
+    "meaning": "安全的/牢固的；v 获得/保护"
+   },
+   {
+    "word": "see",
+    "pos": "v",
+    "meaning": "看见/明白/会见"
+   },
+   {
+    "word": "seed",
+    "pos": "n",
+    "meaning": "种子"
+   },
+   {
+    "word": "seek",
+    "pos": "v",
+    "meaning": "寻找/谋求"
+   },
+   {
+    "word": "seem",
+    "pos": "v",
+    "meaning": "似乎/好像"
+   },
+   {
+    "word": "seize",
+    "pos": "v",
+    "meaning": "抓住/夺取"
+   },
+   {
+    "word": "seldom",
+    "pos": "ad",
+    "meaning": "很少/不常"
+   },
+   {
+    "word": "self",
+    "pos": "n",
+    "meaning": "自我/自己"
+   },
+   {
+    "word": "sell",
+    "pos": "v",
+    "meaning": "卖/销售"
+   },
+   {
+    "word": "semester",
+    "pos": "n",
+    "meaning": "学期"
+   },
+   {
+    "word": "send",
+    "pos": "v",
+    "meaning": "发送/派遣"
+   },
+   {
+    "word": "senior",
+    "pos": "a",
+    "meaning": "年长的/高级的；n 前辈"
+   },
+   {
+    "word": "series",
+    "pos": "n",
+    "meaning": "系列/连续"
+   },
+   {
+    "word": "serious",
+    "pos": "a",
+    "meaning": "严肃的/严重的/认真的"
+   },
+   {
+    "word": "set",
+    "pos": "v",
+    "meaning": "设置/树立；n 一套"
+   },
+   {
+    "word": "settle",
+    "pos": "v",
+    "meaning": "定居/解决/安顿"
+   },
+   {
+    "word": "several",
+    "pos": "a",
+    "meaning": "几个的"
+   },
+   {
+    "word": "severe",
+    "pos": "a",
+    "meaning": "严重的/严厉的"
+   },
+   {
+    "word": "sew",
+    "pos": "v",
+    "meaning": "缝纫/缝补"
+   },
+   {
+    "word": "sex",
+    "pos": "n",
+    "meaning": "性别/性"
+   },
+   {
+    "word": "shade",
+    "pos": "n",
+    "meaning": "阴凉处/色调；v 遮蔽"
+   },
+   {
+    "word": "shadow",
+    "pos": "n",
+    "meaning": "影子/阴影"
+   },
+   {
+    "word": "shake",
+    "pos": "v",
+    "meaning": "摇动/颤抖/握手"
+   },
+   {
+    "word": "shallow",
+    "pos": "a",
+    "meaning": "浅的/肤浅的"
+   },
+   {
+    "word": "shame",
+    "pos": "n",
+    "meaning": "羞耻/遗憾"
+   },
+   {
+    "word": "shape",
+    "pos": "n",
+    "meaning": "形状/状况；v 塑造"
+   },
+   {
+    "word": "share",
+    "pos": "v",
+    "meaning": "分享/分担；n 份额/股份"
+   },
+   {
+    "word": "shark",
+    "pos": "n",
+    "meaning": "鲨鱼"
+   },
+   {
+    "word": "sharp",
+    "pos": "a",
+    "meaning": "锋利的/敏锐的/急剧的"
+   },
+   {
+    "word": "shave",
+    "pos": "v",
+    "meaning": "刮脸/剃"
+   },
+   {
+    "word": "sheep",
+    "pos": "n",
+    "meaning": "绵羊"
+   },
+   {
+    "word": "sheet",
+    "pos": "n",
+    "meaning": "床单/一张(纸)/薄板"
+   },
+   {
+    "word": "shell",
+    "pos": "n",
+    "meaning": "壳/贝壳/炮弹"
+   },
+   {
+    "word": "shelter",
+    "pos": "n",
+    "meaning": "避难所/庇护；v 掩蔽"
+   },
+   {
+    "word": "shine",
+    "pos": "v",
+    "meaning": "发光/照耀"
+   },
+   {
+    "word": "ship",
+    "pos": "n",
+    "meaning": "船；v 运送"
+   },
+   {
+    "word": "shirt",
+    "pos": "n",
+    "meaning": "衬衫"
+   },
+   {
+    "word": "shock",
+    "pos": "n",
+    "meaning": "震惊/休克/电击；v 使震惊"
+   },
+   {
+    "word": "shoe",
+    "pos": "n",
+    "meaning": "鞋"
+   },
+   {
+    "word": "shoot",
+    "pos": "v",
+    "meaning": "射击/拍摄/投篮；n 嫩芽"
+   },
+   {
+    "word": "shop",
+    "pos": "n",
+    "meaning": "商店；v 购物"
+   },
+   {
+    "word": "shore",
+    "pos": "n",
+    "meaning": "岸/海滨"
+   },
+   {
+    "word": "short",
+    "pos": "a",
+    "meaning": "短的/矮的/缺乏的"
+   },
+   {
+    "word": "shot",
+    "pos": "n",
+    "meaning": "射击/投篮/注射/镜头"
+   },
+   {
+    "word": "shoulder",
+    "pos": "n",
+    "meaning": "肩膀；v 承担"
+   },
+   {
+    "word": "shout",
+    "pos": "v",
+    "meaning": "喊叫；n 呼喊"
+   },
+   {
+    "word": "show",
+    "pos": "v",
+    "meaning": "显示/展示；n 演出/节目"
+   },
+   {
+    "word": "shower",
+    "pos": "n",
+    "meaning": "淋浴/阵雨"
+   },
+   {
+    "word": "shut",
+    "pos": "v",
+    "meaning": "关闭"
+   },
+   {
+    "word": "shy",
+    "pos": "a",
+    "meaning": "害羞的"
+   },
+   {
+    "word": "sick",
+    "pos": "a",
+    "meaning": "生病的/恶心的/厌倦的"
+   },
+   {
+    "word": "side",
+    "pos": "n",
+    "meaning": "边/面/一方"
+   },
+   {
+    "word": "sigh",
+    "pos": "v",
+    "meaning": "叹气；n 叹息"
+   },
+   {
+    "word": "sight",
+    "pos": "n",
+    "meaning": "视力/景象/视野"
+   },
+   {
+    "word": "silence",
+    "pos": "n",
+    "meaning": "沉默/寂静"
+   },
+   {
+    "word": "silent",
+    "pos": "a",
+    "meaning": "沉默的/寂静的"
+   },
+   {
+    "word": "silk",
+    "pos": "n",
+    "meaning": "丝绸"
+   },
+   {
+    "word": "silly",
+    "pos": "a",
+    "meaning": "愚蠢的/傻的"
+   },
+   {
+    "word": "silver",
+    "pos": "n",
+    "meaning": "银/银色"
+   },
+   {
+    "word": "since",
+    "pos": "prep",
+    "meaning": "自从；conj 因为"
+   },
+   {
+    "word": "sincere",
+    "pos": "a",
+    "meaning": "真诚的"
+   },
+   {
+    "word": "sing",
+    "pos": "v",
+    "meaning": "唱歌"
+   },
+   {
+    "word": "single",
+    "pos": "a",
+    "meaning": "单一的/单身的"
+   },
+   {
+    "word": "sink",
+    "pos": "v",
+    "meaning": "下沉/沉没；n 水槽"
+   },
+   {
+    "word": "sir",
+    "pos": "n",
+    "meaning": "先生/阁下"
+   },
+   {
+    "word": "sister",
+    "pos": "n",
+    "meaning": "姐妹"
+   },
+   {
+    "word": "sit",
+    "pos": "v",
+    "meaning": "坐"
+   },
+   {
+    "word": "situation",
+    "pos": "n",
+    "meaning": "形势/处境/位置"
+   },
+   {
+    "word": "size",
+    "pos": "n",
+    "meaning": "大小/尺寸"
+   },
+   {
+    "word": "skate",
+    "pos": "v",
+    "meaning": "滑冰；n 冰鞋"
+   },
+   {
+    "word": "sketch",
+    "pos": "n",
+    "meaning": "素描/草图/小品；v 写生"
+   },
+   {
+    "word": "ski",
+    "pos": "v",
+    "meaning": "滑雪；n 滑雪板"
+   },
+   {
+    "word": "skill",
+    "pos": "n",
+    "meaning": "技能/技巧"
+   },
+   {
+    "word": "skin",
+    "pos": "n",
+    "meaning": "皮肤/外皮"
+   },
+   {
+    "word": "skirt",
+    "pos": "n",
+    "meaning": "裙子"
+   },
+   {
+    "word": "sky",
+    "pos": "n",
+    "meaning": "天空"
+   },
+   {
+    "word": "slave",
+    "pos": "n",
+    "meaning": "奴隶"
+   },
+   {
+    "word": "sleep",
+    "pos": "v",
+    "meaning": "睡觉；n 睡眠"
+   },
+   {
+    "word": "sleeve",
+    "pos": "n",
+    "meaning": "袖子"
+   },
+   {
+    "word": "slice",
+    "pos": "n",
+    "meaning": "薄片/一片；v 切片"
+   },
+   {
+    "word": "slight",
+    "pos": "a",
+    "meaning": "轻微的/瘦小的"
+   },
+   {
+    "word": "slow",
+    "pos": "a",
+    "meaning": "慢的/迟钝的；v 放慢"
+   },
+   {
+    "word": "small",
+    "pos": "a",
+    "meaning": "小的"
+   },
+   {
+    "word": "smart",
+    "pos": "a",
+    "meaning": "聪明的/时髦的/智能的"
+   },
+   {
+    "word": "smell",
+    "pos": "v",
+    "meaning": "闻/散发气味；n 气味"
+   },
+   {
+    "word": "smile",
+    "pos": "v",
+    "meaning": "微笑；n 微笑"
+   },
+   {
+    "word": "smoke",
+    "pos": "n",
+    "meaning": "烟；v 吸烟/冒烟"
+   },
+   {
+    "word": "smooth",
+    "pos": "a",
+    "meaning": "光滑的/顺利的"
+   },
+   {
+    "word": "snake",
+    "pos": "n",
+    "meaning": "蛇"
+   },
+   {
+    "word": "sneeze",
+    "pos": "v",
+    "meaning": "打喷嚏"
+   },
+   {
+    "word": "snow",
+    "pos": "n",
+    "meaning": "雪；v 下雪"
+   },
+   {
+    "word": "soap",
+    "pos": "n",
+    "meaning": "肥皂"
+   },
+   {
+    "word": "soccer",
+    "pos": "n",
+    "meaning": "足球"
+   },
+   {
+    "word": "sock",
+    "pos": "n",
+    "meaning": "短袜"
+   },
+   {
+    "word": "sofa",
+    "pos": "n",
+    "meaning": "沙发"
+   },
+   {
+    "word": "soft",
+    "pos": "a",
+    "meaning": "软的/柔和的"
+   },
+   {
+    "word": "soil",
+    "pos": "n",
+    "meaning": "土壤；v 弄脏"
+   },
+   {
+    "word": "soldier",
+    "pos": "n",
+    "meaning": "士兵/军人"
+   },
+   {
+    "word": "son",
+    "pos": "n",
+    "meaning": "儿子"
+   },
+   {
+    "word": "song",
+    "pos": "n",
+    "meaning": "歌曲"
+   },
+   {
+    "word": "soon",
+    "pos": "ad",
+    "meaning": "不久/很快"
+   },
+   {
+    "word": "sore",
+    "pos": "a",
+    "meaning": "疼痛的；n 疮"
+   },
+   {
+    "word": "sorrow",
+    "pos": "n",
+    "meaning": "悲伤/悲痛"
+   },
+   {
+    "word": "sorry",
+    "pos": "a",
+    "meaning": "抱歉的/难过的"
+   },
+   {
+    "word": "sort",
+    "pos": "n",
+    "meaning": "种类；v 分类/整理"
+   },
+   {
+    "word": "soul",
+    "pos": "n",
+    "meaning": "灵魂/心灵"
+   },
+   {
+    "word": "sound",
+    "pos": "n",
+    "meaning": "声音；v 听起来；a 健全的"
+   },
+   {
+    "word": "soup",
+    "pos": "n",
+    "meaning": "汤"
+   },
+   {
+    "word": "sour",
+    "pos": "a",
+    "meaning": "酸的/酸臭的"
+   },
+   {
+    "word": "south",
+    "pos": "n",
+    "meaning": "南方；a 南方的"
+   },
+   {
+    "word": "space",
+    "pos": "n",
+    "meaning": "空间/太空/空白"
+   },
+   {
+    "word": "spare",
+    "pos": "a",
+    "meaning": "空闲的/备用的；v 抽出/饶恕"
+   },
+   {
+    "word": "speak",
+    "pos": "v",
+    "meaning": "说话/演讲"
+   },
+   {
+    "word": "speech",
+    "pos": "n",
+    "meaning": "演讲/言语"
+   },
+   {
+    "word": "speed",
+    "pos": "n",
+    "meaning": "速度；v 加速"
+   },
+   {
+    "word": "spell",
+    "pos": "v",
+    "meaning": "拼写；n 一段时间/咒语"
+   },
+   {
+    "word": "spirit",
+    "pos": "n",
+    "meaning": "精神/灵魂/情绪"
+   },
+   {
+    "word": "spite",
+    "pos": "n",
+    "meaning": "恶意(in spite of 尽管)"
+   },
+   {
+    "word": "splendid",
+    "pos": "a",
+    "meaning": "壮丽的/极好的"
+   },
+   {
+    "word": "spoon",
+    "pos": "n",
+    "meaning": "勺子"
+   },
+   {
+    "word": "spot",
+    "pos": "n",
+    "meaning": "地点/斑点；v 发现"
+   },
+   {
+    "word": "spread",
+    "pos": "v",
+    "meaning": "传播/蔓延/涂；n 传播"
+   },
+   {
+    "word": "spring",
+    "pos": "n",
+    "meaning": "春天/泉/弹簧；v 跳跃"
+   },
+   {
+    "word": "square",
+    "pos": "n",
+    "meaning": "广场/正方形/平方；a 方形的"
+   },
+   {
+    "word": "staff",
+    "pos": "n",
+    "meaning": "全体职员/工作人员"
+   },
+   {
+    "word": "stair",
+    "pos": "n",
+    "meaning": "楼梯"
+   },
+   {
+    "word": "stamp",
+    "pos": "n",
+    "meaning": "邮票/印章；v 跺脚/盖章"
+   },
+   {
+    "word": "stand",
+    "pos": "v",
+    "meaning": "站/忍受/位于；n 立场/看台"
+   },
+   {
+    "word": "star",
+    "pos": "n",
+    "meaning": "星/明星"
+   },
+   {
+    "word": "stare",
+    "pos": "v",
+    "meaning": "凝视/盯着看"
+   },
+   {
+    "word": "start",
+    "pos": "v",
+    "meaning": "开始/出发/启动；n 开端"
+   },
+   {
+    "word": "statement",
+    "pos": "n",
+    "meaning": "声明/陈述/报表"
+   },
+   {
+    "word": "stay",
+    "pos": "v",
+    "meaning": "停留/保持；n 逗留"
+   },
+   {
+    "word": "steady",
+    "pos": "a",
+    "meaning": "稳定的/稳固的"
+   },
+   {
+    "word": "steak",
+    "pos": "n",
+    "meaning": "牛排"
+   },
+   {
+    "word": "steal",
+    "pos": "v",
+    "meaning": "偷/窃取"
+   },
+   {
+    "word": "steam",
+    "pos": "n",
+    "meaning": "蒸汽；v 蒸"
+   },
+   {
+    "word": "steel",
+    "pos": "n",
+    "meaning": "钢/钢铁"
+   },
+   {
+    "word": "steep",
+    "pos": "a",
+    "meaning": "陡峭的/急剧的"
+   },
+   {
+    "word": "step",
+    "pos": "n",
+    "meaning": "步/台阶/步骤；v 迈步"
+   },
+   {
+    "word": "stick",
+    "pos": "v",
+    "meaning": "粘贴/坚持(stick to)；n 棍棒"
+   },
+   {
+    "word": "stiff",
+    "pos": "a",
+    "meaning": "僵硬的/生硬的"
+   },
+   {
+    "word": "still",
+    "pos": "ad",
+    "meaning": "仍然；a 静止的"
+   },
+   {
+    "word": "stomach",
+    "pos": "n",
+    "meaning": "胃/腹部"
+   },
+   {
+    "word": "stone",
+    "pos": "n",
+    "meaning": "石头/宝石"
+   },
+   {
+    "word": "stop",
+    "pos": "v",
+    "meaning": "停止/阻止；n 车站"
+   },
+   {
+    "word": "store",
+    "pos": "n",
+    "meaning": "商店/储备；v 储存"
+   },
+   {
+    "word": "storm",
+    "pos": "n",
+    "meaning": "暴风雨/风暴"
+   },
+   {
+    "word": "story",
+    "pos": "n",
+    "meaning": "故事/楼层/报道"
+   },
+   {
+    "word": "stove",
+    "pos": "n",
+    "meaning": "炉子"
+   },
+   {
+    "word": "straight",
+    "pos": "a",
+    "meaning": "直的/坦率的；ad 直接"
+   },
+   {
+    "word": "straw",
+    "pos": "n",
+    "meaning": "稻草/吸管"
+   },
+   {
+    "word": "street",
+    "pos": "n",
+    "meaning": "街道"
+   },
+   {
+    "word": "strength",
+    "pos": "n",
+    "meaning": "力量/优势"
+   },
+   {
+    "word": "stretch",
+    "pos": "v",
+    "meaning": "伸展/延伸；n 一段"
+   },
+   {
+    "word": "strong",
+    "pos": "a",
+    "meaning": "强壮的/坚固的/浓的"
+   },
+   {
+    "word": "student",
+    "pos": "n",
+    "meaning": "学生"
+   },
+   {
+    "word": "studio",
+    "pos": "n",
+    "meaning": "工作室/演播室"
+   },
+   {
+    "word": "study",
+    "pos": "v",
+    "meaning": "学习/研究；n 书房"
+   },
+   {
+    "word": "stupid",
+    "pos": "a",
+    "meaning": "愚蠢的"
+   },
+   {
+    "word": "such",
+    "pos": "a",
+    "meaning": "这样的/如此的"
+   },
+   {
+    "word": "sudden",
+    "pos": "a",
+    "meaning": "突然的"
+   },
+   {
+    "word": "sugar",
+    "pos": "n",
+    "meaning": "糖"
+   },
+   {
+    "word": "suggest",
+    "pos": "v",
+    "meaning": "建议/暗示"
+   },
+   {
+    "word": "suit",
+    "pos": "n",
+    "meaning": "西装/套装；v 适合"
+   },
+   {
+    "word": "summer",
+    "pos": "n",
+    "meaning": "夏天"
+   },
+   {
+    "word": "sun",
+    "pos": "n",
+    "meaning": "太阳/阳光"
+   },
+   {
+    "word": "sunset",
+    "pos": "n",
+    "meaning": "日落/晚霞"
+   },
+   {
+    "word": "supper",
+    "pos": "n",
+    "meaning": "晚饭"
+   },
+   {
+    "word": "sure",
+    "pos": "a",
+    "meaning": "确信的/一定的"
+   },
+   {
+    "word": "surface",
+    "pos": "n",
+    "meaning": "表面/外表"
+   },
+   {
+    "word": "surgery",
+    "pos": "n",
+    "meaning": "外科手术"
+   },
+   {
+    "word": "surprise",
+    "pos": "n",
+    "meaning": "惊讶/惊喜；v 使吃惊"
+   },
+   {
+    "word": "surround",
+    "pos": "v",
+    "meaning": "包围/环绕"
+   },
+   {
+    "word": "swallow",
+    "pos": "v",
+    "meaning": "吞咽/忍受；n 燕子"
+   },
+   {
+    "word": "swear",
+    "pos": "v",
+    "meaning": "发誓/咒骂"
+   },
+   {
+    "word": "sweat",
+    "pos": "n",
+    "meaning": "汗；v 出汗"
+   },
+   {
+    "word": "sweater",
+    "pos": "n",
+    "meaning": "毛衣"
+   },
+   {
+    "word": "sweep",
+    "pos": "v",
+    "meaning": "打扫/席卷"
+   },
+   {
+    "word": "sweet",
+    "pos": "a",
+    "meaning": "甜的/可爱的；n 糖果"
+   },
+   {
+    "word": "swim",
+    "pos": "v",
+    "meaning": "游泳"
+   },
+   {
+    "word": "swing",
+    "pos": "v",
+    "meaning": "摇摆/挥舞；n 秋千"
+   },
+   {
+    "word": "switch",
+    "pos": "n",
+    "meaning": "开关/转换；v 转变/切换"
+   },
+   {
+    "word": "sword",
+    "pos": "n",
+    "meaning": "剑/刀"
+   },
+   {
+    "word": "system",
+    "pos": "n",
+    "meaning": "系统/制度/体系"
+   },
+   {
+    "word": "table",
+    "pos": "n",
+    "meaning": "桌子/表格"
+   },
+   {
+    "word": "tail",
+    "pos": "n",
+    "meaning": "尾巴/末尾"
+   },
+   {
+    "word": "tailor",
+    "pos": "n",
+    "meaning": "裁缝；v 定制"
+   },
+   {
+    "word": "take",
+    "pos": "v",
+    "meaning": "拿/带/花费/乘坐"
+   },
+   {
+    "word": "tale",
+    "pos": "n",
+    "meaning": "故事/传说"
+   },
+   {
+    "word": "talent",
+    "pos": "n",
+    "meaning": "天赋/人才"
+   },
+   {
+    "word": "talk",
+    "pos": "v",
+    "meaning": "谈话/讨论；n 谈话/报告"
+   },
+   {
+    "word": "tall",
+    "pos": "a",
+    "meaning": "高的"
+   },
+   {
+    "word": "tank",
+    "pos": "n",
+    "meaning": "坦克/水箱"
+   },
+   {
+    "word": "tap",
+    "pos": "v",
+    "meaning": "轻敲/开发；n 水龙头"
+   },
+   {
+    "word": "tape",
+    "pos": "n",
+    "meaning": "胶带/磁带"
+   },
+   {
+    "word": "target",
+    "pos": "n",
+    "meaning": "目标/靶子；v 瞄准"
+   },
+   {
+    "word": "task",
+    "pos": "n",
+    "meaning": "任务/工作"
+   },
+   {
+    "word": "taste",
+    "pos": "n",
+    "meaning": "味道/品味；v 尝"
+   },
+   {
+    "word": "tax",
+    "pos": "n",
+    "meaning": "税；v 征税"
+   },
+   {
+    "word": "taxi",
+    "pos": "n",
+    "meaning": "出租车"
+   },
+   {
+    "word": "tea",
+    "pos": "n",
+    "meaning": "茶"
+   },
+   {
+    "word": "teach",
+    "pos": "v",
+    "meaning": "教/教导"
+   },
+   {
+    "word": "team",
+    "pos": "n",
+    "meaning": "队/团队"
+   },
+   {
+    "word": "tear",
+    "pos": "n",
+    "meaning": "眼泪；v 撕裂"
+   },
+   {
+    "word": "technical",
+    "pos": "a",
+    "meaning": "技术的/专业的"
+   },
+   {
+    "word": "technique",
+    "pos": "n",
+    "meaning": "技巧/技术"
+   },
+   {
+    "word": "tell",
+    "pos": "v",
+    "meaning": "告诉/分辨"
+   },
+   {
+    "word": "temperature",
+    "pos": "n",
+    "meaning": "温度/体温"
+   },
+   {
+    "word": "tend",
+    "pos": "v",
+    "meaning": "倾向于/照料"
+   },
+   {
+    "word": "tendency",
+    "pos": "n",
+    "meaning": "趋势/倾向"
+   },
+   {
+    "word": "tennis",
+    "pos": "n",
+    "meaning": "网球"
+   },
+   {
+    "word": "tent",
+    "pos": "n",
+    "meaning": "帐篷"
+   },
+   {
+    "word": "terrible",
+    "pos": "a",
+    "meaning": "可怕的/糟糕的"
+   },
+   {
+    "word": "text",
+    "pos": "n",
+    "meaning": "文本/课文/短信"
+   },
+   {
+    "word": "thank",
+    "pos": "v",
+    "meaning": "感谢"
+   },
+   {
+    "word": "theater",
+    "pos": "n",
+    "meaning": "剧院/戏剧"
+   },
+   {
+    "word": "then",
+    "pos": "ad",
+    "meaning": "然后/那时"
+   },
+   {
+    "word": "theory",
+    "pos": "n",
+    "meaning": "理论/学说"
+   },
+   {
+    "word": "there",
+    "pos": "ad",
+    "meaning": "在那里"
+   },
+   {
+    "word": "therefore",
+    "pos": "ad",
+    "meaning": "因此"
+   },
+   {
+    "word": "thick",
+    "pos": "a",
+    "meaning": "厚的/浓密的"
+   },
+   {
+    "word": "thief",
+    "pos": "n",
+    "meaning": "小偷"
+   },
+   {
+    "word": "thin",
+    "pos": "a",
+    "meaning": "薄的/瘦的/稀的"
+   },
+   {
+    "word": "thing",
+    "pos": "n",
+    "meaning": "东西/事情"
+   },
+   {
+    "word": "think",
+    "pos": "v",
+    "meaning": "想/认为"
+   },
+   {
+    "word": "third",
+    "pos": "num",
+    "meaning": "第三"
+   },
+   {
+    "word": "thirst",
+    "pos": "n",
+    "meaning": "口渴/渴望"
+   },
+   {
+    "word": "though",
+    "pos": "conj",
+    "meaning": "虽然/尽管"
+   },
+   {
+    "word": "thought",
+    "pos": "n",
+    "meaning": "思想/想法"
+   },
+   {
+    "word": "thread",
+    "pos": "n",
+    "meaning": "线/线索/线程"
+   },
+   {
+    "word": "threat",
+    "pos": "n",
+    "meaning": "威胁/凶兆"
+   },
+   {
+    "word": "threaten",
+    "pos": "v",
+    "meaning": "威胁/恐吓"
+   },
+   {
+    "word": "throat",
+    "pos": "n",
+    "meaning": "喉咙"
+   },
+   {
+    "word": "through",
+    "pos": "prep",
+    "meaning": "穿过/通过/凭借"
+   },
+   {
+    "word": "throw",
+    "pos": "v",
+    "meaning": "扔/投掷"
+   },
+   {
+    "word": "thunder",
+    "pos": "n",
+    "meaning": "雷/轰隆声"
+   },
+   {
+    "word": "thus",
+    "pos": "ad",
+    "meaning": "因此/这样"
+   },
+   {
+    "word": "ticket",
+    "pos": "n",
+    "meaning": "票/罚单"
+   },
+   {
+    "word": "tide",
+    "pos": "n",
+    "meaning": "潮汐/潮流"
+   },
+   {
+    "word": "tie",
+    "pos": "v",
+    "meaning": "系/打结/打平；n 领带/联系"
+   },
+   {
+    "word": "tiger",
+    "pos": "n",
+    "meaning": "老虎"
+   },
+   {
+    "word": "tight",
+    "pos": "a",
+    "meaning": "紧的/严格的"
+   },
+   {
+    "word": "till",
+    "pos": "prep",
+    "meaning": "直到"
+   },
+   {
+    "word": "time",
+    "pos": "n",
+    "meaning": "时间/次数/时代"
+   },
+   {
+    "word": "tin",
+    "pos": "n",
+    "meaning": "锡/罐头"
+   },
+   {
+    "word": "tiny",
+    "pos": "a",
+    "meaning": "极小的"
+   },
+   {
+    "word": "tip",
+    "pos": "n",
+    "meaning": "小费/尖端/建议；v 给小费/倾斜"
+   },
+   {
+    "word": "tire",
+    "pos": "v",
+    "meaning": "使疲劳；n 轮胎"
+   },
+   {
+    "word": "tired",
+    "pos": "a",
+    "meaning": "疲倦的/厌倦的"
+   },
+   {
+    "word": "title",
+    "pos": "n",
+    "meaning": "标题/头衔/冠军"
+   },
+   {
+    "word": "toast",
+    "pos": "n",
+    "meaning": "烤面包/敬酒；v 烘烤/祝酒"
+   },
+   {
+    "word": "tobacco",
+    "pos": "n",
+    "meaning": "烟草"
+   },
+   {
+    "word": "today",
+    "pos": "ad",
+    "meaning": "今天/现今"
+   },
+   {
+    "word": "toe",
+    "pos": "n",
+    "meaning": "脚趾"
+   },
+   {
+    "word": "together",
+    "pos": "ad",
+    "meaning": "一起/共同"
+   },
+   {
+    "word": "toilet",
+    "pos": "n",
+    "meaning": "厕所/马桶"
+   },
+   {
+    "word": "tomato",
+    "pos": "n",
+    "meaning": "西红柿"
+   },
+   {
+    "word": "tomb",
+    "pos": "n",
+    "meaning": "坟墓"
+   },
+   {
+    "word": "tomorrow",
+    "pos": "ad",
+    "meaning": "明天"
+   },
+   {
+    "word": "ton",
+    "pos": "n",
+    "meaning": "吨/大量"
+   },
+   {
+    "word": "tone",
+    "pos": "n",
+    "meaning": "语气/音调/色调"
+   },
+   {
+    "word": "tongue",
+    "pos": "n",
+    "meaning": "舌头/语言"
+   },
+   {
+    "word": "tonight",
+    "pos": "ad",
+    "meaning": "今晚"
+   },
+   {
+    "word": "too",
+    "pos": "ad",
+    "meaning": "也/太"
+   },
+   {
+    "word": "tool",
+    "pos": "n",
+    "meaning": "工具/手段"
+   },
+   {
+    "word": "tooth",
+    "pos": "n",
+    "meaning": "牙齿"
+   },
+   {
+    "word": "top",
+    "pos": "n",
+    "meaning": "顶部/上方；a 最高的"
+   },
+   {
+    "word": "topic",
+    "pos": "n",
+    "meaning": "话题/主题"
+   },
+   {
+    "word": "total",
+    "pos": "a",
+    "meaning": "总的/完全的；n 总数"
+   },
+   {
+    "word": "touch",
+    "pos": "v",
+    "meaning": "触摸/感动/涉及；n 接触"
+   },
+   {
+    "word": "tough",
+    "pos": "a",
+    "meaning": "艰难的/坚韧的/强硬的"
+   },
+   {
+    "word": "tour",
+    "pos": "n",
+    "meaning": "旅行/巡回演出；v 游览"
+   },
+   {
+    "word": "tourist",
+    "pos": "n",
+    "meaning": "游客"
+   },
+   {
+    "word": "toward",
+    "pos": "prep",
+    "meaning": "朝向/对于"
+   },
+   {
+    "word": "tower",
+    "pos": "n",
+    "meaning": "塔/高楼"
+   },
+   {
+    "word": "town",
+    "pos": "n",
+    "meaning": "城镇/市区"
+   },
+   {
+    "word": "toy",
+    "pos": "n",
+    "meaning": "玩具"
+   },
+   {
+    "word": "trace",
+    "pos": "v",
+    "meaning": "追踪/追溯；n 痕迹"
+   },
+   {
+    "word": "track",
+    "pos": "n",
+    "meaning": "轨道/跑道/足迹；v 追踪"
+   },
+   {
+    "word": "trade",
+    "pos": "n",
+    "meaning": "贸易/行业；v 交易"
+   },
+   {
+    "word": "tradition",
+    "pos": "n",
+    "meaning": "传统/惯例"
+   },
+   {
+    "word": "train",
+    "pos": "n",
+    "meaning": "火车；v 训练"
+   },
+   {
+    "word": "translate",
+    "pos": "v",
+    "meaning": "翻译/转化"
+   },
+   {
+    "word": "trap",
+    "pos": "n",
+    "meaning": "陷阱/圈套；v 困住"
+   },
+   {
+    "word": "travel",
+    "pos": "v",
+    "meaning": "旅行/传播；n 旅行"
+   },
+   {
+    "word": "tray",
+    "pos": "n",
+    "meaning": "托盘"
+   },
+   {
+    "word": "treasure",
+    "pos": "n",
+    "meaning": "财宝/珍品；v 珍惜"
+   },
+   {
+    "word": "treat",
+    "pos": "v",
+    "meaning": "对待/治疗/请客；n 款待"
+   },
+   {
+    "word": "treatment",
+    "pos": "n",
+    "meaning": "治疗/对待/处理"
+   },
+   {
+    "word": "tree",
+    "pos": "n",
+    "meaning": "树"
+   },
+   {
+    "word": "trend",
+    "pos": "n",
+    "meaning": "趋势/潮流"
+   },
+   {
+    "word": "trial",
+    "pos": "n",
+    "meaning": "审判/试验/考验"
+   },
+   {
+    "word": "tribe",
+    "pos": "n",
+    "meaning": "部落/族"
+   },
+   {
+    "word": "trick",
+    "pos": "n",
+    "meaning": "诡计/把戏/诀窍；v 欺骗"
+   },
+   {
+    "word": "trip",
+    "pos": "n",
+    "meaning": "旅行；v 绊倒"
+   },
+   {
+    "word": "troop",
+    "pos": "n",
+    "meaning": "部队/一群"
+   },
+   {
+    "word": "trouble",
+    "pos": "n",
+    "meaning": "麻烦/困难；v 使烦恼"
+   },
+   {
+    "word": "truck",
+    "pos": "n",
+    "meaning": "卡车"
+   },
+   {
+    "word": "true",
+    "pos": "a",
+    "meaning": "真实的/忠实的"
+   },
+   {
+    "word": "trunk",
+    "pos": "n",
+    "meaning": "树干/后备箱/象鼻/箱子"
+   },
+   {
+    "word": "trust",
+    "pos": "v",
+    "meaning": "信任；n 信任/信托"
+   },
+   {
+    "word": "truth",
+    "pos": "n",
+    "meaning": "真相/真理"
+   },
+   {
+    "word": "try",
+    "pos": "v",
+    "meaning": "尝试/审判；n 尝试"
+   },
+   {
+    "word": "tube",
+    "pos": "n",
+    "meaning": "管子/地铁"
+   },
+   {
+    "word": "tune",
+    "pos": "n",
+    "meaning": "曲调；v 调音/调整"
+   },
+   {
+    "word": "turkey",
+    "pos": "n",
+    "meaning": "火鸡"
+   },
+   {
+    "word": "turn",
+    "pos": "v",
+    "meaning": "转动/变成；n 轮流/转弯"
+   },
+   {
+    "word": "twin",
+    "pos": "n",
+    "meaning": "双胞胎之一；a 成对的"
+   },
+   {
+    "word": "type",
+    "pos": "n",
+    "meaning": "类型；v 打字"
+   },
+   {
+    "word": "typical",
+    "pos": "a",
+    "meaning": "典型的/特有的"
+   },
+   {
+    "word": "ugly",
+    "pos": "a",
+    "meaning": "丑陋的/难看的"
+   },
+   {
+    "word": "uncle",
+    "pos": "n",
+    "meaning": "叔叔/舅舅"
+   },
+   {
+    "word": "under",
+    "pos": "prep",
+    "meaning": "在…下面/低于"
+   },
+   {
+    "word": "underground",
+    "pos": "a",
+    "meaning": "地下的/秘密的；n 地铁"
+   },
+   {
+    "word": "understand",
+    "pos": "v",
+    "meaning": "理解/明白"
+   },
+   {
+    "word": "unfair",
+    "pos": "a",
+    "meaning": "不公平的"
+   },
+   {
+    "word": "union",
+    "pos": "n",
+    "meaning": "联盟/工会/联合"
+   },
+   {
+    "word": "unique",
+    "pos": "a",
+    "meaning": "独特的/唯一的"
+   },
+   {
+    "word": "unit",
+    "pos": "n",
+    "meaning": "单位/单元/部件"
+   },
+   {
+    "word": "unite",
+    "pos": "v",
+    "meaning": "联合/团结"
+   },
+   {
+    "word": "unknown",
+    "pos": "a",
+    "meaning": "未知的/无名的"
+   },
+   {
+    "word": "unless",
+    "pos": "conj",
+    "meaning": "除非"
+   },
+   {
+    "word": "until",
+    "pos": "prep",
+    "meaning": "直到…为止"
+   },
+   {
+    "word": "unusual",
+    "pos": "a",
+    "meaning": "不寻常的/独特的"
+   },
+   {
+    "word": "upon",
+    "pos": "prep",
+    "meaning": "在…之上"
+   },
+   {
+    "word": "upper",
+    "pos": "a",
+    "meaning": "上面的/上层的"
+   },
+   {
+    "word": "upstairs",
+    "pos": "ad",
+    "meaning": "在楼上"
+   },
+   {
+    "word": "urban",
+    "pos": "a",
+    "meaning": "城市的"
+   },
+   {
+    "word": "use",
+    "pos": "v",
+    "meaning": "使用/利用；n 用途"
+   },
+   {
+    "word": "useful",
+    "pos": "a",
+    "meaning": "有用的"
+   },
+   {
+    "word": "useless",
+    "pos": "a",
+    "meaning": "无用的"
+   },
+   {
+    "word": "usual",
+    "pos": "a",
+    "meaning": "通常的/惯常的"
+   },
+   {
+    "word": "vacation",
+    "pos": "n",
+    "meaning": "假期"
+   },
+   {
+    "word": "valley",
+    "pos": "n",
+    "meaning": "山谷/流域"
+   },
+   {
+    "word": "variety",
+    "pos": "n",
+    "meaning": "多样性/品种(a variety of)"
+   },
+   {
+    "word": "various",
+    "pos": "a",
+    "meaning": "各种各样的"
+   },
+   {
+    "word": "vast",
+    "pos": "a",
+    "meaning": "巨大的/广阔的"
+   },
+   {
+    "word": "vegetable",
+    "pos": "n",
+    "meaning": "蔬菜"
+   },
+   {
+    "word": "vehicle",
+    "pos": "n",
+    "meaning": "车辆/工具/载体"
+   },
+   {
+    "word": "verb",
+    "pos": "n",
+    "meaning": "动词"
+   },
+   {
+    "word": "victim",
+    "pos": "n",
+    "meaning": "受害者/牺牲品"
+   },
+   {
+    "word": "victory",
+    "pos": "n",
+    "meaning": "胜利"
+   },
+   {
+    "word": "village",
+    "pos": "n",
+    "meaning": "村庄"
+   },
+   {
+    "word": "violence",
+    "pos": "n",
+    "meaning": "暴力/猛烈"
+   },
+   {
+    "word": "violent",
+    "pos": "a",
+    "meaning": "暴力的/猛烈的"
+   },
+   {
+    "word": "violin",
+    "pos": "n",
+    "meaning": "小提琴"
+   },
+   {
+    "word": "volume",
+    "pos": "n",
+    "meaning": "体积/音量/卷"
+   },
+   {
+    "word": "vote",
+    "pos": "v",
+    "meaning": "投票/选举；n 选票"
+   },
+   {
+    "word": "wage",
+    "pos": "n",
+    "meaning": "工资/报酬"
+   },
+   {
+    "word": "waist",
+    "pos": "n",
+    "meaning": "腰/腰部"
+   },
+   {
+    "word": "wait",
+    "pos": "v",
+    "meaning": "等待/伺候"
+   },
+   {
+    "word": "waiter",
+    "pos": "n",
+    "meaning": "服务员"
+   },
+   {
+    "word": "wake",
+    "pos": "v",
+    "meaning": "醒来/唤醒"
+   },
+   {
+    "word": "walk",
+    "pos": "v",
+    "meaning": "走/散步；n 步行"
+   },
+   {
+    "word": "wall",
+    "pos": "n",
+    "meaning": "墙/城墙"
+   },
+   {
+    "word": "wallet",
+    "pos": "n",
+    "meaning": "钱包"
+   },
+   {
+    "word": "wander",
+    "pos": "v",
+    "meaning": "漫游/走神"
+   },
+   {
+    "word": "want",
+    "pos": "v",
+    "meaning": "想要/需要"
+   },
+   {
+    "word": "war",
+    "pos": "n",
+    "meaning": "战争/斗争"
+   },
+   {
+    "word": "warm",
+    "pos": "a",
+    "meaning": "温暖的/热情的；v 加热"
+   },
+   {
+    "word": "warn",
+    "pos": "v",
+    "meaning": "警告/提醒"
+   },
+   {
+    "word": "wash",
+    "pos": "v",
+    "meaning": "洗/冲刷"
+   },
+   {
+    "word": "waste",
+    "pos": "v",
+    "meaning": "浪费；n 废物/浪费"
+   },
+   {
+    "word": "watch",
+    "pos": "v",
+    "meaning": "观看/注视/当心；n 手表"
+   },
+   {
+    "word": "water",
+    "pos": "n",
+    "meaning": "水；v 浇水"
+   },
+   {
+    "word": "wave",
+    "pos": "n",
+    "meaning": "波浪/挥手/浪潮；v 挥动"
+   },
+   {
+    "word": "wax",
+    "pos": "n",
+    "meaning": "蜡"
+   },
+   {
+    "word": "way",
+    "pos": "n",
+    "meaning": "路/方法/方式"
+   },
+   {
+    "word": "weak",
+    "pos": "a",
+    "meaning": "弱的/差的"
+   },
+   {
+    "word": "wealth",
+    "pos": "n",
+    "meaning": "财富/大量"
+   },
+   {
+    "word": "weapon",
+    "pos": "n",
+    "meaning": "武器"
+   },
+   {
+    "word": "wear",
+    "pos": "v",
+    "meaning": "穿/戴/磨损"
+   },
+   {
+    "word": "weather",
+    "pos": "n",
+    "meaning": "天气"
+   },
+   {
+    "word": "web",
+    "pos": "n",
+    "meaning": "网/蜘蛛网"
+   },
+   {
+    "word": "wedding",
+    "pos": "n",
+    "meaning": "婚礼"
+   },
+   {
+    "word": "week",
+    "pos": "n",
+    "meaning": "星期/周"
+   },
+   {
+    "word": "weekend",
+    "pos": "n",
+    "meaning": "周末"
+   },
+   {
+    "word": "weep",
+    "pos": "v",
+    "meaning": "哭泣/流泪"
+   },
+   {
+    "word": "weigh",
+    "pos": "v",
+    "meaning": "称重/权衡/重达"
+   },
+   {
+    "word": "weight",
+    "pos": "n",
+    "meaning": "重量/重要性/重物"
+   },
+   {
+    "word": "welcome",
+    "pos": "v",
+    "meaning": "欢迎；a 受欢迎的"
+   },
+   {
+    "word": "well",
+    "pos": "ad",
+    "meaning": "好/相当；n 井"
+   },
+   {
+    "word": "west",
+    "pos": "n",
+    "meaning": "西方；a 西方的"
+   },
+   {
+    "word": "wet",
+    "pos": "a",
+    "meaning": "湿的/多雨的"
+   },
+   {
+    "word": "whale",
+    "pos": "n",
+    "meaning": "鲸"
+   },
+   {
+    "word": "wheat",
+    "pos": "n",
+    "meaning": "小麦"
+   },
+   {
+    "word": "wheel",
+    "pos": "n",
+    "meaning": "轮子/方向盘"
+   },
+   {
+    "word": "whether",
+    "pos": "conj",
+    "meaning": "是否"
+   },
+   {
+    "word": "while",
+    "pos": "conj",
+    "meaning": "当…时/然而；n 一会儿"
+   },
+   {
+    "word": "whip",
+    "pos": "n",
+    "meaning": "鞭子；v 鞭打/搅打"
+   },
+   {
+    "word": "whisper",
+    "pos": "v",
+    "meaning": "低声说；n 耳语"
+   },
+   {
+    "word": "white",
+    "pos": "a",
+    "meaning": "白色的；n 白色"
+   },
+   {
+    "word": "wide",
+    "pos": "a",
+    "meaning": "宽的/广泛的"
+   },
+   {
+    "word": "width",
+    "pos": "n",
+    "meaning": "宽度"
+   },
+   {
+    "word": "wild",
+    "pos": "a",
+    "meaning": "野生的/狂热的/荒凉的"
+   },
+   {
+    "word": "willing",
+    "pos": "a",
+    "meaning": "愿意的/乐意的"
+   },
+   {
+    "word": "win",
+    "pos": "v",
+    "meaning": "赢/获得；n 胜利"
+   },
+   {
+    "word": "wind",
+    "pos": "n",
+    "meaning": "风；v 缠绕/蜿蜒"
+   },
+   {
+    "word": "window",
+    "pos": "n",
+    "meaning": "窗户/窗口"
+   },
+   {
+    "word": "wine",
+    "pos": "n",
+    "meaning": "葡萄酒/酒"
+   },
+   {
+    "word": "wing",
+    "pos": "n",
+    "meaning": "翅膀/机翼/侧翼"
+   },
+   {
+    "word": "winner",
+    "pos": "n",
+    "meaning": "获胜者"
+   },
+   {
+    "word": "winter",
+    "pos": "n",
+    "meaning": "冬天"
+   },
+   {
+    "word": "wipe",
+    "pos": "v",
+    "meaning": "擦/抹"
+   },
+   {
+    "word": "wire",
+    "pos": "n",
+    "meaning": "电线/金属丝；v 接线"
+   },
+   {
+    "word": "wise",
+    "pos": "a",
+    "meaning": "明智的/聪明的"
+   },
+   {
+    "word": "wish",
+    "pos": "v",
+    "meaning": "希望/祝愿；n 愿望"
+   },
+   {
+    "word": "within",
+    "pos": "prep",
+    "meaning": "在…之内"
+   },
+   {
+    "word": "without",
+    "pos": "prep",
+    "meaning": "没有/在…之外"
+   },
+   {
+    "word": "witness",
+    "pos": "n",
+    "meaning": "目击者/证人；v 目睹"
+   },
+   {
+    "word": "wolf",
+    "pos": "n",
+    "meaning": "狼"
+   },
+   {
+    "word": "woman",
+    "pos": "n",
+    "meaning": "女人/妇女"
+   },
+   {
+    "word": "wonder",
+    "pos": "v",
+    "meaning": "想知道/惊讶；n 奇迹"
+   },
+   {
+    "word": "wonderful",
+    "pos": "a",
+    "meaning": "精彩的/绝妙的"
+   },
+   {
+    "word": "wood",
+    "pos": "n",
+    "meaning": "木头/树林"
+   },
+   {
+    "word": "wooden",
+    "pos": "a",
+    "meaning": "木制的/呆板的"
+   },
+   {
+    "word": "wool",
+    "pos": "n",
+    "meaning": "羊毛/毛线"
+   },
+   {
+    "word": "word",
+    "pos": "n",
+    "meaning": "词/话语/诺言"
+   },
+   {
+    "word": "work",
+    "pos": "v",
+    "meaning": "工作/起作用；n 工作/作品"
+   },
+   {
+    "word": "worker",
+    "pos": "n",
+    "meaning": "工人/工作者"
+   },
+   {
+    "word": "world",
+    "pos": "n",
+    "meaning": "世界/领域"
+   },
+   {
+    "word": "worm",
+    "pos": "n",
+    "meaning": "虫/蠕虫"
+   },
+   {
+    "word": "worry",
+    "pos": "v",
+    "meaning": "担心/烦恼；n 忧虑"
+   },
+   {
+    "word": "worth",
+    "pos": "a",
+    "meaning": "值得的；n 价值"
+   },
+   {
+    "word": "wrap",
+    "pos": "v",
+    "meaning": "包/裹；n 包裹物"
+   },
+   {
+    "word": "wrist",
+    "pos": "n",
+    "meaning": "手腕"
+   },
+   {
+    "word": "write",
+    "pos": "v",
+    "meaning": "写/写作"
+   },
+   {
+    "word": "wrong",
+    "pos": "a",
+    "meaning": "错误的/不对的"
+   },
+   {
+    "word": "yard",
+    "pos": "n",
+    "meaning": "院子/码"
+   },
+   {
+    "word": "yawn",
+    "pos": "v",
+    "meaning": "打哈欠"
+   },
+   {
+    "word": "year",
+    "pos": "n",
+    "meaning": "年/年度"
+   },
+   {
+    "word": "yell",
+    "pos": "v",
+    "meaning": "叫喊"
+   },
+   {
+    "word": "yellow",
+    "pos": "a",
+    "meaning": "黄色的；n 黄色"
+   },
+   {
+    "word": "yesterday",
+    "pos": "ad",
+    "meaning": "昨天"
+   },
+   {
+    "word": "yet",
+    "pos": "ad",
+    "meaning": "还/已经；conj 然而"
+   },
+   {
+    "word": "young",
+    "pos": "a",
+    "meaning": "年轻的；n 年轻人"
+   },
+   {
+    "word": "youth",
+    "pos": "n",
+    "meaning": "青春/青年"
+   },
+   {
+    "word": "zebra",
+    "pos": "n",
+    "meaning": "斑马"
+   },
+   {
+    "word": "zero",
+    "pos": "num",
+    "meaning": "零；n 零度"
+   },
+   {
+    "word": "zone",
+    "pos": "n",
+    "meaning": "地区/地带"
+   },
+   {
+    "word": "among",
+    "pos": "prep",
+    "meaning": "在…之中/之间(三者以上)"
+   },
+   {
+    "word": "around",
+    "pos": "prep",
+    "meaning": "围绕/在附近；ad 大约"
+   },
+   {
+    "word": "between",
+    "pos": "prep",
+    "meaning": "在(两者)之间"
+   },
+   {
+    "word": "into",
+    "pos": "prep",
+    "meaning": "进入/变成/撞上"
+   },
+   {
+    "word": "kindergarten",
+    "pos": "n",
+    "meaning": "幼儿园"
+   },
+   {
+    "word": "panic",
+    "pos": "n",
+    "meaning": "恐慌/惊慌；v 使恐慌"
+   },
+   {
+    "word": "style",
+    "pos": "n",
+    "meaning": "风格/样式/文体"
    }
   ],
   "社会生活": [

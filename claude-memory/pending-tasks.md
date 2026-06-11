@@ -26,7 +26,7 @@ metadata:
 
 ## 近期开发任务（5 项，来自 [[redesign-plan-2026-06]]）
 2. wordSenses 多义项扩展：**第三批 +115 已完成（2026-06-11）**，文件共 607 条、词库内命中 479/3731；继续向词频中段扩展（管线：jest 临时脚本导出未覆盖高频词→挑真多义词编写→python 合并）。注意：旧批次有 128 条键不在词库（fall/hand/head 等基础词），无害但提示编写必须从词库导出清单出发
-3. ~~六级词表长尾缺口~~ **第三批 +775 已完成（2026-06-11）**：自建 1754 词六级特征候选表 diff 词库，缺口 783，编写 775 条（word/pos/meaning）入「六级核心」组；顺手清理 14 个词根/补充双重建档的历史重复词。词库 3731→**4492**（全唯一），可拆解 1728（38%，新词多为哑词拉低占比——哑词扩词根/词源故事的后续素材）。注意：词 id 为构建时顺序分配，移词/删词会改变 id 布局，上架后不可再随意动（用户进度按 id 存）
+3. ~~六级词表长尾缺口~~ **已完成（2026-06-11，两轮）**：①六级批 +775（自建 1754 词候选表 diff，入「六级核心」），顺手清理 14 个词根/补充双重建档重复词；②基础词批 +1384（自建 2256 词四级/基础候选表 diff 缺口 1451，剔除纯语法词后编写 1381+补 7，入「日常基础」）。词库 3731→4492→**5876**（全唯一）。附带收益：wordSenses 死条目激活（命中 479→601/607）、wordOrigins 命中 204→240/307（window/money/school 故事上线）；修复 wordSenses「March」大写键死条目（键已全部小写化）。可拆解 1895（32%）。注意：词 id 为构建时顺序分配，移词/删词会改变 id 布局，上架后不可再随意动（用户进度按 id 存）
 4. 哑词扩词根：剩约 2089 个单块词（其中相当部分是真不可拆的独立词，到顶约 60% 可拆率）
 5. ~~短词根误拆审计~~ **第三批审查已完成（2026-06-11），恒真条件保留待变干表**：
    - **已修**：①数据手术——22 个假成员移出词根家族进补充词表（equ 移出 equip/equipment/frequency；ment 移出 8 个 -mentum 词只留 mental/mention/comment/mind；sol 移出 solvere/solidus/solari/insula 系 7 词只留 solar/solo；par 移出 parere/希腊语系 4 词）；②`isSuffixOnlyMatch` 后缀同形守卫——词根子串只在词尾出现且与同形后缀重合不算命中，generic 修掉 achievement/ailment/amendment/fragment 等全部 -ment 误拆；③黑名单 +11（equip/equipment/frequency/solid/console/isolate/element/examine/contaminate/discrimination/establishment）；④手工 override +23 个真词源拆块（solv/solut 解开、par 显现·生育、monu 提醒、docu 教导、ple 填满、frag 打碎、parlia 商谈等）
