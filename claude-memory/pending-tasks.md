@@ -15,8 +15,8 @@ metadata:
 ## 新方向：词源宇宙（4 项，用户已拍板，见 [[etymology-universe-plan]]）
 - A. ~~第一批 wordOrigins + 哑词"📜 身世"卡~~ **已完成（2026-06-11）**：wordOrigins.json 307 条（首批 149 + 二批 158，二批全部从词库高频哑词导出编写），词库内命中 204 词；getWordOrigin() 挂载 wordDatabase，身世卡已上线学习卡揭晓后（LearnScreen，琥珀色 originCard）+ 详情页（WordDetailScreen，联想记忆上方）；新增 wordOrigins.test.ts 4 项数据质量测试
 - B. ~~今日词源冷知识 + 分享卡~~ **已完成（2026-06-11）**：`src/data/dailyTrivia.ts`（getDailyTrivia 按日期×质数131跳步取 307 条故事池含词库外故事；buildTriviaShareMessage 配 slogan"没有一个单词是凭空来的"）；卡片在猜词页滚动区末尾（琥珀色 triviaCard，词可朗读+分享↗按钮走 RN Share 零原生依赖）；dailyTrivia.test.ts 3 项测试
-- C. 猜来历题型（词源故事选择题）← **下一个动手项**
-- D. 词源版图（替代原阶段4星系图，#6 作废合并于此）
+- C. ~~猜来历题型~~ **已完成（2026-06-11）**：`src/data/originQuiz.ts` 48 道手写选择题（choices[0] 恒正确、出题洗牌，explanation 直取 wordOrigins 身世故事="答错也开心"）；Question type 新增 'origin-quiz'；generateReviewQuestions 每场复习随机位置混入 1 道（无 wordId 不进 SM-2）；答对不自动跳题让用户读完故事（ReviewScreen）；originQuiz.test.ts 4 项测试
+- D. 词源版图（替代原阶段4星系图，#6 作废合并于此）← 词源宇宙仅剩此项，计划放下个大版本
 
 ## 近期开发任务（5 项，来自 [[redesign-plan-2026-06]]）
 2. wordSenses 多义项第二批+：继续向词频中段扩展（已覆盖 330/3731，每批约 300）

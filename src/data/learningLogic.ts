@@ -17,6 +17,7 @@ import {
 } from './wordDatabase';
 import {getMorphemeKey} from './decipherPower';
 import {getUnlearnedFamilyWords} from './wordFamilies';
+import {buildOriginQuizQuestion} from './originQuiz';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {loadAuth} from './authService';
 
@@ -667,6 +668,15 @@ export const generateReviewQuestions = (
         wordId: word.id,
       });
     }
+  }
+
+  // 彩蛋：每场复习随机混入一道「猜来历」——答错也开心，因为揭晓的答案是个故事
+  if (questions.length > 0) {
+    const pos = Math.floor(Math.random() * (questions.length + 1));
+    questions.splice(pos, 0, buildOriginQuizQuestion(0));
+    questions.forEach((q, idx) => {
+      q.id = idx + 1;
+    });
   }
   return questions;
 };

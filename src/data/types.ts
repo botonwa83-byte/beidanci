@@ -56,12 +56,14 @@ export interface Level {
 export interface Question {
   id: number;
   // word-build: options 是碎片瓦片（多选），选中集合 = 全部 isCorrect 项才算对
+  // origin-quiz: 词源故事选择题，explanation 是身世故事（答错也开心）
   type:
     | 'root-meaning'
     | 'word-meaning'
     | 'morpheme-match'
     | 'fill-blank'
-    | 'word-build';
+    | 'word-build'
+    | 'origin-quiz';
   question: string;
   options: {text: string; isCorrect: boolean}[];
   explanation: string;

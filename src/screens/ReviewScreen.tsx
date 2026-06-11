@@ -130,7 +130,10 @@ export const ReviewScreen: React.FC = () => {
           Alert.alert('保存失败', '进度保存失败，请重试');
         }
       }
-      setTimeout(() => handleNext(), 600);
+      // 猜来历答对不自动跳：揭晓的故事就是奖励，让用户读完再走
+      if (q.type !== 'origin-quiz') {
+        setTimeout(() => handleNext(), 600);
+      }
     } else {
       setWrong(n => n + 1);
       if (q.wordId) {
@@ -181,6 +184,7 @@ export const ReviewScreen: React.FC = () => {
       'morpheme-match': '词根匹配',
       'fill-blank': '例句填空',
       'word-build': '拼词工坊',
+      'origin-quiz': '🏺 猜来历',
     };
     const isBuild = isBuildQ(q);
     const answeredCorrectly =
@@ -319,7 +323,7 @@ export const ReviewScreen: React.FC = () => {
               activeOpacity={0.7}>
               <Text style={styles.confirmBtnText}>确认</Text>
             </TouchableOpacity>
-          ) : !answeredCorrectly ? (
+          ) : !answeredCorrectly || q.type === 'origin-quiz' ? (
             <TouchableOpacity
               style={styles.confirmBtn}
               onPress={handleNext}
