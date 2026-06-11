@@ -28,13 +28,11 @@ metadata:
 2. wordSenses 多义项扩展：**第三批 +115 已完成（2026-06-11）**，文件共 607 条、词库内命中 479/3731；继续向词频中段扩展（管线：jest 临时脚本导出未覆盖高频词→挑真多义词编写→python 合并）。注意：旧批次有 128 条键不在词库（fall/hand/head 等基础词），无害但提示编写必须从词库导出清单出发
 3. 六级词表长尾缺口：对照完整六级词表 diff 补词（已两批 +264）
 4. 哑词扩词根：剩约 2089 个单块词（其中相当部分是真不可拆的独立词，到顶约 60% 可拆率）
-5. 全库词源审计 + buildMorphemes 恒真条件 bug（**2026-06-11 已完成侦察，结论如下**）：
-   - bug 位置：wordDatabase.ts buildMorphemes 前缀校验 `afterPrefix.slice(0,1) + afterPrefix.slice(1).startsWith(rootId.slice(1))`——字符串拼布尔恒为真值，任何前缀都放行
-   - 影响面：1086 个带前缀拆解中 **491 个依赖恒真分支**（用 jest 临时脚本对存量 morphemes 重放"本意条件"测得）
-   - **关键：不能简单改成严格条件**——491 个里大量是正确的表层变体拆解（produce=pro+duc(t 脱落)、expect=ex+(s)pect 同化、description=de+scrib），恒真 bug 是它们的承重墙
-   - 真误拆集中在短词根：**ment**（achievement/apartment/department/excitement 等 -ment 后缀词被错当词根）、**min**（examine/contaminate/discrimination）、par（apart）等，与既有怀疑名单（min/ment/par/equ/grat/sol）吻合
-   - 修复方向：写词根表层变体感知的存在性校验（允许末辅音脱落/首辅音同化），对短词根加严格白名单或 override，修完全量 diff 存量拆解人工审计；会改动 破译力/拼词工坊 的输入，测试需同步看
-   - 复现脚本：临时 jest 测试遍历 allWords，对 morphemes[0].type==='prefix' 的词重放条件 `after.startsWith(rootId) || after.slice(1).startsWith(rootId.slice(1))`，不满足即依赖恒真分支
+5. ~~短词根误拆审计~~ **第三批审查已完成（2026-06-11），恒真条件保留待变干表**：
+   - **已修**：①数据手术——22 个假成员移出词根家族进补充词表（equ 移出 equip/equipment/frequency；ment 移出 8 个 -mentum 词只留 mental/mention/comment/mind；sol 移出 solvere/solidus/solari/insula 系 7 词只留 solar/solo；par 移出 parere/希腊语系 4 词）；②`isSuffixOnlyMatch` 后缀同形守卫——词根子串只在词尾出现且与同形后缀重合不算命中，generic 修掉 achievement/ailment/amendment/fragment 等全部 -ment 误拆；③黑名单 +11（equip/equipment/frequency/solid/console/isolate/element/examine/contaminate/discrimination/establishment）；④手工 override +23 个真词源拆块（solv/solut 解开、par 显现·生育、monu 提醒、docu 教导、ple 填满、frag 打碎、parlia 商谈等）
+   - 净效果：全库 3731 词中 50 词拆解变化，全部为修复或改善，jest 全过
+   - **恒真条件原样保留**（buildMorphemes 前缀校验，已加注释说明）：实验证明简单收紧会误删几百个正确前缀——拉丁词根变干（cap/cip/cept、fac/fic/fect、ced/cess、quest/quir、vis/vic）超出 startsWith 规则；待将来建立**完整词根变干表**后再收紧。词根家族词表已净化，恒真条件残余危害仅限装饰性前缀块（如 action 显示 ac- 前缀）
+   - 审计工具：jest 临时脚本 dump 全库 `word :: morphemes :: rootId` 排序快照，改动前后 diff 审查（本次三轮快照对比定位全部尾巴）
 6. ~~词根星系图（原阶段4）~~ → 已并入词源宇宙 D（词源版图）
 7. 收缩 tab（原阶段5）：语法并入词缀、6→5 ——**与内购冲突**：语法 tab 是 3 个付费门禁之一，撤 tab 前需重新设计门禁位置
 

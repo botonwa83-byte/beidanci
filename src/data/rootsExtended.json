@@ -780,8 +780,6 @@
         "equalize",
         "equate",
         "equation",
-        "equip",
-        "equipment",
         "equivalent",
         "equity",
         "adequate"
@@ -1715,14 +1713,7 @@
       "level": 5,
       "words": [
         "solar",
-        "solve",
-        "solution",
-        "absolute",
-        "solo",
-        "solid",
-        "isolate",
-        "console",
-        "dissolve"
+        "solo"
       ]
     },
     "ment": {
@@ -1733,14 +1724,7 @@
       "words": [
         "mental",
         "mention",
-        "comment",
-        "monument",
-        "document",
-        "experiment",
-        "argument",
-        "element",
-        "supplement",
-        "implement"
+        "comment"
       ]
     },
     "par": {
@@ -1753,11 +1737,7 @@
         "prepare",
         "separate",
         "repair",
-        "pair",
-        "apparent",
-        "parallel",
-        "parent",
-        "transparent"
+        "pair"
       ]
     },
     "hab": {

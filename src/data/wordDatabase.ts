@@ -806,6 +806,11 @@ const buildMorphemes = (
     for (const v of variants) {
       if (remaining.startsWith(v) && remaining.length > v.length + 1) {
         const afterPrefix = remaining.slice(v.length);
+        // 注意：下面的条件因运算优先级恒为真值（字符串+布尔），等于不校验词根。
+        // 2026-06-11 审计结论：不能简单改严——拉丁词根变干（cap/cip/cept、fac/fic/fect、
+        // ced/cess、quest/quir…）远超 startsWith 类规则，收紧会误删几百个正确前缀。
+        // 真正的误拆已由 词根家族词表手术 + isSuffixOnlyMatch + DECOMPOSE_BLOCKLIST 治理；
+        // 此处待建立完整词根变干表后再收紧。
         if (
           afterPrefix.startsWith(rootId) ||
           afterPrefix.slice(0, 1) +
@@ -5817,6 +5822,24 @@ const DECOMPOSE_BLOCKLIST = new Set<string>([
   'torment',
   'impart',
   'intact',
+  // 第三批审查（2026-06-11）：equip/equipment 是古法语 esquiper(装船)、frequency 是
+  // frequens(拥挤)，都不含 equ(平等)；solid 是 solidus(坚固)、console 是 solari(安慰)、
+  // isolate 是 insula(岛)，都不是 sol(太阳/单独)；element 本源不明；
+  // examine 是 exigere(称量)、contaminate 是 tangere(触)、discrimination 是
+  // discernere(分辨)，都不含 min(小)
+  'equip',
+  'equipment',
+  'frequency',
+  'solid',
+  'console',
+  'isolate',
+  'element',
+  'examine',
+  'contaminate',
+  'discrimination',
+  // establishment 含 sta 子串会误接 sta(站立)；拉黑后由"词内基词分解"
+  // 升级为 establish + -ment
+  'establishment',
 ]);
 
 // 词根条目按长度降序：长词根更具体，必须先于短词根匹配
@@ -6080,6 +6103,128 @@ Object.assign(extendedMorphemeOverrides, {
   ],
 });
 
+// 第三批词源审计（2026-06-11）：从 equ/ment/sol/par 词根家族移出的词，
+// 按真实词源手工拆块（solvere 解开 / parere 显现·生育 / monere 提醒 / plere 填满…）
+Object.assign(extendedMorphemeOverrides, {
+  solve: [
+    {text: 'solv', type: 'root', meaning: '解开/松开', origin: '拉丁语 solvere', color: '#3B82A0'},
+  ],
+  resolve: [
+    {text: 're-', type: 'prefix', meaning: '再次/回', origin: '拉丁语', color: '#A03B82'},
+    {text: 'solv', type: 'root', meaning: '解开/松开', origin: '拉丁语 solvere', color: '#3B82A0'},
+  ],
+  dissolve: [
+    {text: 'dis-', type: 'prefix', meaning: '分开', origin: '拉丁语', color: '#A03B82'},
+    {text: 'solv', type: 'root', meaning: '解开/松开', origin: '拉丁语 solvere', color: '#3B82A0'},
+  ],
+  solution: [
+    {text: 'solut', type: 'root', meaning: '解开/松开', origin: '拉丁语 solvere', color: '#3B82A0'},
+    {text: '-ion', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  absolute: [
+    {text: 'ab-', type: 'prefix', meaning: '离开/脱离', origin: '拉丁语', color: '#A03B82'},
+    {text: 'solut', type: 'root', meaning: '解开(束缚)→完全的', origin: '拉丁语 solvere', color: '#3B82A0'},
+  ],
+  apparent: [
+    {text: 'ap-', type: 'prefix', meaning: '朝向(ad)', origin: '拉丁语', color: '#A03B82'},
+    {text: 'par', type: 'root', meaning: '显现', origin: '拉丁语 parere', color: '#27AE60'},
+    {text: '-ent', type: 'suffix', meaning: '形容词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  transparent: [
+    {text: 'trans-', type: 'prefix', meaning: '穿过', origin: '拉丁语', color: '#A03B82'},
+    {text: 'par', type: 'root', meaning: '显现', origin: '拉丁语 parere', color: '#27AE60'},
+    {text: '-ent', type: 'suffix', meaning: '形容词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  parent: [
+    {text: 'par', type: 'root', meaning: '生育', origin: '拉丁语 parere', color: '#27AE60'},
+    {text: '-ent', type: 'suffix', meaning: '…的人', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  parallel: [
+    {text: 'para-', type: 'prefix', meaning: '在旁边', origin: '希腊语', color: '#A03B82'},
+    {text: 'allel', type: 'root', meaning: '彼此', origin: '希腊语 allelon', color: '#16A085'},
+  ],
+  monument: [
+    {text: 'monu', type: 'root', meaning: '提醒', origin: '拉丁语 monere', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  document: [
+    {text: 'docu', type: 'root', meaning: '教导', origin: '拉丁语 docere', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  argument: [
+    {text: 'argu', type: 'root', meaning: '论证/说理', origin: '拉丁语 arguere', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  experiment: [
+    {text: 'experi', type: 'root', meaning: '尝试/试验', origin: '拉丁语 experiri', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  supplement: [
+    {text: 'sup-', type: 'prefix', meaning: '从下(sub)', origin: '拉丁语', color: '#A03B82'},
+    {text: 'ple', type: 'root', meaning: '填满', origin: '拉丁语 plere', color: '#9B59B6'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  implement: [
+    {text: 'im-', type: 'prefix', meaning: '进入(in)', origin: '拉丁语', color: '#A03B82'},
+    {text: 'ple', type: 'root', meaning: '填满', origin: '拉丁语 plere', color: '#9B59B6'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  fundamental: [
+    {text: 'funda', type: 'root', meaning: '基底', origin: '拉丁语 fundus', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+    {text: '-al', type: 'suffix', meaning: '形容词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  apart: [
+    {text: 'a-', type: 'prefix', meaning: '处于/朝向', origin: '法语 à', color: '#A03B82'},
+    {text: 'part', type: 'root', meaning: '部分/分开', origin: '拉丁语 pars', color: '#27AE60'},
+  ],
+  apartment: [
+    {text: 'apart', type: 'root', meaning: '隔开/单独', origin: '意大利语 appartare', color: '#27AE60'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  department: [
+    {text: 'de-', type: 'prefix', meaning: '分离', origin: '拉丁语', color: '#A03B82'},
+    {text: 'part', type: 'root', meaning: '部分/分开', origin: '拉丁语 pars', color: '#27AE60'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  parliament: [
+    {text: 'parlia', type: 'root', meaning: '商谈/说话', origin: '古法语 parler', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  complement: [
+    {text: 'com-', type: 'prefix', meaning: '完全', origin: '拉丁语', color: '#A03B82'},
+    {text: 'ple', type: 'root', meaning: '填满', origin: '拉丁语 plere', color: '#9B59B6'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  procurement: [
+    {text: 'pro-', type: 'prefix', meaning: '向前/代为', origin: '拉丁语', color: '#A03B82'},
+    {text: 'cur', type: 'root', meaning: '关心/操办', origin: '拉丁语 curare', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  fragment: [
+    {text: 'frag', type: 'root', meaning: '打碎', origin: '拉丁语 frangere', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  sediment: [
+    {text: 'sedi', type: 'root', meaning: '坐/沉降', origin: '拉丁语 sedere', color: '#C0843B'},
+    {text: '-ment', type: 'suffix', meaning: '名词后缀', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+});
+
+// 后缀同形守卫：achievement 含 "ment"，但那是 -ment 名词后缀不是词根 ment(心智)。
+// 词根子串若只在词尾出现、且与同形后缀重合，不算词根命中。
+const suffixShapes = new Set(
+  suffixes.flatMap(s =>
+    s.suffix
+      .replace('-', '')
+      .split('/')
+      .map(v => v.replace('-', '')),
+  ),
+);
+const isSuffixOnlyMatch = (text: string, rootId: string): boolean =>
+  suffixShapes.has(rootId) &&
+  text.indexOf(rootId) === text.length - rootId.length;
+
 const analyzeSupplementMorphemes = (word: string, meaning: string) => {
   const lowerWord = word.toLowerCase();
 
@@ -6101,7 +6246,11 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
   }
 
   for (const [rootId, rootData] of extendedRootEntries) {
-    if (lowerWord.includes(rootId) && lowerWord.length > rootId.length + 1) {
+    if (
+      lowerWord.includes(rootId) &&
+      lowerWord.length > rootId.length + 1 &&
+      !isSuffixOnlyMatch(lowerWord, rootId)
+    ) {
       return buildMorphemes(
         word,
         rootId,
@@ -6120,7 +6269,10 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
     ) {
       const afterPrefix = lowerWord.slice(cleanPrefix.length);
       for (const [rootId, rootData] of extendedRootEntries) {
-        if (afterPrefix.includes(rootId)) {
+        if (
+          afterPrefix.includes(rootId) &&
+          !isSuffixOnlyMatch(afterPrefix, rootId)
+        ) {
           return buildMorphemes(
             word,
             rootId,
@@ -6139,7 +6291,10 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
       if (lowerWord.endsWith(v) && lowerWord.length > v.length + 2) {
         const beforeSuffix = lowerWord.slice(0, -v.length);
         for (const [rootId, rootData] of extendedRootEntries) {
-          if (beforeSuffix.includes(rootId)) {
+          if (
+            beforeSuffix.includes(rootId) &&
+            !isSuffixOnlyMatch(beforeSuffix, rootId)
+          ) {
             return buildMorphemes(
               word,
               rootId,

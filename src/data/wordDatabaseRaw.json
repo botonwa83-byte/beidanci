@@ -4672,16 +4672,6 @@
      "meaning": "方程"
     },
     {
-     "word": "equip",
-     "pos": "v",
-     "meaning": "装备"
-    },
-    {
-     "word": "equipment",
-     "pos": "n",
-     "meaning": "设备"
-    },
-    {
      "word": "equivalent",
      "pos": "a",
      "meaning": "等价的"
@@ -4705,11 +4695,6 @@
      "word": "equilibrium",
      "pos": "n",
      "meaning": "平衡"
-    },
-    {
-     "word": "frequency",
-     "pos": "n",
-     "meaning": "频率"
     }
    ]
   },
@@ -7732,44 +7717,9 @@
      "meaning": "太阳的"
     },
     {
-     "word": "solve",
-     "pos": "v",
-     "meaning": "解决"
-    },
-    {
-     "word": "solution",
-     "pos": "n",
-     "meaning": "解决方案"
-    },
-    {
-     "word": "absolute",
-     "pos": "a",
-     "meaning": "绝对的"
-    },
-    {
      "word": "solo",
      "pos": "a",
      "meaning": "单独的"
-    },
-    {
-     "word": "solid",
-     "pos": "a",
-     "meaning": "固体的；坚固的"
-    },
-    {
-     "word": "isolate",
-     "pos": "v",
-     "meaning": "隔离"
-    },
-    {
-     "word": "console",
-     "pos": "v",
-     "meaning": "安慰"
-    },
-    {
-     "word": "dissolve",
-     "pos": "v",
-     "meaning": "溶解"
     }
    ]
   },
@@ -7795,46 +7745,6 @@
      "word": "comment",
      "pos": "n",
      "meaning": "评论"
-    },
-    {
-     "word": "monument",
-     "pos": "n",
-     "meaning": "纪念碑"
-    },
-    {
-     "word": "document",
-     "pos": "n",
-     "meaning": "文件"
-    },
-    {
-     "word": "experiment",
-     "pos": "n",
-     "meaning": "实验"
-    },
-    {
-     "word": "argument",
-     "pos": "n",
-     "meaning": "争论"
-    },
-    {
-     "word": "element",
-     "pos": "n",
-     "meaning": "元素"
-    },
-    {
-     "word": "supplement",
-     "pos": "n",
-     "meaning": "补充"
-    },
-    {
-     "word": "implement",
-     "pos": "v",
-     "meaning": "实施"
-    },
-    {
-     "word": "fundamental",
-     "pos": "a",
-     "meaning": "基本的"
     },
     {
      "word": "mind",
@@ -7875,26 +7785,6 @@
      "word": "pair",
      "pos": "n",
      "meaning": "一对"
-    },
-    {
-     "word": "apparent",
-     "pos": "a",
-     "meaning": "明显的"
-    },
-    {
-     "word": "parallel",
-     "pos": "a",
-     "meaning": "平行的"
-    },
-    {
-     "word": "parent",
-     "pos": "n",
-     "meaning": "父母"
-    },
-    {
-     "word": "transparent",
-     "pos": "a",
-     "meaning": "透明的"
     }
    ]
   },
@@ -18849,6 +18739,116 @@
     "word": "tycoon",
     "pos": "n",
     "meaning": "大亨"
+   },
+   {
+    "word": "equip",
+    "pos": "v",
+    "meaning": "装备"
+   },
+   {
+    "word": "equipment",
+    "pos": "n",
+    "meaning": "设备"
+   },
+   {
+    "word": "frequency",
+    "pos": "n",
+    "meaning": "频率"
+   },
+   {
+    "word": "solve",
+    "pos": "v",
+    "meaning": "解决"
+   },
+   {
+    "word": "solution",
+    "pos": "n",
+    "meaning": "解决方案"
+   },
+   {
+    "word": "absolute",
+    "pos": "a",
+    "meaning": "绝对的"
+   },
+   {
+    "word": "solid",
+    "pos": "a",
+    "meaning": "固体的；坚固的"
+   },
+   {
+    "word": "isolate",
+    "pos": "v",
+    "meaning": "隔离"
+   },
+   {
+    "word": "console",
+    "pos": "v",
+    "meaning": "安慰"
+   },
+   {
+    "word": "dissolve",
+    "pos": "v",
+    "meaning": "溶解"
+   },
+   {
+    "word": "monument",
+    "pos": "n",
+    "meaning": "纪念碑"
+   },
+   {
+    "word": "document",
+    "pos": "n",
+    "meaning": "文件"
+   },
+   {
+    "word": "experiment",
+    "pos": "n",
+    "meaning": "实验"
+   },
+   {
+    "word": "argument",
+    "pos": "n",
+    "meaning": "争论"
+   },
+   {
+    "word": "element",
+    "pos": "n",
+    "meaning": "元素"
+   },
+   {
+    "word": "supplement",
+    "pos": "n",
+    "meaning": "补充"
+   },
+   {
+    "word": "implement",
+    "pos": "v",
+    "meaning": "实施"
+   },
+   {
+    "word": "fundamental",
+    "pos": "a",
+    "meaning": "基本的"
+   },
+   {
+    "word": "apparent",
+    "pos": "a",
+    "meaning": "明显的"
+   },
+   {
+    "word": "parallel",
+    "pos": "a",
+    "meaning": "平行的"
+   },
+   {
+    "word": "parent",
+    "pos": "n",
+    "meaning": "父母"
+   },
+   {
+    "word": "transparent",
+    "pos": "a",
+    "meaning": "透明的"
    }
   ],
   "六级核心": [
