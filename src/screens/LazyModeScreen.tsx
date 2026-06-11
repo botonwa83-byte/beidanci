@@ -7,6 +7,8 @@ import {
   Pressable,
   AppState,
   Alert,
+  Animated,
+  Easing,
 } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
@@ -48,6 +50,9 @@ export const LazyModeScreen: React.FC = () => {
   const [paused, setPaused] = useState(false);
   const [saving, setSaving] = useState(false);
   const spokenRef = useRef(-1);
+  // 倒计时动画（0=刚开始，1=时间用尽）与揭示淡入
+  const drainAnim = useRef(new Animated.Value(0)).current;
+  const revealAnim = useRef(new Animated.Value(0)).current;
 
   const prepareBatch = useCallback((p: UserProgress) => {
     const q = buildLazyQueue(p);
@@ -118,6 +123,45 @@ export const LazyModeScreen: React.FC = () => {
     const t = setInterval(() => setElapsed(e => e + TICK_MS), TICK_MS);
     return () => clearInterval(t);
   }, [step, paused]);
+
+  // 8 秒倒计时平滑动画：换词归零重来，暂停时冻结、继续时按剩余时长接着走
+  useEffect(() => {
+    if (!step || !timings) {
+      return;
+    }
+    if (paused) {
+      drainAnim.stopAnimation();
+      return;
+    }
+    const remaining = Math.max(0, timings.nextAt - elapsed);
+    Animated.timing(drainAnim, {
+      toValue: 1,
+      duration: remaining,
+      easing: Easing.linear,
+      useNativeDriver: false,
+    }).start();
+    // 仅在换词/暂停切换时重启动画；elapsed 由心跳驱动，不参与依赖
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [idx, paused, step, timings, drainAnim]);
+
+  useEffect(() => {
+    drainAnim.setValue(0);
+  }, [idx, drainAnim]);
+
+  // 释义揭示瞬间淡入上移，把视线拉回词义
+  const showMeaningNow = !!(step && timings && elapsed >= timings.meaningAt);
+  useEffect(() => {
+    if (showMeaningNow) {
+      Animated.timing(revealAnim, {
+        toValue: 1,
+        duration: 280,
+        easing: Easing.out(Easing.quad),
+        useNativeDriver: true,
+      }).start();
+    } else {
+      revealAnim.setValue(0);
+    }
+  }, [showMeaningNow, revealAnim]);
 
   // 到点切词/收尾
   useEffect(() => {
@@ -248,7 +292,25 @@ export const LazyModeScreen: React.FC = () => {
   const seg = segmentAt(segments, idx);
   const remainMs = (queue.steps.length - idx) * STEP_MS - elapsed;
   const halfway = idx + 1 > queue.steps.length / 2;
-  const wordPct = Math.min(100, Math.round((elapsed / timings!.nextAt) * 100));
+  const drainWidth = drainAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['100%', '0%'],
+  });
+  const drainColor = drainAnim.interpolate({
+    inputRange: [0, 0.7, 1],
+    outputRange: [colors.primary, colors.primary, colors.warning],
+  });
+  const revealStyle = {
+    opacity: revealAnim,
+    transform: [
+      {
+        translateY: revealAnim.interpolate({
+          inputRange: [0, 1],
+          outputRange: [8, 0],
+        }),
+      },
+    ],
+  };
 
   return (
     <Pressable
@@ -272,6 +334,16 @@ export const LazyModeScreen: React.FC = () => {
         </Text>
       </View>
 
+      {/* 本词 8 秒倒计时：平滑消逝，最后一段变琥珀色提醒"快切了，专注看" */}
+      <View style={styles.drainTrack}>
+        <Animated.View
+          style={[
+            styles.drainFill,
+            {width: drainWidth, backgroundColor: drainColor},
+          ]}
+        />
+      </View>
+
       <View style={styles.cardArea}>
         {/* 轮次小目标：把一长批切成可完成的小段 */}
         <Text style={styles.passTag}>
@@ -288,27 +360,32 @@ export const LazyModeScreen: React.FC = () => {
         )}
 
         {showMeaning ? (
-          <Text style={styles.meaning}>{getFullMeaning(word)}</Text>
+          <Animated.View style={revealStyle}>
+            <Text style={styles.meaning}>{getFullMeaning(word)}</Text>
+
+            {/* 可拆词亮出词根块：8 秒里多塞一层记忆抓手 */}
+            {word.morphemes.length >= 2 && (
+              <View style={styles.morphRow}>
+                {word.morphemes.map((m, i) => (
+                  <View
+                    key={i}
+                    style={[
+                      styles.morphChip,
+                      {backgroundColor: m.color + '22'},
+                    ]}>
+                    <Text style={[styles.morphChipText, {color: m.color}]}>
+                      {m.text}
+                    </Text>
+                    <Text style={styles.morphChipMeaning}>{m.meaning}</Text>
+                  </View>
+                ))}
+              </View>
+            )}
+          </Animated.View>
         ) : (
           <Text style={styles.meaningPlaceholder}>
             {step!.pass === 1 ? '…' : '想一想它的意思'}
           </Text>
-        )}
-
-        {/* 可拆词亮出词根块：8 秒里多塞一层记忆抓手 */}
-        {showMeaning && word.morphemes.length >= 2 && (
-          <View style={styles.morphRow}>
-            {word.morphemes.map((m, i) => (
-              <View
-                key={i}
-                style={[styles.morphChip, {backgroundColor: m.color + '22'}]}>
-                <Text style={[styles.morphChipText, {color: m.color}]}>
-                  {m.text}
-                </Text>
-                <Text style={styles.morphChipMeaning}>{m.meaning}</Text>
-              </View>
-            ))}
-          </View>
         )}
 
         {showExample && (
@@ -322,10 +399,6 @@ export const LazyModeScreen: React.FC = () => {
         )}
       </View>
 
-      {/* 本词 8 秒倒计时细条：节奏可感知 */}
-      <View style={styles.wordTimerTrack}>
-        <View style={[styles.wordTimerFill, {width: `${wordPct}%`}]} />
-      </View>
       <Text style={styles.hint}>
         {paused
           ? '⏸ 已暂停 · 点屏幕继续'
@@ -434,17 +507,17 @@ const createStyles = (colors: ThemeColors) =>
       marginTop: 10,
       lineHeight: 20,
     },
-    wordTimerTrack: {
-      height: 3,
+    drainTrack: {
+      height: 4,
       marginHorizontal: 28,
+      marginTop: 12,
       borderRadius: 2,
       backgroundColor: colors.surfaceLight,
       overflow: 'hidden',
-      marginBottom: 10,
     },
-    wordTimerFill: {
+    drainFill: {
       height: '100%',
-      backgroundColor: colors.primary + '88',
+      borderRadius: 2,
     },
     hint: {
       textAlign: 'center',

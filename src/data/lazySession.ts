@@ -56,9 +56,7 @@ export const buildLazyQueue = (progress: UserProgress): LazyQueue | null => {
     mission = generateNextBatch(progress);
   }
 
-  const newWords = remainingNew(mission)
-    .map(byId)
-    .filter(Boolean) as Word[];
+  const newWords = remainingNew(mission).map(byId).filter(Boolean) as Word[];
   const reviewWords = remainingReview(mission)
     .map(byId)
     .filter(Boolean) as Word[];
@@ -138,10 +136,10 @@ export interface LazySegment {
 }
 
 const SEG_LABELS: Record<string, string> = {
-  'review': '🔁 复习热身',
-  'pass1': '✨ 第 1 遍 · 见个面',
-  'pass2': '🤔 第 2 遍 · 先回忆',
-  'pass3': '🎯 第 3 遍 · 钉进脑子',
+  review: '🔁 复习热身',
+  pass1: '✨ 第 1 遍 · 见个面',
+  pass2: '🤔 第 2 遍 · 先回忆',
+  pass3: '🎯 第 3 遍 · 钉进脑子',
 };
 
 /** 把队列切成连续段（复习/第N遍），播放时显示"第 2 遍 · 8/10"的小目标进度 */
@@ -161,10 +159,17 @@ export const lazySegments = (queue: LazyQueue): LazySegment[] => {
 };
 
 /** 当前步所在段及段内进度 */
-export const segmentAt = (segs: LazySegment[], idx: number): {label: string; pos: number; count: number} => {
+export const segmentAt = (
+  segs: LazySegment[],
+  idx: number,
+): {label: string; pos: number; count: number} => {
   for (let i = segs.length - 1; i >= 0; i--) {
     if (idx >= segs[i].startIdx) {
-      return {label: segs[i].label, pos: idx - segs[i].startIdx + 1, count: segs[i].count};
+      return {
+        label: segs[i].label,
+        pos: idx - segs[i].startIdx + 1,
+        count: segs[i].count,
+      };
     }
   }
   return {label: '', pos: 1, count: 1};

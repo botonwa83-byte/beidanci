@@ -198,7 +198,8 @@
       "Bash(echo \"---files exit: $?\")",
       "Bash(echo \"---grep exit: $?\")",
       "Bash(git merge *)",
-      "Bash(cp .claude/settings.local.json /tmp/settings.current.json)"
+      "Bash(cp .claude/settings.local.json /tmp/settings.current.json)",
+      "Bash(git commit -q -m 'feat: 付费墙与内购功能合入最新主线（freemium 买断制） *)"
     ]
   }
 }
