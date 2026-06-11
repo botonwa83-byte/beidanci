@@ -14,8 +14,8 @@ metadata:
 
 ## 新方向：词源宇宙（4 项，用户已拍板，见 [[etymology-universe-plan]]）
 - A. ~~第一批 wordOrigins + 哑词"📜 身世"卡~~ **已完成（2026-06-11）**：wordOrigins.json 307 条（首批 149 + 二批 158，二批全部从词库高频哑词导出编写），词库内命中 204 词；getWordOrigin() 挂载 wordDatabase，身世卡已上线学习卡揭晓后（LearnScreen，琥珀色 originCard）+ 详情页（WordDetailScreen，联想记忆上方）；新增 wordOrigins.test.ts 4 项数据质量测试
-- B. 今日词源冷知识 + 分享卡（流行性最高杠杆）← **下一个动手项**；首批 149 条里 103 条词库外的故事（sandwich/robot/boycott…）正好做冷知识池
-- C. 猜来历题型（词源故事选择题）
+- B. ~~今日词源冷知识 + 分享卡~~ **已完成（2026-06-11）**：`src/data/dailyTrivia.ts`（getDailyTrivia 按日期×质数131跳步取 307 条故事池含词库外故事；buildTriviaShareMessage 配 slogan"没有一个单词是凭空来的"）；卡片在猜词页滚动区末尾（琥珀色 triviaCard，词可朗读+分享↗按钮走 RN Share 零原生依赖）；dailyTrivia.test.ts 3 项测试
+- C. 猜来历题型（词源故事选择题）← **下一个动手项**
 - D. 词源版图（替代原阶段4星系图，#6 作废合并于此）
 
 ## 近期开发任务（5 项，来自 [[redesign-plan-2026-06]]）

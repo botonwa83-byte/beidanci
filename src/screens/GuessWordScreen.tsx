@@ -30,6 +30,7 @@ import {
   consumeGuess,
 } from '../data/guessQuota';
 import {useEntitlement} from '../data/useEntitlement';
+import {getDailyTrivia, buildTriviaShareMessage} from '../data/dailyTrivia';
 import {speak} from '../utils/speech';
 import {theme, useAppTheme, ThemeColors} from '../theme';
 
@@ -179,6 +180,16 @@ export const GuessWordScreen: React.FC = () => {
       // 用户取消分享，忽略
     }
   }, [totalDecoded, maxCombo, showcaseWord]);
+
+  const trivia = useMemo(() => getDailyTrivia(), []);
+
+  const shareTrivia = useCallback(async () => {
+    try {
+      await Share.share({message: buildTriviaShareMessage(trivia)});
+    } catch {
+      // 用户取消分享，忽略
+    }
+  }, [trivia]);
 
   const jumpToDaily = useCallback(() => {
     const pos = deck.findIndex(w => w.word === dailyWord.word);
@@ -440,6 +451,31 @@ export const GuessWordScreen: React.FC = () => {
               </View>
             </View>
           )}
+
+          {/* 今日词源冷知识：每天一条身世故事，配分享自传播 */}
+          <View style={styles.triviaCard}>
+            <View style={styles.triviaHead}>
+              <Text style={styles.triviaTitle}>🧠 今日词源冷知识</Text>
+              <TouchableOpacity
+                onPress={shareTrivia}
+                activeOpacity={0.7}
+                accessibilityRole="button"
+                accessibilityLabel="分享今日词源冷知识">
+                <Text style={styles.triviaShare}>分享 ↗</Text>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              onPress={() => speak(trivia.word)}
+              activeOpacity={0.6}
+              accessibilityRole="button"
+              accessibilityLabel={`朗读 ${trivia.word}`}>
+              <Text style={styles.triviaWord}>
+                {trivia.word} <Text style={styles.triviaSpeaker}>🔊</Text>
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.triviaStory}>{trivia.story}</Text>
+            <Text style={styles.triviaSlogan}>没有一个单词是凭空来的</Text>
+          </View>
         </View>
       </ScrollView>
 
@@ -756,6 +792,42 @@ const createStyles = (colors: ThemeColors) =>
       fontWeight: '600',
       lineHeight: 20,
       textAlign: 'center',
+    },
+    // 今日词源冷知识
+    triviaCard: {
+      marginTop: 18,
+      backgroundColor: colors.warningBg,
+      borderRadius: 14,
+      padding: 16,
+      borderLeftWidth: 3,
+      borderLeftColor: colors.warning,
+    },
+    triviaHead: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 8,
+    },
+    triviaTitle: {
+      fontSize: 12,
+      color: colors.warning,
+      fontWeight: '700',
+      letterSpacing: 1,
+    },
+    triviaShare: {fontSize: 13, color: colors.primary, fontWeight: '600'},
+    triviaWord: {
+      fontSize: 20,
+      color: colors.textPrimary,
+      fontWeight: '700',
+      marginBottom: 6,
+    },
+    triviaSpeaker: {fontSize: 14},
+    triviaStory: {fontSize: 14, color: colors.textSecondary, lineHeight: 22},
+    triviaSlogan: {
+      marginTop: 10,
+      fontSize: 11,
+      color: colors.textTertiary,
+      textAlign: 'right',
     },
     judgeRow: {flexDirection: 'row', gap: 10, marginTop: 16},
     judgeButton: {
