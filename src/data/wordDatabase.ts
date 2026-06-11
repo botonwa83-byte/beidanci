@@ -3,6 +3,7 @@ import rawData from './wordDatabaseRaw.json';
 import enrichmentData from './wordEnrichment.json';
 import wordExamplesData from './wordExamples.json';
 import rootsExtendedData from './rootsExtended.json';
+import wordSensesData from './wordSenses.json';
 import {translationService} from '../services/translationService';
 
 const enrichment: Record<
@@ -6218,6 +6219,23 @@ const {words: rootWords, roots} = buildRootWords();
 const supplementWords = buildSupplementWords();
 
 export const allWords: Word[] = [...rootWords, ...supplementWords];
+
+// ==================== 多义项合并 ====================
+// wordSenses.json 是人工编写的多义项词典（transmission 不只有"传输"还有"变速箱"），
+// 优先级最高；没收录的词保持原 meanings（serviceDef 或 meaning 按 / 拆分）
+{
+  const senses = wordSensesData as Record<string, string[]>;
+  for (const w of allWords) {
+    const s = senses[w.word.toLowerCase()];
+    if (s && s.length > 0) {
+      w.meanings = s;
+    }
+  }
+}
+
+// 完整释义：多义项用"；"连接展示（学习卡/详情页用），单义项回退 meaning
+export const getFullMeaning = (w: Word): string =>
+  w.meanings && w.meanings.length > 1 ? w.meanings.join('；') : w.meaning;
 
 // ==================== 词内基词分解（哑词升级二号通道） ====================
 // 大量"哑词"其实是派生词：happiness = happy + -ness，useful = use + -ful。

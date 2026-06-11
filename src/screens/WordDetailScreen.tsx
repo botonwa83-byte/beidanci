@@ -10,7 +10,7 @@ import {RouteProp} from '@react-navigation/native';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {Word} from '../data/types';
-import {theme, useAppTheme, ThemeColors} from '../theme';
+import {useAppTheme, ThemeColors} from '../theme';
 import {
   loadProgress,
   saveProgress,
@@ -103,7 +103,18 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({
           <Text style={styles.pos}>{word.partOfSpeech}</Text>
         </View>
 
-        <Text style={styles.meaning}>{word.meaning}</Text>
+        {word.meanings && word.meanings.length > 1 ? (
+          <View style={styles.sensesWrap}>
+            {word.meanings.map((m, i) => (
+              <Text key={i} style={styles.senseItem}>
+                <Text style={styles.senseNum}>{i + 1}. </Text>
+                {m}
+              </Text>
+            ))}
+          </View>
+        ) : (
+          <Text style={styles.meaning}>{word.meaning}</Text>
+        )}
       </View>
 
       {/* Morpheme blocks */}
@@ -344,6 +355,16 @@ const createStyles = (colors: ThemeColors) =>
       color: colors.textPrimary,
       fontWeight: '500',
     },
+    // 多义项列表
+    sensesWrap: {gap: 4, alignSelf: 'stretch'},
+    senseItem: {
+      fontSize: 17,
+      color: colors.textPrimary,
+      fontWeight: '500',
+      lineHeight: 26,
+      textAlign: 'center',
+    },
+    senseNum: {color: colors.textTertiary, fontWeight: '400'},
     section: {
       paddingHorizontal: 20,
       marginBottom: 20,

@@ -26,7 +26,12 @@ import {
   getOverallStats,
   generateNextBatch,
 } from '../data/learningLogic';
-import {allWords, coreRoots, getWordsByRoot} from '../data/wordDatabase';
+import {
+  allWords,
+  coreRoots,
+  getWordsByRoot,
+  getFullMeaning,
+} from '../data/wordDatabase';
 import {
   computeDecipherPower,
   getHarvestBatch,
@@ -355,7 +360,7 @@ export const LearnScreen: React.FC = () => {
           )}
 
           {harvestOpen ? (
-            <Text style={styles.wordMeaningBig}>{hw.meaning}</Text>
+            <Text style={styles.wordMeaningBig}>{getFullMeaning(hw)}</Text>
           ) : (
             <View style={styles.guessPrompt}>
               <Text style={styles.guessPromptTitle}>⚡ 你没背过这个词</Text>
@@ -528,7 +533,7 @@ export const LearnScreen: React.FC = () => {
             )}
 
             {revealed ? (
-              <Text style={styles.wordMeaningBig}>{word.meaning}</Text>
+              <Text style={styles.wordMeaningBig}>{getFullMeaning(word)}</Text>
             ) : (
               <View style={styles.guessPrompt}>
                 <Text style={styles.guessPromptTitle}>🔮 先别看答案</Text>
@@ -976,7 +981,9 @@ export const LearnScreen: React.FC = () => {
                 </TouchableOpacity>
                 {flipReview ? (
                   <>
-                    <Text style={styles.flashMeaning}>{word.meaning}</Text>
+                    <Text style={styles.flashMeaning}>
+                      {getFullMeaning(word)}
+                    </Text>
                     <View style={styles.flashMorphRow}>
                       {word.morphemes.map((m, i) => (
                         <Text
