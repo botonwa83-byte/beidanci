@@ -128,7 +128,23 @@
       "Bash(npx ts-node *)",
       "Bash(git add *)",
       "Bash(git commit -m ' *)",
-      "Bash(echo \"=== tsc exit $? ===\")"
+      "Bash(echo \"=== tsc exit $? ===\")",
+      "Bash(python3 -c \"import json; d=json.load\\(open\\('src/data/wordDatabaseRaw.json'\\)\\); rs=d['roots']; print\\('roots:',len\\(rs\\)\\); import collections; lens=[len\\(r['meaning']\\) for r in rs]; print\\('meaning样例:'\\); [print\\(' ',r['id'],'=',r['meaning']\\) for r in rs[:15]]\")",
+      "Bash(cd *)",
+      "Bash(grep -c 'styles\\\\.__TRACKED_VAR__\\\\b' src/screens/LearnScreen.tsx)",
+      "Bash(echo \"tsc exit: $?\")",
+      "Bash(python3 -c \"import json;d=json.load\\(open\\('src/data/wordDatabaseRaw.json'\\)\\);print\\('mal' in {r['id'] for r in d['roots']}\\)\")",
+      "Bash(python3 -c ' *)",
+      "Bash(claude update *)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(claude install *)",
+      "Bash(python3 *)",
+      "Bash(npx eslint *)",
+      "Bash(npm test *)",
+      "Bash(git stash *)",
+      "Bash(npx jest *)",
+      "Bash(cp /tmp/coverage.test.ts __tests__/tmp_coverage.test.ts)",
+      "Bash(sed -i '' 's|../Documents/trae_projects/beidanci/src|../src|' __tests__/tmp_coverage.test.ts)"
     ]
   }
 }

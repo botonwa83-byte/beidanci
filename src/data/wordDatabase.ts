@@ -63,14 +63,14 @@ export const levels: Level[] = [
     name: '精通',
     description: '深度词根扩展',
     targetWords: 1600,
-    rootsCount: 148,
+    rootsCount: 149,
   },
   {
     level: 8,
     name: '大师',
     description: '全部词汇掌握',
     targetWords: 3467,
-    rootsCount: 148,
+    rootsCount: 149,
   },
 ];
 
@@ -87,7 +87,7 @@ export const prefixes: Prefix[] = [
   },
   {
     id: 'p_in1',
-    prefix: 'in-',
+    prefix: 'in-/im-/il-/ir-',
     meaning: '不/向内',
     origin: '拉丁语',
     color: '#FF6B6B',
@@ -141,7 +141,7 @@ export const prefixes: Prefix[] = [
   },
   {
     id: 'p_sub',
-    prefix: 'sub-',
+    prefix: 'sub-/sup-/sus-/suc-/suf-',
     meaning: '在...下面',
     origin: '拉丁语',
     color: '#F7DC6F',
@@ -150,7 +150,7 @@ export const prefixes: Prefix[] = [
   },
   {
     id: 'p_con',
-    prefix: 'con-/com-',
+    prefix: 'con-/com-/col-/cor-',
     meaning: '共同/一起',
     origin: '拉丁语',
     color: '#85C1E9',
@@ -210,7 +210,7 @@ export const prefixes: Prefix[] = [
   },
   {
     id: 'p_ob',
-    prefix: 'ob-',
+    prefix: 'ob-/oc-/op-/of-',
     meaning: '对着/阻碍',
     origin: '拉丁语',
     color: '#CD6155',
@@ -219,7 +219,7 @@ export const prefixes: Prefix[] = [
   },
   {
     id: 'p_ad',
-    prefix: 'ad-',
+    prefix: 'ad-/ac-/ap-/ar-/as-/at-/af-/ag-/al-/an-',
     meaning: '朝向/附加',
     origin: '拉丁语',
     color: '#5DADE2',
@@ -749,14 +749,26 @@ const buildMorphemes = (
     color: string;
   };
   const lowerWord = word.toLowerCase();
+  // In-word breakdown blocks are tiny — show only the primary sense of the
+  // root (multi-sense glosses like "看/观察/注视" live on the root card).
+  const rootPrimary = rootMeaning.split('/')[0];
 
   // Check manual overrides first
   const override = morphemeOverrides[lowerWord];
   if (override) {
+    // override 的词根块如果就是匹配到的词根，用其主释义；
+    // 否则按块自己的词根名查表（telephone 匹配到 tele 时，phon 块要查 phon 的释义而不是"远"）
     return override.map(([text, type, meaning]) => ({
       text,
       type,
-      meaning: type === 'root' ? rootMeaning : meaning,
+      meaning:
+        type === 'root'
+          ? text.replace(/-/g, '') === rootId
+            ? rootPrimary
+            : (extendedRoots as any)[text.replace(/-/g, '')]?.meaning?.split(
+                '/',
+              )[0] || rootPrimary
+          : meaning,
       origin: type === 'root' ? rootOrigin : '',
       color:
         type === 'root'
@@ -852,7 +864,7 @@ const buildMorphemes = (
   morphemes.push({
     text: rootId,
     type: 'root',
-    meaning: rootMeaning,
+    meaning: rootPrimary,
     origin: rootOrigin,
     color: rootColor,
   });
@@ -5759,11 +5771,305 @@ const buildRootWords = (): {words: Word[]; roots: WordRoot[]} => {
   return {words, roots};
 };
 
+// ==================== 严格全覆盖分解器 ====================
+// word = [前缀×≤2] + 词根 + [后缀×≤2]，每个字母都必须被覆盖才算拆解成功。
+// 结构约束很强，但拼写巧合仍可能产生假词源（如 present ≠ pre+sent），
+// 凡人工审查发现的误拆都进黑名单（黑名单对宽松路径同样生效）。
+// 词源依据：turb(骚乱)≠urb(城市)；anesthesia=an+aisthesis(感觉)；
+// orchestra 来自 orkheisthai(跳舞)；catastrophe=kata+strophe(转折)；
+// lucrative 来自 lucrum(利润)；tectonic 来自 tekton(建造者)≠tegere(遮盖)；
+// allegory=allos(其他)+agoreuein(说)。
+const DECOMPOSE_BLOCKLIST = new Set<string>([
+  'turbulence',
+  'turbulent',
+  'disturb',
+  'disturbance',
+  'anesthesia',
+  'orchestra',
+  'orchestrate',
+  'catastrophe',
+  'catastrophic',
+  'lucrative',
+  'tectonic',
+  'allegory',
+]);
+
+type StrictMorpheme = {
+  text: string;
+  type: 'prefix' | 'root' | 'suffix';
+  meaning: string;
+  origin: string;
+  color: string;
+};
+
+type AffixInfo = {meaning: string; origin: string; color: string};
+
+// 前缀变体表：[变体, 词缀信息]，长变体优先
+const strictPrefixVariants: [string, AffixInfo][] = [];
+for (const p of prefixes) {
+  for (const v of p.prefix.replace(/-/g, '').split('/')) {
+    if (v) {
+      strictPrefixVariants.push([v, p]);
+    }
+  }
+}
+// 主表没列的常用前缀
+const EXTRA_PREFIX_DEFS: [string[], AffixInfo][] = [
+  [['non'], {meaning: '否定/非', origin: '拉丁语', color: '#E74C3C'}],
+  [
+    ['im', 'ir', 'il'],
+    {meaning: '否定/向内', origin: '拉丁语', color: '#FF6B6B'},
+  ],
+  [['en', 'em'], {meaning: '使成为', origin: '拉丁语', color: '#16A085'}],
+  [['fore'], {meaning: '预先/前面', origin: '古英语', color: '#8E44AD'}],
+  [['co'], {meaning: '共同', origin: '拉丁语', color: '#85C1E9'}],
+  [['semi'], {meaning: '半', origin: '拉丁语', color: '#F39C12'}],
+  [['multi'], {meaning: '多', origin: '拉丁语', color: '#27AE60'}],
+];
+for (const [texts, info] of EXTRA_PREFIX_DEFS) {
+  for (const t of texts) {
+    strictPrefixVariants.push([t, info]);
+  }
+}
+strictPrefixVariants.sort((a, b) => b[0].length - a[0].length);
+
+// 后缀变体表：主表 + 主表没列全的常见变体
+const strictSuffixVariants: [string, AffixInfo][] = [];
+for (const s of suffixes) {
+  for (const v of s.suffix.replace(/-/g, '').split('/')) {
+    if (v) {
+      strictSuffixVariants.push([v, s]);
+    }
+  }
+}
+const EXTRA_SUFFIX_DEFS: [string[], AffixInfo][] = [
+  [
+    ['ion', 'ation', 'ition', 'ication'],
+    {meaning: '行为/状态(名词)', origin: '拉丁语', color: '#00D4AA'},
+  ],
+  [
+    ['ancy', 'ency'],
+    {meaning: '状态/性质(名词)', origin: '拉丁语', color: '#1ABC9C'},
+  ],
+  [['ism'], {meaning: '主义/学说', origin: '希腊语', color: '#9B59B6'}],
+  [['ian'], {meaning: '...的人/...的', origin: '拉丁语', color: '#E67E22'}],
+  [['ee'], {meaning: '被...的人', origin: '法语', color: '#E67E22'}],
+  [['ship'], {meaning: '身份/关系(名词)', origin: '古英语', color: '#3498DB'}],
+  [['hood'], {meaning: '身份/时期(名词)', origin: '古英语', color: '#3498DB'}],
+  [['dom'], {meaning: '领域/状态(名词)', origin: '古英语', color: '#3498DB'}],
+  [['age'], {meaning: '行为/状态(名词)', origin: '法语', color: '#00D4AA'}],
+  [
+    ['ery', 'ory', 'ary'],
+    {meaning: '场所/...的', origin: '拉丁语', color: '#F39C12'},
+  ],
+  [['th'], {meaning: '名词后缀', origin: '古英语', color: '#1ABC9C'}],
+  [['ward'], {meaning: '向...方向', origin: '古英语', color: '#8E44AD'}],
+  [['y'], {meaning: '...的(形容词)', origin: '古英语', color: '#2ECC71'}],
+  [['ish'], {meaning: '像...的/有点...', origin: '古英语', color: '#2ECC71'}],
+  [['en'], {meaning: '使变.../材质的', origin: '古英语', color: '#16A085'}],
+  [['ing'], {meaning: '令人...的/进行', origin: '古英语', color: '#95A5A6'}],
+  [['ed'], {meaning: '感到...的', origin: '古英语', color: '#95A5A6'}],
+];
+for (const [texts, info] of EXTRA_SUFFIX_DEFS) {
+  for (const t of texts) {
+    strictSuffixVariants.push([t, info]);
+  }
+}
+strictSuffixVariants.sort((a, b) => b[0].length - a[0].length);
+
+// 把 rest 解析成 ≤max 个前缀的精确拼接，失败返回 null
+const matchPrefixChain = (
+  rest: string,
+  max: number,
+): StrictMorpheme[] | null => {
+  if (rest === '') {
+    return [];
+  }
+  if (max === 0) {
+    return null;
+  }
+  for (const [v, p] of strictPrefixVariants) {
+    if (rest.startsWith(v)) {
+      const tail = matchPrefixChain(rest.slice(v.length), max - 1);
+      if (tail) {
+        return [
+          {
+            text: v + '-',
+            type: 'prefix',
+            meaning: p.meaning,
+            origin: p.origin,
+            color: p.color,
+          },
+          ...tail,
+        ];
+      }
+    }
+  }
+  return null;
+};
+
+// 把 rest 解析成 ≤max 个后缀的精确拼接，失败返回 null
+const matchSuffixChain = (
+  rest: string,
+  max: number,
+): StrictMorpheme[] | null => {
+  if (rest === '') {
+    return [];
+  }
+  if (max === 0) {
+    return null;
+  }
+  for (const [v, s] of strictSuffixVariants) {
+    if (rest.startsWith(v)) {
+      const tail = matchSuffixChain(rest.slice(v.length), max - 1);
+      if (tail) {
+        return [
+          {
+            text: '-' + v,
+            type: 'suffix',
+            meaning: s.meaning,
+            origin: s.origin,
+            color: s.color,
+          },
+          ...tail,
+        ];
+      }
+    }
+  }
+  return null;
+};
+
+// 测试/审查用导出：返回 null 表示无法严格拆解
+export const strictDecompose = (word: string): StrictMorpheme[] | null => {
+  const lower = word.toLowerCase();
+  if (DECOMPOSE_BLOCKLIST.has(lower)) {
+    return null;
+  }
+  // 长词根优先（覆盖更具体），词根 <3 字母不参与
+  const rootEntries = Object.entries(extendedRoots).sort(
+    (a, b) => b[0].length - a[0].length,
+  );
+  for (const [rootId, rootData] of rootEntries) {
+    if (rootId.length < 3) {
+      continue;
+    }
+    let idx = lower.indexOf(rootId);
+    while (idx !== -1) {
+      const pre = lower.slice(0, idx);
+      const post = lower.slice(idx + rootId.length);
+      const prefixChain = matchPrefixChain(pre, 2);
+      if (prefixChain) {
+        const suffixChain = matchSuffixChain(post, 2);
+        if (suffixChain) {
+          // 纯词根本身（无前后缀）不算"拆解"
+          if (prefixChain.length + suffixChain.length === 0) {
+            return null;
+          }
+          return [
+            ...prefixChain,
+            {
+              text: rootId,
+              type: 'root',
+              meaning: (rootData as any).meaning.split('/')[0],
+              origin: (rootData as any).origin,
+              color: (rootData as any).color,
+            },
+            ...suffixChain,
+          ];
+        }
+      }
+      idx = lower.indexOf(rootId, idx + 1);
+    }
+  }
+  return null;
+};
+
+// 人工校正的拆解（自动通道拆不对/拆不好的词）
+Object.assign(extendedMorphemeOverrides, {
+  astronomy: [
+    {
+      text: 'astro',
+      type: 'root',
+      meaning: '星',
+      origin: '希腊语 astron',
+      color: '#F4D03F',
+    },
+    {
+      text: '-nomy',
+      type: 'suffix',
+      meaning: '学科/法则',
+      origin: '希腊语 nomos',
+      color: '#9B59B6',
+    },
+  ],
+  astronaut: [
+    {
+      text: 'astro',
+      type: 'root',
+      meaning: '星',
+      origin: '希腊语 astron',
+      color: '#F4D03F',
+    },
+    {
+      text: '-naut',
+      type: 'suffix',
+      meaning: '航行者',
+      origin: '希腊语 nautes',
+      color: '#2980B9',
+    },
+  ],
+  atmosphere: [
+    {
+      text: 'atmo',
+      type: 'root',
+      meaning: '蒸汽/空气',
+      origin: '希腊语 atmos',
+      color: '#5DADE2',
+    },
+    {
+      text: 'sphere',
+      type: 'root',
+      meaning: '球体',
+      origin: '希腊语 sphaira',
+      color: '#2471A3',
+    },
+  ],
+  thermometer: [
+    {
+      text: 'thermo',
+      type: 'root',
+      meaning: '热',
+      origin: '希腊语 thermos',
+      color: '#E74C3C',
+    },
+    {
+      text: '-meter',
+      type: 'suffix',
+      meaning: '测量器',
+      origin: '希腊语 metron',
+      color: '#1ABC9C',
+    },
+  ],
+});
+
 const analyzeSupplementMorphemes = (word: string, meaning: string) => {
   const lowerWord = word.toLowerCase();
 
   if (extendedMorphemeOverrides[lowerWord]) {
     return extendedMorphemeOverrides[lowerWord];
+  }
+
+  // 人工审查过的假词源：不拆，直接走单块
+  if (DECOMPOSE_BLOCKLIST.has(lowerWord)) {
+    return [
+      {
+        text: word,
+        type: 'root' as const,
+        meaning,
+        origin: '',
+        color: '#A06F3B',
+      },
+    ];
   }
 
   for (const [rootId, rootData] of Object.entries(extendedRoots)) {
@@ -5819,6 +6125,12 @@ const analyzeSupplementMorphemes = (word: string, meaning: string) => {
     }
   }
 
+  // 最后机会：严格全覆盖分解（每个字母都对上才采纳）
+  const strict = strictDecompose(word);
+  if (strict) {
+    return strict;
+  }
+
   return [
     {text: word, type: 'root' as const, meaning, origin: '', color: '#A06F3B'},
   ];
@@ -5835,6 +6147,7 @@ const buildSupplementWords = (): Word[] => {
     日常基础: 1,
     社会生活: 3,
     学术科技: 5,
+    六级核心: 6,
     进阶词汇: 7,
   };
 
@@ -5879,6 +6192,159 @@ const {words: rootWords, roots} = buildRootWords();
 const supplementWords = buildSupplementWords();
 
 export const allWords: Word[] = [...rootWords, ...supplementWords];
+
+// ==================== 词内基词分解（哑词升级二号通道） ====================
+// 大量"哑词"其实是派生词：happiness = happy + -ness，useful = use + -ful。
+// 它们的"词根"是词库里的另一个单词。后置升级：单块词若能严格拆成
+// [前缀×≤2] + 词库基词 + [后缀×≤2]（全字母覆盖 + 基词含义与本词含义共字），
+// 就用基词当词根块——学过 happy 的人，happiness 就是免费的。
+{
+  const STOP_CHARS = new Set('的地得者性化人物使有是不在为与和或'.split(''));
+  const sharesMeaningChar = (a: string, b: string): boolean => {
+    const charsA = new Set(
+      a.split('').filter(c => /[一-鿿]/.test(c) && !STOP_CHARS.has(c)),
+    );
+    for (const c of b) {
+      if (charsA.has(c) && !STOP_CHARS.has(c)) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  const byText = new Map<string, Word>();
+  for (const w of allWords) {
+    const key = w.word.toLowerCase();
+    if (!byText.has(key)) {
+      byText.set(key, w);
+    }
+  }
+
+  // 基词在派生词中的拼写形还原：happi → happy，creat → create
+  const baseCandidates = (mid: string): string[] => {
+    const cands = [mid];
+    if (mid.endsWith('i')) {
+      cands.push(mid.slice(0, -1) + 'y');
+    }
+    cands.push(mid + 'e');
+    return cands;
+  };
+
+  for (const w of allWords) {
+    if (w.morphemes.length >= 2) {
+      continue;
+    }
+    const lower = w.word.toLowerCase();
+    let upgraded: Word['morphemes'] | null = null;
+
+    // 枚举前缀链可消耗的长度（含空链）
+    const preOptions: {len: number; chain: Word['morphemes']}[] = [
+      {len: 0, chain: []},
+    ];
+    for (const [v, p] of strictPrefixVariants) {
+      if (lower.startsWith(v) && v.length < lower.length) {
+        preOptions.push({
+          len: v.length,
+          chain: [
+            {
+              text: v + '-',
+              type: 'prefix',
+              meaning: p.meaning,
+              origin: p.origin,
+              color: p.color,
+            },
+          ],
+        });
+      }
+    }
+
+    for (const pre of preOptions) {
+      if (upgraded) {
+        break;
+      }
+      const afterPre = lower.slice(pre.len);
+      // 枚举后缀链（0/1/2 个），剩余中段作为基词候选
+      const sufOptions: {len: number; chain: Word['morphemes']}[] = [
+        {len: 0, chain: []},
+      ];
+      for (const [v1, s1] of strictSuffixVariants) {
+        if (afterPre.endsWith(v1) && v1.length < afterPre.length) {
+          const sufM1 = {
+            text: '-' + v1,
+            type: 'suffix' as const,
+            meaning: s1.meaning,
+            origin: s1.origin,
+            color: s1.color,
+          };
+          sufOptions.push({len: v1.length, chain: [sufM1]});
+          const rest1 = afterPre.slice(0, -v1.length);
+          for (const [v2, s2] of strictSuffixVariants) {
+            if (rest1.endsWith(v2) && v2.length < rest1.length) {
+              sufOptions.push({
+                len: v1.length + v2.length,
+                chain: [
+                  {
+                    text: '-' + v2,
+                    type: 'suffix' as const,
+                    meaning: s2.meaning,
+                    origin: s2.origin,
+                    color: s2.color,
+                  },
+                  sufM1,
+                ],
+              });
+            }
+          }
+        }
+      }
+
+      for (const suf of sufOptions) {
+        if (pre.len + suf.len === 0) {
+          continue; // 没有任何词缀，不算拆解
+        }
+        const mid = afterPre.slice(0, afterPre.length - suf.len);
+        if (mid.length < 3) {
+          continue;
+        }
+        let found: Word | undefined;
+        for (const cand of baseCandidates(mid)) {
+          const base = byText.get(cand);
+          if (
+            base &&
+            base.id !== w.id &&
+            base.morphemes.length < 2 && // 基词本身是不可再拆的词（避免与词根体系重复）
+            sharesMeaningChar(base.meaning, w.meaning)
+          ) {
+            found = base;
+            break;
+          }
+        }
+        if (found) {
+          // 基词块用基词原形（而非词内拼写形），与"学过基词"的破译力 key 对齐
+          upgraded = [
+            ...pre.chain,
+            {
+              text: found.word.toLowerCase(),
+              type: 'root',
+              meaning: found.meaning.split('/')[0],
+              origin: '',
+              color: '#A06F3B',
+            },
+            ...suf.chain,
+          ];
+          break;
+        }
+      }
+    }
+
+    if (upgraded) {
+      w.morphemes = upgraded;
+      w.associationStory = `${w.word} = ${upgraded
+        .map(m => `${m.text}(${m.meaning})`)
+        .join(' + ')}`;
+    }
+  }
+}
 export const coreRoots: WordRoot[] = roots;
 
 // Build root index for O(1) lookup instead of O(n) filter

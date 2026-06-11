@@ -17,7 +17,9 @@ const DEFAULT: GuessProgress = {totalDecoded: 0, maxCombo: 0};
 export const loadGuessProgress = async (): Promise<GuessProgress> => {
   try {
     const raw = await AsyncStorage.getItem(STORAGE_KEY);
-    if (!raw) return {...DEFAULT};
+    if (!raw) {
+      return {...DEFAULT};
+    }
     const parsed = JSON.parse(raw);
     return {
       totalDecoded: Number(parsed.totalDecoded) || 0,
@@ -61,7 +63,9 @@ export interface RankInfo {
 export const getRank = (total: number): RankInfo => {
   let idx = 0;
   for (let i = 0; i < RANKS.length; i++) {
-    if (total >= RANKS[i].min) idx = i;
+    if (total >= RANKS[i].min) {
+      idx = i;
+    }
   }
   const cur = RANKS[idx];
   const next = RANKS[idx + 1] || null;
@@ -81,9 +85,17 @@ export const getDailyWord = (): GuessWord => {
 
 /** 连击对应的鼓励语 */
 export const comboCheer = (combo: number): string => {
-  if (combo >= 8) return '势不可挡！';
-  if (combo >= 5) return '手感爆棚 🔥';
-  if (combo >= 3) return '连对，状态来了！';
-  if (combo >= 2) return '漂亮，继续！';
+  if (combo >= 8) {
+    return '势不可挡！';
+  }
+  if (combo >= 5) {
+    return '手感爆棚 🔥';
+  }
+  if (combo >= 3) {
+    return '连对，状态来了！';
+  }
+  if (combo >= 2) {
+    return '漂亮，继续！';
+  }
   return '';
 };

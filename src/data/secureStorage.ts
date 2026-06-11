@@ -11,7 +11,9 @@ const MIGRATION_KEY = 'beidanci_auth_migrated';
 
 export const secureGet = async (key: string): Promise<string | null> => {
   try {
-    const result = await Keychain.getGenericPassword({service: `${SERVICE_NAME}.${key}`});
+    const result = await Keychain.getGenericPassword({
+      service: `${SERVICE_NAME}.${key}`,
+    });
     if (result) {
       return result.password;
     }
@@ -23,7 +25,9 @@ export const secureGet = async (key: string): Promise<string | null> => {
 
 export const secureSet = async (key: string, value: string): Promise<void> => {
   try {
-    await Keychain.setGenericPassword(key, value, {service: `${SERVICE_NAME}.${key}`});
+    await Keychain.setGenericPassword(key, value, {
+      service: `${SERVICE_NAME}.${key}`,
+    });
   } catch (e) {
     console.warn('[SecureStorage] Keychain write failed:', e);
     throw e;

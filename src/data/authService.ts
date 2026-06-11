@@ -49,18 +49,21 @@ export const maskPhone = (phone: string): string => {
 };
 
 // Validate phone number (supports international formats)
-export const isValidPhone = (phone: string, countryCode: string = '+86'): boolean => {
+export const isValidPhone = (
+  phone: string,
+  countryCode: string = '+86',
+): boolean => {
   const rules: Record<string, RegExp> = {
-    '+86': /^1[3-9]\d{9}$/,       // China: 11 digits starting with 1
-    '+1': /^[2-9]\d{9}$/,          // US/Canada: 10 digits
-    '+44': /^7\d{9}$/,             // UK: 10 digits starting with 7
-    '+81': /^[0-9]\d{9,10}$/,      // Japan: 10-11 digits
-    '+82': /^1\d{9,10}$/,          // Korea: 10-11 digits
-    '+852': /^[5-9]\d{7}$/,        // Hong Kong: 8 digits
-    '+853': /^6\d{7}$/,            // Macau: 8 digits
-    '+886': /^9\d{8}$/,            // Taiwan: 9 digits
-    '+65': /^[89]\d{7}$/,          // Singapore: 8 digits
-    '+60': /^1\d{8,9}$/,           // Malaysia: 9-10 digits
+    '+86': /^1[3-9]\d{9}$/, // China: 11 digits starting with 1
+    '+1': /^[2-9]\d{9}$/, // US/Canada: 10 digits
+    '+44': /^7\d{9}$/, // UK: 10 digits starting with 7
+    '+81': /^[0-9]\d{9,10}$/, // Japan: 10-11 digits
+    '+82': /^1\d{9,10}$/, // Korea: 10-11 digits
+    '+852': /^[5-9]\d{7}$/, // Hong Kong: 8 digits
+    '+853': /^6\d{7}$/, // Macau: 8 digits
+    '+886': /^9\d{8}$/, // Taiwan: 9 digits
+    '+65': /^[89]\d{7}$/, // Singapore: 8 digits
+    '+60': /^1\d{8,9}$/, // Malaysia: 9-10 digits
   };
   const regex = rules[countryCode];
   if (regex) {

@@ -8,7 +8,15 @@ import {
   DailyMission,
   SessionStep,
 } from './types';
-import {levels, allWords, coreRoots, getWordsByRoot} from './wordDatabase';
+import {
+  levels,
+  allWords,
+  coreRoots,
+  getWordsByRoot,
+  getSimilarWords,
+} from './wordDatabase';
+import {getMorphemeKey} from './decipherPower';
+import {getUnlearnedFamilyWords} from './wordFamilies';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {loadAuth} from './authService';
 
@@ -114,15 +122,24 @@ export const generateDailyMission = (progress: UserProgress): DailyMission => {
   const plan = progress.studyPlan;
   const wordsPerDay = plan?.wordsPerDay || 25;
 
+  const completedSet = new Set(progress.completedWords);
+
   // -- Pick roots to teach today (not yet learned) --
+  // 贪心：优先教"家族未学词最多"的词根——以点带面，每个点选杠杆最大的
   const unlearnedRoots = coreRoots.filter(
     r => !progress.learnedRootIds.includes(r.id),
   );
-  const todayRoots = unlearnedRoots.slice(0, ROOTS_PER_SESSION);
+  const todayRoots = unlearnedRoots
+    .map(r => ({
+      root: r,
+      gain: getWordsByRoot(r.id).filter(w => !completedSet.has(w.id)).length,
+    }))
+    .sort((a, b) => b.gain - a.gain)
+    .slice(0, ROOTS_PER_SESSION)
+    .map(x => x.root);
   const todayRootIds = todayRoots.map(r => r.id);
 
   // -- Pick new words: prioritize words from today's roots --
-  const completedSet = new Set(progress.completedWords);
   let newWordIds: number[] = [];
 
   // Words from today's new roots
@@ -183,19 +200,44 @@ export const buildLearningSession = (
 ): SessionStep[] => {
   const steps: SessionStep[] = [];
 
-  // Step 1: Introduce today's new roots
-  for (const rootId of mission.newRoots) {
-    if (!progress.learnedRootIds.includes(rootId)) {
-      steps.push({type: 'root-intro', rootId});
-    }
-  }
-
-  // Step 2: Learn new words (from those roots first, then others)
+  // Step 1: Learn new words. Root words come first (see generateDailyMission),
+  // and each not-yet-learned root is introduced in context on the first word
+  // that carries it — no separate "memorize this root" gate up front.
   const remaining = mission.newWordIds.filter(
     id => !mission.completedNewWords.includes(id),
   );
+  const rootsToIntroduce = new Set(
+    mission.newRoots.filter(id => !progress.learnedRootIds.includes(id)),
+  );
+  // 派生带学：每个锚点词后顺手带走 ≤3 个未学派生词（组块化记忆），
+  // 每组最多 4 个家族步骤，避免 session 膨胀
+  const usedSatellites = new Set<number>(mission.newWordIds);
+  let familySteps = 0;
   for (const wordId of remaining.slice(0, 15)) {
-    steps.push({type: 'word-learn', wordId});
+    const word = allWords.find(w => w.id === wordId);
+    let introRootId: string | undefined;
+    if (word?.rootId && rootsToIntroduce.has(word.rootId)) {
+      introRootId = word.rootId;
+      rootsToIntroduce.delete(word.rootId);
+    }
+    steps.push({type: 'word-learn', wordId, introRootId});
+
+    if (familySteps < 4) {
+      const satellites = getUnlearnedFamilyWords(
+        wordId,
+        progress.completedWords,
+        3,
+      ).filter(s => !usedSatellites.has(s.id));
+      if (satellites.length > 0) {
+        satellites.forEach(s => usedSatellites.add(s.id));
+        steps.push({
+          type: 'word-family',
+          anchorId: wordId,
+          satelliteIds: satellites.map(s => s.id),
+        });
+        familySteps++;
+      }
+    }
   }
 
   // Step 3: Quick quiz on what was just learned
@@ -309,6 +351,59 @@ export const getLearnedWords = (progress: UserProgress): Word[] => {
 
 // ==================== Question Generation ====================
 
+// 拼词工坊：给中文释义 + 碎片瓦片（正确碎片 + 干扰碎片），用户选出能拼成该词的全部碎片
+const buildWordBuildQuestion = (word: Word, id: number): Question | null => {
+  if (word.morphemes.length < 2) {
+    return null;
+  }
+  const ownKeys = new Set(word.morphemes.map(getMorphemeKey));
+  const ownTexts = new Set(word.morphemes.map(m => m.text.toLowerCase()));
+
+  // 从其他词抽干扰碎片，避免与本词碎片同形
+  const distractors: {text: string; isCorrect: boolean}[] = [];
+  const pool = [...allWords].sort(() => Math.random() - 0.5);
+  for (const w of pool) {
+    if (distractors.length >= 3) {
+      break;
+    }
+    if (w.id === word.id) {
+      continue;
+    }
+    for (const m of w.morphemes) {
+      if (distractors.length >= 3) {
+        break;
+      }
+      const key = getMorphemeKey(m);
+      const text = m.text.toLowerCase();
+      if (ownKeys.has(key) || ownTexts.has(text)) {
+        continue;
+      }
+      ownTexts.add(text); // 干扰碎片之间也不重复
+      distractors.push({text: m.text, isCorrect: false});
+    }
+  }
+  if (distractors.length < 2) {
+    return null;
+  }
+
+  const options = [
+    ...word.morphemes.map(m => ({text: m.text, isCorrect: true})),
+    ...distractors,
+  ].sort(() => Math.random() - 0.5);
+
+  return {
+    id,
+    type: 'word-build',
+    question: `用碎片拼出：「${word.meaning}」`,
+    options,
+    explanation: `${word.word} = ${word.morphemes
+      .map(m => `${m.text}(${m.meaning})`)
+      .join(' + ')}`,
+    level: word.level,
+    wordId: word.id,
+  };
+};
+
 export const generateQuestions = (
   words: Word[],
   count: number = 6,
@@ -319,6 +414,15 @@ export const generateQuestions = (
   for (let i = 0; i < Math.min(count, shuffled.length); i++) {
     const word = shuffled[i];
     const qType = i % 3;
+
+    // 刚学过的词优先用"拼词工坊"考——和词根方法论同构的测验形式
+    if (qType === 0 && word.morphemes.length >= 2) {
+      const buildQ = buildWordBuildQuestion(word, i + 1);
+      if (buildQ) {
+        questions.push(buildQ);
+        continue;
+      }
+    }
 
     if (qType === 0) {
       const distractors = allWords
@@ -442,11 +546,18 @@ export const generateReviewQuestions = (
       });
     } else if (qType === 1) {
       // Chinese -> English (reverse)
-      const distractors = allWords
-        .filter(w => w.id !== word.id)
+      // 干扰项优先用形近词：对比辨析是防干扰记忆的最好时机
+      const lookalikes = getSimilarWords(word, 3).map(w => ({
+        text: w.word,
+        isCorrect: false,
+      }));
+      const usedTexts = new Set(lookalikes.map(l => l.text));
+      const fillers = allWords
+        .filter(w => w.id !== word.id && !usedTexts.has(w.word))
         .sort(() => Math.random() - 0.5)
-        .slice(0, 3)
+        .slice(0, 3 - lookalikes.length)
         .map(w => ({text: w.word, isCorrect: false}));
+      const distractors = [...lookalikes, ...fillers];
       questions.push({
         id: i + 1,
         type: 'word-meaning',
@@ -454,7 +565,12 @@ export const generateReviewQuestions = (
         options: [...distractors, {text: word.word, isCorrect: true}].sort(
           () => Math.random() - 0.5,
         ),
-        explanation: `${word.meaning} 对应的单词是 ${word.word}`,
+        explanation:
+          lookalikes.length > 0
+            ? `${word.meaning} 对应的单词是 ${
+                word.word
+              }。注意形近词：${lookalikes.map(l => l.text).join('、')}`
+            : `${word.meaning} 对应的单词是 ${word.word}`,
         level: word.level,
         wordId: word.id,
       });
@@ -605,6 +721,32 @@ export const markWordLearned = (
     masteredRoots,
     wordReviews: {...progress.wordReviews, [wordId]: review},
     todayMission: mission,
+  };
+};
+
+// 收割：碎片全认识、自评猜对的可破译词。推理得来的记忆比死记牢，
+// 首个复习间隔直接 3 天起步（普通新词是 1 天）
+export const markWordHarvested = (
+  progress: UserProgress,
+  wordId: number,
+): UserProgress => {
+  const now = todayStr();
+  const review: WordReviewData = {
+    wordId,
+    easeFactor: SM2_DEFAULT_EASE + 0.1,
+    interval: 3,
+    repetitions: 1,
+    nextReview: addDays(now, 3),
+    lastReview: now,
+  };
+  const completedWords = progress.completedWords.includes(wordId)
+    ? progress.completedWords
+    : [...progress.completedWords, wordId];
+  return {
+    ...progress,
+    completedWords,
+    wordReviews: {...progress.wordReviews, [wordId]: review},
+    totalScore: progress.totalScore + 1,
   };
 };
 

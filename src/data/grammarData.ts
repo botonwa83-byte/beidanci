@@ -37,7 +37,11 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '辅音+y -> ies',
         description: '辅音字母 + y 结尾，变 y 为 i 加 -es',
-        examples: ['study -> studies', 'factory -> factories', 'country -> countries'],
+        examples: [
+          'study -> studies',
+          'factory -> factories',
+          'country -> countries',
+        ],
       },
       {
         pattern: '-f/-fe -> ves',
@@ -58,7 +62,11 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '+ s',
         description: '一般动词加 -s',
-        examples: ['work -> works', 'transport -> transports', 'export -> exports'],
+        examples: [
+          'work -> works',
+          'transport -> transports',
+          'export -> exports',
+        ],
       },
       {
         pattern: '-s/-sh/-ch/-x/-o + es',
@@ -84,22 +92,38 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '+ ed',
         description: '一般动词直接加 -ed',
-        examples: ['export -> exported', 'transport -> transported', 'report -> reported'],
+        examples: [
+          'export -> exported',
+          'transport -> transported',
+          'report -> reported',
+        ],
       },
       {
         pattern: '-e + d',
         description: '以 e 结尾只加 -d',
-        examples: ['describe -> described', 'produce -> produced', 'reduce -> reduced'],
+        examples: [
+          'describe -> described',
+          'produce -> produced',
+          'reduce -> reduced',
+        ],
       },
       {
         pattern: '辅音+y -> ied',
         description: '辅音 + y 结尾，变 y 为 i 加 -ed',
-        examples: ['study -> studied', 'magnify -> magnified', 'apply -> applied'],
+        examples: [
+          'study -> studied',
+          'magnify -> magnified',
+          'apply -> applied',
+        ],
       },
       {
         pattern: '重读闭音节双写',
         description: '重读闭音节结尾，双写末尾辅音字母再加 -ed',
-        examples: ['stop -> stopped', 'admit -> admitted', 'prefer -> preferred'],
+        examples: [
+          'stop -> stopped',
+          'admit -> admitted',
+          'prefer -> preferred',
+        ],
       },
     ],
     tips: '不规则动词（go->went, write->wrote）需要专门记忆',
@@ -115,17 +139,29 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '+ ing',
         description: '一般动词直接加 -ing',
-        examples: ['export -> exporting', 'transport -> transporting', 'report -> reporting'],
+        examples: [
+          'export -> exporting',
+          'transport -> transporting',
+          'report -> reporting',
+        ],
       },
       {
         pattern: '-e 去 e + ing',
         description: '以不发音 e 结尾，去 e 加 -ing',
-        examples: ['describe -> describing', 'produce -> producing', 'reduce -> reducing'],
+        examples: [
+          'describe -> describing',
+          'produce -> producing',
+          'reduce -> reducing',
+        ],
       },
       {
         pattern: '重读闭音节双写',
         description: '重读闭音节结尾，双写末尾辅音字母再加 -ing',
-        examples: ['run -> running', 'admit -> admitting', 'begin -> beginning'],
+        examples: [
+          'run -> running',
+          'admit -> admitting',
+          'begin -> beginning',
+        ],
       },
       {
         pattern: '-ie -> ying',
@@ -155,7 +191,10 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '多音节 more/most',
         description: '两个音节以上用 more/most',
-        examples: ['important -> more important', 'incredible -> most incredible'],
+        examples: [
+          'important -> more important',
+          'incredible -> most incredible',
+        ],
       },
     ],
     tips: '不规则：good->better->best, bad->worse->worst, many/much->more->most',
@@ -172,22 +211,38 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '-tion / -sion',
         description: '动词 -> 名词，表示动作或状态',
-        examples: ['transport -> transportation', 'describe -> description', 'admit -> admission'],
+        examples: [
+          'transport -> transportation',
+          'describe -> description',
+          'admit -> admission',
+        ],
       },
       {
         pattern: '-ment',
         description: '动词 -> 名词，表示行为或结果',
-        examples: ['develop -> development', 'achieve -> achievement', 'manage -> management'],
+        examples: [
+          'develop -> development',
+          'achieve -> achievement',
+          'manage -> management',
+        ],
       },
       {
         pattern: '-ness',
         description: '形容词 -> 名词，表示性质或状态',
-        examples: ['happy -> happiness', 'kind -> kindness', 'dark -> darkness'],
+        examples: [
+          'happy -> happiness',
+          'kind -> kindness',
+          'dark -> darkness',
+        ],
       },
       {
         pattern: '-ity / -ty',
         description: '形容词 -> 名词，表示性质',
-        examples: ['possible -> possibility', 'creative -> creativity', 'able -> ability'],
+        examples: [
+          'possible -> possibility',
+          'creative -> creativity',
+          'able -> ability',
+        ],
       },
     ],
   },
@@ -203,22 +258,38 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '-able / -ible',
         description: '表示"可以...的"',
-        examples: ['transport -> transportable', 'credit -> credible', 'access -> accessible'],
+        examples: [
+          'transport -> transportable',
+          'credit -> credible',
+          'access -> accessible',
+        ],
       },
       {
         pattern: '-ful',
         description: '表示"充满...的"',
-        examples: ['hope -> hopeful', 'power -> powerful', 'beauty -> beautiful'],
+        examples: [
+          'hope -> hopeful',
+          'power -> powerful',
+          'beauty -> beautiful',
+        ],
       },
       {
         pattern: '-less',
         description: '表示"没有...的"（与 -ful 相反）',
-        examples: ['hope -> hopeless', 'power -> powerless', 'care -> careless'],
+        examples: [
+          'hope -> hopeless',
+          'power -> powerless',
+          'care -> careless',
+        ],
       },
       {
         pattern: '-ous / -ious',
         description: '表示"具有...性质的"',
-        examples: ['danger -> dangerous', 'fame -> famous', 'space -> spacious'],
+        examples: [
+          'danger -> dangerous',
+          'fame -> famous',
+          'space -> spacious',
+        ],
       },
     ],
   },
@@ -234,7 +305,11 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '+ ly',
         description: '一般直接加 -ly',
-        examples: ['quick -> quickly', 'incredible -> incredibly', 'final -> finally'],
+        examples: [
+          'quick -> quickly',
+          'incredible -> incredibly',
+          'final -> finally',
+        ],
       },
       {
         pattern: '-y -> ily',
@@ -244,7 +319,11 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '-le -> ly',
         description: '以 le 结尾，去 e 加 -y',
-        examples: ['simple -> simply', 'possible -> possibly', 'terrible -> terribly'],
+        examples: [
+          'simple -> simply',
+          'possible -> possibly',
+          'terrible -> terribly',
+        ],
       },
     ],
     tips: '有些 -ly 词是形容词而非副词：friendly, lovely, lonely, likely',
@@ -267,22 +346,38 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'S + V + O',
         description: '主语 + 及物动词 + 宾语',
-        examples: ['I study English.', 'She exports products.', 'They transport goods.'],
+        examples: [
+          'I study English.',
+          'She exports products.',
+          'They transport goods.',
+        ],
       },
       {
         pattern: 'S + V + C',
         description: '主语 + 系动词 + 表语',
-        examples: ['He is a student.', 'The story sounds incredible.', 'She became famous.'],
+        examples: [
+          'He is a student.',
+          'The story sounds incredible.',
+          'She became famous.',
+        ],
       },
       {
         pattern: 'S + V + O + O',
         description: '主语 + 动词 + 间接宾语 + 直接宾语',
-        examples: ['He gave me a book.', 'She taught us English.', 'I told him the truth.'],
+        examples: [
+          'He gave me a book.',
+          'She taught us English.',
+          'I told him the truth.',
+        ],
       },
       {
         pattern: 'S + V + O + C',
         description: '主语 + 动词 + 宾语 + 宾补',
-        examples: ['We call him Tom.', 'The news made her happy.', 'I found it incredible.'],
+        examples: [
+          'We call him Tom.',
+          'The news made her happy.',
+          'I found it incredible.',
+        ],
       },
     ],
   },
@@ -297,32 +392,54 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '一般现在时',
         description: 'do/does — 习惯、事实、规律',
-        examples: ['I study every day.', 'Water boils at 100°C.', 'She works in transport.'],
+        examples: [
+          'I study every day.',
+          'Water boils at 100°C.',
+          'She works in transport.',
+        ],
       },
       {
         pattern: '一般过去时',
         description: 'did — 过去的动作或状态',
-        examples: ['I studied yesterday.', 'He exported goods last year.', 'They reported the news.'],
+        examples: [
+          'I studied yesterday.',
+          'He exported goods last year.',
+          'They reported the news.',
+        ],
       },
       {
         pattern: '现在进行时',
         description: 'am/is/are + doing — 正在进行',
-        examples: ['I am studying.', 'She is describing the scene.', 'They are transporting cargo.'],
+        examples: [
+          'I am studying.',
+          'She is describing the scene.',
+          'They are transporting cargo.',
+        ],
       },
       {
         pattern: '现在完成时',
         description: 'have/has + done — 已完成，与现在有关',
-        examples: ['I have studied for two hours.', 'She has described it.', 'They have exported many products.'],
+        examples: [
+          'I have studied for two hours.',
+          'She has described it.',
+          'They have exported many products.',
+        ],
       },
       {
         pattern: '过去完成时',
         description: 'had + done — 过去的过去',
-        examples: ['I had studied before the test.', 'He had already exported the goods when I called.'],
+        examples: [
+          'I had studied before the test.',
+          'He had already exported the goods when I called.',
+        ],
       },
       {
         pattern: '将来时',
         description: 'will + do / be going to + do — 将要发生',
-        examples: ['I will study tomorrow.', 'She is going to describe the plan.'],
+        examples: [
+          'I will study tomorrow.',
+          'She is going to describe the plan.',
+        ],
       },
     ],
     tips: '完成进行时（have been doing）表示从过去开始持续到现在的动作',
@@ -338,22 +455,34 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'am/is/are + done',
         description: '一般现在时被动',
-        examples: ['English is spoken worldwide.', 'Goods are transported by ship.'],
+        examples: [
+          'English is spoken worldwide.',
+          'Goods are transported by ship.',
+        ],
       },
       {
         pattern: 'was/were + done',
         description: '一般过去时被动',
-        examples: ['The report was written yesterday.', 'The goods were exported last month.'],
+        examples: [
+          'The report was written yesterday.',
+          'The goods were exported last month.',
+        ],
       },
       {
         pattern: 'have/has been + done',
         description: '现在完成时被动',
-        examples: ['The problem has been described.', 'Many products have been exported.'],
+        examples: [
+          'The problem has been described.',
+          'Many products have been exported.',
+        ],
       },
       {
         pattern: 'will be + done',
         description: '将来时被动',
-        examples: ['The news will be reported tomorrow.', 'The goods will be transported next week.'],
+        examples: [
+          'The news will be reported tomorrow.',
+          'The goods will be transported next week.',
+        ],
       },
     ],
     tips: '不是所有动词都能用被动语态，不及物动词（happen, appear）没有被动形式',
@@ -369,22 +498,34 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'who / that',
         description: '修饰人',
-        examples: ['The man who reported the news is my friend.', 'Students that study hard will succeed.'],
+        examples: [
+          'The man who reported the news is my friend.',
+          'Students that study hard will succeed.',
+        ],
       },
       {
         pattern: 'which / that',
         description: '修饰物',
-        examples: ['The book which describes the history is famous.', 'The goods that were exported are valuable.'],
+        examples: [
+          'The book which describes the history is famous.',
+          'The goods that were exported are valuable.',
+        ],
       },
       {
         pattern: 'whose',
         description: '表示"...的"（所有格）',
-        examples: ['The student whose score is highest wins.', 'The company whose products are exported globally.'],
+        examples: [
+          'The student whose score is highest wins.',
+          'The company whose products are exported globally.',
+        ],
       },
       {
         pattern: 'where / when / why',
         description: '修饰地点、时间、原因',
-        examples: ['The place where I study is quiet.', 'The day when he arrived was rainy.'],
+        examples: [
+          'The place where I study is quiet.',
+          'The day when he arrived was rainy.',
+        ],
       },
     ],
     tips: '限制性从句不加逗号，非限制性从句前加逗号且不能用 that',
@@ -400,22 +541,34 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '零条件句',
         description: 'If + 一般现在, 一般现在 — 客观事实',
-        examples: ['If you heat water, it boils.', 'If you study hard, you improve.'],
+        examples: [
+          'If you heat water, it boils.',
+          'If you study hard, you improve.',
+        ],
       },
       {
         pattern: '第一条件句',
         description: 'If + 一般现在, will + do — 真实可能',
-        examples: ['If it rains, I will stay home.', 'If you study, you will pass.'],
+        examples: [
+          'If it rains, I will stay home.',
+          'If you study, you will pass.',
+        ],
       },
       {
         pattern: '第二条件句',
         description: 'If + 过去式, would + do — 与现在事实相反的假设',
-        examples: ['If I had time, I would study more.', 'If she were here, she would help.'],
+        examples: [
+          'If I had time, I would study more.',
+          'If she were here, she would help.',
+        ],
       },
       {
         pattern: '第三条件句',
         description: 'If + had done, would have done — 与过去事实相反的假设',
-        examples: ['If I had studied harder, I would have passed.', 'If he had reported earlier, we would have known.'],
+        examples: [
+          'If I had studied harder, I would have passed.',
+          'If he had reported earlier, we would have known.',
+        ],
       },
     ],
   },
@@ -430,22 +583,38 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: '动词 + to',
         description: 'refer to, contribute to, subscribe to, apply to',
-        examples: ['This refers to the report.', 'He contributed to the project.', 'Please apply to the office.'],
+        examples: [
+          'This refers to the report.',
+          'He contributed to the project.',
+          'Please apply to the office.',
+        ],
       },
       {
         pattern: '动词 + for',
         description: 'apply for, account for, search for, stand for',
-        examples: ['She applied for the job.', 'This accounts for 50%.', 'I searched for the word.'],
+        examples: [
+          'She applied for the job.',
+          'This accounts for 50%.',
+          'I searched for the word.',
+        ],
       },
       {
         pattern: '动词 + with',
         description: 'deal with, agree with, provide...with',
-        examples: ['We deal with problems.', 'I agree with you.', 'He provided us with information.'],
+        examples: [
+          'We deal with problems.',
+          'I agree with you.',
+          'He provided us with information.',
+        ],
       },
       {
         pattern: '形容词 + of/about/at',
         description: 'afraid of, aware of, worried about, good at',
-        examples: ['She is afraid of failure.', 'He is aware of the risk.', 'I am good at English.'],
+        examples: [
+          'She is afraid of failure.',
+          'He is aware of the risk.',
+          'I am good at English.',
+        ],
       },
     ],
   },
@@ -460,17 +629,28 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'to do (不定式)',
         description: '表示目的、将来、具体动作',
-        examples: ['I want to study English.', 'She decided to export.', 'To describe is to make clear.'],
+        examples: [
+          'I want to study English.',
+          'She decided to export.',
+          'To describe is to make clear.',
+        ],
       },
       {
         pattern: 'doing (动名词/现在分词)',
         description: '表示正在进行、习惯性、一般性动作',
-        examples: ['I enjoy studying.', 'Transporting goods is his job.', 'She kept describing the scene.'],
+        examples: [
+          'I enjoy studying.',
+          'Transporting goods is his job.',
+          'She kept describing the scene.',
+        ],
       },
       {
         pattern: 'done (过去分词)',
         description: '表示被动、完成',
-        examples: ['The exported goods are valuable.', 'Described in detail, the plan looks great.'],
+        examples: [
+          'The exported goods are valuable.',
+          'Described in detail, the plan looks great.',
+        ],
       },
     ],
     tips: 'remember to do (记得要做) vs remember doing (记得做过了)',
@@ -488,12 +668,18 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'affect (v.)',
         description: '动词，表示"影响、感动"',
-        examples: ['The weather affects my mood.', 'Pollution affects our health.'],
+        examples: [
+          'The weather affects my mood.',
+          'Pollution affects our health.',
+        ],
       },
       {
         pattern: 'effect (n.)',
         description: '名词，表示"效果、影响"',
-        examples: ['The effect of the medicine is obvious.', 'This has a positive effect on learning.'],
+        examples: [
+          'The effect of the medicine is obvious.',
+          'This has a positive effect on learning.',
+        ],
       },
     ],
     tips: '记忆：Affect 是 Action（动作/动词），Effect 是 End result（结果/名词）',
@@ -509,12 +695,20 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'rise (vi.)',
         description: '不及物动词，自己上升（rise-rose-risen）',
-        examples: ['The sun rises in the east.', 'Prices rise every year.', 'He rose from his seat.'],
+        examples: [
+          'The sun rises in the east.',
+          'Prices rise every year.',
+          'He rose from his seat.',
+        ],
       },
       {
         pattern: 'raise (vt.)',
         description: '及物动词，使...上升（raise-raised-raised）',
-        examples: ['Please raise your hand.', 'They raised the price.', 'She raised three children.'],
+        examples: [
+          'Please raise your hand.',
+          'They raised the price.',
+          'She raised three children.',
+        ],
       },
     ],
   },
@@ -529,12 +723,15 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'much + 不可数',
         description: '修饰不可数名词，多用于否定句和疑问句',
-        examples: ['I don\'t have much time.', 'How much water do you need?'],
+        examples: ["I don't have much time.", 'How much water do you need?'],
       },
       {
         pattern: 'many + 可数复数',
         description: '修饰可数名词复数',
-        examples: ['There are many students.', 'How many words have you learned?'],
+        examples: [
+          'There are many students.',
+          'How many words have you learned?',
+        ],
       },
       {
         pattern: 'a lot of / lots of',
@@ -554,12 +751,18 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'since + 时间点',
         description: '从某个时间点开始，常与完成时连用',
-        examples: ['I have studied English since 2020.', 'She has worked here since May.'],
+        examples: [
+          'I have studied English since 2020.',
+          'She has worked here since May.',
+        ],
       },
       {
         pattern: 'for + 时间段',
         description: '持续了多长时间',
-        examples: ['I have studied for three years.', 'She has worked here for six months.'],
+        examples: [
+          'I have studied for three years.',
+          'She has worked here for six months.',
+        ],
       },
     ],
     tips: 'since 后面接的是过去的某个点，for 后面接的是一段时间长度',
@@ -580,12 +783,18 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'be used to + doing',
         description: '习惯于做某事',
-        examples: ['I am used to studying early.', 'He is used to working hard.'],
+        examples: [
+          'I am used to studying early.',
+          'He is used to working hard.',
+        ],
       },
       {
         pattern: 'be used to + do',
         description: '被用来做某事（被动）',
-        examples: ['This tool is used to measure length.', 'Computers are used to process data.'],
+        examples: [
+          'This tool is used to measure length.',
+          'Computers are used to process data.',
+        ],
       },
     ],
   },
@@ -600,12 +809,20 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'some',
         description: '用于肯定句，或期望得到肯定回答的疑问句',
-        examples: ['I have some books.', 'Would you like some tea?', 'There are some students outside.'],
+        examples: [
+          'I have some books.',
+          'Would you like some tea?',
+          'There are some students outside.',
+        ],
       },
       {
         pattern: 'any',
         description: '用于否定句和一般疑问句',
-        examples: ['I don\'t have any money.', 'Do you have any questions?', 'Is there any problem?'],
+        examples: [
+          "I don't have any money.",
+          'Do you have any questions?',
+          'Is there any problem?',
+        ],
       },
     ],
     tips: 'any 用于肯定句时表示"任何"：Any student can answer this question.',
@@ -626,12 +843,20 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'see',
         description: '看见，强调看的结果',
-        examples: ['I can see the mountain.', 'Did you see that?', 'I saw him yesterday.'],
+        examples: [
+          'I can see the mountain.',
+          'Did you see that?',
+          'I saw him yesterday.',
+        ],
       },
       {
         pattern: 'watch',
         description: '观看（移动的事物），注视',
-        examples: ['I watch TV every evening.', 'Watch the game carefully.', 'He watched the sunset.'],
+        examples: [
+          'I watch TV every evening.',
+          'Watch the game carefully.',
+          'He watched the sunset.',
+        ],
       },
     ],
   },
@@ -651,7 +876,12 @@ export const grammarRules: GrammarRule[] = [
       {
         pattern: 'on + 具体日期',
         description: '某天/星期/特定日期',
-        examples: ['on Monday', 'on May 1st', 'on my birthday', 'on a cold morning'],
+        examples: [
+          'on Monday',
+          'on May 1st',
+          'on my birthday',
+          'on a cold morning',
+        ],
       },
       {
         pattern: 'at + 时刻',

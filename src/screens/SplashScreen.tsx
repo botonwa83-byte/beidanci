@@ -97,7 +97,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
         <Animated.View style={[styles.heroSection, {opacity: fadeAnim}]}>
           <Text style={styles.heroTitle}>装上 WordPulse，解锁「猜词超能力」</Text>
           <Text style={styles.heroSubtitle}>
-            148个词根，覆盖考研 / 四六级 / 雅思 / 托福{'\n'}
+            149个词根，覆盖考研 / 四六级 / 雅思 / 托福{'\n'}
             看到没背过的长单词，拆开词根也能猜出意思
           </Text>
         </Animated.View>
@@ -120,7 +120,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
         {/* 数据统计 */}
         <Animated.View style={[styles.statsSection, {opacity: fadeAnim}]}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>148</Text>
+            <Text style={styles.statNumber}>149</Text>
             <Text style={styles.statLabel}>核心词根</Text>
           </View>
           <View style={styles.statDivider} />

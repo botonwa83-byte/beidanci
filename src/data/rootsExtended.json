@@ -503,21 +503,15 @@
       ]
     },
     "bene": {
-      "meaning": "好/坏",
-      "origin": "拉丁语 bene/malus",
+      "meaning": "好/善",
+      "origin": "拉丁语 bene",
       "color": "#4B8B4B",
       "level": 5,
       "words": [
         "beneficiary",
         "benevolent",
         "benevolence",
-        "benign",
-        "malice",
-        "malicious",
-        "malfunction",
-        "malignant",
-        "malcontent",
-        "malediction"
+        "benign"
       ]
     },
     "tele": {
@@ -2308,6 +2302,453 @@
         "legal",
         "legislation",
         "legitimate"
+      ]
+    },
+    "vict": {
+      "meaning": "征服/战胜",
+      "origin": "拉丁语 vincere-victus",
+      "color": "#C0392B",
+      "level": 5,
+      "words": [
+        "victory",
+        "convict",
+        "conviction"
+      ]
+    },
+    "vinc": {
+      "meaning": "征服/战胜",
+      "origin": "拉丁语 vincere",
+      "color": "#C0392B",
+      "level": 5,
+      "words": [
+        "convince",
+        "invincible",
+        "province"
+      ]
+    },
+    "tect": {
+      "meaning": "遮盖",
+      "origin": "拉丁语 tegere-tectus",
+      "color": "#7F8C8D",
+      "level": 5,
+      "words": [
+        "protect",
+        "detect",
+        "detective"
+      ]
+    },
+    "stell": {
+      "meaning": "星",
+      "origin": "拉丁语 stella",
+      "color": "#F1C40F",
+      "level": 6,
+      "words": [
+        "constellation",
+        "stellar",
+        "interstellar"
+      ]
+    },
+    "priv": {
+      "meaning": "私有/剥夺",
+      "origin": "拉丁语 privus",
+      "color": "#8E44AD",
+      "level": 5,
+      "words": [
+        "private",
+        "privilege",
+        "deprive",
+        "privacy"
+      ]
+    },
+    "sumpt": {
+      "meaning": "取用",
+      "origin": "拉丁语 sumere-sumptus",
+      "color": "#D35400",
+      "level": 6,
+      "words": [
+        "consumption",
+        "assumption",
+        "resumption"
+      ]
+    },
+    "hes": {
+      "meaning": "粘附",
+      "origin": "拉丁语 haerere",
+      "color": "#16A085",
+      "level": 6,
+      "words": [
+        "adhesive",
+        "cohesion",
+        "hesitate"
+      ]
+    },
+    "sequ": {
+      "meaning": "跟随",
+      "origin": "拉丁语 sequi",
+      "color": "#2980B9",
+      "level": 5,
+      "words": [
+        "sequence",
+        "consequence",
+        "subsequent"
+      ]
+    },
+    "secut": {
+      "meaning": "跟随",
+      "origin": "拉丁语 sequi-secutus",
+      "color": "#2980B9",
+      "level": 6,
+      "words": [
+        "consecutive",
+        "execution",
+        "persecution"
+      ]
+    },
+    "creas": {
+      "meaning": "增长",
+      "origin": "拉丁语 crescere",
+      "color": "#27AE60",
+      "level": 4,
+      "words": [
+        "increase",
+        "decrease"
+      ]
+    },
+    "prehens": {
+      "meaning": "抓住",
+      "origin": "拉丁语 prehendere",
+      "color": "#E67E22",
+      "level": 6,
+      "words": [
+        "comprehension",
+        "apprehension"
+      ]
+    },
+    "prehend": {
+      "meaning": "抓住",
+      "origin": "拉丁语 prehendere",
+      "color": "#E67E22",
+      "level": 6,
+      "words": [
+        "comprehend",
+        "apprehend"
+      ]
+    },
+    "onym": {
+      "meaning": "名字",
+      "origin": "希腊语 onoma",
+      "color": "#9B59B6",
+      "level": 6,
+      "words": [
+        "synonym",
+        "antonym",
+        "anonymous"
+      ]
+    },
+    "psych": {
+      "meaning": "心灵/心理",
+      "origin": "希腊语 psyche",
+      "color": "#BB8FCE",
+      "level": 5,
+      "words": [
+        "psychology",
+        "psychiatrist",
+        "psychological"
+      ]
+    },
+    "phon": {
+      "meaning": "声音",
+      "origin": "希腊语 phone",
+      "color": "#3498DB",
+      "level": 5,
+      "words": [
+        "telephone",
+        "symphony",
+        "microphone"
+      ]
+    },
+    "metr": {
+      "meaning": "测量",
+      "origin": "希腊语 metron",
+      "color": "#1ABC9C",
+      "level": 5,
+      "words": [
+        "geometry",
+        "symmetry",
+        "metric"
+      ]
+    },
+    "therm": {
+      "meaning": "热",
+      "origin": "希腊语 thermos",
+      "color": "#E74C3C",
+      "level": 5,
+      "words": [
+        "thermal",
+        "thermometer"
+      ]
+    },
+    "hydr": {
+      "meaning": "水",
+      "origin": "希腊语 hydor",
+      "color": "#5DADE2",
+      "level": 5,
+      "words": [
+        "hydrogen",
+        "dehydration",
+        "hydraulic"
+      ]
+    },
+    "astr": {
+      "meaning": "星",
+      "origin": "希腊语 astron",
+      "color": "#F4D03F",
+      "level": 5,
+      "words": [
+        "astronomy",
+        "astronaut",
+        "disaster"
+      ]
+    },
+    "nounce": {
+      "meaning": "说/报告",
+      "origin": "拉丁语 nuntiare",
+      "color": "#AF7AC5",
+      "level": 5,
+      "words": [
+        "announce",
+        "pronounce",
+        "denounce"
+      ]
+    },
+    "techn": {
+      "meaning": "技艺",
+      "origin": "希腊语 techne",
+      "color": "#34495E",
+      "level": 4,
+      "words": [
+        "technology",
+        "technique",
+        "technical"
+      ]
+    },
+    "cracy": {
+      "meaning": "统治/政体",
+      "origin": "希腊语 kratos",
+      "color": "#7D3C98",
+      "level": 6,
+      "words": [
+        "democracy",
+        "bureaucracy",
+        "aristocracy"
+      ]
+    },
+    "crat": {
+      "meaning": "统治者",
+      "origin": "希腊语 kratos",
+      "color": "#7D3C98",
+      "level": 6,
+      "words": [
+        "democrat",
+        "bureaucrat",
+        "aristocrat"
+      ]
+    },
+    "mob": {
+      "meaning": "移动",
+      "origin": "拉丁语 mobilis",
+      "color": "#48C9B0",
+      "level": 4,
+      "words": [
+        "mobile",
+        "automobile",
+        "mobility"
+      ]
+    },
+    "flect": {
+      "meaning": "弯曲",
+      "origin": "拉丁语 flectere",
+      "color": "#EB984E",
+      "level": 5,
+      "words": [
+        "reflect",
+        "reflection",
+        "deflect"
+      ]
+    },
+    "flex": {
+      "meaning": "弯曲",
+      "origin": "拉丁语 flectere-flexus",
+      "color": "#EB984E",
+      "level": 5,
+      "words": [
+        "flexible",
+        "flexibility"
+      ]
+    },
+    "rect": {
+      "meaning": "正/直",
+      "origin": "拉丁语 regere-rectus",
+      "color": "#2E86C1",
+      "level": 5,
+      "words": [
+        "direct",
+        "correct",
+        "rectangle",
+        "erect"
+      ]
+    },
+    "patr": {
+      "meaning": "父/祖国",
+      "origin": "拉丁语 pater",
+      "color": "#A04000",
+      "level": 6,
+      "words": [
+        "patriot",
+        "patriarch",
+        "patron"
+      ]
+    },
+    "migr": {
+      "meaning": "迁移",
+      "origin": "拉丁语 migrare",
+      "color": "#138D75",
+      "level": 5,
+      "words": [
+        "migrate",
+        "immigrant",
+        "emigration"
+      ]
+    },
+    "spir": {
+      "meaning": "呼吸",
+      "origin": "拉丁语 spirare",
+      "color": "#85C1E9",
+      "level": 5,
+      "words": [
+        "inspire",
+        "spirit",
+        "expire",
+        "respiration"
+      ]
+    },
+    "tort": {
+      "meaning": "扭曲",
+      "origin": "拉丁语 torquere-tortus",
+      "color": "#CA6F1E",
+      "level": 6,
+      "words": [
+        "distort",
+        "torture",
+        "distortion"
+      ]
+    },
+    "text": {
+      "meaning": "编织",
+      "origin": "拉丁语 texere",
+      "color": "#796A2B",
+      "level": 5,
+      "words": [
+        "textile",
+        "texture",
+        "context"
+      ]
+    },
+    "urb": {
+      "meaning": "城市",
+      "origin": "拉丁语 urbs",
+      "color": "#5D6D7E",
+      "level": 5,
+      "words": [
+        "urban",
+        "suburb",
+        "suburban"
+      ]
+    },
+    "vac": {
+      "meaning": "空",
+      "origin": "拉丁语 vacare",
+      "color": "#AAB7B8",
+      "level": 5,
+      "words": [
+        "vacant",
+        "vacation",
+        "vacuum"
+      ]
+    },
+    "volunt": {
+      "meaning": "意愿",
+      "origin": "拉丁语 voluntas",
+      "color": "#F5B041",
+      "level": 5,
+      "words": [
+        "voluntary",
+        "volunteer"
+      ]
+    },
+    "doct": {
+      "meaning": "教导",
+      "origin": "拉丁语 docere-doctus",
+      "color": "#6C3483",
+      "level": 5,
+      "words": [
+        "doctor",
+        "doctrine"
+      ]
+    },
+    "fid": {
+      "meaning": "信任",
+      "origin": "拉丁语 fidere",
+      "color": "#117864",
+      "level": 6,
+      "words": [
+        "confident",
+        "fidelity",
+        "confidential"
+      ]
+    },
+    "grav": {
+      "meaning": "重",
+      "origin": "拉丁语 gravis",
+      "color": "#4D5656",
+      "level": 5,
+      "words": [
+        "gravity",
+        "grave",
+        "aggravate"
+      ]
+    },
+    "leg": {
+      "meaning": "法律/选取",
+      "origin": "拉丁语 lex/legere",
+      "color": "#1F618D",
+      "level": 5,
+      "words": [
+        "legal",
+        "legislation",
+        "privilege",
+        "college"
+      ]
+    },
+    "numer": {
+      "meaning": "数",
+      "origin": "拉丁语 numerus",
+      "color": "#239B56",
+      "level": 5,
+      "words": [
+        "numerous",
+        "innumerable",
+        "numerical"
+      ]
+    },
+    "sphere": {
+      "meaning": "球体",
+      "origin": "希腊语 sphaira",
+      "color": "#2471A3",
+      "level": 5,
+      "words": [
+        "atmosphere",
+        "hemisphere"
       ]
     }
   }

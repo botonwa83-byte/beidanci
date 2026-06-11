@@ -55,7 +55,13 @@ export interface Level {
 
 export interface Question {
   id: number;
-  type: 'root-meaning' | 'word-meaning' | 'morpheme-match' | 'fill-blank';
+  // word-build: options 是碎片瓦片（多选），选中集合 = 全部 isCorrect 项才算对
+  type:
+    | 'root-meaning'
+    | 'word-meaning'
+    | 'morpheme-match'
+    | 'fill-blank'
+    | 'word-build';
   question: string;
   options: {text: string; isCorrect: boolean}[];
   explanation: string;
@@ -85,8 +91,11 @@ export interface DailyMission {
 // === Learning Session (引导式学习流程) ===
 
 export type SessionStep =
-  | {type: 'root-intro'; rootId: string}
-  | {type: 'word-learn'; wordId: number}
+  // word-learn carries introRootId when this word is the first of a newly
+  // unlocked root — the root is taught in context, not as a separate gate.
+  | {type: 'word-learn'; wordId: number; introRootId?: string}
+  // 派生带学：锚点词学完后顺手带走的派生词（组块化，一键全带走）
+  | {type: 'word-family'; anchorId: number; satelliteIds: number[]}
   | {type: 'quiz'; questions: Question[]}
   | {type: 'review-card'; wordId: number}
   | {type: 'complete'};
