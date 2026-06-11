@@ -1318,6 +1318,29 @@ export const LearnScreen: React.FC = () => {
         )}
       </TouchableOpacity>
 
+      {/* 懒人模式入口：零操作自动播放，按记忆曲线重现 */}
+      <TouchableOpacity
+        style={styles.lazyBtn}
+        onPress={() => {
+          if (
+            !isPremium &&
+            progress &&
+            progress.completedWords.length >= FREE_WORD_LIMIT
+          ) {
+            navigation.navigate('Paywall', {feature: '全部词库与关卡'});
+            return;
+          }
+          navigation.navigate('Lazy');
+        }}
+        activeOpacity={0.7}
+        accessibilityLabel="懒人模式，自动播放今日单词"
+        accessibilityRole="button">
+        <Text style={styles.lazyTitle}>😴 懒人模式 · 盯着看就行</Text>
+        <Text style={styles.lazySub}>
+          全自动播放，每词 8 秒，按记忆曲线一遍遍替你重现
+        </Text>
+      </TouchableOpacity>
+
       {/* 扫荡入口：把可破译词收进战果 */}
       {decipher && decipher.decodableCount > 0 && (
         <TouchableOpacity
@@ -1741,6 +1764,24 @@ const createStyles = (colors: ThemeColors) =>
     },
     harvestTitle: {fontSize: 17, fontWeight: 'bold', color: '#F59E0B'},
     harvestSub: {fontSize: 12, color: colors.textSecondary, marginTop: 4},
+    lazyBtn: {
+      marginHorizontal: 20,
+      backgroundColor: colors.surface,
+      borderRadius: 18,
+      padding: 18,
+      alignItems: 'center',
+      marginTop: -8,
+      marginBottom: 24,
+      borderWidth: 1.5,
+      borderColor: colors.primary + '50',
+      shadowColor: colors.primary,
+      shadowOffset: {width: 0, height: 4},
+      shadowOpacity: 0.12,
+      shadowRadius: 10,
+      elevation: 3,
+    },
+    lazyTitle: {fontSize: 17, fontWeight: 'bold', color: colors.primary},
+    lazySub: {fontSize: 12, color: colors.textSecondary, marginTop: 4},
     harvestRemainText: {
       fontSize: 13,
       color: colors.textSecondary,
