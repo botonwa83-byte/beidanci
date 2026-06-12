@@ -203,7 +203,9 @@
       "Bash(npm install *)",
       "Bash(git -C /Users/fengwang/Documents/trae_projects/beidanci status --short)",
       "Bash(git -C /Users/fengwang/Documents/trae_projects/beidanci log --oneline -5)",
-      "Bash(git commit -q -m 'fix: 学习页无专属故事的词改用简洁来源语言标签 *)"
+      "Bash(git commit -q -m 'fix: 学习页无专属故事的词改用简洁来源语言标签 *)",
+      "Bash(swift --version)",
+      "Bash(swift icon_gen.swift)"
     ]
   }
 }

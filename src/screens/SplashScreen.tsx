@@ -29,6 +29,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
     new Animated.Value(0),
     new Animated.Value(0),
     new Animated.Value(0),
+    new Animated.Value(0),
   ]).current;
 
   useEffect(() => {
@@ -66,10 +67,11 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
 
   const features = [
     {icon: '🔮', title: '猜词超能力 · 词根破译', desc: '看到陌生长难词，拆开词根就能猜出意思，越破译段位越高'},
-    {icon: '~', title: '词根词缀记忆法', desc: '科学拆解单词结构，举一反三记住海量词汇'},
-    {icon: '>', title: '智能学习算法', desc: '间隔重复 + 艾宾浩斯曲线，遗忘率降低80%'},
-    {icon: '#', title: '语法速查手册', desc: '23条核心语法规则，随时查阅随时学'},
-    {icon: '*', title: '纯离线使用', desc: '无需网络，地铁飞机随时背单词'},
+    {icon: '🧩', title: '先猜后揭 · 拼词工坊', desc: '不再被动刷词：先自己猜再翻答案，拆碎的词根亲手拼回去'},
+    {icon: '🌍', title: '词源宇宙 · 单词身世', desc: '每个词都有来历故事，词源版图横跨拉丁语、希腊语等15种语言'},
+    {icon: '🛋️', title: '懒人模式', desc: '零操作自动播放，按记忆曲线间隔重现，通勤躺平都能背'},
+    {icon: '🌱', title: '词根词缀记忆法', desc: '330+ 词根词缀拆解 5800+ 词汇，记一个词根认一串词'},
+    {icon: '✈️', title: '纯离线使用', desc: '无需网络，地铁飞机随时背单词'},
   ];
 
   return (
@@ -97,7 +99,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
         <Animated.View style={[styles.heroSection, {opacity: fadeAnim}]}>
           <Text style={styles.heroTitle}>装上 WordPulse，解锁「猜词超能力」</Text>
           <Text style={styles.heroSubtitle}>
-            149个词根，覆盖考研 / 四六级 / 雅思 / 托福{'\n'}
+            330+ 词根词缀 · 5800+ 词汇，覆盖考研 / 四六级 / 雅思 / 托福{'\n'}
             看到没背过的长单词，拆开词根也能猜出意思
           </Text>
         </Animated.View>
@@ -120,18 +122,18 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
         {/* 数据统计 */}
         <Animated.View style={[styles.statsSection, {opacity: fadeAnim}]}>
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>149</Text>
-            <Text style={styles.statLabel}>核心词根</Text>
+            <Text style={styles.statNumber}>330+</Text>
+            <Text style={styles.statLabel}>词根词缀</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>3400+</Text>
+            <Text style={styles.statNumber}>5800+</Text>
             <Text style={styles.statLabel}>精选词汇</Text>
           </View>
           <View style={styles.statDivider} />
           <View style={styles.statItem}>
-            <Text style={styles.statNumber}>23</Text>
-            <Text style={styles.statLabel}>语法规则</Text>
+            <Text style={styles.statNumber}>15</Text>
+            <Text style={styles.statLabel}>语源语言</Text>
           </View>
         </Animated.View>
 
@@ -161,7 +163,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({onFinish}) => {
 
         {/* 底部版权 */}
         <View style={styles.footer}>
-          <Text style={styles.footerText}>WordPulse v1.5.0</Text>
+          <Text style={styles.footerText}>WordPulse v2.0.0</Text>
           <Text style={styles.footerCopy}>
             {'(c)'} 2024-2026 King Top. All rights reserved.
           </Text>
