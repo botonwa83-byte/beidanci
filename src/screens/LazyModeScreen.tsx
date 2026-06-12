@@ -26,6 +26,7 @@ import {
   STEP_MS,
 } from '../data/lazySession';
 import {getFullMeaning, getWordOrigin} from '../data/wordDatabase';
+import {getWordLanguage, LANG_META} from '../data/etymologyMap';
 import {speak} from '../utils/speech';
 
 const TICK_MS = 250;
@@ -288,6 +289,8 @@ export const LazyModeScreen: React.FC = () => {
   const showMeaning = elapsed >= timings!.meaningAt;
   const showExample = elapsed >= timings!.exampleAt;
   const origin = getWordOrigin(word.word);
+  const wordLang = getWordLanguage(word);
+  const langMeta = wordLang ? LANG_META.find(m => m.id === wordLang) : null;
   const pct = Math.round(((idx + 1) / queue.steps.length) * 100);
   const seg = segmentAt(segments, idx);
   const remainMs = (queue.steps.length - idx) * STEP_MS - elapsed;
@@ -392,9 +395,16 @@ export const LazyModeScreen: React.FC = () => {
           <View style={styles.exampleBox}>
             <Text style={styles.exampleText}>{word.example}</Text>
             <Text style={styles.exampleTrans}>{word.translation}</Text>
-            {step!.pass === 1 && origin && (
-              <Text style={styles.originText}>📜 {origin}</Text>
-            )}
+            {step!.pass === 1 &&
+              (origin ? (
+                <Text style={styles.originText}>📜 {origin}</Text>
+              ) : (
+                langMeta && (
+                  <Text style={[styles.originText, {color: langMeta.color}]}>
+                    {langMeta.emoji} 源自{langMeta.id}
+                  </Text>
+                )
+              ))}
           </View>
         )}
       </View>

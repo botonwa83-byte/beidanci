@@ -23,6 +23,7 @@ import {
   getWordOrigin,
 } from '../data/wordDatabase';
 import {speak} from '../utils/speech';
+import {getWordLanguage, LANG_META} from '../data/etymologyMap';
 
 type RootStackParamList = {
   Tab: undefined;
@@ -83,6 +84,9 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({
     ? coreRoots.find(r => r.id === word.rootId)
     : null;
 
+  const wordLang = getWordLanguage(word);
+  const langMeta = wordLang ? LANG_META.find(m => m.id === wordLang) : null;
+
   return (
     <ScrollView style={styles.container}>
       {/* Header */}
@@ -107,6 +111,25 @@ export const WordDetailScreen: React.FC<WordDetailScreenProps> = ({
           ) : null}
           <Text style={styles.pos}>{word.partOfSpeech}</Text>
         </View>
+
+        {langMeta && (
+          <TouchableOpacity
+            style={[
+              styles.langChip,
+              {
+                backgroundColor: langMeta.color + '15',
+                borderColor: langMeta.color + '40',
+              },
+            ]}
+            onPress={() => (navigation as any).navigate('EtymologyMap')}
+            activeOpacity={0.7}
+            accessibilityRole="button"
+            accessibilityLabel={`这个词源自${langMeta.id}，点击查看词源版图`}>
+            <Text style={[styles.langChipText, {color: langMeta.color}]}>
+              {langMeta.emoji} 源自{langMeta.id} ›
+            </Text>
+          </TouchableOpacity>
+        )}
 
         {word.meanings && word.meanings.length > 1 ? (
           <View style={styles.sensesWrap}>
@@ -365,6 +388,15 @@ const createStyles = (colors: ThemeColors) =>
       overflow: 'hidden',
       fontWeight: '600',
     },
+    langChip: {
+      alignSelf: 'flex-start',
+      marginBottom: 8,
+      paddingHorizontal: 10,
+      paddingVertical: 4,
+      borderRadius: 12,
+      borderWidth: 1,
+    },
+    langChipText: {fontSize: 12, fontWeight: '700'},
     meaning: {
       fontSize: 20,
       color: colors.textPrimary,

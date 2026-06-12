@@ -43,6 +43,7 @@ import {
   getShowcaseWords,
 } from '../data/decipherPower';
 import {getFamilyWords} from '../data/wordFamilies';
+import {getWordLanguage, LANG_META} from '../data/etymologyMap';
 import {speak} from '../utils/speech';
 
 type AppMode = 'dashboard' | 'setup' | 'session' | 'harvest';
@@ -594,14 +595,40 @@ export const LearnScreen: React.FC = () => {
 
             {revealed && (
               <>
-                {getWordOrigin(word.word) && (
-                  <View style={styles.originCard}>
-                    <Text style={styles.originLabel}>📜 身世 · 它从哪来</Text>
-                    <Text style={styles.originText}>
-                      {getWordOrigin(word.word)}
-                    </Text>
-                  </View>
-                )}
+                {(() => {
+                  const lang = getWordLanguage(word);
+                  const meta = lang
+                    ? LANG_META.find(m => m.id === lang)
+                    : null;
+                  const story = getWordOrigin(word.word);
+                  if (!meta && !story) {
+                    return null;
+                  }
+                  return (
+                    <View style={styles.originCard}>
+                      <View style={styles.originHeadRow}>
+                        <Text style={styles.originLabel}>
+                          📜 身世 · 它从哪来
+                        </Text>
+                        {meta && (
+                          <Text
+                            style={[styles.originLang, {color: meta.color}]}>
+                            {meta.emoji} {meta.id}
+                          </Text>
+                        )}
+                      </View>
+                      {story ? (
+                        <Text style={styles.originText}>{story}</Text>
+                      ) : (
+                        meta && (
+                          <Text style={styles.originText}>
+                            这个词源自{meta.id}——{meta.tagline}
+                          </Text>
+                        )
+                      )}
+                    </View>
+                  );
+                })()}
 
                 <View style={styles.assocCard}>
                   <Text style={styles.assocLabel}>联想记忆</Text>
@@ -2037,6 +2064,12 @@ const createStyles = (colors: ThemeColors) =>
       borderLeftWidth: 3,
       borderLeftColor: colors.warning,
     },
+    originHeadRow: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+    },
+    originLang: {fontSize: 12, fontWeight: '700'},
     originLabel: {
       fontSize: 11,
       color: colors.warning,
