@@ -622,7 +622,7 @@ export const LearnScreen: React.FC = () => {
                       ) : (
                         meta && (
                           <Text style={styles.originText}>
-                            这个词源自{meta.id}——{meta.tagline}
+                            这个词直接来自{meta.id}。
                           </Text>
                         )
                       )}
