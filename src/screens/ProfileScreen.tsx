@@ -21,6 +21,7 @@ import {
   getOverallStats,
 } from '../data/learningLogic';
 import {levels, allWords} from '../data/wordDatabase';
+import {computeEtymologyMap} from '../data/etymologyMap';
 import {
   loadAuth,
   maskPhone,
@@ -124,6 +125,14 @@ export const ProfileScreen: React.FC = () => {
     .sort((a, b) => b.date.localeCompare(a.date))
     .slice(0, 7);
 
+  const mapStats = useMemo(
+    () => (progress ? computeEtymologyMap(progress.completedWords) : null),
+    [progress],
+  );
+  const litLangs = mapStats
+    ? mapStats.territories.filter(t => t.learned > 0).length
+    : 0;
+
   return (
     <ScrollView
       style={styles.container}
@@ -203,6 +212,25 @@ export const ProfileScreen: React.FC = () => {
           </Text>
         </View>
       )}
+
+      {/* 词源版图入口 */}
+      <TouchableOpacity
+        style={styles.mapCard}
+        onPress={() => navigation.navigate('EtymologyMap')}
+        activeOpacity={0.85}
+        accessibilityRole="button"
+        accessibilityLabel="查看我的词源版图">
+        <Text style={styles.mapEmoji}>🗺️</Text>
+        <View style={styles.mapInfo}>
+          <Text style={styles.mapTitle}>我的词源版图</Text>
+          <Text style={styles.mapDesc}>
+            {mapStats && mapStats.topShare
+              ? `已踏足 ${litLangs} 种语言 · ${mapStats.topShare.percent}% 来自${mapStats.topShare.meta.id}`
+              : '没有一个单词是凭空来的'}
+          </Text>
+        </View>
+        <Text style={styles.mapArrow}>›</Text>
+      </TouchableOpacity>
 
       {/* Plan info */}
       {plan && (
@@ -423,6 +451,29 @@ const createStyles = (colors: ThemeColors) =>
       borderRadius: 3,
     },
     ovMeta: {fontSize: 12, color: colors.textTertiary, textAlign: 'center'},
+
+    mapCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginHorizontal: 20,
+      marginBottom: 24,
+      backgroundColor: colors.surface,
+      borderRadius: theme.borderRadius.xl,
+      paddingVertical: 16,
+      paddingHorizontal: 20,
+      gap: 14,
+      ...theme.shadow.lg,
+    },
+    mapEmoji: {fontSize: 30},
+    mapInfo: {flex: 1},
+    mapTitle: {
+      fontSize: 16,
+      fontWeight: '700',
+      color: colors.textPrimary,
+      marginBottom: 3,
+    },
+    mapDesc: {fontSize: 12, color: colors.textTertiary},
+    mapArrow: {fontSize: 22, color: colors.textTertiary, fontWeight: '300'},
 
     section: {paddingHorizontal: 20, marginBottom: 28},
     sectionTitle: {

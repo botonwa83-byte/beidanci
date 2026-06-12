@@ -199,7 +199,10 @@
       "Bash(echo \"---grep exit: $?\")",
       "Bash(git merge *)",
       "Bash(cp .claude/settings.local.json /tmp/settings.current.json)",
-      "Bash(git commit -q -m 'feat: 付费墙与内购功能合入最新主线（freemium 买断制） *)"
+      "Bash(git commit -q -m 'feat: 付费墙与内购功能合入最新主线（freemium 买断制） *)",
+      "Bash(npm install *)",
+      "Bash(git -C /Users/fengwang/Documents/trae_projects/beidanci status --short)",
+      "Bash(git -C /Users/fengwang/Documents/trae_projects/beidanci log --oneline -5)"
     ]
   }
 }

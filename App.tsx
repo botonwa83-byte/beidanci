@@ -16,6 +16,7 @@ import {LoginScreen} from './src/screens/LoginScreen';
 import {SplashScreen} from './src/screens/SplashScreen';
 import {PaywallScreen} from './src/screens/PaywallScreen';
 import {LazyModeScreen} from './src/screens/LazyModeScreen';
+import {EtymologyMapScreen} from './src/screens/EtymologyMapScreen';
 import {TabBarIcon} from './src/components/TabBarIcon';
 import {loadAuth, clearAuth, AuthUser} from './src/data/authService';
 import {migrateAuthToKeychain} from './src/data/secureStorage';
@@ -192,6 +193,7 @@ const AppContent: React.FC = () => {
         <Stack.Screen name="Tab" component={TabNavigator} />
         <Stack.Screen name="WordDetail" component={WordDetailScreen as any} />
         <Stack.Screen name="Lazy" component={LazyModeScreen} />
+        <Stack.Screen name="EtymologyMap" component={EtymologyMapScreen} />
         <Stack.Screen
           name="Paywall"
           component={PaywallScreen}
